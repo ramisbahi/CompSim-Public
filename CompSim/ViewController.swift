@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var Time5: UIButton!
     
     
+    
     @IBOutlet weak var RoundLabel: UILabel!
     
     @IBOutlet weak var ScrambleLabel: UILabel!
@@ -43,12 +44,38 @@ class ViewController: UIViewController {
     var labels = [UIButton]()
     
     static var times = [Int]()
+    static var averages: [String] = []
+    static var winningAverages: [String] = []
+    static var allTimes: [[String]] = Array(repeating: Array(repeating: "", count: 5), count: 1000)
+    static var currentAverage: Int = -1 // keeps track of last average currently on (round - 2)
+    static var results: [Bool] = []
+    
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        self.swipeSetup()
+        RoundLabel.text = "Round " + String(ViewController.roundNumber)
+        self.labels = [Time1, Time2, Time3, Time4, Time5] // add labels to labels array - one time thing
+        
+        if(!AverageDetailViewController.justReturned)
+        {
+            self.reset() // only when actually starting new round
+        }
+        else // just returned
+        {
+            self.updateTimeLabels()
+            AverageDetailViewController.justReturned = false
+        }
+        
+    }
+    
+    
+    func swipeSetup()
+    {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipe(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
         swipeUp.direction = .up // ...when up swipe is done
         self.view.addGestureRecognizer(swipeUp) // allow view to recognize
@@ -56,17 +83,15 @@ class ViewController: UIViewController {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipe(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
         swipeDown.direction = .down // ...when down swipe is done
         self.view.addGestureRecognizer(swipeDown) // allow view to recognize
-     
-        RoundLabel.text = "Round " + String(ViewController.roundNumber)
-        self.labels = [Time1, Time2, Time3, Time4, Time5] // add labels to labels array - one time thing
+    }
+    
+    func reset()
+    {
         ViewController.currentIndex = 0 // reset
         ViewController.times = [] // reset
         ViewController.minIndex = 0 // reset
         ViewController.maxIndex = 1 // reset
-        
-        print("in view did load")
         ScrambleLabel.text = String(ViewController.scrambler.nextScramble()) // next scramble
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -195,17 +220,27 @@ class ViewController: UIViewController {
     func updateTimes(enteredTime: Double)
     {
         let intTime = ViewController.hundredthRound(num: enteredTime) // now 1.49 --> 149
-        let stringTime = ViewController.hundredthString(num: intTime) // now "1.49"
-        
-        self.labels[ViewController.currentIndex].setTitle(stringTime, for: .normal)
-        
-        self.labels[ViewController.currentIndex].isHidden = false // show its button
-        
-            
-        ViewController.currentIndex += 1 // next index
         ViewController.times.append(intTime) // add time to array
         
-        if(ViewController.currentIndex >= 3) // 3+ solves done - update min/maxes and display them
+        ViewController.currentIndex += 1 // next index
+        self.updateTimeLabels()
+        
+        if(ViewController.currentIndex < 5) // next scramble
+        {
+            print("in update times")
+            ScrambleLabel.text = ViewController.scrambler.nextScramble() // change scramble
+        }
+        else // change view when 5 solves done
+        {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ResultView") as! ResultViewController
+            self.present(resultViewController, animated:false, completion:nil)
+        }
+    }
+    
+    func updateTimeLabels()
+    {
+        if(ViewController.currentIndex >= 3) // 3+ solves done - update min/maxes
         {
             for i in 0..<ViewController.currentIndex
             {
@@ -218,34 +253,21 @@ class ViewController: UIViewController {
                     ViewController.maxIndex = i
                 }
             }
-            
-            for i in 0..<ViewController.currentIndex
-            {
-                if(i == ViewController.minIndex || i == ViewController.maxIndex)
-                {
-                    self.labels[i].setTitle("(" + ViewController.hundredthString(num: ViewController.times[i]) + ")", for: .normal)
-                }
-                else
-                {
-                    self.labels[i].setTitle( ViewController.hundredthString(num: ViewController.times[i]), for: .normal)
-                }
-            }
         }
         
-        if(ViewController.currentIndex < 5)
+        for i in 0..<ViewController.currentIndex
         {
-            print("in update times")
-            ScrambleLabel.text = ViewController.scrambler.nextScramble() // change scramble
+            if(ViewController.currentIndex >= 3 && (i == ViewController.minIndex || i == ViewController.maxIndex)) // 3+ solves done, is max/min
+            {
+                self.labels[i].setTitle("(" + ViewController.hundredthString(num: ViewController.times[i]) + ")", for: .normal)
+            }
+            else
+            {
+                self.labels[i].setTitle( ViewController.hundredthString(num: ViewController.times[i]), for: .normal)
+            }
+            self.labels[i].isHidden = false
         }
-        else // change view when 5 solves done
-        {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
-            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ResultView") as! ResultViewController
-            
-            self.present(resultViewController, animated:false, completion:nil)
-            
-        }
+        
     }
     
     @IBAction func Time1Touched(_ sender: Any) {
@@ -273,10 +295,11 @@ class ViewController: UIViewController {
     {
         let myText = self.labels[num].titleLabel!.text
         
+        /*
         for scramble in ViewController.scrambler.scrambles
         {
             print(scramble)
-        }
+        }*/
         let alert = UIAlertController(title: myText, message: ViewController.scrambler.getScramble(number: (ViewController.roundNumber - 1) * 5 + num), preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))

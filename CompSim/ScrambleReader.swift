@@ -59,6 +59,7 @@ class ScrambleReader
     
     func nextScramble() -> String
     {
+        print("next scramble")
         if(doingTwo)
         {
             if(currentScramble < scrambles.count - 1) // already generated that scramble

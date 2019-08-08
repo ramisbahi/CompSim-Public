@@ -23,7 +23,9 @@ class ResultViewController: UIViewController {
     
     @IBOutlet weak var MyAverageLabel: UILabel!
     @IBOutlet weak var WinningAverageLabel: UILabel!
-    @IBOutlet weak var ResultLabel: UILabel!
+    
+    @IBOutlet weak var ResultButton: UIButton!
+    
     
     @IBOutlet weak var TryAgainButton: UIButton!
     
@@ -36,32 +38,41 @@ class ResultViewController: UIViewController {
         labels = [SecondTime1, SecondTime2, SecondTime3, SecondTime4, SecondTime5]
 
         var total: Int = 0
+        var timeStrings: [String] = []
         
         for i in 0..<5
         {
-            let currentTime = ViewController.times[i]
+            let currentTime: Int = ViewController.times[i]
+            let currentTimeString: String =  ViewController.hundredthString(num: currentTime)
             
-            if(i == ViewController.minIndex || i == ViewController.maxIndex)
+            if(i == ViewController.minIndex || i == ViewController.maxIndex) // min/max time, so add parentheses
             {
-                labels[i].setTitle("(" + ViewController.hundredthString(num: currentTime) + ")", for: .normal)
+                labels[i].setTitle("(" + currentTimeString + ")", for: .normal)
+                timeStrings.append("(" + currentTimeString + ")")
             }
             else // calculated in average
             {
-                labels[i].setTitle(ViewController.hundredthString(num: currentTime), for: .normal)
-                total += ViewController.times[i]
+                labels[i].setTitle(currentTimeString, for: .normal)
+                total += currentTime
+                timeStrings.append(currentTimeString)
             }
             labels[i].isHidden = false
         }
         
+        
         myAverage = (total + 1) / 3 // will end up doing average for ints
-        MyAverageLabel.text = "= " + ViewController.hundredthString(num: myAverage) + " Average!" // update my average label
+        let averageString: String = ViewController.hundredthString(num: myAverage)
+        MyAverageLabel.text = "= " + averageString + " Average!" // update my average label
         MyAverageLabel.isHidden = false
-        
         updateWinningAverage() // update winning average label & win/lose
-        
         TryAgainButton.isHidden = false
+        ViewController.currentAverage += 1
+        ViewController.allTimes[ViewController.currentAverage] = timeStrings // add the strings for the times in average
         
         
+        print("ViewController.allTimes[0] \(ViewController.allTimes[0])")
+        
+        ViewController.averages.append(averageString) // add the actual average (i.e. "1.45")
         
         // Do any additional setup after loading the view.
     }
@@ -74,15 +85,30 @@ class ResultViewController: UIViewController {
         WinningAverageLabel.text = "Winning Average: " + ViewController.hundredthString(num: winningAverage) // update label
         WinningAverageLabel.isHidden = false
         
+        ViewController.winningAverages.append(ViewController.hundredthString(num: winningAverage))
+        
         if(myAverage <= winningAverage)
         {
-            ResultLabel.textColor = UIColor.green
-            ResultLabel.text = "You WIN!"
-            BackgroundImage.image = UIImage(named: "background")
+            self.win()
         }
-        ResultLabel.isHidden = false
+        else
+        {
+            ViewController.results.append(false)
+        }
+        ResultButton.isHidden = false
         
     }
+    
+    func win()
+    {
+        ViewController.results.append(true)
+        ResultButton.titleLabel?.textColor = UIColor.green
+        ResultButton.setTitle("You WIN!", for: .normal)
+        BackgroundImage.image = UIImage(named: "background")
+    }
+    
+    
+    
     
     // prepare for going back to (compsim) viewcontroller
     override func viewDidAppear(_ animated: Bool) {

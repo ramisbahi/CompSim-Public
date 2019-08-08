@@ -10,6 +10,10 @@
 		360BEB2C22F70ECE00D57E57 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360BEB2B22F70ECE00D57E57 /* EventViewController.swift */; };
 		360F108B22E24EFE00EEBB75 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360F108A22E24EFE00EEBB75 /* SettingsViewController.swift */; };
 		360F108F22E551E500EEBB75 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360F108E22E551E500EEBB75 /* TabBarController.swift */; };
+		361231D922FA201B0044DEF1 /* AverageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361231D822FA201B0044DEF1 /* AverageDetailViewController.swift */; };
+		361231DD22FA74C60044DEF1 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361231DC22FA74C60044DEF1 /* SegueFromLeft.swift */; };
+		361231DF22FA7B520044DEF1 /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361231DE22FA7B520044DEF1 /* SegueFromRight.swift */; };
+		36225EDF22F9EFF9009EFEC6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36225EDE22F9EFF9009EFEC6 /* StatsViewController.swift */; };
 		36412EED22EE787E0034E0FC /* TwoByTwoSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */; };
 		3663DF3B22DD699D006657CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF3A22DD699D006657CF /* AppDelegate.swift */; };
 		3663DF3D22DD699D006657CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF3C22DD699D006657CF /* ViewController.swift */; };
@@ -25,6 +29,10 @@
 		360BEB2B22F70ECE00D57E57 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		360F108A22E24EFE00EEBB75 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		360F108E22E551E500EEBB75 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		361231D822FA201B0044DEF1 /* AverageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageDetailViewController.swift; sourceTree = "<group>"; };
+		361231DC22FA74C60044DEF1 /* SegueFromLeft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
+		361231DE22FA7B520044DEF1 /* SegueFromRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; };
+		36225EDE22F9EFF9009EFEC6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoByTwoSolver.swift; sourceTree = "<group>"; };
 		3663DF3722DD699D006657CF /* CompSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3663DF3A22DD699D006657CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,12 +76,16 @@
 		3663DF3922DD699D006657CF /* CompSim */ = {
 			isa = PBXGroup;
 			children = (
+				361231DE22FA7B520044DEF1 /* SegueFromRight.swift */,
+				361231DC22FA74C60044DEF1 /* SegueFromLeft.swift */,
 				3663DF3E22DD699D006657CF /* Main.storyboard */,
+				361231D822FA201B0044DEF1 /* AverageDetailViewController.swift */,
 				3663DF3A22DD699D006657CF /* AppDelegate.swift */,
 				3663DF3C22DD699D006657CF /* ViewController.swift */,
 				360BEB2B22F70ECE00D57E57 /* EventViewController.swift */,
 				360F108A22E24EFE00EEBB75 /* SettingsViewController.swift */,
 				3663DF4C22DEBB5C006657CF /* ResultViewController.swift */,
+				36225EDE22F9EFF9009EFEC6 /* StatsViewController.swift */,
 				36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */,
 				3663DF4122DD699E006657CF /* Assets.xcassets */,
 				3663DF4322DD699E006657CF /* LaunchScreen.storyboard */,
@@ -163,8 +175,12 @@
 				3663DF3B22DD699D006657CF /* AppDelegate.swift in Sources */,
 				3663DF4D22DEBB5C006657CF /* ResultViewController.swift in Sources */,
 				360F108F22E551E500EEBB75 /* TabBarController.swift in Sources */,
+				361231D922FA201B0044DEF1 /* AverageDetailViewController.swift in Sources */,
+				361231DD22FA74C60044DEF1 /* SegueFromLeft.swift in Sources */,
+				361231DF22FA7B520044DEF1 /* SegueFromRight.swift in Sources */,
 				360BEB2C22F70ECE00D57E57 /* EventViewController.swift in Sources */,
 				360F108B22E24EFE00EEBB75 /* SettingsViewController.swift in Sources */,
+				36225EDF22F9EFF9009EFEC6 /* StatsViewController.swift in Sources */,
 				3663DF5122DEE4E5006657CF /* ScrambleReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

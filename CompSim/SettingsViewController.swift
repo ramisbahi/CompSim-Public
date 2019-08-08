@@ -10,8 +10,6 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    
-    
     @IBOutlet weak var MinTimeLabel: UIButton!
     @IBOutlet weak var MaxTimeLabel: UIButton!
     
@@ -23,6 +21,17 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var Dist6: UILabel!
     @IBOutlet weak var Dist7: UILabel!
     
+    @IBOutlet weak var WinningTimeSetting: UISegmentedControl!
+    @IBOutlet weak var DistributionImage: UIImageView!
+    @IBOutlet weak var SetRangeLabel: UILabel!
+    @IBOutlet weak var DistributionLabel: UILabel!
+    @IBOutlet weak var ToLabel: UILabel!
+    
+    @IBOutlet weak var StackView: UIStackView!
+    
+    static var noWinning = false // no win
+    static var singleWinning = false
+    static var rangeWinning = true
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -31,6 +40,68 @@ class SettingsViewController: UIViewController {
         MinTimeLabel.setTitle(ViewController.hundredthString(num: ViewController.minTime), for: .normal) // set label to min
         MaxTimeLabel.setTitle(ViewController.hundredthString(num: ViewController.maxTime), for: .normal) // set label to max
         self.updateDistributionLabels()
+    }
+    
+    @IBAction func ValueChanged(_ sender: Any) // value changed on winning time setting
+    {
+        print("called")
+        if WinningTimeSetting.selectedSegmentIndex == 0 // none
+        {
+            StackView.isHidden = true
+            SetRangeLabel.isHidden = true
+            DistributionLabel.isHidden = true
+            DistributionImage.isHidden = true
+            self.changeDistLabels(hide: true)
+            
+            SettingsViewController.noWinning = true
+            SettingsViewController.singleWinning = false
+            SettingsViewController.rangeWinning = false
+        }
+        else if WinningTimeSetting.selectedSegmentIndex == 1 // single
+        {
+            SetRangeLabel.text = "  Set Time:"
+            SetRangeLabel.font = UIFont.systemFont(ofSize: 40.0)
+            StackView.isHidden = false
+            SetRangeLabel.isHidden = false
+            DistributionLabel.isHidden = true
+            DistributionImage.isHidden = true
+            MinTimeLabel.titleLabel?.textColor = UIColor.white
+            MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 45.0)
+            ToLabel.isHidden = true
+            self.changeDistLabels(hide: true)
+            
+            SettingsViewController.noWinning = false
+            SettingsViewController.singleWinning = true
+            SettingsViewController.rangeWinning = false
+        }
+        else // range
+        {
+            SetRangeLabel.text = "Set Range:"
+            SetRangeLabel.font = UIFont.systemFont(ofSize: 24.0)
+            SetRangeLabel.isHidden = false
+            StackView.isHidden = false
+            DistributionLabel.isHidden = false
+            DistributionImage.isHidden = false
+            MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 30.0)
+            MinTimeLabel.titleLabel?.textColor = UIColor(displayP3Red: 0, green:0.478431, blue: 1, alpha: 1.0)
+            ToLabel.isHidden = false
+            self.changeDistLabels(hide: false)
+            
+            SettingsViewController.noWinning = false
+            SettingsViewController.singleWinning = false
+            SettingsViewController.rangeWinning = true
+        }
+    }
+    
+    func changeDistLabels(hide: Bool)
+    {
+        Dist1.isHidden = hide
+        Dist2.isHidden = hide
+        Dist3.isHidden = hide
+        Dist4.isHidden = hide
+        Dist5.isHidden = hide
+        Dist6.isHidden = hide
+        Dist7.isHidden = hide
     }
     
     @IBAction func MinTimeTouched(_ sender: Any) {

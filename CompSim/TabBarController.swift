@@ -5,7 +5,6 @@
 //  Created by Rami Sbahi on 7/21/19.
 //  Copyright © 2019 Rami Sbahi. All rights reserved.
 //
-
 import UIKit
 
 class TabBarController: UITabBarController {
@@ -13,7 +12,14 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.selectedIndex = 1
+        if(AverageDetailViewController.justReturned)
+        {
+            self.selectedIndex = 3
+        }
+        else // just came from stats
+        {
+            self.selectedIndex = 1
+        }
 
         // Do any additional setup after loading the view.
     }
