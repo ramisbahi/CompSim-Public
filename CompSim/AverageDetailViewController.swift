@@ -23,18 +23,14 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     // returns number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        print("on THIS shit")
         return 5
     }
     
     // performed for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("on this shit")
-        
         let myCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "myCell")
         
-        print("all times \(ViewController.allTimes[StatsViewController.myIndex])")
         myCell.textLabel?.text = ViewController.allTimes[StatsViewController.myIndex][indexPath.row] // each time
         myCell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         
@@ -54,13 +50,21 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewWillAppear(true)
         
         AverageLabel.text = ViewController.averages[StatsViewController.myIndex] + " Average"
-        if(ViewController.results[StatsViewController.myIndex]) // won
+    
+        if(ViewController.usingWinningTime[StatsViewController.myIndex]) // was going against a winning time
         {
-            AverageLabel.textColor = UIColor.green
+            if(ViewController.results[StatsViewController.myIndex]) // won
+            {
+                AverageLabel.textColor = UIColor.green
+            }
+            else // ost
+            {
+                AverageLabel.textColor = UIColor.red
+            }
         }
-        else // ost
+        else // wasn't
         {
-            AverageLabel.textColor = UIColor.red
+            WinningAverageLabel.isHidden = true
         }
         
         WinningAverageLabel.text = "Winning Average: " +  ViewController.winningAverages[StatsViewController.myIndex] + " Average"

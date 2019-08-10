@@ -10,7 +10,19 @@ import UIKit
 
 class EventViewController: UIViewController {
     
-    @IBOutlet weak var EventChooser: UISegmentedControl!
+    @IBOutlet var eventCollection: [UIButton]!
+    
+    @IBOutlet weak var ScrambleTypeButton: UIButton!
+    
+    @IBAction func handleSelection(_ sender: UIButton) // clicked select
+    {
+        eventCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
     
 
     override func viewDidLoad() {
@@ -19,20 +31,79 @@ class EventViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        eventCollection.forEach { (button) in
+            button.isHidden = true
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(false)
-        if EventChooser.selectedSegmentIndex == 0
-        {
-            ViewController.scrambler.doEvent(event: true)
-            
-        }
-        else
-        {
-            ViewController.scrambler.doEvent(event: false)
-            
-        }
     }
+    
+    enum Events: String
+    {
+        case twoCube = "2x2x2"
+        case threeCube = "3x3x3"
+        case fourCube = "4x4x4"
+        case fiveCube = "5x5x5"
+        case sixCube = "6x6x6"
+        case sevenCube = "7x7x7"
+        case pyra = "Pyraminx"
+        case mega = "Megaminx"
+        case sq1 = "Square-1"
+        case skewb = "Skewb"
+        case clock = "Clock"
+    }
+    
+    @IBAction func eventTapped(_ sender: UIButton) {
+        
+        eventCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+        
+        guard let title = sender.currentTitle, let event = Events(rawValue: title) else
+        {
+            return // doesn't have title
+        }
+        
+        ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
+        
+        switch event
+        {
+        case .twoCube:
+            ViewController.scrambler.doEvent(event: 0)
+        case .threeCube:
+            ViewController.scrambler.doEvent(event: 1)
+        case .fourCube:
+            ViewController.scrambler.doEvent(event: 2)
+        case .fiveCube:
+            ViewController.scrambler.doEvent(event: 3)
+        case .sixCube:
+            ViewController.scrambler.doEvent(event: 4)
+        case .sevenCube:
+            ViewController.scrambler.doEvent(event: 5)
+        case .pyra:
+            ViewController.scrambler.doEvent(event: 6)
+        case .mega:
+            ViewController.scrambler.doEvent(event: 7)
+        case .sq1:
+            ViewController.scrambler.doEvent(event: 8)
+        case .skewb:
+            ViewController.scrambler.doEvent(event: 9)
+        case .clock:
+            ViewController.scrambler.doEvent(event: 10)
+        default:
+            print("op")
+        }
+        
+    }
+    
     
 
     /*

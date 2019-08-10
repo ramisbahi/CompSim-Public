@@ -21,29 +21,34 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // performed for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
-        print(ViewController.averages[indexPath.row])
+        let currentIndex = ViewController.currentAverage - indexPath.row // reverse order
         
-        cell.textLabel?.text = ViewController.averages[indexPath.row] // set to average
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
+        print(ViewController.averages[currentIndex])
+        
+        cell.textLabel?.text = ViewController.averages[currentIndex] // set to average
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         cell.accessoryType = .disclosureIndicator // show little arrow thing on right side of each cell
-        if(ViewController.results[indexPath.row]) // win
+        if(ViewController.usingWinningTime[currentIndex]) // if was competing against winning time
         {
-            cell.textLabel?.textColor = UIColor.green
-        }
-        else // loss
-        {
-            cell.textLabel?.textColor = UIColor.red
+            if(ViewController.results[currentIndex]) // win
+            {
+                cell.textLabel?.textColor = UIColor.green
+            }
+            else // loss
+            {
+                cell.textLabel?.textColor = UIColor.red
+            }
         }
         
         var timeList: String = ""
         
         
         for i in 0..<4
-        { timeList.append(ViewController.allTimes[indexPath.row][i])
+        { timeList.append(ViewController.allTimes[currentIndex][i])
             timeList.append(", ")
         }
-        timeList.append(ViewController.allTimes[indexPath.row][4])
+        timeList.append(ViewController.allTimes[currentIndex][4])
         
         cell.detailTextLabel?.text = timeList
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)
@@ -58,7 +63,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        StatsViewController.myIndex = indexPath.row
+        StatsViewController.myIndex = ViewController.currentAverage - indexPath.row // bc reverse
         performSegue(withIdentifier: "segue", sender: self)
     }
     

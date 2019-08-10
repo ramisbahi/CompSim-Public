@@ -29,6 +29,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var StackView: UIStackView!
     
+    
     static var noWinning = false // no win
     static var singleWinning = false
     static var rangeWinning = true
@@ -40,6 +41,23 @@ class SettingsViewController: UIViewController {
         MinTimeLabel.setTitle(ViewController.hundredthString(num: ViewController.minTime), for: .normal) // set label to min
         MaxTimeLabel.setTitle(ViewController.hundredthString(num: ViewController.maxTime), for: .normal) // set label to max
         self.updateDistributionLabels()
+        
+        // set the selected segment correctly
+        if(SettingsViewController.noWinning)
+        {
+            WinningTimeSetting.selectedSegmentIndex = 0
+            noWinningSetup()
+        }
+        else if(SettingsViewController.singleWinning)
+        {
+            WinningTimeSetting.selectedSegmentIndex = 1
+            singleWinningSetup()
+        }
+        else
+        {
+            WinningTimeSetting.selectedSegmentIndex = 2
+            rangeWinningSetup()
+        }
     }
     
     @IBAction func ValueChanged(_ sender: Any) // value changed on winning time setting
@@ -47,11 +65,7 @@ class SettingsViewController: UIViewController {
         print("called")
         if WinningTimeSetting.selectedSegmentIndex == 0 // none
         {
-            StackView.isHidden = true
-            SetRangeLabel.isHidden = true
-            DistributionLabel.isHidden = true
-            DistributionImage.isHidden = true
-            self.changeDistLabels(hide: true)
+            noWinningSetup()
             
             SettingsViewController.noWinning = true
             SettingsViewController.singleWinning = false
@@ -59,16 +73,7 @@ class SettingsViewController: UIViewController {
         }
         else if WinningTimeSetting.selectedSegmentIndex == 1 // single
         {
-            SetRangeLabel.text = "  Set Time:"
-            SetRangeLabel.font = UIFont.systemFont(ofSize: 40.0)
-            StackView.isHidden = false
-            SetRangeLabel.isHidden = false
-            DistributionLabel.isHidden = true
-            DistributionImage.isHidden = true
-            MinTimeLabel.titleLabel?.textColor = UIColor.white
-            MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 45.0)
-            ToLabel.isHidden = true
-            self.changeDistLabels(hide: true)
+            singleWinningSetup()
             
             SettingsViewController.noWinning = false
             SettingsViewController.singleWinning = true
@@ -76,21 +81,49 @@ class SettingsViewController: UIViewController {
         }
         else // range
         {
-            SetRangeLabel.text = "Set Range:"
-            SetRangeLabel.font = UIFont.systemFont(ofSize: 24.0)
-            SetRangeLabel.isHidden = false
-            StackView.isHidden = false
-            DistributionLabel.isHidden = false
-            DistributionImage.isHidden = false
-            MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 30.0)
-            MinTimeLabel.titleLabel?.textColor = UIColor(displayP3Red: 0, green:0.478431, blue: 1, alpha: 1.0)
-            ToLabel.isHidden = false
-            self.changeDistLabels(hide: false)
+            rangeWinningSetup()
             
             SettingsViewController.noWinning = false
             SettingsViewController.singleWinning = false
             SettingsViewController.rangeWinning = true
         }
+    }
+    
+    func noWinningSetup()
+    {
+        StackView.isHidden = true
+        SetRangeLabel.isHidden = true
+        DistributionLabel.isHidden = true
+        DistributionImage.isHidden = true
+        self.changeDistLabels(hide: true)
+    }
+    
+    func singleWinningSetup()
+    {
+        SetRangeLabel.text = "  Set Time:"
+        SetRangeLabel.font = UIFont.systemFont(ofSize: 40.0)
+        StackView.isHidden = false
+        SetRangeLabel.isHidden = false
+        DistributionLabel.isHidden = true
+        DistributionImage.isHidden = true
+        MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
+        MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 45.0)
+        ToLabel.isHidden = true
+        self.changeDistLabels(hide: true)
+    }
+    
+    func rangeWinningSetup()
+    {
+        SetRangeLabel.text = "Set Range:"
+        SetRangeLabel.font = UIFont.systemFont(ofSize: 24.0)
+        SetRangeLabel.isHidden = false
+        StackView.isHidden = false
+        DistributionLabel.isHidden = false
+        DistributionImage.isHidden = false
+        MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 30.0)
+        MinTimeLabel.setTitleColor(UIColor(displayP3Red: 0, green:0.478431, blue: 1, alpha: 1.0), for: .normal)
+        ToLabel.isHidden = false
+        self.changeDistLabels(hide: false)
     }
     
     func changeDistLabels(hide: Bool)
@@ -153,7 +186,10 @@ class SettingsViewController: UIViewController {
         
     }
     @IBAction func MaxTimeTouched(_ sender: Any) {
-        
+        if(SettingsViewController.singleWinning)
+        {
+            MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
+        }
         let alert = UIAlertController(title: "Enter Maximum Time", message: "", preferredStyle: .alert)
         
         alert.addTextField(configurationHandler: { (textField) in
@@ -171,15 +207,24 @@ class SettingsViewController: UIViewController {
             if let doubleTime = Double(enteredTime)
             {
                 let time = ViewController.hundredthRound(num: doubleTime) // // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150)
-                if(time >= ViewController.minTime)
+                
+                if(SettingsViewController.rangeWinning) // range winning
+                {
+                    if(time >= ViewController.minTime)
+                    {
+                        self.MaxTimeLabel.setTitle(ViewController.hundredthString(num: time), for: .normal) // set title to string version
+                        ViewController.maxTime = time
+                        self.updateDistributionLabels()
+                    }
+                    else
+                    {
+                        self.alertValidTime(alertMessage:"Please enter a time greater than minimum")
+                    }
+                }
+                else // single winning time - don't need to check
                 {
                     self.MaxTimeLabel.setTitle(ViewController.hundredthString(num: time), for: .normal) // set title to string version
                     ViewController.maxTime = time
-                    self.updateDistributionLabels()
-                }
-                else
-                {
-                    self.alertValidTime(alertMessage:"Please enter a time greater than minimum")
                 }
             }
             else

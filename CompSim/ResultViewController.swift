@@ -25,14 +25,15 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var WinningAverageLabel: UILabel!
     
     @IBOutlet weak var ResultButton: UIButton!
-    
-    
     @IBOutlet weak var TryAgainButton: UIButton!
     
     var labels = [UIButton]()
     
     var myAverage: Int = 0
     
+    
+    
+    // Additional setup after loading the view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         labels = [SecondTime1, SecondTime2, SecondTime3, SecondTime4, SecondTime5]
@@ -64,50 +65,81 @@ class ResultViewController: UIViewController {
         let averageString: String = ViewController.hundredthString(num: myAverage)
         MyAverageLabel.text = "= " + averageString + " Average!" // update my average label
         MyAverageLabel.isHidden = false
-        updateWinningAverage() // update winning average label & win/lose
         TryAgainButton.isHidden = false
         ViewController.currentAverage += 1
         ViewController.allTimes[ViewController.currentAverage] = timeStrings // add the strings for the times in average
-        
-        
-        print("ViewController.allTimes[0] \(ViewController.allTimes[0])")
-        
         ViewController.averages.append(averageString) // add the actual average (i.e. "1.45")
         
-        // Do any additional setup after loading the view.
+        
+        
+       if(SettingsViewController.noWinning) // no winning time
+       {
+            ResultButton.isHidden = true
+            WinningAverageLabel.isHidden = true
+            BackgroundImage.isHidden = true
+            ViewController.usingWinningTime.append(false)
+        
+        // instead of updateWinningAverage():
+            ViewController.winningAverages.append("") // blank string for average
+            ViewController.results.append(true) // win for winning (not used tho)
+       }
+       else // winning time
+       {
+            ResultButton.isHidden = false
+            WinningAverageLabel.isHidden = false
+            BackgroundImage.isHidden = false
+            ViewController.usingWinningTime.append(true)
+            updateWinningAverage() // update winning average label & win/lose
+        }
     }
     
     func updateWinningAverage() // calculate average and update label
     {
-        let random = GKRandomSource()
-        let winningTimeDistribution = GKGaussianDistribution(randomSource: random, lowestValue: ViewController.minTime, highestValue: ViewController.maxTime) // now using ints pays off. Distribution created easily
-        let winningAverage: Int = winningTimeDistribution.nextInt()
+        var winningAverage: Int = ViewController.maxTime // for single time
+        if(SettingsViewController.rangeWinning)
+        {
+            let random = GKRandomSource()
+            let winningTimeDistribution = GKGaussianDistribution(randomSource: random, lowestValue: ViewController.minTime, highestValue: ViewController.maxTime) // now using ints pays off. Distribution created easily
+            winningAverage = winningTimeDistribution.nextInt()
+        }
+        
         WinningAverageLabel.text = "Winning Average: " + ViewController.hundredthString(num: winningAverage) // update label
         WinningAverageLabel.isHidden = false
         
         ViewController.winningAverages.append(ViewController.hundredthString(num: winningAverage))
         
-        if(myAverage <= winningAverage)
+        if(myAverage < winningAverage)
         {
             self.win()
         }
+        else if(myAverage == winningAverage) // 50% chance of winning in event of a tie
+        {
+            let rand = Int.random(in: 0...1)
+            if(rand == 0)
+            {
+                self.win()
+            }
+            else // 1
+            {
+                ViewController.results.append(false)
+            }
+        }
         else
         {
-            ViewController.results.append(false)
+            ViewController.results.append(false) // loss
         }
+        
         ResultButton.isHidden = false
         
     }
     
     func win()
     {
-        ViewController.results.append(true)
-        ResultButton.titleLabel?.textColor = UIColor.green
+        ViewController.results.append(true) // win
+        ResultButton.setTitleColor(UIColor.green, for: .normal)
         ResultButton.setTitle("You WIN!", for: .normal)
         BackgroundImage.image = UIImage(named: "background")
     }
-    
-    
     
     
     // prepare for going back to (compsim) viewcontroller

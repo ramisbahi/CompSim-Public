@@ -13,6 +13,18 @@
 		361231D922FA201B0044DEF1 /* AverageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361231D822FA201B0044DEF1 /* AverageDetailViewController.swift */; };
 		361231DD22FA74C60044DEF1 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361231DC22FA74C60044DEF1 /* SegueFromLeft.swift */; };
 		361231DF22FA7B520044DEF1 /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361231DE22FA7B520044DEF1 /* SegueFromRight.swift */; };
+		361231E122FD06A10044DEF1 /* CoordCube.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231E022FD06A10044DEF1 /* CoordCube.m */; };
+		361231E522FD07B30044DEF1 /* CubieCube.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231E422FD07B30044DEF1 /* CubieCube.m */; };
+		361231E822FD081C0044DEF1 /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231E722FD081C0044DEF1 /* Search.m */; };
+		361231EB22FD08E80044DEF1 /* TwoPhaseScrambler.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231EA22FD08E80044DEF1 /* TwoPhaseScrambler.m */; };
+		361231EF22FD0AF70044DEF1 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231EE22FD0AF70044DEF1 /* Util.m */; };
+		361231F222FD289B0044DEF1 /* Clock.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231F122FD289B0044DEF1 /* Clock.m */; };
+		361231F622FD2A480044DEF1 /* Megaminx.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231F522FD2A480044DEF1 /* Megaminx.m */; };
+		361231F822FD2E870044DEF1 /* Sq1.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231F722FD2E870044DEF1 /* Sq1.m */; };
+		361231FF22FD2F4C0044DEF1 /* Skewb.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231FE22FD2F4C0044DEF1 /* Skewb.m */; };
+		3612320122FD2FEA0044DEF1 /* Pyraminx.m in Sources */ = {isa = PBXBuildFile; fileRef = 3612320022FD2FEA0044DEF1 /* Pyraminx.m */; };
+		3612320422FD30DE0044DEF1 /* Im.m in Sources */ = {isa = PBXBuildFile; fileRef = 3612320322FD30DE0044DEF1 /* Im.m */; };
+		3612320922FDC5F80044DEF1 /* BigCubeScrambler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3612320822FDC5F80044DEF1 /* BigCubeScrambler.m */; };
 		36225EDF22F9EFF9009EFEC6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36225EDE22F9EFF9009EFEC6 /* StatsViewController.swift */; };
 		36412EED22EE787E0034E0FC /* TwoByTwoSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */; };
 		3663DF3B22DD699D006657CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF3A22DD699D006657CF /* AppDelegate.swift */; };
@@ -22,7 +34,6 @@
 		3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4322DD699E006657CF /* LaunchScreen.storyboard */; };
 		3663DF4D22DEBB5C006657CF /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF4C22DEBB5C006657CF /* ResultViewController.swift */; };
 		3663DF5122DEE4E5006657CF /* ScrambleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF5022DEE4E5006657CF /* ScrambleReader.swift */; };
-		3663DF5322DEE861006657CF /* scrambles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF5222DEE861006657CF /* scrambles.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +43,31 @@
 		361231D822FA201B0044DEF1 /* AverageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageDetailViewController.swift; sourceTree = "<group>"; };
 		361231DC22FA74C60044DEF1 /* SegueFromLeft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
 		361231DE22FA7B520044DEF1 /* SegueFromRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; };
+		361231E022FD06A10044DEF1 /* CoordCube.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoordCube.m; sourceTree = "<group>"; };
+		361231E222FD075B0044DEF1 /* CoordCube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoordCube.h; sourceTree = "<group>"; };
+		361231E322FD07830044DEF1 /* CubieCube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CubieCube.h; sourceTree = "<group>"; };
+		361231E422FD07B30044DEF1 /* CubieCube.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CubieCube.m; sourceTree = "<group>"; };
+		361231E622FD08050044DEF1 /* Search.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
+		361231E722FD081C0044DEF1 /* Search.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
+		361231E922FD08500044DEF1 /* TwoPhaseScrambler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwoPhaseScrambler.h; sourceTree = "<group>"; };
+		361231EA22FD08E80044DEF1 /* TwoPhaseScrambler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwoPhaseScrambler.m; sourceTree = "<group>"; };
+		361231ED22FD0ADF0044DEF1 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		361231EE22FD0AF70044DEF1 /* Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		361231F022FD0B4E0044DEF1 /* CompSim-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CompSim-Bridging-Header.h"; sourceTree = "<group>"; };
+		361231F122FD289B0044DEF1 /* Clock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Clock.m; sourceTree = "<group>"; };
+		361231F322FD2A090044DEF1 /* Clock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
+		361231F422FD2A360044DEF1 /* Megaminx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Megaminx.h; sourceTree = "<group>"; };
+		361231F522FD2A480044DEF1 /* Megaminx.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Megaminx.m; sourceTree = "<group>"; };
+		361231F722FD2E870044DEF1 /* Sq1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sq1.m; sourceTree = "<group>"; };
+		361231FC22FD2F050044DEF1 /* Sq1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sq1.h; sourceTree = "<group>"; };
+		361231FD22FD2F230044DEF1 /* Skewb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Skewb.h; sourceTree = "<group>"; };
+		361231FE22FD2F4C0044DEF1 /* Skewb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Skewb.m; sourceTree = "<group>"; };
+		3612320022FD2FEA0044DEF1 /* Pyraminx.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pyraminx.m; sourceTree = "<group>"; };
+		3612320222FD2FFE0044DEF1 /* Pyraminx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pyraminx.h; sourceTree = "<group>"; };
+		3612320322FD30DE0044DEF1 /* Im.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Im.m; sourceTree = "<group>"; };
+		3612320522FD30F00044DEF1 /* Im.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Im.h; sourceTree = "<group>"; };
+		3612320822FDC5F80044DEF1 /* BigCubeScrambler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigCubeScrambler.m; sourceTree = "<group>"; };
+		3612320A22FDC7050044DEF1 /* BigCubeScrambler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigCubeScrambler.h; sourceTree = "<group>"; };
 		36225EDE22F9EFF9009EFEC6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoByTwoSolver.swift; sourceTree = "<group>"; };
 		3663DF3722DD699D006657CF /* CompSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,7 +79,6 @@
 		3663DF4622DD699E006657CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3663DF4C22DEBB5C006657CF /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		3663DF5022DEE4E5006657CF /* ScrambleReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrambleReader.swift; sourceTree = "<group>"; };
-		3663DF5222DEE861006657CF /* scrambles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scrambles.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +111,26 @@
 		3663DF3922DD699D006657CF /* CompSim */ = {
 			isa = PBXGroup;
 			children = (
+				361231F122FD289B0044DEF1 /* Clock.m */,
+				361231F322FD2A090044DEF1 /* Clock.h */,
+				361231F422FD2A360044DEF1 /* Megaminx.h */,
+				361231F522FD2A480044DEF1 /* Megaminx.m */,
+				361231F722FD2E870044DEF1 /* Sq1.m */,
+				361231FC22FD2F050044DEF1 /* Sq1.h */,
+				361231FD22FD2F230044DEF1 /* Skewb.h */,
+				361231FE22FD2F4C0044DEF1 /* Skewb.m */,
+				3612320022FD2FEA0044DEF1 /* Pyraminx.m */,
+				3612320222FD2FFE0044DEF1 /* Pyraminx.h */,
+				3612320322FD30DE0044DEF1 /* Im.m */,
+				3612320522FD30F00044DEF1 /* Im.h */,
+				361231E322FD07830044DEF1 /* CubieCube.h */,
+				361231E422FD07B30044DEF1 /* CubieCube.m */,
+				361231E022FD06A10044DEF1 /* CoordCube.m */,
+				361231E222FD075B0044DEF1 /* CoordCube.h */,
+				361231E622FD08050044DEF1 /* Search.h */,
+				361231E722FD081C0044DEF1 /* Search.m */,
+				361231E922FD08500044DEF1 /* TwoPhaseScrambler.h */,
+				361231EA22FD08E80044DEF1 /* TwoPhaseScrambler.m */,
 				361231DE22FA7B520044DEF1 /* SegueFromRight.swift */,
 				361231DC22FA74C60044DEF1 /* SegueFromLeft.swift */,
 				3663DF3E22DD699D006657CF /* Main.storyboard */,
@@ -91,8 +146,12 @@
 				3663DF4322DD699E006657CF /* LaunchScreen.storyboard */,
 				3663DF4622DD699E006657CF /* Info.plist */,
 				3663DF5022DEE4E5006657CF /* ScrambleReader.swift */,
-				3663DF5222DEE861006657CF /* scrambles.txt */,
 				360F108E22E551E500EEBB75 /* TabBarController.swift */,
+				361231ED22FD0ADF0044DEF1 /* Util.h */,
+				361231EE22FD0AF70044DEF1 /* Util.m */,
+				361231F022FD0B4E0044DEF1 /* CompSim-Bridging-Header.h */,
+				3612320822FDC5F80044DEF1 /* BigCubeScrambler.m */,
+				3612320A22FDC7050044DEF1 /* BigCubeScrambler.h */,
 			);
 			path = CompSim;
 			sourceTree = "<group>";
@@ -159,7 +218,6 @@
 				3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */,
 				3663DF4222DD699E006657CF /* Assets.xcassets in Resources */,
 				3663DF4022DD699D006657CF /* Main.storyboard in Resources */,
-				3663DF5322DEE861006657CF /* scrambles.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,16 +228,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				361231FF22FD2F4C0044DEF1 /* Skewb.m in Sources */,
+				361231F222FD289B0044DEF1 /* Clock.m in Sources */,
+				361231EF22FD0AF70044DEF1 /* Util.m in Sources */,
 				36412EED22EE787E0034E0FC /* TwoByTwoSolver.swift in Sources */,
 				3663DF3D22DD699D006657CF /* ViewController.swift in Sources */,
+				3612320422FD30DE0044DEF1 /* Im.m in Sources */,
+				361231E122FD06A10044DEF1 /* CoordCube.m in Sources */,
 				3663DF3B22DD699D006657CF /* AppDelegate.swift in Sources */,
+				361231EB22FD08E80044DEF1 /* TwoPhaseScrambler.m in Sources */,
+				3612320922FDC5F80044DEF1 /* BigCubeScrambler.m in Sources */,
+				361231F622FD2A480044DEF1 /* Megaminx.m in Sources */,
 				3663DF4D22DEBB5C006657CF /* ResultViewController.swift in Sources */,
 				360F108F22E551E500EEBB75 /* TabBarController.swift in Sources */,
 				361231D922FA201B0044DEF1 /* AverageDetailViewController.swift in Sources */,
 				361231DD22FA74C60044DEF1 /* SegueFromLeft.swift in Sources */,
 				361231DF22FA7B520044DEF1 /* SegueFromRight.swift in Sources */,
 				360BEB2C22F70ECE00D57E57 /* EventViewController.swift in Sources */,
+				3612320122FD2FEA0044DEF1 /* Pyraminx.m in Sources */,
 				360F108B22E24EFE00EEBB75 /* SettingsViewController.swift in Sources */,
+				361231E522FD07B30044DEF1 /* CubieCube.m in Sources */,
+				361231E822FD081C0044DEF1 /* Search.m in Sources */,
+				361231F822FD2E870044DEF1 /* Sq1.m in Sources */,
 				36225EDF22F9EFF9009EFEC6 /* StatsViewController.swift in Sources */,
 				3663DF5122DEE4E5006657CF /* ScrambleReader.swift in Sources */,
 			);
@@ -246,7 +316,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -306,7 +376,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

@@ -20,11 +20,10 @@ class ViewController: UIViewController {
     
     
     
-    @IBOutlet weak var RoundLabel: UILabel!
     
     @IBOutlet weak var ScrambleLabel: UILabel!
     
-    static let scrambler: ScrambleReader = ScrambleReader(doingTwo: true)
+    static let scrambler: ScrambleReader = ScrambleReader()
     
     static var roundNumber: Int = 1
     
@@ -46,9 +45,11 @@ class ViewController: UIViewController {
     static var times = [Int]()
     static var averages: [String] = []
     static var winningAverages: [String] = []
+    static var usingWinningTime: [Bool] = [] // for each round, whether or not using winning time
     static var allTimes: [[String]] = Array(repeating: Array(repeating: "", count: 5), count: 1000)
     static var currentAverage: Int = -1 // keeps track of last average currently on (round - 2)
     static var results: [Bool] = []
+    
     
     
     
@@ -58,7 +59,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.swipeSetup()
-        RoundLabel.text = "Round " + String(ViewController.roundNumber)
         self.labels = [Time1, Time2, Time3, Time4, Time5] // add labels to labels array - one time thing
         
         if(!AverageDetailViewController.justReturned)
