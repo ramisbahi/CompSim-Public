@@ -12,6 +12,9 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     static var justReturned: Bool = false // don't do any viewdidload stuff if just returned, also  make tab bar controller on stats
     
+    @IBOutlet weak var DarkBackground: UIImageView!
+    
+    @IBOutlet weak var AverageTableView: UITableView!
     @IBOutlet weak var AverageLabel: UILabel!
     @IBOutlet weak var WinningAverageLabel: UILabel!
     
@@ -37,9 +40,13 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         myCell.detailTextLabel?.text = ViewController.scrambler.scrambles[StatsViewController.myIndex*5 + indexPath.row] // each scramble
         myCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)
         
-        if(indexPath.row % 2 == 1) // make gray for every other cell
+        if(indexPath.row % 2 == 1 && !ViewController.darkMode) // make gray for every other cell
         {
             myCell.backgroundColor = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
+        }
+        else if(indexPath.row % 2 == 0 && ViewController.darkMode)
+        {
+            myCell.backgroundColor = UIColor.darkGray
         }
         
         return myCell
@@ -48,9 +55,22 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         AverageLabel.text = ViewController.averages[StatsViewController.myIndex] + " Average"
-    
+        
+        if(ViewController.darkMode)
+        {
+            makeDarkMode()
+        }
+        else
+        {
+            turnOffDarkMode()
+        }
+        
         if(ViewController.usingWinningTime[StatsViewController.myIndex]) // was going against a winning time
         {
             if(ViewController.results[StatsViewController.myIndex]) // won
@@ -68,12 +88,26 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         WinningAverageLabel.text = "Winning Average: " +  ViewController.winningAverages[StatsViewController.myIndex] + " Average"
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        
+    
 
         // Do any additional setup after loading the view.
+    }
+    
+    func makeDarkMode()
+    {
+        DarkBackground.isHidden = false
+        WinningAverageLabel.textColor? = UIColor.white
+        AverageLabel.textColor? = UIColor.white // may be changed to red/green afterwards - just changing default
+        AverageTableView.backgroundColor = UIColor.init(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
+    }
+    
+    func turnOffDarkMode()
+    {
+        DarkBackground.isHidden = true
+        WinningAverageLabel.textColor? = UIColor.black
+        AverageLabel.textColor? = UIColor.black // may be changed to red/green afterwards - just changing default
+        AverageTableView.backgroundColor = UIColor.white
     }
     
 

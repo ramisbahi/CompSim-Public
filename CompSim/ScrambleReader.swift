@@ -131,7 +131,7 @@ class ScrambleReader
         case 7:
             return megaScrambler.scrMinx()
         case 8:
-            return sq1Scrambler.sq1_scramble(0) // might have to fix
+            return sq1Scrambler.sq1_scramble(1) // might have to fix
         case 9:
             return skewbScrambler.scrSkb()
         case 10:

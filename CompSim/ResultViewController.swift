@@ -13,6 +13,7 @@ import GameKit
 class ResultViewController: UIViewController {
 
     @IBOutlet weak var BackgroundImage: UIImageView!
+    @IBOutlet weak var DarkBackground: UIImageView!
     
     @IBOutlet weak var SecondTime1: UIButton!
     @IBOutlet weak var SecondTime2: UIButton!
@@ -26,6 +27,9 @@ class ResultViewController: UIViewController {
     
     @IBOutlet weak var ResultButton: UIButton!
     @IBOutlet weak var TryAgainButton: UIButton!
+    
+    @IBOutlet var TimesCollection: [UIButton]!
+    
     
     var labels = [UIButton]()
     
@@ -90,6 +94,22 @@ class ResultViewController: UIViewController {
             BackgroundImage.isHidden = false
             ViewController.usingWinningTime.append(true)
             updateWinningAverage() // update winning average label & win/lose
+        }
+        
+        if(ViewController.darkMode)
+        {
+            makeDarkMode()
+        }
+    }
+    
+    func makeDarkMode()
+    {
+        DarkBackground.isHidden = false
+        WinningAverageLabel.textColor? = UIColor.white
+        MyAverageLabel.textColor? = UIColor.white
+        TryAgainButton.setTitleColor(ViewController.orangeColor(), for: .normal)
+        TimesCollection.forEach { (button) in
+            button.setTitleColor(ViewController.orangeColor(), for: .normal)
         }
     }
     

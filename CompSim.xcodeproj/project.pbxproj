@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		360BEB2C22F70ECE00D57E57 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360BEB2B22F70ECE00D57E57 /* EventViewController.swift */; };
-		360F108B22E24EFE00EEBB75 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360F108A22E24EFE00EEBB75 /* SettingsViewController.swift */; };
 		360F108F22E551E500EEBB75 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360F108E22E551E500EEBB75 /* TabBarController.swift */; };
-		361231D922FA201B0044DEF1 /* AverageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361231D822FA201B0044DEF1 /* AverageDetailViewController.swift */; };
 		361231DD22FA74C60044DEF1 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361231DC22FA74C60044DEF1 /* SegueFromLeft.swift */; };
 		361231DF22FA7B520044DEF1 /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361231DE22FA7B520044DEF1 /* SegueFromRight.swift */; };
 		361231E122FD06A10044DEF1 /* CoordCube.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231E022FD06A10044DEF1 /* CoordCube.m */; };
@@ -25,10 +22,15 @@
 		3612320122FD2FEA0044DEF1 /* Pyraminx.m in Sources */ = {isa = PBXBuildFile; fileRef = 3612320022FD2FEA0044DEF1 /* Pyraminx.m */; };
 		3612320422FD30DE0044DEF1 /* Im.m in Sources */ = {isa = PBXBuildFile; fileRef = 3612320322FD30DE0044DEF1 /* Im.m */; };
 		3612320922FDC5F80044DEF1 /* BigCubeScrambler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3612320822FDC5F80044DEF1 /* BigCubeScrambler.m */; };
-		36225EDF22F9EFF9009EFEC6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36225EDE22F9EFF9009EFEC6 /* StatsViewController.swift */; };
+		3612321223005D3E0044DEF1 /* ViewControllers in Resources */ = {isa = PBXBuildFile; fileRef = 3612321123005D3E0044DEF1 /* ViewControllers */; };
+		3612321923005DA00044DEF1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612321523005D9F0044DEF1 /* SettingsViewController.swift */; };
+		3612321A23005DA00044DEF1 /* AverageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612321423005D9F0044DEF1 /* AverageDetailViewController.swift */; };
+		3612321B23005DA00044DEF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612321323005D9F0044DEF1 /* ViewController.swift */; };
+		3612321C23005DA00044DEF1 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612321823005DA00044DEF1 /* StatsViewController.swift */; };
+		3612321D23005DA00044DEF1 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612321723005DA00044DEF1 /* ResultViewController.swift */; };
+		3612321E23005DA00044DEF1 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612321623005D9F0044DEF1 /* EventViewController.swift */; };
 		36412EED22EE787E0034E0FC /* TwoByTwoSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */; };
 		3663DF3B22DD699D006657CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF3A22DD699D006657CF /* AppDelegate.swift */; };
-		3663DF3D22DD699D006657CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF3C22DD699D006657CF /* ViewController.swift */; };
 		3663DF4022DD699D006657CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF3E22DD699D006657CF /* Main.storyboard */; };
 		3663DF4222DD699E006657CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4122DD699E006657CF /* Assets.xcassets */; };
 		3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4322DD699E006657CF /* LaunchScreen.storyboard */; };
@@ -37,10 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		360BEB2B22F70ECE00D57E57 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
-		360F108A22E24EFE00EEBB75 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		360F108E22E551E500EEBB75 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		361231D822FA201B0044DEF1 /* AverageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageDetailViewController.swift; sourceTree = "<group>"; };
 		361231DC22FA74C60044DEF1 /* SegueFromLeft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
 		361231DE22FA7B520044DEF1 /* SegueFromRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; };
 		361231E022FD06A10044DEF1 /* CoordCube.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoordCube.m; sourceTree = "<group>"; };
@@ -68,11 +67,16 @@
 		3612320522FD30F00044DEF1 /* Im.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Im.h; sourceTree = "<group>"; };
 		3612320822FDC5F80044DEF1 /* BigCubeScrambler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigCubeScrambler.m; sourceTree = "<group>"; };
 		3612320A22FDC7050044DEF1 /* BigCubeScrambler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigCubeScrambler.h; sourceTree = "<group>"; };
-		36225EDE22F9EFF9009EFEC6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		3612321123005D3E0044DEF1 /* ViewControllers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ViewControllers; sourceTree = "<group>"; };
+		3612321323005D9F0044DEF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3612321423005D9F0044DEF1 /* AverageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageDetailViewController.swift; sourceTree = "<group>"; };
+		3612321523005D9F0044DEF1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		3612321623005D9F0044DEF1 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		3612321723005DA00044DEF1 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		3612321823005DA00044DEF1 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoByTwoSolver.swift; sourceTree = "<group>"; };
 		3663DF3722DD699D006657CF /* CompSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3663DF3A22DD699D006657CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3663DF3C22DD699D006657CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3663DF3F22DD699D006657CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3663DF4122DD699E006657CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3663DF4422DD699E006657CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -111,7 +115,14 @@
 		3663DF3922DD699D006657CF /* CompSim */ = {
 			isa = PBXGroup;
 			children = (
+				3612321123005D3E0044DEF1 /* ViewControllers */,
 				361231F122FD289B0044DEF1 /* Clock.m */,
+				3612321423005D9F0044DEF1 /* AverageDetailViewController.swift */,
+				3612321623005D9F0044DEF1 /* EventViewController.swift */,
+				3612321723005DA00044DEF1 /* ResultViewController.swift */,
+				3612321523005D9F0044DEF1 /* SettingsViewController.swift */,
+				3612321823005DA00044DEF1 /* StatsViewController.swift */,
+				3612321323005D9F0044DEF1 /* ViewController.swift */,
 				361231F322FD2A090044DEF1 /* Clock.h */,
 				361231F422FD2A360044DEF1 /* Megaminx.h */,
 				361231F522FD2A480044DEF1 /* Megaminx.m */,
@@ -134,13 +145,8 @@
 				361231DE22FA7B520044DEF1 /* SegueFromRight.swift */,
 				361231DC22FA74C60044DEF1 /* SegueFromLeft.swift */,
 				3663DF3E22DD699D006657CF /* Main.storyboard */,
-				361231D822FA201B0044DEF1 /* AverageDetailViewController.swift */,
 				3663DF3A22DD699D006657CF /* AppDelegate.swift */,
-				3663DF3C22DD699D006657CF /* ViewController.swift */,
-				360BEB2B22F70ECE00D57E57 /* EventViewController.swift */,
-				360F108A22E24EFE00EEBB75 /* SettingsViewController.swift */,
 				3663DF4C22DEBB5C006657CF /* ResultViewController.swift */,
-				36225EDE22F9EFF9009EFEC6 /* StatsViewController.swift */,
 				36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */,
 				3663DF4122DD699E006657CF /* Assets.xcassets */,
 				3663DF4322DD699E006657CF /* LaunchScreen.storyboard */,
@@ -216,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */,
+				3612321223005D3E0044DEF1 /* ViewControllers in Resources */,
 				3663DF4222DD699E006657CF /* Assets.xcassets in Resources */,
 				3663DF4022DD699D006657CF /* Main.storyboard in Resources */,
 			);
@@ -231,26 +238,27 @@
 				361231FF22FD2F4C0044DEF1 /* Skewb.m in Sources */,
 				361231F222FD289B0044DEF1 /* Clock.m in Sources */,
 				361231EF22FD0AF70044DEF1 /* Util.m in Sources */,
+				3612321923005DA00044DEF1 /* SettingsViewController.swift in Sources */,
+				3612321B23005DA00044DEF1 /* ViewController.swift in Sources */,
 				36412EED22EE787E0034E0FC /* TwoByTwoSolver.swift in Sources */,
-				3663DF3D22DD699D006657CF /* ViewController.swift in Sources */,
+				3612321C23005DA00044DEF1 /* StatsViewController.swift in Sources */,
 				3612320422FD30DE0044DEF1 /* Im.m in Sources */,
 				361231E122FD06A10044DEF1 /* CoordCube.m in Sources */,
 				3663DF3B22DD699D006657CF /* AppDelegate.swift in Sources */,
+				3612321E23005DA00044DEF1 /* EventViewController.swift in Sources */,
+				3612321A23005DA00044DEF1 /* AverageDetailViewController.swift in Sources */,
+				3612321D23005DA00044DEF1 /* ResultViewController.swift in Sources */,
 				361231EB22FD08E80044DEF1 /* TwoPhaseScrambler.m in Sources */,
 				3612320922FDC5F80044DEF1 /* BigCubeScrambler.m in Sources */,
 				361231F622FD2A480044DEF1 /* Megaminx.m in Sources */,
 				3663DF4D22DEBB5C006657CF /* ResultViewController.swift in Sources */,
 				360F108F22E551E500EEBB75 /* TabBarController.swift in Sources */,
-				361231D922FA201B0044DEF1 /* AverageDetailViewController.swift in Sources */,
 				361231DD22FA74C60044DEF1 /* SegueFromLeft.swift in Sources */,
 				361231DF22FA7B520044DEF1 /* SegueFromRight.swift in Sources */,
-				360BEB2C22F70ECE00D57E57 /* EventViewController.swift in Sources */,
 				3612320122FD2FEA0044DEF1 /* Pyraminx.m in Sources */,
-				360F108B22E24EFE00EEBB75 /* SettingsViewController.swift in Sources */,
 				361231E522FD07B30044DEF1 /* CubieCube.m in Sources */,
 				361231E822FD081C0044DEF1 /* Search.m in Sources */,
 				361231F822FD2E870044DEF1 /* Sq1.m in Sources */,
-				36225EDF22F9EFF9009EFEC6 /* StatsViewController.swift in Sources */,
 				3663DF5122DEE4E5006657CF /* ScrambleReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

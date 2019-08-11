@@ -9,6 +9,41 @@
 import UIKit
 
 class EventViewController: UIViewController {
+    @IBOutlet weak var Background: UIImageView!
+    @IBOutlet weak var DarkModeLabel: UILabel!
+    @IBOutlet weak var DarkModeControl: UISegmentedControl!
+    
+    
+    @IBAction func DarkModeChanged(_ sender: Any) {
+        ViewController.changedDarkMode = true
+        if(!ViewController.darkMode) // not dark, set to dark
+        {
+            makeDarkMode()
+            ViewController.darkMode = true
+        }
+        else // dark, turn off
+        {
+            turnOffDarkMode()
+            ViewController.darkMode = false
+        }
+    }
+    
+    func makeDarkMode()
+    {
+        Background.isHidden = false
+        ScrambleTypeButton.backgroundColor = UIColor.darkGray
+        DarkModeLabel.backgroundColor = UIColor.darkGray
+        DarkModeControl.tintColor = ViewController.orangeColor()
+    }
+    
+    func turnOffDarkMode()
+    {
+        Background.isHidden = true
+        ScrambleTypeButton.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+        DarkModeLabel.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+        DarkModeControl.tintColor = ViewController.blueColor()
+    }
+    
     
     @IBOutlet var eventCollection: [UIButton]!
     
@@ -26,7 +61,18 @@ class EventViewController: UIViewController {
     
 
     override func viewDidLoad() {
+        if(ViewController.darkMode)
+        {
+            DarkModeControl.selectedSegmentIndex = 0
+            makeDarkMode()
+        }
+        else
+        {
+            turnOffDarkMode()
+        }
         super.viewDidLoad()
+        
+        
 
         // Do any additional setup after loading the view.
     }

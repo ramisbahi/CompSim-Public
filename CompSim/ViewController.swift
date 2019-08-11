@@ -10,18 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
-
-    
     @IBOutlet weak var Time1: UIButton!
     @IBOutlet weak var Time2: UIButton!
     @IBOutlet weak var Time3: UIButton!
     @IBOutlet weak var Time4: UIButton!
     @IBOutlet weak var Time5: UIButton!
     
+    @IBOutlet var TimesCollection: [UIButton]!
     
     
+    @IBOutlet weak var BackgroundImage: UIImageView!
     
     @IBOutlet weak var ScrambleLabel: UILabel!
+    @IBOutlet weak var SwipeUpLabel: UILabel!
+    @IBOutlet weak var SwipeDownLabel: UILabel!
+    
     
     static let scrambler: ScrambleReader = ScrambleReader()
     
@@ -50,7 +53,8 @@ class ViewController: UIViewController {
     static var currentAverage: Int = -1 // keeps track of last average currently on (round - 2)
     static var results: [Bool] = []
     
-    
+    static var darkMode: Bool = false
+    static var changedDarkMode = false
     
     
     override func viewDidLoad() {
@@ -71,6 +75,31 @@ class ViewController: UIViewController {
             AverageDetailViewController.justReturned = false
         }
         
+        if(ViewController.darkMode) // dark
+        {
+            makeDarkMode()
+        }
+        else // light
+        {
+            turnOffDarkMode()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(false)
+        if(ViewController.changedDarkMode) // changed it - only have to do this once when changed
+        {
+            if(ViewController.darkMode) // dark
+            {
+                makeDarkMode()
+            }
+            else // light
+            {
+                turnOffDarkMode()
+            }
+            ViewController.changedDarkMode = false
+        }
     }
     
     
@@ -304,6 +333,38 @@ class ViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func makeDarkMode()
+    {
+        BackgroundImage.isHidden = false
+        ScrambleLabel.textColor? = UIColor.white
+        SwipeUpLabel.textColor? = UIColor.white
+        SwipeDownLabel.textColor? = UIColor.white
+        TimesCollection.forEach { (button) in
+            button.setTitleColor(ViewController.orangeColor(), for: .normal) // orange
+        }
+    }
+    
+    func turnOffDarkMode()
+    {
+        BackgroundImage.isHidden = true
+        ScrambleLabel.textColor = UIColor.black
+        SwipeUpLabel.textColor = UIColor.black
+        SwipeDownLabel.textColor = UIColor.black
+        TimesCollection.forEach { (button) in
+            button.setTitleColor(ViewController.blueColor(), for: .normal) // orange
+        }
+    }
+    
+    static func orangeColor() -> UIColor
+    {
+        return UIColor.init(displayP3Red: 255/255, green: 175/255, blue: 10/255, alpha: 1.0)
+    }
+    
+    static func blueColor() ->  UIColor
+    {
+        return UIColor.init(displayP3Red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0)
     }
     
     

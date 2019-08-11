@@ -34,6 +34,11 @@ class SettingsViewController: UIViewController {
     static var singleWinning = false
     static var rangeWinning = true
     
+    @IBOutlet weak var DarkBackground: UIImageView!
+    @IBOutlet var BlackWhiteLabels: [UILabel]!
+    
+    @IBOutlet weak var Segment: UISegmentedControl!
+    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated);
@@ -57,6 +62,15 @@ class SettingsViewController: UIViewController {
         {
             WinningTimeSetting.selectedSegmentIndex = 2
             rangeWinningSetup()
+        }
+        
+        if(ViewController.darkMode)
+        {
+            makeDarkMode()
+        }
+        else
+        {
+            turnOffDarkMode()
         }
     }
     
@@ -106,8 +120,15 @@ class SettingsViewController: UIViewController {
         SetRangeLabel.isHidden = false
         DistributionLabel.isHidden = true
         DistributionImage.isHidden = true
-        MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
-        MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 45.0)
+        if(!ViewController.darkMode)
+        {
+            MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
+        }
+        else
+        {
+            MinTimeLabel.setTitleColor(UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0), for: .normal)
+        }
+        MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 30.0)
         ToLabel.isHidden = true
         self.changeDistLabels(hide: true)
     }
@@ -121,7 +142,7 @@ class SettingsViewController: UIViewController {
         DistributionLabel.isHidden = false
         DistributionImage.isHidden = false
         MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 30.0)
-        MinTimeLabel.setTitleColor(UIColor(displayP3Red: 0, green:0.478431, blue: 1, alpha: 1.0), for: .normal)
+        MinTimeLabel.setTitleColor(UIColor(displayP3Red: 255/255, green:175/255, blue: 10/255, alpha: 1.0), for: .normal)
         ToLabel.isHidden = false
         self.changeDistLabels(hide: false)
     }
@@ -188,7 +209,14 @@ class SettingsViewController: UIViewController {
     @IBAction func MaxTimeTouched(_ sender: Any) {
         if(SettingsViewController.singleWinning)
         {
-            MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
+            if(!ViewController.darkMode)
+            {
+                MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
+            }
+            else
+            {
+                MinTimeLabel.setTitleColor(UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0), for: .normal)
+            }
         }
         let alert = UIAlertController(title: "Enter Maximum Time", message: "", preferredStyle: .alert)
         
@@ -286,6 +314,35 @@ class SettingsViewController: UIViewController {
         return beforeDecimal + "." + afterDecimal
     }
     
+    func makeDarkMode()
+    {
+        DarkBackground.isHidden = false
+        BlackWhiteLabels.forEach { (label) in
+            label.textColor? = UIColor.white
+        }
+        if(SettingsViewController.singleWinning)
+        {
+            MinTimeLabel.setTitleColor(UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0), for: .normal)
+        }
+        Segment.tintColor = ViewController.orangeColor()
+        MinTimeLabel.setTitleColor(ViewController.orangeColor(), for: .normal)
+        MaxTimeLabel.setTitleColor(ViewController.orangeColor(), for: .normal)
+    }
+    
+    func turnOffDarkMode()
+    {
+        DarkBackground.isHidden = true
+        BlackWhiteLabels.forEach { (label) in
+            label.textColor? = UIColor.black
+        }
+        if(SettingsViewController.singleWinning)
+        {
+            MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
+        }
+        Segment.tintColor = ViewController.blueColor()
+        MinTimeLabel.setTitleColor(ViewController.blueColor(), for: .normal)
+        MaxTimeLabel.setTitleColor(ViewController.blueColor(), for: .normal)
+    }
 
     /*
     // MARK: - Navigation
