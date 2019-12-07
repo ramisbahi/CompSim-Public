@@ -80,12 +80,24 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var timeList: String = ""
         
-        
-        for i in 0..<4
-        { timeList.append(ViewController.allTimes[currentIndex][i])
-            timeList.append(", ")
+        if ViewController.averageTypes[currentIndex] == 0 // ao5
+        {
+            for i in 0..<4
+            {
+                timeList.append(ViewController.allTimes[currentIndex][i])
+                timeList.append(", ")
+            }
+            timeList.append(ViewController.allTimes[currentIndex][4])
         }
-        timeList.append(ViewController.allTimes[currentIndex][4])
+        else // mo3 or bo3
+        {
+            for i in 0...1
+            {
+                timeList.append(ViewController.allTimes[currentIndex][i])
+                timeList.append(", ")
+            }
+            timeList.append(ViewController.allTimes[currentIndex][2])
+        }
         
         cell.detailTextLabel?.text = timeList
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)

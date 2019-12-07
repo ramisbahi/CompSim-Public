@@ -35,8 +35,6 @@ class ResultViewController: UIViewController {
     
     var myAverage: Int = 0
     
-    
-    
     // Additional setup after loading the view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -45,38 +43,80 @@ class ResultViewController: UIViewController {
         var total: Int = 0
         var timeStrings: [String] = []
         
-        for i in 0..<5
+        print("ao5: \(ViewController.ao5)")
+        print("mo3: \(ViewController.mo3)")
+        
+        if(ViewController.ao5)
         {
-            let currentTime: Int = ViewController.times[i]
-            let currentTimeString: String =  ViewController.hundredthString(num: currentTime)
-            
-            if(i == ViewController.minIndex || i == ViewController.maxIndex) // min/max time, so add parentheses
+            for i in 0..<5
             {
-                labels[i].setTitle("(" + currentTimeString + ")", for: .normal)
-                timeStrings.append("(" + currentTimeString + ")")
+                let currentTime: Int = ViewController.times[i]
+                let currentTimeString: String =  ViewController.hundredthString(num: currentTime)
+                
+                if(i == ViewController.minIndex || i == ViewController.maxIndex) // min/max time, so add parentheses
+                {
+                    labels[i].setTitle("(" + currentTimeString + ")", for: .normal)
+                    timeStrings.append("(" + currentTimeString + ")")
+                }
+                else // calculated in average
+                {
+                    labels[i].setTitle(currentTimeString, for: .normal)
+                    total += currentTime
+                    timeStrings.append(currentTimeString)
+                }
+                labels[i].isHidden = false
             }
-            else // calculated in average
+        }
+        else if(ViewController.mo3)
+        {
+            for i in 0..<3
             {
-                labels[i].setTitle(currentTimeString, for: .normal)
+                let currentTime: Int = ViewController.times[i]
+                let currentTimeString: String =  ViewController.hundredthString(num: currentTime)
+                print("currentTime: \(currentTime)")
                 total += currentTime
+                print("total: \(total)")
+                labels[i].setTitle(currentTimeString, for: .normal)
+                labels[i].isHidden = false
                 timeStrings.append(currentTimeString)
             }
-            labels[i].isHidden = false
+            timeStrings.append("")
+            timeStrings.append("") // need 5 timestrings
         }
-        
         
         myAverage = (total + 1) / 3 // will end up doing average for ints
         let averageString: String = ViewController.hundredthString(num: myAverage)
-        MyAverageLabel.text = "= " + averageString + " Average!" // update my average label
+        
+        if(ViewController.ao5)
+        {
+            MyAverageLabel.text = "= " + averageString + " Average!" // update my average label
+        }
+        else if(ViewController.mo3)
+        {
+            MyAverageLabel.text = "= " + averageString + " Mean!" // update my average label
+            ViewController.scrambler.appendTwoBlankScrambles()
+        }
+        
         MyAverageLabel.isHidden = false
         TryAgainButton.isHidden = false
         ViewController.currentAverage += 1
         ViewController.allTimes[ViewController.currentAverage] = timeStrings // add the strings for the times in average
-        ViewController.averages.append(averageString) // add the actual average (i.e. "1.45")
+        ViewController.averages.append(averageString) // add the actual average/mean string (i.e. "1.45")
         
+        if(ViewController.ao5)
+        {
+            ViewController.averageTypes.append(0)
+        }
+        else if(ViewController.mo3)
+        {
+            ViewController.averageTypes.append(1)
+        }
+        else
+        {
+            ViewController.averageTypes.append(2)
+        }
         
-        
-       if(SettingsViewController.noWinning) // no winning time
+       if(TargetViewController.noWinning) // no winning time
        {
             ResultButton.isHidden = true
             WinningAverageLabel.isHidden = true
@@ -116,14 +156,21 @@ class ResultViewController: UIViewController {
     func updateWinningAverage() // calculate average and update label
     {
         var winningAverage: Int = ViewController.maxTime // for single time
-        if(SettingsViewController.rangeWinning)
+        if(TargetViewController.rangeWinning)
         {
             let random = GKRandomSource()
             let winningTimeDistribution = GKGaussianDistribution(randomSource: random, lowestValue: ViewController.minTime, highestValue: ViewController.maxTime) // now using ints pays off. Distribution created easily
             winningAverage = winningTimeDistribution.nextInt()
         }
         
-        WinningAverageLabel.text = "Winning Average: " + ViewController.hundredthString(num: winningAverage) // update label
+        if(ViewController.ao5)
+        {
+            WinningAverageLabel.text = "Target Average: " + ViewController.hundredthString(num: winningAverage) // update label
+        }
+        else if(ViewController.mo3)
+        {
+            WinningAverageLabel.text = "Target Mean: " + ViewController.hundredthString(num: winningAverage) // update label
+        }
         WinningAverageLabel.isHidden = false
         
         ViewController.winningAverages.append(ViewController.hundredthString(num: winningAverage))

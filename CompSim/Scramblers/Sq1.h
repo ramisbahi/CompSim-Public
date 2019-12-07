@@ -1,8 +1,8 @@
 //
-//  SQ1.h
+//  Clock.h
 //  DCTimer scramblers
 //
-//  Created by MeigenChou on 13-3-3.
+//  Created by MeigenChou on 13-3-2.
 //  Copyright (c) 2013年 MeigenChou. All rights reserved.
 //
 
@@ -11,6 +11,5 @@
 @interface Sq1 : NSObject
 
 - (NSString *) sq1_scramble: (int)type;
-- (NSString *) ssq1t_scramble;
 
 @end

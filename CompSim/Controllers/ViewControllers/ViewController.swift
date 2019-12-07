@@ -18,7 +18,6 @@ class ViewController: UIViewController {
     
     @IBOutlet var TimesCollection: [UIButton]!
     
-    
     @IBOutlet weak var BackgroundImage: UIImageView!
     
     @IBOutlet weak var ScrambleLabel: UILabel!
@@ -46,7 +45,8 @@ class ViewController: UIViewController {
     var labels = [UIButton]()
     
     static var times = [Int]()
-    static var averages: [String] = []
+    static var averages: [String] = [] // average strings stored here
+    static var averageTypes: [Int] = [] // 0 = avg5, 1 = mo3, 2 = bo3
     static var winningAverages: [String] = []
     static var usingWinningTime: [Bool] = [] // for each round, whether or not using winning time
     static var allTimes: [[String]] = Array(repeating: Array(repeating: "", count: 5), count: 1000)
@@ -56,24 +56,39 @@ class ViewController: UIViewController {
     static var darkMode: Bool = false
     static var changedDarkMode = false
     
+    static var ao5 = true
+    static var mo3 = false
+    static var bo3 = false
+    
+    let IDLE = 0
+    let INSPECTION = 1
+    let TIMING = 2
+    var timerPhase = 0 // 0 = nothing, 1 = inspection, 2 = solving
+    var timerTime = 0.000
+    var inspectionTimer = Timer()
+    var timer = Timer()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.swipeSetup()
+        print("viewcontroller did load")
+        
+        self.gestureSetup()
         self.labels = [Time1, Time2, Time3, Time4, Time5] // add labels to labels array - one time thing
         
         if(!AverageDetailViewController.justReturned)
         {
-            self.reset() // only when actually starting new round
+            self.reset() // only when actually starting new round, not when returning from avgdetail
         }
-        else // just returned
+        else // just returned from avgdetail
         {
             self.updateTimeLabels()
             AverageDetailViewController.justReturned = false
         }
+        
+        print(ViewController.scrambler.scrambles)
         
         if(ViewController.darkMode) // dark
         {
@@ -87,6 +102,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool)
     {
+        timerPhase = IDLE
         super.viewWillAppear(false)
         if(ViewController.changedDarkMode) // changed it - only have to do this once when changed
         {
@@ -103,15 +119,18 @@ class ViewController: UIViewController {
     }
     
     
-    func swipeSetup()
+    func gestureSetup()
     {
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipe(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToGesture(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
         swipeUp.direction = .up // ...when up swipe is done
         self.view.addGestureRecognizer(swipeUp) // allow view to recognize
         
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipe(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
         swipeDown.direction = .down // ...when down swipe is done
         self.view.addGestureRecognizer(swipeDown) // allow view to recognize
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
+        self.view.addGestureRecognizer(tap)
     }
     
     func reset()
@@ -126,6 +145,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         ScrambleLabel.text = ViewController.scrambler.getCurrentScramble()
+        
     }
     
     
@@ -154,7 +174,7 @@ class ViewController: UIViewController {
     
     
     
-    @objc func respondToSwipe(gesture: UIGestureRecognizer) {
+    @objc func respondToGesture(gesture: UIGestureRecognizer) {
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer
         {
@@ -171,6 +191,70 @@ class ViewController: UIViewController {
                     break
             }
         }
+        else // tap gesture
+        {
+            print("tapped")
+            if(timerPhase == IDLE)
+            {
+                startInspection()
+            }
+            else if(timerPhase == INSPECTION)
+            {
+                startTimer()
+            }
+            else // TIMING
+            {
+                stopTimer()
+            }
+        }
+    }
+    
+    func startInspection()
+    {
+        timerPhase = INSPECTION
+        ScrambleLabel.font = UIFont.systemFont(ofSize: 40)
+        var inspectionTime = 15
+        ScrambleLabel.text = String(inspectionTime)
+        inspectionTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (time) in
+            if(self.timerPhase == self.INSPECTION)
+            {
+                inspectionTime -= 1
+                if(inspectionTime >= 0) // stops at 0
+                {
+                    self.ScrambleLabel.text = String(inspectionTime)
+                }
+            }
+            else
+            {
+                return
+            }
+        })
+    }
+    
+    func startTimer()
+    {
+        inspectionTimer.invalidate()
+        timerTime = 0
+        timerPhase = TIMING
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (blah) in
+            if(self.timerPhase == self.TIMING)
+            {
+                self.timerTime += 0.01
+                self.ScrambleLabel.text = String(format: "%.2f", self.timerTime)
+            }
+            else
+            {
+                return
+            }
+        })
+        
+    }
+    
+    func stopTimer()
+    {
+        timer.invalidate()
+        timerPhase = IDLE
+        self.updateTimes(enteredTime: timerTime)
     }
     
     func deleteSolve()
@@ -206,8 +290,6 @@ class ViewController: UIViewController {
             textField.placeholder = "Time in seconds"
             textField.keyboardType = .decimalPad
         })
-        
-        
         
         let enterAction = UIAlertAction(title: "Enter", style: .cancel, handler: {
             
@@ -254,16 +336,17 @@ class ViewController: UIViewController {
         ViewController.currentIndex += 1 // next index
         self.updateTimeLabels()
         
-        if(ViewController.currentIndex < 5) // next scramble
-        {
-            print("in update times")
-            ScrambleLabel.text = ViewController.scrambler.nextScramble() // change scramble
-        }
-        else // change view when 5 solves done
+        if(ViewController.currentIndex >= 5 || ViewController.currentIndex >= 3 && (ViewController.mo3 || ViewController.bo3)) // change view when 5 solves done, or 3 for mo3/bo3
         {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ResultView") as! ResultViewController
+            resultViewController.modalPresentationStyle = .fullScreen
             self.present(resultViewController, animated:false, completion:nil)
+        }
+        else // next scramble
+        {
+            print("in update times")
+            ScrambleLabel.text = ViewController.scrambler.nextScramble() // change scramble
         }
     }
     
@@ -286,7 +369,7 @@ class ViewController: UIViewController {
         
         for i in 0..<ViewController.currentIndex
         {
-            if(ViewController.currentIndex >= 3 && (i == ViewController.minIndex || i == ViewController.maxIndex)) // 3+ solves done, is max/min
+            if(ViewController.currentIndex >= 3 && (i == ViewController.minIndex || i == ViewController.maxIndex) && ViewController.ao5) // 3+ solves done, is max/min, using ao5 ting
             {
                 self.labels[i].setTitle("(" + ViewController.hundredthString(num: ViewController.times[i]) + ")", for: .normal)
             }

@@ -13,8 +13,11 @@
 #import "CubieCube.h"
 #import "stdlib.h"
 #import "time.h"
+#import "Cross.h"
+
 
 @implementation TwoPhaseScrambler
+
 int STATE_RANDOM[] = {-2};
 int STATE_SOLVED[] = {-3};
 

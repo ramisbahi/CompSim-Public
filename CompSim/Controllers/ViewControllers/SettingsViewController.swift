@@ -8,11 +8,15 @@
 
 import UIKit
 
-class EventViewController: UIViewController {
+class SettingsViewController: UIViewController {
+    
     @IBOutlet weak var Background: UIImageView!
     @IBOutlet weak var DarkModeLabel: UILabel!
     @IBOutlet weak var DarkModeControl: UISegmentedControl!
     
+    @IBOutlet weak var solveTypeLabel: UILabel!
+    @IBOutlet weak var solveTypeControl: UISegmentedControl!
+    // checked for when view disappears, no point updating every time it changes
     
     @IBAction func DarkModeChanged(_ sender: Any) {
         ViewController.changedDarkMode = true
@@ -33,7 +37,9 @@ class EventViewController: UIViewController {
         Background.isHidden = false
         ScrambleTypeButton.backgroundColor = UIColor.darkGray
         DarkModeLabel.backgroundColor = UIColor.darkGray
+        solveTypeLabel.backgroundColor = UIColor.darkGray
         DarkModeControl.tintColor = ViewController.orangeColor()
+        solveTypeControl.tintColor = ViewController.orangeColor()
     }
     
     func turnOffDarkMode()
@@ -41,7 +47,9 @@ class EventViewController: UIViewController {
         Background.isHidden = true
         ScrambleTypeButton.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
         DarkModeLabel.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+        solveTypeLabel.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
         DarkModeControl.tintColor = ViewController.blueColor()
+        solveTypeControl.tintColor = ViewController.blueColor()
     }
     
     
@@ -82,11 +90,50 @@ class EventViewController: UIViewController {
         eventCollection.forEach { (button) in
             button.isHidden = true
         }
+        if(ViewController.ao5)
+        {
+            solveTypeControl.selectedSegmentIndex = 0
+        }
+        else if(ViewController.mo3)
+        {
+            solveTypeControl.selectedSegmentIndex = 1
+        }
+        else
+        {
+            solveTypeControl.selectedSegmentIndex = 2
+        }
+        
+        if(ViewController.currentIndex > 0) // started average, wont allow change
+        {
+            solveTypeControl.isEnabled = false
+        }
+        else
+        {
+            solveTypeControl.isEnabled = true
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(false)
+        
+        switch(solveTypeControl.selectedSegmentIndex)
+        {
+        case 0:
+            ViewController.ao5 = true
+            ViewController.mo3 = false
+            ViewController.bo3 = false
+            break
+        case 1:
+            ViewController.mo3 = true
+            ViewController.ao5 = false
+            ViewController.bo3 = false
+            break
+        default:
+            ViewController.bo3 = true
+            ViewController.ao5 = false
+            ViewController.mo3 = false
+        }
     }
     
     enum Events: String
@@ -102,6 +149,7 @@ class EventViewController: UIViewController {
         case sq1 = "Square-1"
         case skewb = "Skewb"
         case clock = "Clock"
+        case nonMag = "Non-Mag November"
     }
     
     @IBAction func eventTapped(_ sender: UIButton) {
@@ -144,6 +192,8 @@ class EventViewController: UIViewController {
             ViewController.scrambler.doEvent(event: 9)
         case .clock:
             ViewController.scrambler.doEvent(event: 10)
+        case .nonMag:
+            ViewController.scrambler.doEvent(event: 11)
         default:
             print("op")
         }

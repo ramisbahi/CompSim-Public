@@ -15,6 +15,7 @@
 #import "time.h"
 
 @interface BigCubeScrambler()
+
 @end
 
 @implementation BigCubeScrambler
@@ -26,8 +27,6 @@
     }
     return self;
 }
-
-
 
 - (NSString *)megascramble: (NSArray *)turns len:(int)len suf:(NSArray *)suff sql:(int)sql {
     int donemoves[10];

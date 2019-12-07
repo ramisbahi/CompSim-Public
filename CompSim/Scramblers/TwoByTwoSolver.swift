@@ -12,8 +12,10 @@ class TwoByTwoSolver
 {
     init()
     {
+        print("2x2 initializing")
         initMoves()
         initPrun()
+    
     }
     
     let N_PERM = 5040

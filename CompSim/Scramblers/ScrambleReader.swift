@@ -12,34 +12,25 @@ class ScrambleReader
 {
     var currentScramble: Int = -1
     var scrambles: [String] = [] //  array of scrambles used
-    var twoScrambler: TwoByTwoSolver
-    var threeScrambler: TwoPhaseScrambler
+    lazy var twoScrambler: TwoByTwoSolver = TwoByTwoSolver()
+    lazy var threeScrambler: TwoPhaseScrambler = TwoPhaseScrambler()
     var myEvent: Int
-    var megaScrambler: Megaminx
-    var clockScrambler: Clock
-    var pyraScrambler: Pyraminx
-    var skewbScrambler: Skewb
-    var sq1Scrambler: Sq1
-    var bigCubeScrambler: BigCubeScrambler
+    lazy var megaScrambler: Megaminx = Megaminx()
+    lazy var clockScrambler: Clock = Clock()
+    lazy var pyraScrambler: Pyraminx = Pyraminx()
+    lazy var skewbScrambler: Skewb = Skewb()
+    lazy var sq1Scrambler: Sq1 = Sq1()
+    lazy var bigCubeScrambler: BigCubeScrambler = BigCubeScrambler()
 
-    /*var doingTwo: Bool  // doing 2 or 3
+    /*var doingTwo: Bool  // doing 2 or 3*/
     var importedScrambles: [String] = []
-    var importedIndex: Int = 0*/
+    var importedIndex: Int = -1
     
     init()
     {
-        twoScrambler = TwoByTwoSolver()
-        threeScrambler = TwoPhaseScrambler()
-        megaScrambler = Megaminx()
-        clockScrambler = Clock()
-        pyraScrambler = Pyraminx()
-        skewbScrambler = Skewb()
-        sq1Scrambler = Sq1()
-        bigCubeScrambler = BigCubeScrambler()
-        
         myEvent = 1 // set to 3x3 by default
         
-        /*let filePath = Bundle.main.path(forResource: "scrambles", ofType: "txt");
+        let filePath = Bundle.main.path(forResource: "scrambles", ofType: "txt");
         let URL = NSURL.fileURL(withPath: filePath!)
         
         do {
@@ -48,7 +39,7 @@ class ScrambleReader
         }
         catch  {
             print(error);
-        }*/
+        }
     }
     
     
@@ -75,6 +66,8 @@ class ScrambleReader
         }
     }
     
+    
+    
     func getCurrentScramble() -> String?
     {
         if(currentScramble < scrambles.count)
@@ -96,6 +89,14 @@ class ScrambleReader
     {
         currentScramble -= 1
         return scrambles[currentScramble]
+    }
+    
+    // after mo3 or bo3 need to append two blank scrambles (scrambles for each round are assumed length = 5, so need to adjust)
+    func appendTwoBlankScrambles()
+    {
+        scrambles.append("")
+        scrambles.append("")
+        currentScramble += 2
     }
     
     
@@ -136,6 +137,9 @@ class ScrambleReader
             return skewbScrambler.scrSkb()
         case 10:
             return clockScrambler.scramble()
+        case 11:
+            importedIndex += 1
+            return importedScrambles[importedIndex]
         default:
                 return ""
         }

@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  TargetViewController.swift
 //  CompSim
 //
 //  Created by Rami Sbahi on 7/19/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class TargetViewController: UIViewController {
     
     @IBOutlet weak var MinTimeLabel: UIButton!
     @IBOutlet weak var MaxTimeLabel: UIButton!
@@ -48,12 +48,12 @@ class SettingsViewController: UIViewController {
         self.updateDistributionLabels()
         
         // set the selected segment correctly
-        if(SettingsViewController.noWinning)
+        if(TargetViewController.noWinning)
         {
             WinningTimeSetting.selectedSegmentIndex = 0
             noWinningSetup()
         }
-        else if(SettingsViewController.singleWinning)
+        else if(TargetViewController.singleWinning)
         {
             WinningTimeSetting.selectedSegmentIndex = 1
             singleWinningSetup()
@@ -80,26 +80,24 @@ class SettingsViewController: UIViewController {
         if WinningTimeSetting.selectedSegmentIndex == 0 // none
         {
             noWinningSetup()
-            
-            SettingsViewController.noWinning = true
-            SettingsViewController.singleWinning = false
-            SettingsViewController.rangeWinning = false
+            TargetViewController.noWinning = true
+            TargetViewController.singleWinning = false
+            TargetViewController.rangeWinning = false
         }
         else if WinningTimeSetting.selectedSegmentIndex == 1 // single
         {
             singleWinningSetup()
-            
-            SettingsViewController.noWinning = false
-            SettingsViewController.singleWinning = true
-            SettingsViewController.rangeWinning = false
+            TargetViewController.noWinning = false
+            TargetViewController.singleWinning = true
+            TargetViewController.rangeWinning = false
         }
         else // range
         {
             rangeWinningSetup()
             
-            SettingsViewController.noWinning = false
-            SettingsViewController.singleWinning = false
-            SettingsViewController.rangeWinning = true
+            TargetViewController.noWinning = false
+            TargetViewController.singleWinning = false
+            TargetViewController.rangeWinning = true
         }
     }
     
@@ -142,7 +140,14 @@ class SettingsViewController: UIViewController {
         DistributionLabel.isHidden = false
         DistributionImage.isHidden = false
         MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 30.0)
-        MinTimeLabel.setTitleColor(UIColor(displayP3Red: 255/255, green:175/255, blue: 10/255, alpha: 1.0), for: .normal)
+        if(ViewController.darkMode) // if dark, set orange
+        {
+            MinTimeLabel.setTitleColor(ViewController.orangeColor(), for: .normal)
+        }
+        else
+        {
+            MinTimeLabel.setTitleColor(ViewController.blueColor(), for: .normal)
+        }
         ToLabel.isHidden = false
         self.changeDistLabels(hide: false)
     }
@@ -207,7 +212,7 @@ class SettingsViewController: UIViewController {
         
     }
     @IBAction func MaxTimeTouched(_ sender: Any) {
-        if(SettingsViewController.singleWinning)
+        if(TargetViewController.singleWinning)
         {
             if(!ViewController.darkMode)
             {
@@ -236,7 +241,7 @@ class SettingsViewController: UIViewController {
             {
                 let time = ViewController.hundredthRound(num: doubleTime) // // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150)
                 
-                if(SettingsViewController.rangeWinning) // range winning
+                if(TargetViewController.rangeWinning) // range winning
                 {
                     if(time >= ViewController.minTime)
                     {
@@ -320,7 +325,7 @@ class SettingsViewController: UIViewController {
         BlackWhiteLabels.forEach { (label) in
             label.textColor? = UIColor.white
         }
-        if(SettingsViewController.singleWinning)
+        if(TargetViewController.singleWinning)
         {
             MinTimeLabel.setTitleColor(UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0), for: .normal)
         }
@@ -335,7 +340,7 @@ class SettingsViewController: UIViewController {
         BlackWhiteLabels.forEach { (label) in
             label.textColor? = UIColor.black
         }
-        if(SettingsViewController.singleWinning)
+        if(TargetViewController.singleWinning)
         {
             MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
         }

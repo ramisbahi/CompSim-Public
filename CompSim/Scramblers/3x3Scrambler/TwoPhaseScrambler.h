@@ -11,4 +11,5 @@
 
 @interface TwoPhaseScrambler : NSObject
 -(NSString*)scramble;
+
 @end

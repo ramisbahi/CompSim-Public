@@ -18,6 +18,8 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var AverageLabel: UILabel!
     @IBOutlet weak var WinningAverageLabel: UILabel!
     
+    var averageType = 0
+    
     @IBAction func StatsButtonPressed(_ sender: Any) {
         AverageDetailViewController.justReturned = true
         performSegue(withIdentifier: "returnToStats", sender: self)
@@ -26,7 +28,11 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     // returns number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 5
+        if(averageType == 0) // ao5
+        {
+            return 5
+        }
+        return 3 // otherwise - mo3 / bo3
     }
     
     // performed for each cell
@@ -40,27 +46,49 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         myCell.detailTextLabel?.text = ViewController.scrambler.scrambles[StatsViewController.myIndex*5 + indexPath.row] // each scramble
         myCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)
         
+        if(ViewController.darkMode)
+        {
+            myCell.backgroundColor = UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
+            myCell.textLabel?.textColor = .white
+            myCell.detailTextLabel?.textColor = .white
+        }
         if(indexPath.row % 2 == 1 && !ViewController.darkMode) // make gray for every other cell
         {
             myCell.backgroundColor = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
         }
         else if(indexPath.row % 2 == 0 && ViewController.darkMode)
         {
-            myCell.backgroundColor = UIColor.darkGray
+            myCell.backgroundColor = .darkGray
         }
         
         return myCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let time = tableView.cellForRow(at: indexPath)?.textLabel?.text
+        let scramble = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text
+        let alert = UIAlertController(title: time, message: scramble, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
+        averageType = ViewController.averageTypes[StatsViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AverageLabel.text = ViewController.averages[StatsViewController.myIndex] + " Average"
+        if(averageType == 0)
+        {
+            AverageLabel.text = ViewController.averages[StatsViewController.myIndex] + " Average"
+        }
+        else if(averageType == 1)
+        {
+            AverageLabel.text = ViewController.averages[StatsViewController.myIndex] + " Mean"
+        }
         
         if(ViewController.darkMode)
         {
@@ -87,10 +115,15 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
             WinningAverageLabel.isHidden = true
         }
         
-        WinningAverageLabel.text = "Winning Average: " +  ViewController.winningAverages[StatsViewController.myIndex] + " Average"
-        
+        if(averageType == 0)
+        {
+            WinningAverageLabel.text = "Target: " +  ViewController.winningAverages[StatsViewController.myIndex] + " Average"
+        }
+        if(averageType == 1)
+        {
+            WinningAverageLabel.text = "Target: " +  ViewController.winningAverages[StatsViewController.myIndex] + " Mean"
+        }
     
-
         // Do any additional setup after loading the view.
     }
     
