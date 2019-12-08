@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36348225239C6E82009A14C7 /* TimerViewController.swift */; };
 		3663DF4022DD699D006657CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF3E22DD699D006657CF /* Main.storyboard */; };
 		3663DF4222DD699E006657CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4122DD699E006657CF /* Assets.xcassets */; };
 		3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4322DD699E006657CF /* LaunchScreen.storyboard */; };
@@ -80,6 +81,7 @@
 		3612321823005DA00044DEF1 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3612321F2300C2CB0044DEF1 /* TargetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetViewController.swift; sourceTree = "<group>"; };
 		361232212300C48E0044DEF1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		36348225239C6E82009A14C7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoByTwoSolver.swift; sourceTree = "<group>"; };
 		3663DF3722DD699D006657CF /* CompSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3663DF3A22DD699D006657CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				3612321823005DA00044DEF1 /* StatsViewController.swift */,
 				3612321323005D9F0044DEF1 /* ViewController.swift */,
 				3663DF4C22DEBB5C006657CF /* ResultViewController.swift */,
+				36348225239C6E82009A14C7 /* TimerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				3690EAFD2316293200CB0B78 /* Im.m in Sources */,
 				3690EAFE2316293200CB0B78 /* Im.h in Sources */,
 				3690EAFF2316293200CB0B78 /* CubieCube.h in Sources */,
+				36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */,
 				3690EB002316293200CB0B78 /* CubieCube.m in Sources */,
 				3690EB012316293200CB0B78 /* CoordCube.m in Sources */,
 				3690EB022316293200CB0B78 /* CoordCube.h in Sources */,

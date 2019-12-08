@@ -38,6 +38,7 @@ class ResultViewController: UIViewController {
     // Additional setup after loading the view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        TimerViewController.resultTime = 0 // set to 0 - we done
         labels = [SecondTime1, SecondTime2, SecondTime3, SecondTime4, SecondTime5]
 
         var total: Int = 0

@@ -39,9 +39,6 @@ class ViewController: UIViewController {
     static var minIndex: Int = 0 // index of minimum time in average
     static var maxIndex: Int = 1 // index of maximum time in average
     
-    @IBOutlet weak var MinTimeLabel: UIButton!
-    @IBOutlet weak var MaxTimeLabel: UIButton!
-    
     var labels = [UIButton]()
     
     static var times = [Int]()
@@ -60,13 +57,6 @@ class ViewController: UIViewController {
     static var mo3 = false
     static var bo3 = false
     
-    let IDLE = 0
-    let INSPECTION = 1
-    let TIMING = 2
-    var timerPhase = 0 // 0 = nothing, 1 = inspection, 2 = solving
-    var timerTime = 0.000
-    var inspectionTimer = Timer()
-    var timer = Timer()
     
     override func viewDidLoad() {
         
@@ -78,9 +68,14 @@ class ViewController: UIViewController {
         self.gestureSetup()
         self.labels = [Time1, Time2, Time3, Time4, Time5] // add labels to labels array - one time thing
         
-        if(!AverageDetailViewController.justReturned)
+        if(!AverageDetailViewController.justReturned && TimerViewController.resultTime == 0)
         {
-            self.reset() // only when actually starting new round, not when returning from avgdetail
+            self.reset() // only when actually starting new round, not when returning from avgdetail or timer
+        }
+        else if(TimerViewController.resultTime != 0) // returned from timer
+        {
+            self.updateTimes(enteredTime: TimerViewController.resultTime)
+            TimerViewController.resultTime = 0
         }
         else // just returned from avgdetail
         {
@@ -88,7 +83,7 @@ class ViewController: UIViewController {
             AverageDetailViewController.justReturned = false
         }
         
-        print(ViewController.scrambler.scrambles)
+        //aprint(ViewController.scrambler.scrambles)
         
         if(ViewController.darkMode) // dark
         {
@@ -102,7 +97,6 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool)
     {
-        timerPhase = IDLE
         super.viewWillAppear(false)
         if(ViewController.changedDarkMode) // changed it - only have to do this once when changed
         {
@@ -162,8 +156,6 @@ class ViewController: UIViewController {
         return beforeDecimal + "." + afterDecimal
     }
     
-   
-    
     func alertValidTime(alertMessage: String)
     {
         let alert = UIAlertController(title: alertMessage, message: "", preferredStyle: .alert)
@@ -194,67 +186,8 @@ class ViewController: UIViewController {
         else // tap gesture
         {
             print("tapped")
-            if(timerPhase == IDLE)
-            {
-                startInspection()
-            }
-            else if(timerPhase == INSPECTION)
-            {
-                startTimer()
-            }
-            else // TIMING
-            {
-                stopTimer()
-            }
+            self.performSegue(withIdentifier: "timerSegue", sender: self)
         }
-    }
-    
-    func startInspection()
-    {
-        timerPhase = INSPECTION
-        ScrambleLabel.font = UIFont.systemFont(ofSize: 40)
-        var inspectionTime = 15
-        ScrambleLabel.text = String(inspectionTime)
-        inspectionTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (time) in
-            if(self.timerPhase == self.INSPECTION)
-            {
-                inspectionTime -= 1
-                if(inspectionTime >= 0) // stops at 0
-                {
-                    self.ScrambleLabel.text = String(inspectionTime)
-                }
-            }
-            else
-            {
-                return
-            }
-        })
-    }
-    
-    func startTimer()
-    {
-        inspectionTimer.invalidate()
-        timerTime = 0
-        timerPhase = TIMING
-        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (blah) in
-            if(self.timerPhase == self.TIMING)
-            {
-                self.timerTime += 0.01
-                self.ScrambleLabel.text = String(format: "%.2f", self.timerTime)
-            }
-            else
-            {
-                return
-            }
-        })
-        
-    }
-    
-    func stopTimer()
-    {
-        timer.invalidate()
-        timerPhase = IDLE
-        self.updateTimes(enteredTime: timerTime)
     }
     
     func deleteSolve()
@@ -310,8 +243,6 @@ class ViewController: UIViewController {
                 self.alertValidTime(alertMessage: "Please enter valid time")
             }
             
-            
-            
         }
         )
         
@@ -330,18 +261,17 @@ class ViewController: UIViewController {
     
     func updateTimes(enteredTime: Double)
     {
+        print("updating times")
         let intTime = ViewController.hundredthRound(num: enteredTime) // now 1.49 --> 149
         ViewController.times.append(intTime) // add time to array
+        print(ViewController.times)
         
         ViewController.currentIndex += 1 // next index
         self.updateTimeLabels()
         
         if(ViewController.currentIndex >= 5 || ViewController.currentIndex >= 3 && (ViewController.mo3 || ViewController.bo3)) // change view when 5 solves done, or 3 for mo3/bo3
         {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ResultView") as! ResultViewController
-            resultViewController.modalPresentationStyle = .fullScreen
-            self.present(resultViewController, animated:false, completion:nil)
+            self.performSegue(withIdentifier: "viewControllerToResult", sender: self)
         }
         else // next scramble
         {
