@@ -18,18 +18,50 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var solveTypeControl: UISegmentedControl!
     // checked for when view disappears, no point updating every time it changes
     
+    
+    @IBOutlet weak var TimingControl: UISegmentedControl!
+    @IBOutlet weak var InspectionControl: UISegmentedControl!
+    
+    @IBOutlet weak var HoldingTimeLabel: UILabel!
+    @IBOutlet weak var HoldingTimeSlider: UISlider!
+    
+    @IBOutlet var eventCollection: [UIButton]!
+    
+    @IBOutlet var cuberCollection: [UIButton]!
+    
+    
+    @IBOutlet weak var CuberButton: UIButton!
+    @IBOutlet weak var ScrambleTypeButton: UIButton!
+    
     @IBAction func DarkModeChanged(_ sender: Any) {
         ViewController.changedDarkMode = true
         if(!ViewController.darkMode) // not dark, set to dark
         {
-            makeDarkMode()
             ViewController.darkMode = true
+            makeDarkMode()
         }
         else // dark, turn off
         {
-            turnOffDarkMode()
             ViewController.darkMode = false
+            turnOffDarkMode()
         }
+    }
+    
+    @IBAction func TimingChanged(_ sender: Any) {
+        if(ViewController.timing)
+        {
+            ViewController.timing = false
+            InspectionControl.isEnabled = false
+        }
+        else
+        {
+            ViewController.timing = true
+            InspectionControl.isEnabled = true
+        }
+    }
+    
+    @IBAction func InspectionChanged(_ sender: Any) {
+        ViewController.inspection = !ViewController.inspection
     }
     
     func makeDarkMode()
@@ -40,6 +72,7 @@ class SettingsViewController: UIViewController {
         solveTypeLabel.backgroundColor = UIColor.darkGray
         DarkModeControl.tintColor = ViewController.orangeColor()
         solveTypeControl.tintColor = ViewController.orangeColor()
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     func turnOffDarkMode()
@@ -50,12 +83,10 @@ class SettingsViewController: UIViewController {
         solveTypeLabel.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
         DarkModeControl.tintColor = ViewController.blueColor()
         solveTypeControl.tintColor = ViewController.blueColor()
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     
-    @IBOutlet var eventCollection: [UIButton]!
-    
-    @IBOutlet weak var ScrambleTypeButton: UIButton!
     
     @IBAction func handleSelection(_ sender: UIButton) // clicked select
     {
@@ -67,8 +98,24 @@ class SettingsViewController: UIViewController {
         }
     }
     
-
-    override func viewDidLoad() {
+    @IBAction func handleCuberSelection(_ sender: Any) {
+        cuberCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
+    {
+        print("view did load")
+        
+        let eventNames = ["2x2x2", "3x3x3", "4x4x4", "5x5x5", "6x6x6", "7x7x7", "Pyraminx", "Megaminx", "Square-1", "Skewb", "Clock", "Non-Mag November"]
+        let title = eventNames[ViewController.scrambler.myEvent]
+        ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
+        
+        
         if(ViewController.darkMode)
         {
             DarkModeControl.selectedSegmentIndex = 0
@@ -78,18 +125,8 @@ class SettingsViewController: UIViewController {
         {
             turnOffDarkMode()
         }
-        super.viewDidLoad()
         
         
-
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-        eventCollection.forEach { (button) in
-            button.isHidden = true
-        }
         if(ViewController.ao5)
         {
             solveTypeControl.selectedSegmentIndex = 0
@@ -103,7 +140,45 @@ class SettingsViewController: UIViewController {
             solveTypeControl.selectedSegmentIndex = 2
         }
         
-        if(ViewController.currentIndex > 0) // started average, wont allow change
+        
+        if(ViewController.timing)
+        {
+            TimingControl.selectedSegmentIndex = 0
+        }
+        else // not timing
+        {
+            TimingControl.selectedSegmentIndex = 1
+            InspectionControl.isEnabled = false
+        }
+        
+        
+        if(ViewController.inspection)
+        {
+            InspectionControl.selectedSegmentIndex = 0
+        }
+        else
+        {
+            InspectionControl.selectedSegmentIndex = 1
+        }
+        
+        HoldingTimeSlider.value = ViewController.holdingTime
+        HoldingTimeLabel.text = String(format: "Holding Time: %.2f", ViewController.holdingTime)
+        
+        super.viewDidLoad()
+        
+        
+
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        eventCollection.forEach { (button) in
+            button.isHidden = true
+        }
+        
+        
+        if(ViewController.mySession.currentIndex > 0) // started average, wont allow change
         {
             solveTypeControl.isEnabled = false
         }
@@ -111,6 +186,15 @@ class SettingsViewController: UIViewController {
         {
             solveTypeControl.isEnabled = true
         }
+    }
+    
+    @IBAction func HoldingTimeChanged(_ sender: Any) {
+        
+        let roundedTime = round(HoldingTimeSlider.value * 20) / 20 // 0.29 --> 0.3, 0.27 --> 0.25
+        HoldingTimeLabel.text = String(format: "Holding Time: %.2f", roundedTime)
+        ViewController.holdingTime = roundedTime
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -152,6 +236,29 @@ class SettingsViewController: UIViewController {
         case nonMag = "Non-Mag November"
     }
     
+    
+    @IBAction func cuberTapped(_ sender: UIButton) {
+        
+        cuberCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+        
+        guard let title = sender.currentTitle else
+        {
+            return // doesn't have title
+        }
+        
+        print(title)
+        CuberButton.setTitle("Cuber: \(title)", for: .normal)
+        
+        let nameArr = title.components(separatedBy: " ")
+        ViewController.cuber = nameArr[0]
+    }
+    
+    
     @IBAction func eventTapped(_ sender: UIButton) {
         
         eventCollection.forEach { (button) in
@@ -166,6 +273,7 @@ class SettingsViewController: UIViewController {
             return // doesn't have title
         }
         
+        print(title)
         ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
         
         switch event
@@ -198,6 +306,20 @@ class SettingsViewController: UIViewController {
             print("op")
         }
         
+    }
+    
+    func saveSettings()
+    {
+        
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        if ViewController.darkMode
+        {
+            return .lightContent
+        }
+        return .default
     }
     
     

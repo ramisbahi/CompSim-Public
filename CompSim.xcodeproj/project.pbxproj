@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36348225239C6E82009A14C7 /* TimerViewController.swift */; };
+		3634822823A0615F009A14C7 /* SolveTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822723A0615F009A14C7 /* SolveTime.swift */; };
+		3634822A23A06653009A14C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822923A06653009A14C7 /* Session.swift */; };
 		3663DF4022DD699D006657CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF3E22DD699D006657CF /* Main.storyboard */; };
 		3663DF4222DD699E006657CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4122DD699E006657CF /* Assets.xcassets */; };
 		3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4322DD699E006657CF /* LaunchScreen.storyboard */; };
@@ -82,6 +84,8 @@
 		3612321F2300C2CB0044DEF1 /* TargetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetViewController.swift; sourceTree = "<group>"; };
 		361232212300C48E0044DEF1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		36348225239C6E82009A14C7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		3634822723A0615F009A14C7 /* SolveTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SolveTime.swift; path = CompSim/Session/SolveTime.swift; sourceTree = SOURCE_ROOT; };
+		3634822923A06653009A14C7 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoByTwoSolver.swift; sourceTree = "<group>"; };
 		3663DF3722DD699D006657CF /* CompSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3663DF3A22DD699D006657CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +111,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		363B3A9923AAA2CE00000286 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				3634822723A0615F009A14C7 /* SolveTime.swift */,
+				3634822923A06653009A14C7 /* Session.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
 		3663DF2E22DD699D006657CF = {
 			isa = PBXGroup;
 			children = (
@@ -126,15 +139,16 @@
 		3663DF3922DD699D006657CF /* CompSim */ = {
 			isa = PBXGroup;
 			children = (
+				363B3A9923AAA2CE00000286 /* Session */,
 				3690EAC0231623E300CB0B78 /* CompSim.entitlements */,
 				3690EABB2316201900CB0B78 /* Controllers */,
 				3690EABA23161FCC00CB0B78 /* Scramblers */,
 				3663DF3E22DD699D006657CF /* Main.storyboard */,
 				3663DF3A22DD699D006657CF /* AppDelegate.swift */,
+				361231F022FD0B4E0044DEF1 /* CompSim-Bridging-Header.h */,
 				3663DF4122DD699E006657CF /* Assets.xcassets */,
 				3663DF4322DD699E006657CF /* LaunchScreen.storyboard */,
 				3663DF4622DD699E006657CF /* Info.plist */,
-				361231F022FD0B4E0044DEF1 /* CompSim-Bridging-Header.h */,
 			);
 			path = CompSim;
 			sourceTree = "<group>";
@@ -288,6 +302,7 @@
 			files = (
 				3690EB072316293700CB0B78 /* CompSim-Bridging-Header.h in Sources */,
 				3690EAE52316293200CB0B78 /* TabBarController.swift in Sources */,
+				3634822823A0615F009A14C7 /* SolveTime.swift in Sources */,
 				3690EAE62316293200CB0B78 /* ScrambleReader.swift in Sources */,
 				3690EAE72316293200CB0B78 /* AverageDetailViewController.swift in Sources */,
 				3690EAE82316293200CB0B78 /* SettingsViewController.swift in Sources */,
@@ -315,6 +330,7 @@
 				3690EAFE2316293200CB0B78 /* Im.h in Sources */,
 				3690EAFF2316293200CB0B78 /* CubieCube.h in Sources */,
 				36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */,
+				3634822A23A06653009A14C7 /* Session.swift in Sources */,
 				3690EB002316293200CB0B78 /* CubieCube.m in Sources */,
 				3690EB012316293200CB0B78 /* CoordCube.m in Sources */,
 				3690EB022316293200CB0B78 /* CoordCube.h in Sources */,

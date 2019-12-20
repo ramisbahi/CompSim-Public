@@ -43,8 +43,8 @@ class TargetViewController: UIViewController {
     {
         super.viewWillAppear(animated);
        
-        MinTimeLabel.setTitle(ViewController.hundredthString(num: ViewController.minTime), for: .normal) // set label to min
-        MaxTimeLabel.setTitle(ViewController.hundredthString(num: ViewController.maxTime), for: .normal) // set label to max
+        MinTimeLabel.setTitle(SolveTime.makeMyString(num: ViewController.mySession.minTime), for: .normal) // set label to min
+        MaxTimeLabel.setTitle(SolveTime.makeMyString(num: ViewController.mySession.maxTime), for: .normal) // set label to max
         self.updateDistributionLabels()
         
         // set the selected segment correctly
@@ -179,13 +179,13 @@ class TargetViewController: UIViewController {
             let textField = alert.textFields![0] // Force unwrapping because we know it exists. Let that textfield string storing your time
             let enteredTime = textField.text!
             
-            if let doubleTime = Double(enteredTime)
+            if let floatTime = Float(enteredTime)
             {
-                let time = ViewController.hundredthRound(num: doubleTime) // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150)
-                if(time <= ViewController.maxTime)
+                let time = SolveTime.makeIntTime(num: floatTime) // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150)
+                if(time <= ViewController.mySession.maxTime)
                 {
-                    self.MinTimeLabel.setTitle(ViewController.hundredthString(num: time), for: .normal) //  set title to string version
-                        ViewController.minTime = time
+                    self.MinTimeLabel.setTitle(SolveTime.makeMyString(num: time), for: .normal) //  set title to string version
+                    ViewController.mySession.minTime = time
                         self.updateDistributionLabels()
                 }
                 else
@@ -237,16 +237,16 @@ class TargetViewController: UIViewController {
             let textField = alert.textFields![0] // Force unwrapping because we know it exists. Let that textfield string storing your time
             let enteredTime = textField.text!
             
-            if let doubleTime = Double(enteredTime)
+            if let floatTime = Float(enteredTime)
             {
-                let time = ViewController.hundredthRound(num: doubleTime) // // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150)
+                let time = SolveTime.makeIntTime(num: floatTime) // // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150)
                 
                 if(TargetViewController.rangeWinning) // range winning
                 {
-                    if(time >= ViewController.minTime)
+                    if(time >= ViewController.mySession.minTime)
                     {
-                        self.MaxTimeLabel.setTitle(ViewController.hundredthString(num: time), for: .normal) // set title to string version
-                        ViewController.maxTime = time
+                        self.MaxTimeLabel.setTitle(SolveTime.makeMyString(num: time), for: .normal) // set title to string version
+                        ViewController.mySession.maxTime = time
                         self.updateDistributionLabels()
                     }
                     else
@@ -256,8 +256,8 @@ class TargetViewController: UIViewController {
                 }
                 else // single winning time - don't need to check
                 {
-                    self.MaxTimeLabel.setTitle(ViewController.hundredthString(num: time), for: .normal) // set title to string version
-                    ViewController.maxTime = time
+                    self.MaxTimeLabel.setTitle(SolveTime.makeMyString(num: time), for: .normal) // set title to string version
+                    ViewController.mySession.maxTime = time
                 }
             }
             else
@@ -296,8 +296,8 @@ class TargetViewController: UIViewController {
     
     func updateDistributionLabels()
     {
-        let min: Double = Double(ViewController.minTime) / 100.0
-        let max: Double = Double(ViewController.maxTime) / 100.0
+        let min: Double = Double(ViewController.mySession.minTime) / 100.0
+        let max: Double = Double(ViewController.mySession.maxTime) / 100.0
         Dist1.text = timeToThous(time: min)
         Dist7.text = timeToThous(time: max)
         let std: Double = (max - min) / 6.0
@@ -347,6 +347,15 @@ class TargetViewController: UIViewController {
         Segment.tintColor = ViewController.blueColor()
         MinTimeLabel.setTitleColor(ViewController.blueColor(), for: .normal)
         MaxTimeLabel.setTitleColor(ViewController.blueColor(), for: .normal)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        if ViewController.darkMode
+        {
+            return .lightContent
+        }
+        return .default
     }
 
     /*

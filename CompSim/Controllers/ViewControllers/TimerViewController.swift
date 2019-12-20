@@ -12,13 +12,22 @@ class TimerViewController: UIViewController {
     
     let IDLE = 0
     let INSPECTION = 1
-    let TIMING = 2
-    var timerPhase = 0 // 0 = idle, 1 = inspection, 2 = solving
-    var timerTime: Double = 0.00
+    let FROZEN = 2
+    let READY = 3
+    let TIMING = 4
+    var timerPhase = 0
+    var timerTime: Float = 0.00
     var inspectionTimer = Timer()
     var timer = Timer()
+    let penalties = [2, 0, 1] // index of selector --> penalty (DNF, none, +2)
     
-    static var resultTime: Double = 0.00
+    
+    static var longPress = UILongPressGestureRecognizer()
+    
+    @IBOutlet weak var DarkBackground: UIImageView!
+    
+    static var resultTime: Float = 0.00
+    static var penalty = 0
     
     @IBOutlet weak var PenaltySelector: UISegmentedControl!
     @IBOutlet weak var SubmitButton: UIButton!
@@ -28,7 +37,14 @@ class TimerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(false)
-        startInspection()
+        if(ViewController.inspection)
+        {
+            startInspection()
+        }
+        else
+        {
+            startTimer()
+        }
     }
 
     override func viewDidLoad() {
@@ -36,25 +52,44 @@ class TimerViewController: UIViewController {
 
         self.gestureSetup()
         
-        
+        if(ViewController.darkMode)
+        {
+            DarkBackground.isHidden = false
+            TimerLabel.textColor = .white
+        }
     }
     
     func gestureSetup()
     {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
-        self.view.addGestureRecognizer(tap)
+        TimerViewController.longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
+        TimerViewController.longPress.allowableMovement = 50
+        TimerViewController.longPress.minimumPressDuration = TimeInterval(ViewController.holdingTime)
+        self.view.addGestureRecognizer(TimerViewController.longPress)
+            print("gesture setup")
     }
     
-    @objc func respondToGesture(gesture: UIGestureRecognizer)
-    {
-        
-        if(timerPhase == INSPECTION)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touches began")
+        if timerPhase == INSPECTION && ViewController.holdingTime > 0.01
         {
-            startTimer()
+            TimerLabel.textColor = UIColor.red
+            timerPhase = FROZEN
         }
-        else if(timerPhase == TIMING)// TIMING
+        else if timerPhase == TIMING
         {
             stopTimer()
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) // released before minimum hold time
+    {
+        print("touches ended")
+        if(ViewController.holdingTime > 0.01)
+        {
+            if (timerPhase == FROZEN)
+            {
+                cancel()
+            }
         }
     }
     
@@ -63,13 +98,25 @@ class TimerViewController: UIViewController {
         timerPhase = INSPECTION
         var inspectionTime = 15
         TimerLabel.text = String(inspectionTime)
-        inspectionTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (time) in
-            if(self.timerPhase == self.INSPECTION)
+        inspectionTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block:
+            { (time) in
+            if(self.timerPhase == self.INSPECTION || self.timerPhase == self.FROZEN || self.timerPhase == self.READY)
             {
                 inspectionTime -= 1
-                if(inspectionTime >= 0) // stops at 0
+                if(inspectionTime > 0) // stops at 0
                 {
                     self.TimerLabel.text = String(inspectionTime)
+                }
+                else if(inspectionTime > -2)
+                {
+                    self.TimerLabel.text = "+2"
+                    self.PenaltySelector.selectedSegmentIndex = 2
+                    
+                }
+                else
+                {
+                    self.TimerLabel.text = "DNF"
+                    self.PenaltySelector.selectedSegmentIndex = 0
                 }
             }
             else
@@ -79,16 +126,67 @@ class TimerViewController: UIViewController {
         })
     }
     
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer) // time has been done
+    {
+        print("Handling")
+        if(sender.state == .began && timerPhase == FROZEN || ViewController.holdingTime < 0.01 && timerPhase == INSPECTION) // skip from inspection to ready when 0.0
+        {
+            print("we in here")
+            TimerLabel.textColor = .green
+            timerPhase = READY
+        }
+        else if(ViewController.holdingTime < 0.01 && timerPhase == TIMING)
+        {
+            stopTimer()
+        }
+        else if(sender.state == .cancelled)
+        {
+            cancel()
+        }
+        else if(sender.state == .ended && timerPhase == READY) // actually released from screen
+        {
+            startTimer()
+        }
+    }
+    
+    func cancel()
+    {
+        if(ViewController.darkMode)
+        {
+            TimerLabel.textColor = UIColor.white
+        }
+        else
+        {
+            TimerLabel.textColor = UIColor.black
+        }
+        timerPhase = INSPECTION
+    }
+    
     func startTimer()
     {
         inspectionTimer.invalidate()
         timerTime = 0
         timerPhase = TIMING
+        if(ViewController.darkMode)
+        {
+            TimerLabel.textColor = UIColor.white
+        }
+        else
+        {
+            TimerLabel.textColor = UIColor.black
+        }
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (blah) in
             if(self.timerPhase == self.TIMING)
             {
-                self.timerTime += 0.01
-                self.TimerLabel.text = String(format: "%.2f", self.timerTime)
+                self.timerTime += 0.10
+                if(self.timerTime < 60.00)
+                {
+                    self.TimerLabel.text = String(format: "%.2f", self.timerTime)
+                }
+                else
+                {
+                    self.TimerLabel.text = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
+                }
             }
             else
             {
@@ -100,29 +198,48 @@ class TimerViewController: UIViewController {
     
     func stopTimer()
     {
+        print("timerTime: \(self.timerTime)")
         TimerViewController.resultTime = self.timerTime
         timer.invalidate()
         timerPhase = IDLE
         PenaltySelector.isHidden = false
         SubmitButton.isHidden = false
+        if(ViewController.holdingTime < 0.01)
+        {
+            self.view.removeGestureRecognizer(TimerViewController.longPress)
+        }
+        print("stopTimer() done")
     }
     
     @IBAction func SubmitButton(_ sender: Any) {
         
-        if(ViewController.currentIndex < 4)
+        if(ViewController.mySession.currentIndex < 4 && ViewController.ao5 || ViewController.mySession.currentIndex < 2 && (ViewController.mo3 || ViewController.bo3))
         {
             self.performSegue(withIdentifier: "goToViewController", sender: self)
         }
         else // (ViewController.currentIndex == 4)
         {
-            print("result time = \(TimerViewController.resultTime)")
-            let intTime = ViewController.hundredthRound(num: TimerViewController.resultTime)
-            print("int time = \(intTime)")
-            ViewController.times.append(intTime)
-            ViewController.currentIndex += 1
+            
+            ViewController.mySession.addSolve(time: String(TimerViewController.resultTime), penalty: penalties[PenaltySelector.selectedSegmentIndex])
             self.performSegue(withIdentifier: "goToResultViewController", sender: self)
         }
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(ViewController.mySession.currentIndex < 4)
+        {
+            TimerViewController.penalty = penalties[PenaltySelector.selectedSegmentIndex]
+        }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        if ViewController.darkMode
+        {
+            return .lightContent
+        }
+        return .default
     }
     
     /*

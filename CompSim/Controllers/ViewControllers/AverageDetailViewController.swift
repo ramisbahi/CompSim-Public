@@ -40,7 +40,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         let myCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "myCell")
         
-        myCell.textLabel?.text = ViewController.allTimes[StatsViewController.myIndex][indexPath.row] // each time
+        myCell.textLabel?.text = ViewController.mySession.allTimes[StatsViewController.myIndex][indexPath.row].myString // each time
         myCell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         
         myCell.detailTextLabel?.text = ViewController.scrambler.scrambles[StatsViewController.myIndex*5 + indexPath.row] // each scramble
@@ -75,7 +75,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
-        averageType = ViewController.averageTypes[StatsViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
+        averageType = ViewController.mySession.averageTypes[StatsViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
     }
 
     override func viewDidLoad() {
@@ -83,11 +83,11 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         if(averageType == 0)
         {
-            AverageLabel.text = ViewController.averages[StatsViewController.myIndex] + " Average"
+            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " Average"
         }
         else if(averageType == 1)
         {
-            AverageLabel.text = ViewController.averages[StatsViewController.myIndex] + " Mean"
+            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " Mean"
         }
         
         if(ViewController.darkMode)
@@ -99,9 +99,9 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
             turnOffDarkMode()
         }
         
-        if(ViewController.usingWinningTime[StatsViewController.myIndex]) // was going against a winning time
+        if(ViewController.mySession.usingWinningTime[StatsViewController.myIndex]) // was going against a winning time
         {
-            if(ViewController.results[StatsViewController.myIndex]) // won
+            if(ViewController.mySession.results[StatsViewController.myIndex]) // won
             {
                 AverageLabel.textColor = UIColor.green
             }
@@ -117,11 +117,11 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         if(averageType == 0)
         {
-            WinningAverageLabel.text = "Target: " +  ViewController.winningAverages[StatsViewController.myIndex] + " Average"
+            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Average"
         }
         if(averageType == 1)
         {
-            WinningAverageLabel.text = "Target: " +  ViewController.winningAverages[StatsViewController.myIndex] + " Mean"
+            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Mean"
         }
     
         // Do any additional setup after loading the view.
@@ -133,6 +133,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         WinningAverageLabel.textColor? = UIColor.white
         AverageLabel.textColor? = UIColor.white // may be changed to red/green afterwards - just changing default
         AverageTableView.backgroundColor = UIColor.init(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
+        
     }
     
     func turnOffDarkMode()
@@ -141,6 +142,15 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         WinningAverageLabel.textColor? = UIColor.black
         AverageLabel.textColor? = UIColor.black // may be changed to red/green afterwards - just changing default
         AverageTableView.backgroundColor = UIColor.white
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        if ViewController.darkMode
+        {
+            return .lightContent
+        }
+        return .default
     }
     
 

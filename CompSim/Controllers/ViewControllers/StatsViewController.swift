@@ -20,7 +20,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // returns number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return ViewController.currentAverage + 1 // returns # items
+        return ViewController.mySession.currentAverage + 1 // returns # items
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,12 +46,12 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // performed for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("table view")
-        let currentIndex = ViewController.currentAverage - indexPath.row // reverse order
+        let currentIndex = ViewController.mySession.currentAverage - indexPath.row // reverse order
         
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
-        print(ViewController.averages[currentIndex])
+        print(ViewController.mySession.allAverages[currentIndex])
         
-        cell.textLabel?.text = ViewController.averages[currentIndex] // set to average
+        cell.textLabel?.text = ViewController.mySession.allAverages[currentIndex] // set to average
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         if(ViewController.darkMode)
         {
@@ -66,9 +66,9 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.backgroundColor = UIColor.white
         }
         cell.accessoryType = .disclosureIndicator // show little arrow thing on right side of each cell
-        if(ViewController.usingWinningTime[currentIndex]) // if was competing against winning time
+        if(ViewController.mySession.usingWinningTime[currentIndex]) // if was competing against winning time
         {
-            if(ViewController.results[currentIndex]) // win
+            if(ViewController.mySession.results[currentIndex]) // win
             {
                 cell.textLabel?.textColor = UIColor.green
             }
@@ -80,23 +80,26 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var timeList: String = ""
         
-        if ViewController.averageTypes[currentIndex] == 0 // ao5
+        print(ViewController.mySession.allTimes)
+        print(ViewController.mySession.currentIndex)
+        
+        if ViewController.mySession.averageTypes[currentIndex] == 0 // ao5
         {
             for i in 0..<4
             {
-                timeList.append(ViewController.allTimes[currentIndex][i])
+            timeList.append(ViewController.mySession.allTimes[currentIndex][i].myString)
                 timeList.append(", ")
             }
-            timeList.append(ViewController.allTimes[currentIndex][4])
+            timeList.append(ViewController.mySession.allTimes[currentIndex][4].myString)
         }
         else // mo3 or bo3
         {
-            for i in 0...1
+            for i in 0..<2
             {
-                timeList.append(ViewController.allTimes[currentIndex][i])
+            timeList.append(ViewController.mySession.allTimes[currentIndex][i].myString)
                 timeList.append(", ")
             }
-            timeList.append(ViewController.allTimes[currentIndex][2])
+            timeList.append(ViewController.mySession.allTimes[currentIndex][2].myString)
         }
         
         cell.detailTextLabel?.text = timeList
@@ -117,7 +120,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        StatsViewController.myIndex = ViewController.currentAverage - indexPath.row // bc reverse
+        StatsViewController.myIndex = ViewController.mySession.currentAverage - indexPath.row // bc reverse
         performSegue(withIdentifier: "segue", sender: self)
     }
     
@@ -126,6 +129,15 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        if ViewController.darkMode
+        {
+            return .lightContent
+        }
+        return .default
     }
     
 
