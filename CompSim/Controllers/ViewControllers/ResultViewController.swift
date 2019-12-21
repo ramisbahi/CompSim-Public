@@ -192,7 +192,7 @@ class ResultViewController: UIViewController {
     {
         let myText = self.labels[num].titleLabel!.text
         
-        let alert = UIAlertController(title: myText, message: ViewController.scrambler.getScramble(number: (ViewController.mySession.roundNumber - 2) * 5 + num), preferredStyle: .alert)
+        let alert = UIAlertController(title: myText, message: ViewController.mySession.scrambler.getScramble(number: (ViewController.mySession.roundNumber - 2) * 5 + num), preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)

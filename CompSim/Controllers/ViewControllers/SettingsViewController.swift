@@ -29,9 +29,15 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet var cuberCollection: [UIButton]!
     
+    @IBOutlet var TopButtons: [UIButton]!
+    
+    @IBOutlet var TopLabels: [UILabel]!
+    
     
     @IBOutlet weak var CuberButton: UIButton!
     @IBOutlet weak var ScrambleTypeButton: UIButton!
+    
+    let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Antoine" : "Antoine Cantin"]
     
     @IBAction func DarkModeChanged(_ sender: Any) {
         ViewController.changedDarkMode = true
@@ -67,9 +73,14 @@ class SettingsViewController: UIViewController {
     func makeDarkMode()
     {
         Background.isHidden = false
-        ScrambleTypeButton.backgroundColor = UIColor.darkGray
-        DarkModeLabel.backgroundColor = UIColor.darkGray
-        solveTypeLabel.backgroundColor = UIColor.darkGray
+        TopButtons.forEach{ (button) in
+        
+            button.backgroundColor = UIColor.darkGray
+        }
+        TopLabels.forEach{ (label) in
+        
+            label.backgroundColor = UIColor.darkGray
+        }
         DarkModeControl.tintColor = ViewController.orangeColor()
         solveTypeControl.tintColor = ViewController.orangeColor()
         setNeedsStatusBarAppearanceUpdate()
@@ -78,9 +89,16 @@ class SettingsViewController: UIViewController {
     func turnOffDarkMode()
     {
         Background.isHidden = true
-        ScrambleTypeButton.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
-        DarkModeLabel.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
-        solveTypeLabel.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+        
+        TopButtons.forEach{ (button) in
+        
+            button.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+        }
+        TopLabels.forEach{ (label) in
+        
+            label.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+        }
+        
         DarkModeControl.tintColor = ViewController.blueColor()
         solveTypeControl.tintColor = ViewController.blueColor()
         setNeedsStatusBarAppearanceUpdate()
@@ -111,9 +129,7 @@ class SettingsViewController: UIViewController {
     {
         print("view did load")
         
-        let eventNames = ["2x2x2", "3x3x3", "4x4x4", "5x5x5", "6x6x6", "7x7x7", "Pyraminx", "Megaminx", "Square-1", "Skewb", "Clock", "Non-Mag November"]
-        let title = eventNames[ViewController.scrambler.myEvent]
-        ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
+        
         
         
         if(ViewController.darkMode)
@@ -161,6 +177,8 @@ class SettingsViewController: UIViewController {
             InspectionControl.selectedSegmentIndex = 1
         }
         
+        CuberButton.setTitle("Cuber: \(cuberDictionary[ViewController.cuber]!)", for: .normal)
+        
         HoldingTimeSlider.value = ViewController.holdingTime
         HoldingTimeLabel.text = String(format: "Holding Time: %.2f", ViewController.holdingTime)
         
@@ -172,6 +190,10 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let eventNames = ["2x2x2", "3x3x3", "4x4x4", "5x5x5", "6x6x6", "7x7x7", "Pyraminx", "Megaminx", "Square-1", "Skewb", "Clock", "Non-Mag November"]
+        let title = eventNames[ViewController.mySession.scrambler.myEvent]
+        ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
+        
         super.viewWillAppear(false)
         eventCollection.forEach { (button) in
             button.isHidden = true
@@ -279,37 +301,30 @@ class SettingsViewController: UIViewController {
         switch event
         {
         case .twoCube:
-            ViewController.scrambler.doEvent(event: 0)
+            ViewController.mySession.scrambler.doEvent(event: 0)
         case .threeCube:
-            ViewController.scrambler.doEvent(event: 1)
+            ViewController.mySession.scrambler.doEvent(event: 1)
         case .fourCube:
-            ViewController.scrambler.doEvent(event: 2)
+            ViewController.mySession.scrambler.doEvent(event: 2)
         case .fiveCube:
-            ViewController.scrambler.doEvent(event: 3)
+            ViewController.mySession.scrambler.doEvent(event: 3)
         case .sixCube:
-            ViewController.scrambler.doEvent(event: 4)
+            ViewController.mySession.scrambler.doEvent(event: 4)
         case .sevenCube:
-            ViewController.scrambler.doEvent(event: 5)
+            ViewController.mySession.scrambler.doEvent(event: 5)
         case .pyra:
-            ViewController.scrambler.doEvent(event: 6)
+            ViewController.mySession.scrambler.doEvent(event: 6)
         case .mega:
-            ViewController.scrambler.doEvent(event: 7)
+            ViewController.mySession.scrambler.doEvent(event: 7)
         case .sq1:
-            ViewController.scrambler.doEvent(event: 8)
+            ViewController.mySession.scrambler.doEvent(event: 8)
         case .skewb:
-            ViewController.scrambler.doEvent(event: 9)
+            ViewController.mySession.scrambler.doEvent(event: 9)
         case .clock:
-            ViewController.scrambler.doEvent(event: 10)
+            ViewController.mySession.scrambler.doEvent(event: 10)
         case .nonMag:
-            ViewController.scrambler.doEvent(event: 11)
-        default:
-            print("op")
+            ViewController.mySession.scrambler.doEvent(event: 11)
         }
-        
-    }
-    
-    func saveSettings()
-    {
         
     }
     

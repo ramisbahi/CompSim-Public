@@ -15,7 +15,132 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var StatsTableView: UITableView!
     
+    @IBOutlet weak var SessionButton: UIButton!
+    
+    var SessionCollection: [UIButton] = []
+    
     static var myIndex = 0 // contains index of array hit
+    
+    @IBOutlet var SessionStackView: UIStackView!
+    
+    @IBOutlet weak var DeleteButton: UIButton!
+    
+    @IBAction func newSession(_ sender: Any) {
+        let alert = UIAlertController(title: "New Session", message: "", preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Name"
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (action : UIAlertAction!) -> Void in
+        }
+        )
+        
+        let enterAction = UIAlertAction(title: "Enter", style: .default, handler: {
+            
+            // Everything in here is executed when a time is entered
+            
+            [weak alert] (_) in
+            
+            let textField = alert!.textFields![0] // your time
+            let input = textField.text!
+            
+            let maxCharacters = 20
+            
+            if(input.count < maxCharacters && ViewController.allSessions[input] == nil) // creating new session
+            {
+                self.createNewSession(name: input)
+            }
+            else if input.count >= maxCharacters
+            {
+                self.alertInvalid(alertMessage: "Session name too long!")
+            }
+            else // already used name
+            {
+                self.alertInvalid(alertMessage: "Session name already in use!")
+            }
+            
+        }
+        )
+        
+        alert.addAction(cancelAction)
+        alert.addAction(enterAction)
+        alert.preferredAction = enterAction
+        
+        self.present(alert, animated: true)
+    }
+    
+    func createNewSession(name: String)
+    {
+        print("creating new session...")
+        let newSession = Session(name: name)
+        ViewController.mySession = newSession // now current session
+        ViewController.allSessions[name] = newSession // map with name
+        self.updateNewSessionStackView()
+        StatsTableView.reloadData()
+        ViewController.sessionChanged = true
+    }
+    
+    func updateNewSessionStackView()
+    {
+        hideAll()
+        DeleteButton.isEnabled = ViewController.allSessions.count > 1
+        SessionButton.setTitle(ViewController.mySession.name, for: .normal)
+        let newButton = createButton(name: ViewController.mySession.name)
+        SessionCollection.append(newButton)
+        SessionStackView.addArrangedSubview(newButton)
+        
+    }
+    
+    // called whenever something changed with sessions
+    func setUpStackView()
+    {
+        DeleteButton.isEnabled = ViewController.allSessions.count > 1
+        SessionButton.setTitle(ViewController.mySession.name, for: .normal)
+        SessionCollection = []
+        for (sessionName, _) in ViewController.allSessions
+        {
+            if(ViewController.allSessions[sessionName] != nil)
+            {
+                let newButton = createButton(name: sessionName)
+                SessionCollection.append(newButton)
+                SessionStackView.addArrangedSubview(newButton)
+            }
+        }
+    }
+    
+    func hideAll()
+    {
+        SessionCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = true
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    func createButton(name: String) -> UIButton
+    {
+        let retButton = UIButton(type: .system)
+        retButton.setTitle(name, for: .normal)
+        retButton.isHidden = true
+        retButton.setTitleColor(.white, for: .normal)
+        retButton.titleLabel?.font = UIFont(name: "Futura", size: 17)
+        retButton.backgroundColor = ViewController.orangeColor()
+        retButton.layer.cornerRadius = 20
+        retButton.isUserInteractionEnabled = true
+        retButton.addTarget(self, action: #selector(SessionSelected(_:)), for: UIControl.Event.touchUpInside)
+        return retButton
+    }
+    
+    func alertInvalid(alertMessage: String)
+    {
+        let alert = UIAlertController(title: alertMessage, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        // ask again - no input
+    }
     
     // returns number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -23,24 +148,150 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return ViewController.mySession.currentAverage + 1 // returns # items
     }
     
+    @IBAction func SessionButtonClicked(_ sender: Any) {
+        SessionCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+        print(SessionCollection[0])
+    }
+    
+    @objc @IBAction func SessionSelected(_ sender: UIButton) {
+        SessionCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+        
+        guard let title = sender.currentTitle else
+        {
+            return // doesn't have title
+        }
+        
+        print(title)
+        SessionButton.setTitle(title, for: .normal)
+        if ViewController.allSessions[title] != nil && title != ViewController.mySession.name // exists, not same
+        {
+            ViewController.mySession = ViewController.allSessions[title]!
+            ViewController.sessionChanged = true
+            StatsTableView.reloadData()
+            print("changed session successfully")
+        }
+        
+    }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
+        DeleteButton.isEnabled = ViewController.allSessions.count > 1
         if(ViewController.darkMode)
         {
             DarkBackground.isHidden = false
-            StatsTitle.textColor = UIColor.white
             StatsTableView.backgroundColor = UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
         }
         else
         {
             DarkBackground.isHidden = true
-            StatsTitle.textColor = UIColor.black
             StatsTableView.backgroundColor = UIColor.white
         }
         
         StatsTableView.reloadData()
     }
     
+    @objc func rename(sender: UIButton) {
+        
+        let alert = UIAlertController(title: "Rename Session", message: "", preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Name"
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (action : UIAlertAction!) -> Void in
+        }
+        )
+        
+        let enterAction = UIAlertAction(title: "Enter", style: .default, handler: {
+            
+            // Everything in here is executed when a time is entered
+            
+            [weak alert] (_) in
+            
+            let textField = alert!.textFields![0] // your time
+            let input = textField.text!
+            
+            let maxCharacters = 20
+            
+            if(input.count < maxCharacters && ViewController.allSessions[input] == nil) // creating new session
+            {
+                self.replaceSession(oldName: self.SessionButton.titleLabel?.text! ?? "", newName: input)
+            }
+            else if input.count >= maxCharacters
+            {
+                self.alertInvalid(alertMessage: "Session name too long!")
+            }
+            else // already used name
+            {
+                self.alertInvalid(alertMessage: "Session name already in use!")
+            }
+            
+        }
+        )
+        
+        alert.addAction(cancelAction)
+        alert.addAction(enterAction)
+        alert.preferredAction = enterAction
+        
+        self.present(alert, animated: true)
+    }
+    
+    @IBAction func deletePressed(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Delete current session?", message: "", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
+            (_) in
+            // Confirming deleted solve
+            self.deleteSession()
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (_) in
+            
+        })
+        
+        alert.addAction(cancelAction)
+        alert.addAction(confirmAction)
+        alert.preferredAction = confirmAction
+        
+        self.present(alert, animated: true)
+    }
+    
+    func deleteSession()
+    {
+        let sessionName = SessionButton.titleLabel?.text
+        ViewController.allSessions[sessionName!] = nil // map with name
+        var iterator = ViewController.allSessions.values.makeIterator()
+        ViewController.mySession = iterator.next()!
+        hideAll()
+        setUpStackView()
+    }
+    
+    
+    func replaceSession(oldName: String, newName: String)
+    {
+        print("replacing session...")
+        let session = ViewController.allSessions[oldName]
+        session?.name = newName
+        ViewController.allSessions[oldName] = nil // map with name
+        ViewController.allSessions[newName] = session
+        hideAll()
+        setUpStackView()
+    }
     
     
     // performed for each cell
@@ -128,8 +379,16 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector (rename))
+        doubleTapGesture.numberOfTapsRequired = 2
+        SessionButton.addGestureRecognizer(doubleTapGesture)
+        
+        setUpStackView()
+        
         // Do any additional setup after loading the view.
     }
+    
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
@@ -140,7 +399,10 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return .default
     }
     
-
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 
