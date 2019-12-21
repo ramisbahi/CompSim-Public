@@ -178,7 +178,7 @@ class TimerViewController: UIViewController {
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (blah) in
             if(self.timerPhase == self.TIMING)
             {
-                self.timerTime += 0.10
+                self.timerTime += 0.01
                 if(self.timerTime < 60.00)
                 {
                     self.TimerLabel.text = String(format: "%.2f", self.timerTime)

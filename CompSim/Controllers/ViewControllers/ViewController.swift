@@ -38,11 +38,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var SwipeUpLabel: UILabel!
     @IBOutlet weak var SwipeDownLabel: UILabel!
     
-    
-    static let scrambler: ScrambleReader = ScrambleReader()
-    
-    
-    
     // (roundNumber - 1) * 5 + currentIndex = total solve index (starts at 0)
     
     var labels = [UIButton]()
@@ -61,16 +56,39 @@ class ViewController: UIViewController {
     static var mo3 = false
     static var bo3 = false
     
-    static var holdingTime: Float = 0.55
+    static var holdingTime: Float = 0.55 
     
-    static var mySession = Session()
+    static var mySession = Session(name: "3x3x3")
+    static var allSessions: [String : Session] = ["3x3x3" : ViewController.mySession]
+    
+    
+    static var justOpened = true
+    static var sessionChanged = false
+    
+    struct Keys
+    {
+        static let darkMode = "darkMode"
+    }
+    
+    func hasSetSettings() -> Bool // one must be true
+    {
+        return UserDefaults.standard.bool(forKey: AppDelegate.ao5)
+        || UserDefaults.standard.bool(forKey: AppDelegate.bo3)
+        || UserDefaults.standard.bool(forKey: AppDelegate.mo3)
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        // Do any additional setup after loading the view.\
         print("viewcontroller did load")
+        
+        
+        if(ViewController.justOpened && hasSetSettings())
+        {
+            doSettings()
+            ViewController.justOpened = false
+        }
         
         self.gestureSetup()
         self.labels = [Time1, Time2, Time3, Time4, Time5] // add labels to labels array - one time thing
@@ -91,7 +109,7 @@ class ViewController: UIViewController {
             AverageDetailViewController.justReturned = false
         }
         
-        //aprint(ViewController.scrambler.scrambles)
+        //aprint(ViewController.mySession.scrambler.scrambles)
         
         if(ViewController.darkMode) // dark
         {
@@ -111,7 +129,16 @@ class ViewController: UIViewController {
             ViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
             ViewController.changedDarkMode = false
         }
-        
+        if(ViewController.sessionChanged)
+        {
+            updateTimeLabels()
+            ScrambleLabel.text = ViewController.mySession.scrambler.getChangedSessionScramble()
+            ViewController.sessionChanged = false
+        }
+        else
+        {
+            ScrambleLabel.text = ViewController.mySession.scrambler.getCurrentScramble()
+        }
     }
     
     
@@ -132,12 +159,12 @@ class ViewController: UIViewController {
     func reset()
     {
         ViewController.mySession.reset()
-        ScrambleLabel.text = String(ViewController.scrambler.nextScramble()) // next scramble
+        ScrambleLabel.text = String(ViewController.mySession.scrambler.nextScramble()) // next scramble
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        ScrambleLabel.text = ViewController.scrambler.getCurrentScramble()
+        
         
     }
     
@@ -185,16 +212,16 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Delete last solve?", message: "", preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
-            [weak alert] (_) in
+            _ in
             // Confirming deleted solve
             ViewController.mySession.deleteSolve()
             self.labels[ViewController.mySession.currentIndex].setTitle("", for: .normal)
             self.labels[ViewController.mySession.currentIndex].isHidden = true
-            self.ScrambleLabel.text = ViewController.scrambler.previousScramble()
+            self.ScrambleLabel.text = ViewController.mySession.scrambler.previousScramble()
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            [weak alert] (_) in
+            _ in
             
         })
         
@@ -232,7 +259,7 @@ class ViewController: UIViewController {
             let textField = alert!.textFields![0] // your time
             let inputTime = textField.text!
             
-            if(inputTime.countInstances(of: ".") <= 1 && inputTime.last != ".")
+            if(inputTime.countInstances(of: ".") <= 1 && inputTime.last != "." && inputTime.count > 0)
             {
                 
                 self.updateTimes(enteredTime: inputTime) // add time, show label, change parentheses
@@ -269,7 +296,7 @@ class ViewController: UIViewController {
         else // next scramble
         {
             print("in update times")
-            ScrambleLabel.text = ViewController.scrambler.nextScramble() // change scramble
+            ScrambleLabel.text = ViewController.mySession.scrambler.nextScramble() // change scramble
         }
         
         updateTimeLabels()
@@ -287,7 +314,7 @@ class ViewController: UIViewController {
         else // next scramble
         {
             print("in update times")
-            ScrambleLabel.text = ViewController.scrambler.nextScramble() // change scramble
+            ScrambleLabel.text = ViewController.mySession.scrambler.nextScramble() // change scramble
         }
         
         updateTimeLabels()
@@ -295,6 +322,7 @@ class ViewController: UIViewController {
     
     func updateTimeLabels()
     {
+        print("updating time labels")
         for i in 0..<ViewController.mySession.currentIndex
         {
             self.labels[i].setTitle(ViewController.mySession.times[i].myString, for: .normal)
@@ -308,6 +336,10 @@ class ViewController: UIViewController {
             {
                 self.labels[i].isEnabled = true
             }
+        }
+        for i in ViewController.mySession.currentIndex..<5
+        {
+            self.labels[i].isHidden = true
         }
     }
     
@@ -337,28 +369,28 @@ class ViewController: UIViewController {
         let myText = self.labels[num].titleLabel!.text
         
         /*
-        for scramble in ViewController.scrambler.scrambles
+        for scramble in ViewController.mySession.scrambler.scrambles
         {
             print(scramble)
         }*/
-        let alert = UIAlertController(title: myText, message: ViewController.scrambler.getScramble(number: (ViewController.mySession.roundNumber - 1) * 5 + num), preferredStyle: .alert)
+        let alert = UIAlertController(title: myText, message: ViewController.mySession.scrambler.getScramble(number: (ViewController.mySession.roundNumber - 1) * 5 + num), preferredStyle: .alert)
         
         let noPenaltyAction = UIAlertAction(title: "No Penalty", style: .default, handler: {
-            [weak alert] (_) in
+            _ in
             // Confirming deleted solve
             ViewController.mySession.changePenaltyStatus(index: num, penalty: 0)
             self.updateTimeLabels()
         })
         
         let plusTwoAction = UIAlertAction(title: "+2", style: .default, handler: {
-            [weak alert] (_) in
+            _ in
             // Confirming deleted solve
             ViewController.mySession.changePenaltyStatus(index: num, penalty: 1)
             self.updateTimeLabels()
         })
         
         let DNFAction = UIAlertAction(title: "DNF", style: .default, handler: {
-            [weak alert] (_) in
+            _ in
             // Confirming deleted solve
             ViewController.mySession.changePenaltyStatus(index: num, penalty: 2)
             self.updateTimeLabels()
@@ -397,6 +429,18 @@ class ViewController: UIViewController {
         
     }
     
+    func doSettings()
+    {
+        ViewController.darkMode = UserDefaults.standard.bool(forKey: AppDelegate.darkMode)
+        ViewController.cuber = UserDefaults.standard.string(forKey: AppDelegate.cuber) ?? "Lucas"
+        ViewController.ao5 = UserDefaults.standard.bool(forKey: AppDelegate.ao5)
+        ViewController.bo3 = UserDefaults.standard.bool(forKey: AppDelegate.bo3)
+        ViewController.mo3 = UserDefaults.standard.bool(forKey: AppDelegate.mo3)
+        ViewController.timing = UserDefaults.standard.bool(forKey: AppDelegate.timing)
+        ViewController.inspection = UserDefaults.standard.bool(forKey: AppDelegate.inspection)
+        ViewController.holdingTime = UserDefaults.standard.float(forKey: AppDelegate.holdingTime)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
         if ViewController.darkMode
@@ -408,7 +452,7 @@ class ViewController: UIViewController {
     
     static func orangeColor() -> UIColor
     {
-        return UIColor.init(displayP3Red: 255/255, green: 175/255, blue: 10/255, alpha: 1.0)
+        return UIColor.init(displayP3Red: 255/255, green: 165/255, blue: 61/255, alpha: 1.0)
     }
     
     static func blueColor() ->  UIColor

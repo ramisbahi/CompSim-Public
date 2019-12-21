@@ -14,7 +14,6 @@ class ScrambleReader
     var scrambles: [String] = [] //  array of scrambles used
     lazy var twoScrambler: TwoByTwoSolver = TwoByTwoSolver()
     lazy var threeScrambler: TwoPhaseScrambler = TwoPhaseScrambler()
-    var myEvent: Int
     lazy var megaScrambler: Megaminx = Megaminx()
     lazy var clockScrambler: Clock = Clock()
     lazy var pyraScrambler: Pyraminx = Pyraminx()
@@ -26,9 +25,10 @@ class ScrambleReader
     var importedScrambles: [String] = []
     var importedIndex: Int = -1
     
+    var myEvent = 1 // default to 3x3
+    
     init()
     {
-        myEvent = 1 // set to 3x3 by default
         
         let filePath = Bundle.main.path(forResource: "scrambles", ofType: "txt");
         let URL = NSURL.fileURL(withPath: filePath!)
@@ -45,9 +45,15 @@ class ScrambleReader
     
     func doEvent(event: Int)
     {
-        myEvent = event
-        scrambles.remove(at: scrambles.count - 1) // remove last scramble in array
-        scrambles.append(genScramble())
+        if(myEvent != event)
+        {
+            myEvent = event
+            if(scrambles.count > 0)
+            {
+                scrambles.remove(at: scrambles.count - 1) // remove last scramble in array
+            }
+            scrambles.append(genScramble())
+        }
     }
     
     func nextScramble() -> String
@@ -66,7 +72,19 @@ class ScrambleReader
         }
     }
     
-    
+    func getChangedSessionScramble() -> String
+    {
+        if(currentScramble >= 0)
+        {
+            return scrambles[currentScramble]
+        }
+        else
+        {
+            scrambles.append(genScramble())
+            currentScramble += 1
+            return scrambles[currentScramble]
+        }
+    }
     
     func getCurrentScramble() -> String?
     {

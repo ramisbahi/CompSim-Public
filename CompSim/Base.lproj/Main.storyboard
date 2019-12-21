@@ -305,10 +305,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="dJ8-Mh-N8e"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                         <state key="normal" title="Scramble Type: 3x3x3">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="handleSelection:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="srr-Nw-J4j"/>
                                         </connections>
@@ -319,10 +324,21 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="f8P-9y-ecN"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="2x2x2">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="joH-kt-zpX"/>
                                         </connections>
@@ -333,10 +349,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="S0E-rP-ukH"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="3x3x3">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="8hV-gM-ht0"/>
                                         </connections>
@@ -347,10 +368,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="f1S-jO-Sgc"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="4x4x4">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="8Q9-Jo-c8m"/>
                                         </connections>
@@ -361,10 +387,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Q37-zP-ORD"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="5x5x5">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="yv4-K6-Okl"/>
                                         </connections>
@@ -375,10 +406,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="l60-f1-Xjn"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="6x6x6">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="H6R-AG-GSp"/>
                                         </connections>
@@ -389,10 +425,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="bim-9A-RY7"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="7x7x7">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="aT8-fJ-vpG"/>
                                         </connections>
@@ -403,10 +444,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="J7p-ZI-FgK"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Pyraminx">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="uTI-c1-6ra"/>
                                         </connections>
@@ -417,10 +463,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="GVt-y0-ZKs"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Megaminx">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="3Lr-9J-lkc"/>
                                         </connections>
@@ -431,10 +482,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="UyL-yL-fnk"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Square-1">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="Leb-ta-Pr9"/>
                                         </connections>
@@ -445,10 +501,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="0cN-TE-yoK"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Skewb">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="OI6-pk-MQ1"/>
                                         </connections>
@@ -459,10 +520,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="76m-PN-Gxi"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Clock">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="wby-h5-4kd"/>
                                         </connections>
@@ -473,10 +539,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="5Kf-zZ-Xuo"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Non-Mag November">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="xyO-ii-cqT"/>
                                         </connections>
@@ -531,7 +602,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="j9E-7S-69s"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -553,7 +624,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="zs7-tl-ouS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -577,7 +648,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Ss8-KX-GXX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -613,7 +684,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Eul-S2-Ghz"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -626,10 +697,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="SvI-xF-k8w"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                         <state key="normal" title="Cuber: Lucas Etter">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="handleCuberSelection:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="6SF-M1-wav"/>
                                         </connections>
@@ -640,10 +716,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="uNF-Ym-YWU"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Antoine Cantin">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="cuberTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="0x3-Cu-z7a"/>
                                         </connections>
@@ -654,10 +735,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="UOZ-nt-Yl0"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Bill Wang">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="cuberTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="u3q-gm-7n2"/>
                                         </connections>
@@ -668,10 +754,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="2wM-2o-oeg"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Feliks Zemdegs">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="cuberTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="U7k-fW-4ad"/>
                                         </connections>
@@ -682,10 +773,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="esj-5z-8yu"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Kian Mansour">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="cuberTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="IN4-3V-vTq"/>
                                         </connections>
@@ -696,10 +792,15 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="P2I-ap-gzh"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <state key="normal" title="Lucas Etter">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="cuberTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="tTW-ER-j5X"/>
                                         </connections>
@@ -726,7 +827,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="HkQ-3U-3jO"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -803,6 +904,13 @@
                         <outletCollection property="cuberCollection" destination="s15-AM-FbY" collectionClass="NSMutableArray" id="IVx-qv-45p"/>
                         <outletCollection property="cuberCollection" destination="FND-gp-cJu" collectionClass="NSMutableArray" id="6Rh-lI-J4U"/>
                         <outletCollection property="cuberCollection" destination="84q-54-Z7O" collectionClass="NSMutableArray" id="vzH-hB-TkN"/>
+                        <outletCollection property="TopButtons" destination="dY5-wq-uM6" collectionClass="NSMutableArray" id="P6w-5c-yjb"/>
+                        <outletCollection property="TopButtons" destination="PJq-5N-yCt" collectionClass="NSMutableArray" id="VqB-cc-aUj"/>
+                        <outletCollection property="TopLabels" destination="R04-Tx-5Ya" collectionClass="NSMutableArray" id="eJ1-UN-jR4"/>
+                        <outletCollection property="TopLabels" destination="0mn-7A-bip" collectionClass="NSMutableArray" id="pp7-J0-fqL"/>
+                        <outletCollection property="TopLabels" destination="dIR-c7-qh2" collectionClass="NSMutableArray" id="jhN-xG-fRi"/>
+                        <outletCollection property="TopLabels" destination="6uq-uX-5mP" collectionClass="NSMutableArray" id="N7B-zO-ugY"/>
+                        <outletCollection property="TopLabels" destination="ePi-pz-Za3" collectionClass="NSMutableArray" id="ad8-x2-cyE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jIH-Sc-q0c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -897,7 +1005,7 @@
             </objects>
             <point key="canvasLocation" x="-3716" y="607"/>
         </scene>
-        <!--Stats-->
+        <!--Session-->
         <scene sceneID="cQX-Ox-96D">
             <objects>
                 <viewController id="kqA-DF-Yjh" customClass="StatsViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
@@ -909,12 +1017,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4Q-et-hW7">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="44"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xr8-T2-eEg">
                                 <rect key="frame" x="0.0" y="60" width="414" height="627"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -933,35 +1035,106 @@
                                     <outlet property="delegate" destination="kqA-DF-Yjh" id="ZUC-FO-qrq"/>
                                 </connections>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SYS-AT-ZdR">
+                                <rect key="frame" x="95" y="10" width="224" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SA7-1e-6BY">
+                                        <rect key="frame" x="0.0" y="0.0" width="224" height="35"/>
+                                        <color key="backgroundColor" red="0.036519836629999997" green="0.002115131356" blue="0.2784502506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                        <state key="normal" title="3x3x3">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="SessionButtonClicked:" destination="kqA-DF-Yjh" eventType="touchUpInside" id="a6u-vy-7wQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="SA7-1e-6BY" firstAttribute="centerX" secondItem="SYS-AT-ZdR" secondAttribute="centerX" id="kNY-cz-rRS"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLt-ZZ-r74">
+                                <rect key="frame" x="344" y="10" width="60" height="35"/>
+                                <color key="backgroundColor" red="0.036519836629999997" green="0.002115131356" blue="0.2784502506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="fIg-GS-CBd"/>
+                                    <constraint firstAttribute="width" constant="60" id="uy1-Du-oo7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="deletePressed:" destination="kqA-DF-Yjh" eventType="touchUpInside" id="V3X-Ng-sH8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLh-LP-07j">
+                                <rect key="frame" x="10" y="10" width="60" height="35"/>
+                                <color key="backgroundColor" red="0.029578437289999999" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="9qy-dm-nBl"/>
+                                    <constraint firstAttribute="width" constant="60" id="VhY-nJ-fyK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="1" minY="0.0" maxX="1" maxY="0.0"/>
+                                <state key="normal" title="New">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="newSession:" destination="kqA-DF-Yjh" eventType="touchUpInside" id="iOn-kY-4Qw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xr8-T2-eEg" firstAttribute="leading" secondItem="M4I-BC-dr8" secondAttribute="leading" id="8tg-ca-4s6"/>
                             <constraint firstItem="VYU-3Y-Wca" firstAttribute="bottom" secondItem="xr8-T2-eEg" secondAttribute="bottom" id="CoJ-Yh-wqF"/>
+                            <constraint firstItem="VYU-3Y-Wca" firstAttribute="trailing" secondItem="kLt-ZZ-r74" secondAttribute="trailing" constant="10" id="Lrb-hQ-YyH"/>
                             <constraint firstItem="VYU-3Y-Wca" firstAttribute="trailing" secondItem="wIu-c4-TJb" secondAttribute="trailing" id="OwA-B6-eRj"/>
-                            <constraint firstItem="xr8-T2-eEg" firstAttribute="top" secondItem="F4Q-et-hW7" secondAttribute="bottom" id="QX8-X9-bvu"/>
+                            <constraint firstItem="SLh-LP-07j" firstAttribute="leading" secondItem="VYU-3Y-Wca" secondAttribute="leading" constant="10" id="PUq-Ch-jSc"/>
+                            <constraint firstItem="SYS-AT-ZdR" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" constant="10" id="Qsq-Yh-xCh"/>
                             <constraint firstItem="wIu-c4-TJb" firstAttribute="top" secondItem="M4I-BC-dr8" secondAttribute="top" id="Si6-YT-DzM"/>
-                            <constraint firstItem="F4Q-et-hW7" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" id="V7a-tX-GVU"/>
+                            <constraint firstItem="SLh-LP-07j" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" constant="10" id="XMl-Kd-9HI"/>
                             <constraint firstItem="xr8-T2-eEg" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" constant="60" id="bLq-f3-XQ3"/>
-                            <constraint firstItem="F4Q-et-hW7" firstAttribute="leading" secondItem="VYU-3Y-Wca" secondAttribute="leading" id="flP-do-2l7"/>
-                            <constraint firstItem="VYU-3Y-Wca" firstAttribute="trailing" secondItem="F4Q-et-hW7" secondAttribute="trailing" id="kdW-tn-FI2"/>
+                            <constraint firstItem="SYS-AT-ZdR" firstAttribute="leading" secondItem="SLh-LP-07j" secondAttribute="trailing" constant="25" id="kpf-8O-izh"/>
                             <constraint firstItem="VYU-3Y-Wca" firstAttribute="bottom" secondItem="wIu-c4-TJb" secondAttribute="bottom" id="m7a-ND-6Ko"/>
+                            <constraint firstItem="kLt-ZZ-r74" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" constant="10" id="ni6-4L-18t"/>
                             <constraint firstItem="wIu-c4-TJb" firstAttribute="leading" secondItem="VYU-3Y-Wca" secondAttribute="leading" id="q39-58-2Dm"/>
+                            <constraint firstItem="kLt-ZZ-r74" firstAttribute="leading" secondItem="SYS-AT-ZdR" secondAttribute="trailing" constant="25" id="vtr-OV-UP9"/>
                             <constraint firstAttribute="trailing" secondItem="xr8-T2-eEg" secondAttribute="trailing" id="zKJ-Yc-ABS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VYU-3Y-Wca"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Stats" image="stats" id="Y3a-EX-OVv"/>
+                    <tabBarItem key="tabBarItem" title="Session" image="stats" id="Y3a-EX-OVv"/>
                     <connections>
                         <outlet property="DarkBackground" destination="wIu-c4-TJb" id="WKx-Em-x33"/>
+                        <outlet property="DeleteButton" destination="kLt-ZZ-r74" id="eZg-05-TsW"/>
+                        <outlet property="SessionButton" destination="SA7-1e-6BY" id="prP-YU-16v"/>
+                        <outlet property="SessionStackView" destination="SYS-AT-ZdR" id="W51-QO-b04"/>
                         <outlet property="StatsTableView" destination="xr8-T2-eEg" id="VMW-dy-7XZ"/>
-                        <outlet property="StatsTitle" destination="F4Q-et-hW7" id="hZZ-GG-gFQ"/>
                         <segue destination="AvC-tB-OuD" kind="presentation" identifier="segue" animates="NO" modalPresentationStyle="fullScreen" id="3MC-0Q-g5t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="646-JQ-Yis" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2728" y="607"/>
+            <point key="canvasLocation" x="-2748" y="594"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="dpl-Va-Kbt">
@@ -996,11 +1169,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <color key="backgroundColor" red="0.1131800518" green="0.1131800518" blue="0.1131800518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jjr-t2-MPK">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jjr-t2-MPK">
                                 <rect key="frame" x="15" y="15.000000000000014" width="384" height="227.33333333333337"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="FMg-Wj-RPc">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="175"/>
+                                        <rect key="frame" x="45.333333333333343" y="0.0" width="293.33333333333326" height="175"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="175" id="dHJ-9P-3Lw"/>
                                         </constraints>
@@ -1015,7 +1188,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkF-a5-bB7">
-                                        <rect key="frame" x="0.0" y="175" width="384" height="30"/>
+                                        <rect key="frame" x="69" y="175" width="246" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="IuU-Cz-L6z"/>
                                         </constraints>
@@ -1101,8 +1274,8 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3P-c9-dr7">
-                                        <rect key="frame" x="0.0" y="205" width="384" height="60"/>
+                                    <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3P-c9-dr7">
+                                        <rect key="frame" x="177" y="205" width="30" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="G2o-mv-ego"/>
                                         </constraints>
@@ -1115,7 +1288,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7F-jU-2b1">
-                                        <rect key="frame" x="0.0" y="205" width="384" height="60"/>
+                                        <rect key="frame" x="177" y="205" width="30" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Em3-LQ-p3e"/>
                                         </constraints>
@@ -1128,7 +1301,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUu-Ml-8x3">
-                                        <rect key="frame" x="0.0" y="205" width="384" height="60"/>
+                                        <rect key="frame" x="177" y="205" width="30" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Cea-Um-V6I"/>
                                         </constraints>
@@ -1141,7 +1314,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMw-Mu-qR6">
-                                        <rect key="frame" x="0.0" y="205" width="384" height="60"/>
+                                        <rect key="frame" x="177" y="205" width="30" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="IKG-Ni-rS5"/>
                                         </constraints>
@@ -1154,7 +1327,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0e-a9-1ER">
-                                        <rect key="frame" x="0.0" y="205" width="384" height="60"/>
+                                        <rect key="frame" x="177" y="205" width="30" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="lEH-W4-Eyf"/>
                                         </constraints>
@@ -1167,7 +1340,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DQ-yx-AYa">
-                                        <rect key="frame" x="0.0" y="205" width="384" height="22.333333333333343"/>
+                                        <rect key="frame" x="47.333333333333343" y="205" width="289.66666666666663" height="22.333333333333343"/>
                                         <attributedString key="attributedText">
                                             <fragment content="↓ Swipe Down to Delete Solve ↓">
                                                 <attributes>
@@ -1303,7 +1476,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" red="0.1131800518" green="0.1131800518" blue="0.1131800518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.44999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compfail" translatesAutoresizingMaskIntoConstraints="NO" id="4Tu-dJ-3lW">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.44999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadLucas" translatesAutoresizingMaskIntoConstraints="NO" id="4Tu-dJ-3lW">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="239"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="239" id="XWN-BF-euB"/>
@@ -1459,7 +1632,7 @@
     </scenes>
     <resources>
         <image name="GaussianCurve-1" width="1200" height="600"/>
-        <image name="compfail" width="426.66665649414062" height="240"/>
+        <image name="sadLucas" width="550" height="333.33334350585938"/>
         <image name="settings" width="32.333332061767578" height="32.333332061767578"/>
         <image name="sizedTarget" width="61" height="66"/>
         <image name="stats" width="33.666667938232422" height="33.666667938232422"/>
@@ -1467,6 +1640,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="TfV-nY-2Oj"/>
+        <segue reference="AZA-lg-qSK"/>
     </inferredMetricsTieBreakers>
 </document>

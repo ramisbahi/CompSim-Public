@@ -116,6 +116,7 @@ class TargetViewController: UIViewController {
         SetRangeLabel.font = UIFont.systemFont(ofSize: 40.0)
         StackView.isHidden = false
         SetRangeLabel.isHidden = false
+        MinTimeLabel.isHidden = true
         DistributionLabel.isHidden = true
         DistributionImage.isHidden = true
         if(!ViewController.darkMode)
@@ -137,6 +138,7 @@ class TargetViewController: UIViewController {
         SetRangeLabel.font = UIFont.systemFont(ofSize: 24.0)
         SetRangeLabel.isHidden = false
         StackView.isHidden = false
+        MinTimeLabel.isHidden = false
         DistributionLabel.isHidden = false
         DistributionImage.isHidden = false
         MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 30.0)

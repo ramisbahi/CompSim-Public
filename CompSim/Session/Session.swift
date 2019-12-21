@@ -13,6 +13,8 @@ class Session
     var roundNumber = 1
     var currentIndex = 0
     
+    var name: String
+    
     var minTime = 100 // distributiona
     var maxTime = 200 // distribution
     
@@ -31,10 +33,11 @@ class Session
     var allTimes: [[SolveTime]] = []
     var currentAverage: Int = -1 // keeps track of last average currently on (round - 2)
     var results: [Bool] = []
+    let scrambler = ScrambleReader()
     
-    init()
+    init(name: String)
     {
-        
+        self.name = name
     }
     
     func reset()

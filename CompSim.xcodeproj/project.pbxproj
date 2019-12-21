@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -111,6 +111,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D87AA8D5240F871834B2573 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		363B3A9923AAA2CE00000286 /* Session */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +132,7 @@
 			children = (
 				3663DF3922DD699D006657CF /* CompSim */,
 				3663DF3822DD699D006657CF /* Products */,
+				2D87AA8D5240F871834B2573 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
