@@ -9,6 +9,7 @@
 import UIKit
 
 import GameKit
+import RealmSwift
 
 class ResultViewController: UIViewController {
 
@@ -30,6 +31,7 @@ class ResultViewController: UIViewController {
     
     @IBOutlet var TimesCollection: [UIButton]!
     
+    let realm = try! Realm()
     
     var labels = [UIButton]()
     
@@ -64,26 +66,31 @@ class ResultViewController: UIViewController {
         
         MyAverageLabel.isHidden = false
         TryAgainButton.isHidden = false
-        
        if(TargetViewController.noWinning) // no winning time
        {
             ResultButton.isHidden = true
             WinningAverageLabel.isHidden = true
             BackgroundImage.isHidden = true
-            ViewController.mySession.usingWinningTime.append(false)
+            
+            try! realm.write {
+                ViewController.mySession.usingWinningTime.append(false)
         
-            // instead of updateWinningAverage():
-            ViewController.mySession.winningAverages.append("") // blank string for average
-            ViewController.mySession.results.append(true) // win for winning (not used tho)
+                // instead of updateWinningAverage():
+                ViewController.mySession.winningAverages.append("") // blank string for average
+                ViewController.mySession.results.append(true) // win for winning (not used tho)
+            }
        }
        else // winning time
        {
             ResultButton.isHidden = false
             WinningAverageLabel.isHidden = false
             BackgroundImage.isHidden = false
-        ViewController.mySession.usingWinningTime.append(true)
-            updateWinningAverage() // update winning average label & win/lose
-        }
+            try! realm.write {
+                ViewController.mySession.usingWinningTime.append(true)
+                     // update winning average label & win/lose
+                }
+            }
+        updateWinningAverage()
         
         if(ViewController.darkMode)
         {
@@ -122,7 +129,10 @@ class ResultViewController: UIViewController {
         }
         WinningAverageLabel.isHidden = false
         
-        ViewController.mySession.winningAverages.append(SolveTime.makeMyString(num: winningAverage))
+        try! realm.write
+        {
+            ViewController.mySession.winningAverages.append(SolveTime.makeMyString(num: winningAverage))
+        }
         
         if(ViewController.mySession.myAverageInt < winningAverage)
         {
@@ -151,13 +161,17 @@ class ResultViewController: UIViewController {
     
     func lose()
     {
-        ViewController.mySession.results.append(false)
+        try! realm.write {
+            ViewController.mySession.results.append(false)
+        }
         BackgroundImage.image = UIImage(named: "sad\(ViewController.cuber)")
     }
     
     func win()
     {
-        ViewController.mySession.results.append(true) // win
+        try! realm.write {
+            ViewController.mySession.results.append(true) // win
+        }
         ResultButton.setTitleColor(UIColor.green, for: .normal)
         ResultButton.setTitle("You WIN!", for: .normal)
         BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
@@ -167,8 +181,11 @@ class ResultViewController: UIViewController {
     // prepare for going back to (compsim) viewcontroller
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        ViewController.mySession.roundNumber += 1
-        ViewController.mySession.reset()
+        
+        try! realm.write {
+            ViewController.mySession.roundNumber += 1
+            ViewController.mySession.reset()
+        }
         // Do any additional setup after loading the view.
     }
     @IBAction func Time1Touched(_ sender: Any) {
@@ -200,9 +217,12 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
+    
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {

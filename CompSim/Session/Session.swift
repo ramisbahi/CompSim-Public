@@ -7,16 +7,16 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Session
+class Session: Object
 {
-    var roundNumber = 1
+    @objc dynamic var roundNumber = 1
     var currentIndex = 0
     
-    var name: String
-    
-    var minTime = 100 // distributiona
-    var maxTime = 200 // distribution
+    @objc dynamic var name: String
+    @objc dynamic var minTime = 100 // distributiona
+    @objc dynamic var maxTime = 200 // distribution
     
     var minIndex = 0
     var maxIndex = 1
@@ -26,18 +26,24 @@ class Session
     var myAverage: String = ""
     var myAverageInt: Int = 0
     
-    var allAverages: [String] = [] // average strings stored here
-    var averageTypes: [Int] = [] // 0 = avg5, 1 = mo3, 2 = bo3
-    var winningAverages: [String] = []
-    var usingWinningTime: [Bool] = [] // for each round, whether or not using winning time
-    var allTimes: [[SolveTime]] = []
-    var currentAverage: Int = -1 // keeps track of last average currently on (round - 2)
-    var results: [Bool] = []
+    // following all persist:
+    var allAverages = List<String>()
+    var averageTypes = List<Int>()
+    var winningAverages = List<String>()
+    var usingWinningTime = List<Bool>()
+    var results = List<Bool>()
+    var allTimes = List<SolveTimeList>()
+    
+    @objc dynamic var currentAverage: Int = -1 // keeps track of last average currently on (round - 2)
     let scrambler = ScrambleReader()
     
     init(name: String)
     {
         self.name = name
+    }
+    
+    required init() {
+        name = "hi"
     }
     
     func reset()
@@ -166,7 +172,7 @@ class Session
                 averageTypes.append(2)
             }
         }
-        allTimes.append(times)
+        allTimes.append(SolveTimeList(times))
         if(total > 950000) // has DNF
         {
             myAverage = "DNF"

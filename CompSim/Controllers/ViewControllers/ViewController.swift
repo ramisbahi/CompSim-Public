@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension String {
     /// stringToFind must be at least 1 character.
@@ -65,6 +66,10 @@ class ViewController: UIViewController {
     static var justOpened = true
     static var sessionChanged = false
     
+    static var hasSaved = false
+    
+    let realm = try! Realm()
+    
     struct Keys
     {
         static let darkMode = "darkMode"
@@ -83,6 +88,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.\
         print("viewcontroller did load")
         
+        saveRealmStuff()
         
         if(ViewController.justOpened && hasSetSettings())
         {
@@ -129,15 +135,22 @@ class ViewController: UIViewController {
             ViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
             ViewController.changedDarkMode = false
         }
+        
         if(ViewController.sessionChanged)
         {
             updateTimeLabels()
-            ScrambleLabel.text = ViewController.mySession.scrambler.getChangedSessionScramble()
+            try! realm.write
+            {
+                ScrambleLabel.text = ViewController.mySession.scrambler.getChangedSessionScramble()
+            }
             ViewController.sessionChanged = false
         }
         else
         {
-            ScrambleLabel.text = ViewController.mySession.scrambler.getCurrentScramble()
+            try! realm.write
+            {
+                ScrambleLabel.text = ViewController.mySession.scrambler.getCurrentScramble()
+            }
         }
     }
     
@@ -158,8 +171,23 @@ class ViewController: UIViewController {
     
     func reset()
     {
-        ViewController.mySession.reset()
-        ScrambleLabel.text = String(ViewController.mySession.scrambler.nextScramble()) // next scramble
+        try! realm.write
+        {
+            ViewController.mySession.reset()
+            ScrambleLabel.text = String(ViewController.mySession.scrambler.nextScramble()) // next scramble
+        }
+    }
+    
+    func saveRealmStuff()
+    {
+        print("saving realm stuff")
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
+        let session = ViewController.mySession
+        try! realm.write
+        {
+            realm.add(session)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -214,10 +242,13 @@ class ViewController: UIViewController {
         let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
             _ in
             // Confirming deleted solve
-            ViewController.mySession.deleteSolve()
+            try! self.realm.write
+            {
+                ViewController.mySession.deleteSolve()
+                self.ScrambleLabel.text = ViewController.mySession.scrambler.previousScramble()
+            }
             self.labels[ViewController.mySession.currentIndex].setTitle("", for: .normal)
             self.labels[ViewController.mySession.currentIndex].isHidden = true
-            self.ScrambleLabel.text = ViewController.mySession.scrambler.previousScramble()
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
@@ -261,7 +292,6 @@ class ViewController: UIViewController {
             
             if(inputTime.countInstances(of: ".") <= 1 && inputTime.last != "." && inputTime.count > 0)
             {
-                
                 self.updateTimes(enteredTime: inputTime) // add time, show label, change parentheses
             }
             else
@@ -287,8 +317,10 @@ class ViewController: UIViewController {
     func updateTimes(enteredTime: String, penalty: Int)
     {
         print("updating times w/ penalty")
-        ViewController.mySession.addSolve(time: enteredTime, penalty: penalty)
-        
+        try! realm.write
+        {
+            ViewController.mySession.addSolve(time: enteredTime, penalty: penalty)
+        }
         if(ViewController.mySession.currentIndex >= 5 || ViewController.mySession.currentIndex >= 3 && (ViewController.mo3 || ViewController.bo3)) // change view when 5 solves done, or 3 for mo3/bo3
         {
             self.performSegue(withIdentifier: "viewControllerToResult", sender: self)
@@ -296,7 +328,10 @@ class ViewController: UIViewController {
         else // next scramble
         {
             print("in update times")
-            ScrambleLabel.text = ViewController.mySession.scrambler.nextScramble() // change scramble
+            try! realm.write
+            {
+                ScrambleLabel.text = ViewController.mySession.scrambler.nextScramble() // change scramble
+            }
         }
         
         updateTimeLabels()
@@ -305,7 +340,10 @@ class ViewController: UIViewController {
     func updateTimes(enteredTime: String)
     {
         print("updating times")
-        ViewController.mySession.addSolve(time: enteredTime)
+        try! realm.write
+        {
+            ViewController.mySession.addSolve(time: enteredTime)
+        }
         
         if(ViewController.mySession.currentIndex >= 5 || ViewController.mySession.currentIndex >= 3 && (ViewController.mo3 || ViewController.bo3)) // change view when 5 solves done, or 3 for mo3/bo3
         {
@@ -314,7 +352,10 @@ class ViewController: UIViewController {
         else // next scramble
         {
             print("in update times")
-            ScrambleLabel.text = ViewController.mySession.scrambler.nextScramble() // change scramble
+            try! realm.write
+            {
+                ScrambleLabel.text = ViewController.mySession.scrambler.nextScramble() // change scramble
+            }
         }
         
         updateTimeLabels()
@@ -378,21 +419,30 @@ class ViewController: UIViewController {
         let noPenaltyAction = UIAlertAction(title: "No Penalty", style: .default, handler: {
             _ in
             // Confirming deleted solve
-            ViewController.mySession.changePenaltyStatus(index: num, penalty: 0)
+            try! self.realm.write
+            {
+                ViewController.mySession.changePenaltyStatus(index: num, penalty: 0)
+            }
             self.updateTimeLabels()
         })
         
         let plusTwoAction = UIAlertAction(title: "+2", style: .default, handler: {
             _ in
             // Confirming deleted solve
-            ViewController.mySession.changePenaltyStatus(index: num, penalty: 1)
+            try! self.realm.write
+            {
+                ViewController.mySession.changePenaltyStatus(index: num, penalty: 1)
+            }
             self.updateTimeLabels()
         })
         
         let DNFAction = UIAlertAction(title: "DNF", style: .default, handler: {
             _ in
             // Confirming deleted solve
-            ViewController.mySession.changePenaltyStatus(index: num, penalty: 2)
+            try! self.realm.write
+            {
+                ViewController.mySession.changePenaltyStatus(index: num, penalty: 2)
+            }
             self.updateTimeLabels()
         })
 

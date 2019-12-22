@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SettingsViewController: UIViewController {
     
@@ -38,6 +39,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var ScrambleTypeButton: UIButton!
     
     let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Antoine" : "Antoine Cantin"]
+    
+    let realm = try! Realm()
     
     @IBAction func DarkModeChanged(_ sender: Any) {
         ViewController.changedDarkMode = true
@@ -298,34 +301,36 @@ class SettingsViewController: UIViewController {
         print(title)
         ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
         
-        switch event
+        try! realm.write
         {
-        case .twoCube:
-            ViewController.mySession.scrambler.doEvent(event: 0)
-        case .threeCube:
-            ViewController.mySession.scrambler.doEvent(event: 1)
-        case .fourCube:
-            ViewController.mySession.scrambler.doEvent(event: 2)
-        case .fiveCube:
-            ViewController.mySession.scrambler.doEvent(event: 3)
-        case .sixCube:
-            ViewController.mySession.scrambler.doEvent(event: 4)
-        case .sevenCube:
-            ViewController.mySession.scrambler.doEvent(event: 5)
-        case .pyra:
-            ViewController.mySession.scrambler.doEvent(event: 6)
-        case .mega:
-            ViewController.mySession.scrambler.doEvent(event: 7)
-        case .sq1:
-            ViewController.mySession.scrambler.doEvent(event: 8)
-        case .skewb:
-            ViewController.mySession.scrambler.doEvent(event: 9)
-        case .clock:
-            ViewController.mySession.scrambler.doEvent(event: 10)
-        case .nonMag:
-            ViewController.mySession.scrambler.doEvent(event: 11)
+            switch event
+            {
+                case .twoCube:
+                    ViewController.mySession.scrambler.doEvent(event: 0)
+                case .threeCube:
+                    ViewController.mySession.scrambler.doEvent(event: 1)
+                case .fourCube:
+                    ViewController.mySession.scrambler.doEvent(event: 2)
+                case .fiveCube:
+                    ViewController.mySession.scrambler.doEvent(event: 3)
+                case .sixCube:
+                    ViewController.mySession.scrambler.doEvent(event: 4)
+                case .sevenCube:
+                    ViewController.mySession.scrambler.doEvent(event: 5)
+                case .pyra:
+                    ViewController.mySession.scrambler.doEvent(event: 6)
+                case .mega:
+                    ViewController.mySession.scrambler.doEvent(event: 7)
+                case .sq1:
+                    ViewController.mySession.scrambler.doEvent(event: 8)
+                case .skewb:
+                    ViewController.mySession.scrambler.doEvent(event: 9)
+                case .clock:
+                    ViewController.mySession.scrambler.doEvent(event: 10)
+                case .nonMag:
+                    ViewController.mySession.scrambler.doEvent(event: 11)
+            }
         }
-        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle

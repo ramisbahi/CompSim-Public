@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TimerViewController: UIViewController {
     
@@ -219,8 +220,10 @@ class TimerViewController: UIViewController {
         }
         else // (ViewController.currentIndex == 4)
         {
-            
-            ViewController.mySession.addSolve(time: String(TimerViewController.resultTime), penalty: penalties[PenaltySelector.selectedSegmentIndex])
+            let realm = try! Realm()
+            try! realm.write {
+                ViewController.mySession.addSolve(time: String(TimerViewController.resultTime), penalty: penalties[PenaltySelector.selectedSegmentIndex])
+            }
             self.performSegue(withIdentifier: "goToResultViewController", sender: self)
         }
         

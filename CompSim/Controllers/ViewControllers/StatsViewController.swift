@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -24,6 +25,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet var SessionStackView: UIStackView!
     
     @IBOutlet weak var DeleteButton: UIButton!
+    
+    let realm = try! Realm()
     
     @IBAction func newSession(_ sender: Any) {
         let alert = UIAlertController(title: "New Session", message: "", preferredStyle: .alert)
@@ -75,6 +78,12 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         print("creating new session...")
         let newSession = Session(name: name)
+        
+        
+        try! realm.write {
+            realm.add(newSession)
+        }
+        
         ViewController.mySession = newSession // now current session
         ViewController.allSessions[name] = newSession // map with name
         self.updateNewSessionStackView()
@@ -176,6 +185,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if ViewController.allSessions[title] != nil && title != ViewController.mySession.name // exists, not same
         {
             ViewController.mySession = ViewController.allSessions[title]!
+            
             ViewController.sessionChanged = true
             StatsTableView.reloadData()
             print("changed session successfully")
@@ -273,8 +283,12 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func deleteSession()
     {
-        let sessionName = SessionButton.titleLabel?.text
-        ViewController.allSessions[sessionName!] = nil // map with name
+        let sessionName: String = (SessionButton.titleLabel?.text)!
+        
+        try! realm.write {
+            realm.delete(ViewController.allSessions[sessionName]!)
+        }
+        ViewController.allSessions[sessionName] = nil // map with name
         var iterator = ViewController.allSessions.values.makeIterator()
         ViewController.mySession = iterator.next()!
         hideAll()
@@ -286,7 +300,10 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         print("replacing session...")
         let session = ViewController.allSessions[oldName]
-        session?.name = newName
+        try! realm.write
+        {
+            session?.name = newName
+        }
         ViewController.allSessions[oldName] = nil // map with name
         ViewController.allSessions[newName] = session
         hideAll()
@@ -338,19 +355,19 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
             for i in 0..<4
             {
-            timeList.append(ViewController.mySession.allTimes[currentIndex][i].myString)
+                timeList.append(ViewController.mySession.allTimes[currentIndex].list[i].myString)
                 timeList.append(", ")
             }
-            timeList.append(ViewController.mySession.allTimes[currentIndex][4].myString)
+            timeList.append(ViewController.mySession.allTimes[currentIndex].list[4].myString)
         }
         else // mo3 or bo3
         {
             for i in 0..<2
             {
-            timeList.append(ViewController.mySession.allTimes[currentIndex][i].myString)
+                timeList.append(ViewController.mySession.allTimes[currentIndex].list[i].myString)
                 timeList.append(", ")
             }
-            timeList.append(ViewController.mySession.allTimes[currentIndex][2].myString)
+            timeList.append(ViewController.mySession.allTimes[currentIndex].list[2].myString)
         }
         
         cell.detailTextLabel?.text = timeList

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TargetViewController: UIViewController {
     
@@ -38,6 +39,8 @@ class TargetViewController: UIViewController {
     @IBOutlet var BlackWhiteLabels: [UILabel]!
     
     @IBOutlet weak var Segment: UISegmentedControl!
+    
+    let realm = try! Realm()
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -187,8 +190,10 @@ class TargetViewController: UIViewController {
                 if(time <= ViewController.mySession.maxTime)
                 {
                     self.MinTimeLabel.setTitle(SolveTime.makeMyString(num: time), for: .normal) //  set title to string version
-                    ViewController.mySession.minTime = time
-                        self.updateDistributionLabels()
+                    try! self.realm.write {
+                        ViewController.mySession.minTime = time
+                    }
+                    self.updateDistributionLabels()
                 }
                 else
                 {
@@ -248,7 +253,10 @@ class TargetViewController: UIViewController {
                     if(time >= ViewController.mySession.minTime)
                     {
                         self.MaxTimeLabel.setTitle(SolveTime.makeMyString(num: time), for: .normal) // set title to string version
-                        ViewController.mySession.maxTime = time
+                        try! self.realm.write
+                        {
+                            ViewController.mySession.maxTime = time
+                        }
                         self.updateDistributionLabels()
                     }
                     else
@@ -259,7 +267,10 @@ class TargetViewController: UIViewController {
                 else // single winning time - don't need to check
                 {
                     self.MaxTimeLabel.setTitle(SolveTime.makeMyString(num: time), for: .normal) // set title to string version
-                    ViewController.mySession.maxTime = time
+                    try! self.realm.write
+                    {
+                        ViewController.mySession.maxTime = time
+                    }
                 }
             }
             else
