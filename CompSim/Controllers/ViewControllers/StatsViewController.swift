@@ -77,7 +77,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func createNewSession(name: String)
     {
         print("creating new session...")
-        let newSession = Session(name: name)
+        let newSession = Session(name: name, event: 1)
         
         
         try! realm.write {
@@ -106,6 +106,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func setUpStackView()
     {
         DeleteButton.isEnabled = ViewController.allSessions.count > 1
+        print(ViewController.mySession.name)
         SessionButton.setTitle(ViewController.mySession.name, for: .normal)
         SessionCollection = []
         for (sessionName, _) in ViewController.allSessions
@@ -293,6 +294,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         ViewController.mySession = iterator.next()!
         hideAll()
         setUpStackView()
+        StatsTableView.reloadData()
     }
     
     
@@ -317,7 +319,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let currentIndex = ViewController.mySession.currentAverage - indexPath.row // reverse order
         
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
-        print(ViewController.mySession.allAverages[currentIndex])
         
         cell.textLabel?.text = ViewController.mySession.allAverages[currentIndex] // set to average
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
@@ -336,39 +337,21 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.accessoryType = .disclosureIndicator // show little arrow thing on right side of each cell
         if(ViewController.mySession.usingWinningTime[currentIndex]) // if was competing against winning time
         {
-            if(ViewController.mySession.results[currentIndex]) // win
-            {
-                cell.textLabel?.textColor = UIColor.green
-            }
-            else // loss
-            {
-                cell.textLabel?.textColor = UIColor.red
-            }
+            cell.textLabel?.textColor = ViewController.mySession.results[currentIndex] ? UIColor.green : UIColor.red
+            
         }
         
         var timeList: String = ""
         
-        print(ViewController.mySession.allTimes)
-        print(ViewController.mySession.currentIndex)
-        
-        if ViewController.mySession.averageTypes[currentIndex] == 0 // ao5
+        let numSolves = ViewController.mySession.averageTypes[currentIndex] == 0 ? 5 : 3 // ao5 vs mo3/bo3
+        for i in 0..<numSolves-1
         {
-            for i in 0..<4
-            {
-                timeList.append(ViewController.mySession.allTimes[currentIndex].list[i].myString)
-                timeList.append(", ")
-            }
-            timeList.append(ViewController.mySession.allTimes[currentIndex].list[4].myString)
+            print(ViewController.mySession.allTimes[currentIndex].list[i])
+            print(ViewController.mySession.allTimes[currentIndex].list[i].myString)
+            timeList.append(ViewController.mySession.allTimes[currentIndex].list[i].myString)
+            timeList.append(", ")
         }
-        else // mo3 or bo3
-        {
-            for i in 0..<2
-            {
-                timeList.append(ViewController.mySession.allTimes[currentIndex].list[i].myString)
-                timeList.append(", ")
-            }
-            timeList.append(ViewController.mySession.allTimes[currentIndex].list[2].myString)
-        }
+        timeList.append(ViewController.mySession.allTimes[currentIndex].list[numSolves-1].myString)
         
         cell.detailTextLabel?.text = timeList
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)
@@ -381,8 +364,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
             cell.backgroundColor = UIColor.darkGray
         }
-        
-        
         
         return cell
     }

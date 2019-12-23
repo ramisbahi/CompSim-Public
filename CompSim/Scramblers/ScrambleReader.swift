@@ -7,11 +7,11 @@
 //
 
 import Foundation
+import RealmSwift
 
 class ScrambleReader
 {
-    var currentScramble: Int = -1
-    var scrambles: [String] = [] //  array of scrambles used
+    var currentScramble: String = ""
     lazy var twoScrambler: TwoByTwoSolver = TwoByTwoSolver()
     lazy var threeScrambler: TwoPhaseScrambler = TwoPhaseScrambler()
     lazy var megaScrambler: Megaminx = Megaminx()
@@ -25,10 +25,17 @@ class ScrambleReader
     var importedScrambles: [String] = []
     var importedIndex: Int = -1
     
-    var myEvent = 1 // default to 3x3
+    var myEvent: Int
     
-    init()
+    convenience init()
     {
+        self.init(event: 1) // default to 3x3
+    }
+    
+    init(event: Int)
+    {
+        myEvent = event
+        genScramble()
         
         let filePath = Bundle.main.path(forResource: "scrambles", ofType: "txt");
         let URL = NSURL.fileURL(withPath: filePath!)
@@ -48,75 +55,9 @@ class ScrambleReader
         if(myEvent != event)
         {
             myEvent = event
-            if(scrambles.count > 0)
-            {
-                scrambles.remove(at: scrambles.count - 1) // remove last scramble in array
-            }
-            scrambles.append(genScramble())
+            genScramble()
         }
     }
-    
-    func nextScramble() -> String
-    {
-        print("next scramble")
-        if(currentScramble < scrambles.count - 1) // already generated that scramble
-        {
-            currentScramble += 1
-            return scrambles[currentScramble] // return that element
-        }
-        else // currentScramble should equal scrambles.count now
-        {
-            scrambles.append(genScramble())
-            currentScramble += 1
-            return scrambles[currentScramble]
-        }
-    }
-    
-    func getChangedSessionScramble() -> String
-    {
-        if(currentScramble >= 0)
-        {
-            return scrambles[currentScramble]
-        }
-        else
-        {
-            scrambles.append(genScramble())
-            currentScramble += 1
-            return scrambles[currentScramble]
-        }
-    }
-    
-    func getCurrentScramble() -> String?
-    {
-        if(currentScramble < scrambles.count)
-        {
-            return scrambles[currentScramble]
-        }
-        else
-        {
-            return nil
-        }
-    }
-    
-    func getScramble(number: Int) -> String
-    {
-        return scrambles[number]
-    }
-    
-    func previousScramble() -> String
-    {
-        currentScramble -= 1
-        return scrambles[currentScramble]
-    }
-    
-    // after mo3 or bo3 need to append two blank scrambles (scrambles for each round are assumed length = 5, so need to adjust)
-    func appendTwoBlankScrambles()
-    {
-        scrambles.append("")
-        scrambles.append("")
-        currentScramble += 2
-    }
-    
     
     // 0 = 2x2
     // 1 = 3x3
@@ -129,37 +70,38 @@ class ScrambleReader
     // 8 = sq1
     // 9 = skewb
     // 10 = clock
-    private func genScramble() -> String // generate and return scramble for current event
+    public func genScramble()  // generate and return scramble for current event
     {
+        
         switch myEvent
         {
         case 0: // 2x2
-            return twoScrambler.solveBounded(state: twoScrambler.randomState(), minLength: 9, maxLength: 11) ?? " "
+            currentScramble = twoScrambler.solveBounded(state: twoScrambler.randomState(), minLength: 9, maxLength: 11) ?? " "
         case 1: // 3x3
-            return threeScrambler.scramble()
+            currentScramble = threeScrambler.scramble()
         case 2: // 4x4
-            return bigCubeScrambler.getScrString(byType: 4)
+            currentScramble = bigCubeScrambler.getScrString(byType: 4)
         case 3: // 4x4
-            return bigCubeScrambler.getScrString(byType: 5)
+            currentScramble = bigCubeScrambler.getScrString(byType: 5)
         case 4: // 4x4
-            return bigCubeScrambler.getScrString(byType: 6)
+            currentScramble = bigCubeScrambler.getScrString(byType: 6)
         case 5: // 4x4
-            return bigCubeScrambler.getScrString(byType: 7)
+            currentScramble = bigCubeScrambler.getScrString(byType: 7)
         case 6:
-            return pyraScrambler.scrPyrm()
+            currentScramble = pyraScrambler.scrPyrm()
         case 7:
-            return megaScrambler.scrMinx()
+            currentScramble = megaScrambler.scrMinx()
         case 8:
-            return sq1Scrambler.sq1_scramble(1) // might have to fix
+            currentScramble = sq1Scrambler.sq1_scramble(1) // might have to fix
         case 9:
-            return skewbScrambler.scrSkb()
+            currentScramble = skewbScrambler.scrSkb()
         case 10:
-            return clockScrambler.scramble()
+            currentScramble = clockScrambler.scramble()
         case 11:
             importedIndex += 1
-            return importedScrambles[importedIndex]
+            currentScramble = importedScrambles[importedIndex]
         default:
-                return ""
+            currentScramble = ""
         }
     }
     

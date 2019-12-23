@@ -182,10 +182,7 @@ class ResultViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        try! realm.write {
-            ViewController.mySession.roundNumber += 1
-            ViewController.mySession.reset()
-        }
+        
         // Do any additional setup after loading the view.
     }
     @IBAction func Time1Touched(_ sender: Any) {
@@ -208,8 +205,12 @@ class ResultViewController: UIViewController {
     func showScramble(num: Int)
     {
         let myText = self.labels[num].titleLabel!.text
+        /*print(ViewController.mySession.times)
+        print(ViewController.mySession.currentAverage)
+        print((ViewController.mySession.currentAverage + 1) * 5 + num)*/
+        let scramble = ViewController.mySession.times[num].myScramble
         
-        let alert = UIAlertController(title: myText, message: ViewController.mySession.scrambler.getScramble(number: (ViewController.mySession.roundNumber - 2) * 5 + num), preferredStyle: .alert)
+        let alert = UIAlertController(title: myText, message: scramble, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -234,14 +235,16 @@ class ResultViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+//     In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        print("called prepare")
+        try! realm.write {
+            ViewController.mySession.reset()
+        }
     }
-    */
+    
 
 }

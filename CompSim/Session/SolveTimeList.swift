@@ -13,18 +13,11 @@ class SolveTimeList: Object
 {
     let list = List<SolveTime>()
     
-    init(_ times: [SolveTime])
-    {
+    convenience init(_ times: [SolveTime]) {
+        self.init()
         for time in times
         {
             list.append(time)
-        }
-    }
-    
-    required init() {
-        for _ in 0..<5
-        {
-            list.append(SolveTime())
         }
     }
 }

@@ -331,6 +331,8 @@ class SettingsViewController: UIViewController {
                     ViewController.mySession.scrambler.doEvent(event: 11)
             }
         }
+        
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle

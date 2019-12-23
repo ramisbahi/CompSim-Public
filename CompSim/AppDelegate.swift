@@ -27,11 +27,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let inspection = "inspection"
     static let holdingTime = "holdingTime"
     static let event = "event"
+    static let sessionName = "sessionName"
+    
+    lazy var realm = try! Realm()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
+        retrieveSessions()
         return true
     }
+    
+    
+    func retrieveSessions()
+    {
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        let results = realm.objects(Session.self)
+        if results.count > 0 // has a session saved
+        {
+            ViewController.allSessions.removeAll()
+            ViewController.mySession = results[0]
+            for result in results
+            {
+                if(result.name == UserDefaults.standard.string(forKey: AppDelegate.sessionName))
+                {
+                    ViewController.mySession = result
+                }
+                ViewController.allSessions[result.name] = result
+                print("created \(result.name) session")
+            }
+        }
+        else
+        {
+            addFirstSession()
+        }
+    }
+    
+    func addFirstSession()
+    {
+        let session = ViewController.mySession
+        try! realm.write
+        {
+            realm.add(session)
+        }
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -42,11 +81,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         print("entered background")
+        saveSettings()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        
+         
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -64,15 +104,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         print("setting to \(ViewController.darkMode)")
         
-        UserDefaults.standard.set(ViewController.darkMode, forKey: AppDelegate.darkMode)
-        UserDefaults.standard.set(ViewController.cuber, forKey: AppDelegate.cuber)
-        UserDefaults.standard.set(ViewController.ao5, forKey: AppDelegate.ao5)
-        UserDefaults.standard.set(ViewController.mo3, forKey: AppDelegate.mo3)
-        UserDefaults.standard.set(ViewController.bo3, forKey: AppDelegate.bo3)
-        UserDefaults.standard.set(ViewController.timing, forKey: AppDelegate.timing)
-        UserDefaults.standard.set(ViewController.inspection, forKey: AppDelegate.inspection)
-        UserDefaults.standard.set(ViewController.holdingTime, forKey: AppDelegate.holdingTime)
-        //UserDefaults.standard.set(ViewController.mySession.scrambler.myEvent, forKey: AppDelegate.event)
+        let defaults = UserDefaults.standard
+        
+        defaults.set(ViewController.darkMode, forKey: AppDelegate.darkMode)
+        defaults.set(ViewController.cuber, forKey: AppDelegate.cuber)
+        defaults.set(ViewController.ao5, forKey: AppDelegate.ao5)
+        defaults.set(ViewController.mo3, forKey: AppDelegate.mo3)
+        defaults.set(ViewController.bo3, forKey: AppDelegate.bo3)
+        defaults.set(ViewController.timing, forKey: AppDelegate.timing)
+        defaults.set(ViewController.inspection, forKey: AppDelegate.inspection)
+        defaults.set(ViewController.holdingTime, forKey: AppDelegate.holdingTime)
+        defaults.set(ViewController.mySession.scrambler.myEvent, forKey: AppDelegate.event)
+        defaults.set(ViewController.mySession.name, forKey: AppDelegate.sessionName)
     }
 
 //    // MARK: UISceneSession Lifecycle

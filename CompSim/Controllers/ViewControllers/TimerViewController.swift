@@ -66,7 +66,6 @@ class TimerViewController: UIViewController {
         TimerViewController.longPress.allowableMovement = 50
         TimerViewController.longPress.minimumPressDuration = TimeInterval(ViewController.holdingTime)
         self.view.addGestureRecognizer(TimerViewController.longPress)
-            print("gesture setup")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -129,10 +128,8 @@ class TimerViewController: UIViewController {
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer) // time has been done
     {
-        print("Handling")
         if(sender.state == .began && timerPhase == FROZEN || ViewController.holdingTime < 0.01 && timerPhase == INSPECTION) // skip from inspection to ready when 0.0
         {
-            print("we in here")
             TimerLabel.textColor = .green
             timerPhase = READY
         }
@@ -199,7 +196,6 @@ class TimerViewController: UIViewController {
     
     func stopTimer()
     {
-        print("timerTime: \(self.timerTime)")
         TimerViewController.resultTime = self.timerTime
         timer.invalidate()
         timerPhase = IDLE
@@ -209,7 +205,6 @@ class TimerViewController: UIViewController {
         {
             self.view.removeGestureRecognizer(TimerViewController.longPress)
         }
-        print("stopTimer() done")
     }
     
     @IBAction func SubmitButton(_ sender: Any) {

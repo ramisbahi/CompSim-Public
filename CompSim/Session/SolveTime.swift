@@ -13,13 +13,16 @@ class SolveTime: Object
 {
     var intTime = 0
     var originalIntTime = 0 // only use when switching to DNF
-    @objc dynamic var myString = ""
+    @objc dynamic var myString: String = ""
+    @objc dynamic var myScramble: String = ""
     var isMinMax = false
     var penalty = 0
     
     // can be min:sec:decimal
-    init(enteredTime: String) // initialize with what is entered (time)
-    {
+    convenience init(enteredTime: String, scramble: String) {
+        self.init()
+        
+        myScramble = scramble
         var floatTime: Float = 0.0
         if(enteredTime.countInstances(of: ".") == 1 || enteredTime.count <= 2) // i.e. 67.01 --> 1:07.01
         {
@@ -40,47 +43,19 @@ class SolveTime: Object
                 floatTime = Float(minSec) + restSec
             }
         }
-        print("floatTime: \(floatTime)")
         
         intTime = SolveTime.makeIntTime(num: floatTime)
-        print("int time: \(intTime)")
         myString = SolveTime.makeMyString(num: intTime)
-        print("myString: \(myString)")
-    }
-    
-    required init() {
-        let enteredTime = "0.00"
-        var floatTime: Float = 0.0
-        if(enteredTime.countInstances(of: ".") == 1 || enteredTime.count <= 2) // i.e. 67.01 --> 1:07.01
-        {
-            floatTime = Float(enteredTime)!
-        }
-        else // no decimal, more than 2 characters
-        {
-            if(enteredTime.count <= 4)
-            {
-                floatTime = Float(enteredTime)! / 100
-            }
-            else // 5+ characters, no decimal // example: 21965 (2:19.65)
-            {
-                let min = Int(String(enteredTime.prefix(enteredTime.count - 4)))! // 2
-                let rest = Int(String(enteredTime.suffix(4)))! // 1965
-                let minSec = min * 60
-                let restSec: Float = Float(rest) / 100
-                floatTime = Float(minSec) + restSec
-            }
-        }
-        print("floatTime: \(floatTime)")
-        
-        intTime = SolveTime.makeIntTime(num: floatTime)
-        print("int time: \(intTime)")
-        myString = SolveTime.makeMyString(num: intTime)
-        print("myString: \(myString)")
     }
     
     static func makeIntTime(num: Float) -> Int // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150. Rounding is necessary when calculating averages)
     {
         return Int(num * 100 + 0.5)
+    }
+    
+    func getMyString() -> String
+    {
+        return myString
     }
     
     func setNoPenalty()

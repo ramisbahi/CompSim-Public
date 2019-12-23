@@ -11,10 +11,9 @@ import RealmSwift
 
 class Session: Object
 {
-    @objc dynamic var roundNumber = 1
     var currentIndex = 0
     
-    @objc dynamic var name: String
+    @objc dynamic var name: String = ""
     @objc dynamic var minTime = 100 // distributiona
     @objc dynamic var maxTime = 200 // distribution
     
@@ -35,15 +34,13 @@ class Session: Object
     var allTimes = List<SolveTimeList>()
     
     @objc dynamic var currentAverage: Int = -1 // keeps track of last average currently on (round - 2)
-    let scrambler = ScrambleReader()
     
-    init(name: String)
-    {
+    var scrambler: ScrambleReader = ScrambleReader(event: 1)
+    
+    convenience init(name: String, event: Int) {
+        self.init()
         self.name = name
-    }
-    
-    required init() {
-        name = "hi"
+        scrambler = ScrambleReader(event: event)
     }
     
     func reset()
@@ -62,17 +59,23 @@ class Session: Object
         updateTimes()
     }
     
+    func getCurrentScramble() -> String
+    {
+        return scrambler.currentScramble
+    }
+    
     func addSolve(time: String)
     {
-        let myTime = SolveTime(enteredTime: time)
+        let myTime = SolveTime(enteredTime: time, scramble: scrambler.currentScramble)
         times.append(myTime)
         currentIndex += 1
         updateTimes()
+        scrambler.genScramble()
     }
     
     func addSolve(time: String, penalty: Int)
     {
-        let myTime = SolveTime(enteredTime: time)
+        let myTime = SolveTime(enteredTime: time, scramble: scrambler.currentScramble)
         if(penalty == 1)
         {
             myTime.setPlusTwo()
@@ -84,7 +87,10 @@ class Session: Object
         times.append(myTime)
         currentIndex += 1
         updateTimes()
+        scrambler.genScramble()
     }
+    
+    
     
     func changePenaltyStatus(index: Int, penalty: Int)
     {
@@ -161,16 +167,9 @@ class Session: Object
         }
         else if(currentIndex == 3 && (ViewController.mo3 || ViewController.bo3)) // done with mo3 / bo3
         {
-            times.append(SolveTime(enteredTime: "0"))
-            times.append(SolveTime(enteredTime: "0"))
-            if(ViewController.mo3)
-            {
-                averageTypes.append(1)
-            }
-            else
-            {
-                averageTypes.append(2)
-            }
+            times.append(SolveTime(enteredTime: "0", scramble: ""))
+            times.append(SolveTime(enteredTime: "0", scramble: ""))
+            ViewController.mo3 ? averageTypes.append(1) : averageTypes.append(2)
         }
         allTimes.append(SolveTimeList(times))
         if(total > 950000) // has DNF
@@ -187,6 +186,7 @@ class Session: Object
         allAverages.append(myAverage)
         currentAverage += 1
     }
+    
     
     
 }

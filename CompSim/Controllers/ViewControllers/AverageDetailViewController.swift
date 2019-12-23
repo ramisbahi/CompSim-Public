@@ -40,10 +40,12 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         let myCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "myCell")
         
-        myCell.textLabel?.text = ViewController.mySession.allTimes[StatsViewController.myIndex].list[indexPath.row].myString // each time
+        let currentTime = ViewController.mySession.allTimes[StatsViewController.myIndex].list[indexPath.row]
+        
+        myCell.textLabel?.text = currentTime.myString // each time
         myCell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         
-        myCell.detailTextLabel?.text = ViewController.mySession.scrambler.scrambles[StatsViewController.myIndex*5 + indexPath.row] // each scramble
+        myCell.detailTextLabel?.text = currentTime.myScramble // each scramble
         myCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)
         
         if(ViewController.darkMode)

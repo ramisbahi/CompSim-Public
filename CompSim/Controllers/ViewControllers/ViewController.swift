@@ -59,7 +59,7 @@ class ViewController: UIViewController {
     
     static var holdingTime: Float = 0.55 
     
-    static var mySession = Session(name: "3x3x3")
+    static var mySession = Session(name: "3x3x3", event: 1)
     static var allSessions: [String : Session] = ["3x3x3" : ViewController.mySession]
     
     
@@ -88,8 +88,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.\
         print("viewcontroller did load")
         
-        saveRealmStuff()
-        
         if(ViewController.justOpened && hasSetSettings())
         {
             doSettings()
@@ -99,23 +97,21 @@ class ViewController: UIViewController {
         self.gestureSetup()
         self.labels = [Time1, Time2, Time3, Time4, Time5] // add labels to labels array - one time thing
         
-        if(!AverageDetailViewController.justReturned && TimerViewController.resultTime == 0)
+        /*if(!AverageDetailViewController.justReturned && TimerViewController.resultTime == 0)
         {
             self.reset() // only when actually starting new round, not when returning from avgdetail or timer
-        }
-        else if(TimerViewController.resultTime != 0) // returned from timer
+        }*/
+        if(TimerViewController.resultTime != 0) // returned from timer
         {
             self.updateTimes(enteredTime: String(TimerViewController.resultTime), penalty: TimerViewController.penalty)
             TimerViewController.penalty = 0
             TimerViewController.resultTime = 0
         }
-        else // just returned from avgdetail
+        else if AverageDetailViewController.justReturned // just returned from avgdetail
         {
             self.updateTimeLabels()
             AverageDetailViewController.justReturned = false
         }
-        
-        //aprint(ViewController.mySession.scrambler.scrambles)
         
         if(ViewController.darkMode) // dark
         {
@@ -126,6 +122,8 @@ class ViewController: UIViewController {
             turnOffDarkMode()
         }
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -139,18 +137,13 @@ class ViewController: UIViewController {
         if(ViewController.sessionChanged)
         {
             updateTimeLabels()
-            try! realm.write
-            {
-                ScrambleLabel.text = ViewController.mySession.scrambler.getChangedSessionScramble()
-            }
+            ViewController.mySession.scrambler.genScramble()
+            ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
             ViewController.sessionChanged = false
         }
         else
         {
-            try! realm.write
-            {
-                ScrambleLabel.text = ViewController.mySession.scrambler.getCurrentScramble()
-            }
+            ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
         }
     }
     
@@ -169,26 +162,14 @@ class ViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
     }
     
-    func reset()
+    /*func reset()
     {
         try! realm.write
         {
             ViewController.mySession.reset()
-            ScrambleLabel.text = String(ViewController.mySession.scrambler.nextScramble()) // next scramble
         }
-    }
-    
-    func saveRealmStuff()
-    {
-        print("saving realm stuff")
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        
-        let session = ViewController.mySession
-        try! realm.write
-        {
-            realm.add(session)
-        }
-    }
+        ScrambleLabel.text = String(ViewController.mySession.getCurrentScramble()) // next scramble
+    }*/
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
@@ -245,8 +226,8 @@ class ViewController: UIViewController {
             try! self.realm.write
             {
                 ViewController.mySession.deleteSolve()
-                self.ScrambleLabel.text = ViewController.mySession.scrambler.previousScramble()
             }
+            self.ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
             self.labels[ViewController.mySession.currentIndex].setTitle("", for: .normal)
             self.labels[ViewController.mySession.currentIndex].isHidden = true
         })
@@ -328,10 +309,7 @@ class ViewController: UIViewController {
         else // next scramble
         {
             print("in update times")
-            try! realm.write
-            {
-                ScrambleLabel.text = ViewController.mySession.scrambler.nextScramble() // change scramble
-            }
+            ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
         }
         
         updateTimeLabels()
@@ -352,10 +330,7 @@ class ViewController: UIViewController {
         else // next scramble
         {
             print("in update times")
-            try! realm.write
-            {
-                ScrambleLabel.text = ViewController.mySession.scrambler.nextScramble() // change scramble
-            }
+            ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
         }
         
         updateTimeLabels()
@@ -414,7 +389,7 @@ class ViewController: UIViewController {
         {
             print(scramble)
         }*/
-        let alert = UIAlertController(title: myText, message: ViewController.mySession.scrambler.getScramble(number: (ViewController.mySession.roundNumber - 1) * 5 + num), preferredStyle: .alert)
+        let alert = UIAlertController(title: myText, message: ViewController.mySession.times[num].myScramble, preferredStyle: .alert)
         
         let noPenaltyAction = UIAlertAction(title: "No Penalty", style: .default, handler: {
             _ in
@@ -489,6 +464,7 @@ class ViewController: UIViewController {
         ViewController.timing = UserDefaults.standard.bool(forKey: AppDelegate.timing)
         ViewController.inspection = UserDefaults.standard.bool(forKey: AppDelegate.inspection)
         ViewController.holdingTime = UserDefaults.standard.float(forKey: AppDelegate.holdingTime)
+        ViewController.mySession.scrambler.doEvent(event: UserDefaults.standard.integer(forKey: AppDelegate.event))
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle
