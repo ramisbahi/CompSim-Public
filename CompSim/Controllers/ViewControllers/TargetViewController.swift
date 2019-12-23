@@ -177,7 +177,7 @@ class TargetViewController: UIViewController {
             textField.keyboardType = .decimalPad
         })
         
-        let confirmAction = UIAlertAction(title: "Enter", style: .cancel, handler: {
+        let confirmAction = UIAlertAction(title: "Enter", style: .default, handler: {
             (action : UIAlertAction!) -> Void in
             // Confirming deleted solve
             
@@ -186,19 +186,24 @@ class TargetViewController: UIViewController {
             
             if let floatTime = Float(enteredTime)
             {
-                let time = SolveTime.makeIntTime(num: floatTime) // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150)
-                if(time <= ViewController.mySession.maxTime)
+                let temp = SolveTime(enteredTime: enteredTime, scramble: "")
+                let str = temp.myString
+                let intTime = temp.intTime
+                
+                if(intTime > ViewController.mySession.maxTime)
                 {
-                    self.MinTimeLabel.setTitle(SolveTime.makeMyString(num: time), for: .normal) //  set title to string version
-                    try! self.realm.write {
-                        ViewController.mySession.minTime = time
+                    self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
+                    try! self.realm.write
+                    {
+                        ViewController.mySession.maxTime = intTime
                     }
-                    self.updateDistributionLabels()
                 }
-                else
+                self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
+                try! self.realm.write
                 {
-                    self.alertValidTime(alertMessage:"Please enter a time less than maximum")
+                    ViewController.mySession.minTime = intTime
                 }
+                self.updateDistributionLabels()
             }
             else
             {
@@ -207,13 +212,15 @@ class TargetViewController: UIViewController {
             
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (action : UIAlertAction!) -> Void in
             
         })
         
         alert.addAction(confirmAction)
         alert.addAction(cancelAction)
+        
+        alert.preferredAction = confirmAction
         
         self.present(alert, animated: true)
         
@@ -237,39 +244,44 @@ class TargetViewController: UIViewController {
             textField.keyboardType = .decimalPad
         })
         
-        let confirmAction = UIAlertAction(title: "Enter", style: .cancel, handler: {
+        let confirmAction = UIAlertAction(title: "Enter", style: .default, handler: {
             (action : UIAlertAction!) -> Void in
             // Confirming deleted solve
             
             let textField = alert.textFields![0] // Force unwrapping because we know it exists. Let that textfield string storing your time
             let enteredTime = textField.text!
             
+            let temp = SolveTime(enteredTime: enteredTime, scramble: "")
+            let str = temp.myString
+            let intTime = temp.intTime
+            
             if let floatTime = Float(enteredTime)
             {
-                let time = SolveTime.makeIntTime(num: floatTime) // // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150)
                 
                 if(TargetViewController.rangeWinning) // range winning
                 {
-                    if(time >= ViewController.mySession.minTime)
+                    
+                    if(intTime < ViewController.mySession.minTime)
                     {
-                        self.MaxTimeLabel.setTitle(SolveTime.makeMyString(num: time), for: .normal) // set title to string version
+                        self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
                         try! self.realm.write
                         {
-                            ViewController.mySession.maxTime = time
+                            ViewController.mySession.minTime = intTime
                         }
-                        self.updateDistributionLabels()
                     }
-                    else
+                    self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
+                    try! self.realm.write
                     {
-                        self.alertValidTime(alertMessage:"Please enter a time greater than minimum")
+                        ViewController.mySession.maxTime = intTime
                     }
+                    self.updateDistributionLabels()
                 }
                 else // single winning time - don't need to check
                 {
-                    self.MaxTimeLabel.setTitle(SolveTime.makeMyString(num: time), for: .normal) // set title to string version
+                    self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
                     try! self.realm.write
                     {
-                        ViewController.mySession.maxTime = time
+                        ViewController.mySession.maxTime = intTime
                     }
                 }
             }
@@ -280,13 +292,15 @@ class TargetViewController: UIViewController {
             
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (action : UIAlertAction!) -> Void in
             
         })
         
         alert.addAction(confirmAction)
         alert.addAction(cancelAction)
+        
+        alert.preferredAction = confirmAction
         
         self.present(alert, animated: true)
     }
