@@ -22,8 +22,6 @@ class ScrambleReader
     lazy var bigCubeScrambler: BigCubeScrambler = BigCubeScrambler()
 
     /*var doingTwo: Bool  // doing 2 or 3*/
-    var importedScrambles: [String] = []
-    var importedIndex: Int = -1
     
     var myEvent: Int
     
@@ -36,17 +34,6 @@ class ScrambleReader
     {
         myEvent = event
         genScramble()
-        
-        let filePath = Bundle.main.path(forResource: "scrambles", ofType: "txt");
-        let URL = NSURL.fileURL(withPath: filePath!)
-        
-        do {
-            let string = try String.init(contentsOf: URL) // result
-            self.importedScrambles = string.components(separatedBy: "\n") // add result to scrambles (separated by line)
-        }
-        catch  {
-            print(error);
-        }
     }
     
     
@@ -76,7 +63,7 @@ class ScrambleReader
         switch myEvent
         {
         case 0: // 2x2
-            currentScramble = twoScrambler.solveBounded(state: twoScrambler.randomState(), minLength: 9, maxLength: 11) ?? " "
+            currentScramble = twoScrambler.solveBounded(state: twoScrambler.randomState(), minLength: 8, maxLength: 11) ?? " "
         case 1: // 3x3
             currentScramble = threeScrambler.scramble()
         case 2: // 4x4
@@ -97,9 +84,6 @@ class ScrambleReader
             currentScramble = skewbScrambler.scrSkb()
         case 10:
             currentScramble = clockScrambler.scramble()
-        case 11:
-            importedIndex += 1
-            currentScramble = importedScrambles[importedIndex]
         default:
             currentScramble = ""
         }

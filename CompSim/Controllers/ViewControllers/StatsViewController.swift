@@ -77,11 +77,12 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func createNewSession(name: String)
     {
         print("creating new session...")
-        let newSession = Session(name: name, event: 1)
+        let newSession = Session(name: name, enteredEvent: 1)
         
         
         try! realm.write {
             realm.add(newSession)
+            smartEvent(name: newSession.name, session: newSession)
         }
         
         ViewController.mySession = newSession // now current session
@@ -89,6 +90,37 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.updateNewSessionStackView()
         StatsTableView.reloadData()
         ViewController.sessionChanged = true
+    }
+    
+    func smartEvent(name: String, session: Session)
+    {
+        switch name.lowercased()
+        {
+        case "2x2x2", "2x2":
+            session.doEvent(enteredEvent: 0)
+        case "3x3x3", "3x3":
+            session.doEvent(enteredEvent: 1)
+        case "4x4x4", "4x4":
+            session.doEvent(enteredEvent: 2)
+        case "5x5x5", "5x5":
+            session.doEvent(enteredEvent: 3)
+        case "6x6x6", "6x6":
+            session.doEvent(enteredEvent: 4)
+        case "7x7x7", "7x7":
+            session.doEvent(enteredEvent: 5)
+        case "pyra", "pyraminx":
+            session.doEvent(enteredEvent: 6)
+        case "mega", "megaminx":
+            session.doEvent(enteredEvent: 7)
+        case "sq-1", "sq1", "square1", "square-1":
+            session.doEvent(enteredEvent: 8)
+        case "skewb", "skoob":
+            session.doEvent(enteredEvent: 9)
+        case "clock":
+            session.doEvent(enteredEvent: 10)
+        default:
+            break
+        }
     }
     
     func updateNewSessionStackView()
@@ -106,7 +138,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func setUpStackView()
     {
         DeleteButton.isEnabled = ViewController.allSessions.count > 1
-        print(ViewController.mySession.name)
         SessionButton.setTitle(ViewController.mySession.name, for: .normal)
         SessionCollection = []
         for (sessionName, _) in ViewController.allSessions
@@ -186,7 +217,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if ViewController.allSessions[title] != nil && title != ViewController.mySession.name // exists, not same
         {
             ViewController.mySession = ViewController.allSessions[title]!
-            
+            ViewController.mySession.updateScrambler()
             ViewController.sessionChanged = true
             StatsTableView.reloadData()
             print("changed session successfully")
@@ -198,6 +229,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
+        print("in this")
         DeleteButton.isEnabled = ViewController.allSessions.count > 1
         if(ViewController.darkMode)
         {
@@ -318,6 +350,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print("table view")
         let currentIndex = ViewController.mySession.currentAverage - indexPath.row // reverse order
         
+        
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
         
         cell.textLabel?.text = ViewController.mySession.allAverages[currentIndex] // set to average
@@ -366,6 +399,30 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let currentIndex = ViewController.mySession.currentAverage - indexPath.row // reverse order
+        if editingStyle == .delete {
+            try! realm.write
+            {
+                deleteAverage(at: currentIndex)
+                
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func deleteAverage(at index: Int)
+    {
+        let session = ViewController.mySession
+        session.allAverages.remove(at: index)
+        session.averageTypes.remove(at: index)
+        session.winningAverages.remove(at: index)
+        session.usingWinningTime.remove(at: index)
+        session.results.remove(at: index)
+        session.allTimes.remove(at: index)
+        session.currentAverage -= 1
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -32,7 +32,7 @@ class TimerViewController: UIViewController {
     
     @IBOutlet weak var PenaltySelector: UISegmentedControl!
     @IBOutlet weak var SubmitButton: UIButton!
-    
+
     @IBOutlet weak var TimerLabel: UILabel!
     
     override func viewWillAppear(_ animated: Bool)
@@ -173,13 +173,27 @@ class TimerViewController: UIViewController {
         {
             TimerLabel.textColor = UIColor.black
         }
-        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (blah) in
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: {_ in
+            
             if(self.timerPhase == self.TIMING)
             {
                 self.timerTime += 0.01
                 if(self.timerTime < 60.00)
                 {
-                    self.TimerLabel.text = String(format: "%.2f", self.timerTime)
+                    print("ViewController.timerUpdate \(ViewController.timerUpdate)")
+                    if(ViewController.timerUpdate == 0) // timer update
+                    {
+                        self.TimerLabel.text = String(format: "%.2f", self.timerTime)
+                    }
+                    else if(ViewController.timerUpdate == 1) // seconds update
+                    {
+                        self.TimerLabel.text = String(format: "%.0f", floor(self.timerTime))
+                    }
+                    else // no update
+                    {
+                        self.TimerLabel.text = "solve"
+                    }
                 }
                 else
                 {
@@ -196,6 +210,7 @@ class TimerViewController: UIViewController {
     
     func stopTimer()
     {
+        self.TimerLabel.text = String(format: "%.2f", self.timerTime)
         TimerViewController.resultTime = self.timerTime
         timer.invalidate()
         timerPhase = IDLE

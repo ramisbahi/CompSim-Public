@@ -183,8 +183,8 @@ class TargetViewController: UIViewController {
             
             let textField = alert.textFields![0] // Force unwrapping because we know it exists. Let that textfield string storing your time
             let enteredTime = textField.text!
-            
-            if let floatTime = Float(enteredTime)
+             
+            if let _ = Float(enteredTime)
             {
                 let temp = SolveTime(enteredTime: enteredTime, scramble: "")
                 let str = temp.myString
@@ -341,6 +341,7 @@ class TargetViewController: UIViewController {
     {
         let num = Int(time * 1000 + 0.5)
         let stringNum: String = String(num)
+
         let beforeDecimal = String(stringNum.prefix(stringNum.count - 3))
         let afterDecimal = String(stringNum.suffix(3))
         return beforeDecimal + "." + afterDecimal

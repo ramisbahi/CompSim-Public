@@ -59,9 +59,10 @@ class ViewController: UIViewController {
     
     static var holdingTime: Float = 0.55 
     
-    static var mySession = Session(name: "3x3x3", event: 1)
-    static var allSessions: [String : Session] = ["3x3x3" : ViewController.mySession]
+    static var mySession = Session(name: "3x3", enteredEvent: 1)
+    static var allSessions: [String : Session] = ["3x3" : ViewController.mySession]
     
+    static var timerUpdate = 0 // 0 = update, 1 = seconds, 2 = none
     
     static var justOpened = true
     static var sessionChanged = false
@@ -160,16 +161,44 @@ class ViewController: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
         self.view.addGestureRecognizer(tap)
+        
+        let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToTwoFingerDoubleTap(gesture:)))
+        twoFingerDoubleTap.numberOfTouchesRequired = 2
+        twoFingerDoubleTap.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(twoFingerDoubleTap)
     }
     
-    /*func reset()
+    @objc func respondToTwoFingerDoubleTap(gesture: UITapGestureRecognizer)
+    {
+        let alert = UIAlertController(title: "Reset average?", message: "", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
+            _ in
+            // Confirming deleted solve
+            self.reset()
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            _ in
+            
+        })
+        
+        alert.addAction(cancelAction)
+        alert.addAction(confirmAction)
+        alert.preferredAction = confirmAction
+        
+        self.present(alert, animated: true)
+    }
+    
+    func reset()
     {
         try! realm.write
         {
             ViewController.mySession.reset()
         }
         ScrambleLabel.text = String(ViewController.mySession.getCurrentScramble()) // next scramble
-    }*/
+        updateTimeLabels()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
@@ -464,6 +493,7 @@ class ViewController: UIViewController {
         ViewController.timing = UserDefaults.standard.bool(forKey: AppDelegate.timing)
         ViewController.inspection = UserDefaults.standard.bool(forKey: AppDelegate.inspection)
         ViewController.holdingTime = UserDefaults.standard.float(forKey: AppDelegate.holdingTime)
+        ViewController.timerUpdate = UserDefaults.standard.integer(forKey: AppDelegate.timerUpdate)
         ViewController.mySession.scrambler.doEvent(event: UserDefaults.standard.integer(forKey: AppDelegate.event))
     }
     

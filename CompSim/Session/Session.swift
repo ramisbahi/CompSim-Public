@@ -34,13 +34,28 @@ class Session: Object
     var allTimes = List<SolveTimeList>()
     
     @objc dynamic var currentAverage: Int = -1 // keeps track of last average currently on (round - 2)
+    @objc dynamic var event: Int = 1
     
     var scrambler: ScrambleReader = ScrambleReader(event: 1)
     
-    convenience init(name: String, event: Int) {
+    convenience init(name: String, enteredEvent: Int) {
+        print("convenience init")
         self.init()
         self.name = name
-        scrambler = ScrambleReader(event: event)
+        scrambler = ScrambleReader(event: enteredEvent)
+        updateScrambler()
+        
+    }
+    
+    func updateScrambler()
+    {
+        scrambler.doEvent(event: event)
+    }
+    
+    func doEvent(enteredEvent: Int)
+    {
+        event = enteredEvent
+        updateScrambler()
     }
     
     func reset()

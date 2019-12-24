@@ -19,7 +19,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var solveTypeControl: UISegmentedControl!
     // checked for when view disappears, no point updating every time it changes
     
-    
     @IBOutlet weak var TimingControl: UISegmentedControl!
     @IBOutlet weak var InspectionControl: UISegmentedControl!
     
@@ -37,6 +36,8 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var CuberButton: UIButton!
     @IBOutlet weak var ScrambleTypeButton: UIButton!
+    
+    @IBOutlet weak var TimerUpdateControl: UISegmentedControl!
     
     let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Antoine" : "Antoine Cantin"]
     
@@ -185,6 +186,8 @@ class SettingsViewController: UIViewController {
         HoldingTimeSlider.value = ViewController.holdingTime
         HoldingTimeLabel.text = String(format: "Holding Time: %.2f", ViewController.holdingTime)
         
+        TimerUpdateControl.selectedSegmentIndex = ViewController.timerUpdate
+        
         super.viewDidLoad()
         
         
@@ -203,14 +206,7 @@ class SettingsViewController: UIViewController {
         }
         
         
-        if(ViewController.mySession.currentIndex > 0) // started average, wont allow change
-        {
-            solveTypeControl.isEnabled = false
-        }
-        else
-        {
-            solveTypeControl.isEnabled = true
-        }
+        solveTypeControl.isEnabled = ViewController.mySession.currentIndex < 1
     }
     
     @IBAction func HoldingTimeChanged(_ sender: Any) {
@@ -243,6 +239,8 @@ class SettingsViewController: UIViewController {
             ViewController.ao5 = false
             ViewController.mo3 = false
         }
+        
+        ViewController.timerUpdate = TimerUpdateControl.selectedSegmentIndex
     }
     
     enum Events: String
@@ -258,7 +256,6 @@ class SettingsViewController: UIViewController {
         case sq1 = "Square-1"
         case skewb = "Skewb"
         case clock = "Clock"
-        case nonMag = "Non-Mag November"
     }
     
     
@@ -306,29 +303,27 @@ class SettingsViewController: UIViewController {
             switch event
             {
                 case .twoCube:
-                    ViewController.mySession.scrambler.doEvent(event: 0)
+                    ViewController.mySession.doEvent(enteredEvent: 0)
                 case .threeCube:
-                    ViewController.mySession.scrambler.doEvent(event: 1)
+                    ViewController.mySession.doEvent(enteredEvent: 1)
                 case .fourCube:
-                    ViewController.mySession.scrambler.doEvent(event: 2)
+                    ViewController.mySession.doEvent(enteredEvent: 2)
                 case .fiveCube:
-                    ViewController.mySession.scrambler.doEvent(event: 3)
+                    ViewController.mySession.doEvent(enteredEvent: 3)
                 case .sixCube:
-                    ViewController.mySession.scrambler.doEvent(event: 4)
+                    ViewController.mySession.doEvent(enteredEvent: 4)
                 case .sevenCube:
-                    ViewController.mySession.scrambler.doEvent(event: 5)
+                    ViewController.mySession.doEvent(enteredEvent: 5)
                 case .pyra:
-                    ViewController.mySession.scrambler.doEvent(event: 6)
+                    ViewController.mySession.doEvent(enteredEvent: 6)
                 case .mega:
-                    ViewController.mySession.scrambler.doEvent(event: 7)
+                    ViewController.mySession.doEvent(enteredEvent: 7)
                 case .sq1:
-                    ViewController.mySession.scrambler.doEvent(event: 8)
+                    ViewController.mySession.doEvent(enteredEvent: 8)
                 case .skewb:
-                    ViewController.mySession.scrambler.doEvent(event: 9)
+                    ViewController.mySession.doEvent(enteredEvent: 9)
                 case .clock:
-                    ViewController.mySession.scrambler.doEvent(event: 10)
-                case .nonMag:
-                    ViewController.mySession.scrambler.doEvent(event: 11)
+                    ViewController.mySession.doEvent(enteredEvent: 10)
             }
         }
         

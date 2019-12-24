@@ -70,7 +70,7 @@ class ResultViewController: UIViewController {
        {
             ResultButton.isHidden = true
             WinningAverageLabel.isHidden = true
-            BackgroundImage.isHidden = true
+            BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
             
             try! realm.write {
                 ViewController.mySession.usingWinningTime.append(false)

@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let holdingTime = "holdingTime"
     static let event = "event"
     static let sessionName = "sessionName"
+    static let timerUpdate = "timerUpdate"
     
     lazy var realm = try! Realm()
     
@@ -48,10 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ViewController.mySession = results[0]
             for result in results
             {
-                if(result.name == UserDefaults.standard.string(forKey: AppDelegate.sessionName))
+                if(result.name == UserDefaults.standard.string(forKey: AppDelegate.sessionName)) // last session left on
                 {
                     ViewController.mySession = result
                 }
+                ViewController.mySession.updateScrambler()
                 ViewController.allSessions[result.name] = result
                 print("created \(result.name) session")
             }
@@ -116,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.set(ViewController.holdingTime, forKey: AppDelegate.holdingTime)
         defaults.set(ViewController.mySession.scrambler.myEvent, forKey: AppDelegate.event)
         defaults.set(ViewController.mySession.name, forKey: AppDelegate.sessionName)
+        defaults.set(ViewController.timerUpdate, forKey: AppDelegate.timerUpdate)
     }
 
 //    // MARK: UISceneSession Lifecycle
