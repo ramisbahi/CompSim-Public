@@ -111,7 +111,7 @@ class ResultViewController: UIViewController {
     
     func updateWinningAverage() // calculate average and update label
     {
-        var winningAverage: Int = ViewController.mySession.maxTime // for single time
+        var winningAverage: Int = ViewController.mySession.singleTime // for single time
         if(TargetViewController.rangeWinning)
         {
             let random = GKRandomSource()
@@ -177,14 +177,6 @@ class ResultViewController: UIViewController {
         BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
     }
     
-    
-    // prepare for going back to (compsim) viewcontroller
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        
-        // Do any additional setup after loading the view.
-    }
     @IBAction func Time1Touched(_ sender: Any) {
         
          self.showScramble(num: 0)
@@ -233,8 +225,6 @@ class ResultViewController: UIViewController {
         }
         return .default
     }
-    
-
     
     // MARK: - Navigation
 

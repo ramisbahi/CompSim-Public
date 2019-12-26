@@ -13,6 +13,8 @@ class TargetViewController: UIViewController {
     
     @IBOutlet weak var MinTimeLabel: UIButton!
     @IBOutlet weak var MaxTimeLabel: UIButton!
+    @IBOutlet weak var SingleTimeLabel: UIButton!
+    
     
     @IBOutlet weak var Dist1: UILabel!
     @IBOutlet weak var Dist2: UILabel!
@@ -24,11 +26,9 @@ class TargetViewController: UIViewController {
     
     @IBOutlet weak var WinningTimeSetting: UISegmentedControl!
     @IBOutlet weak var DistributionImage: UIImageView!
-    @IBOutlet weak var SetRangeLabel: UILabel!
     @IBOutlet weak var DistributionLabel: UILabel!
     @IBOutlet weak var ToLabel: UILabel!
     
-    @IBOutlet weak var StackView: UIStackView!
     
     
     static var noWinning = false // no win
@@ -48,6 +48,8 @@ class TargetViewController: UIViewController {
        
         MinTimeLabel.setTitle(SolveTime.makeMyString(num: ViewController.mySession.minTime), for: .normal) // set label to min
         MaxTimeLabel.setTitle(SolveTime.makeMyString(num: ViewController.mySession.maxTime), for: .normal) // set label to max
+        SingleTimeLabel.setTitle(SolveTime.makeMyString(num: ViewController.mySession.singleTime), for: .normal)
+        
         self.updateDistributionLabels()
         
         // set the selected segment correctly
@@ -106,8 +108,10 @@ class TargetViewController: UIViewController {
     
     func noWinningSetup()
     {
-        StackView.isHidden = true
-        SetRangeLabel.isHidden = true
+        MaxTimeLabel.isHidden = true
+        ToLabel.isHidden = true
+        MinTimeLabel.isHidden = true
+        SingleTimeLabel.isHidden = true
         DistributionLabel.isHidden = true
         DistributionImage.isHidden = true
         self.changeDistLabels(hide: true)
@@ -115,44 +119,24 @@ class TargetViewController: UIViewController {
     
     func singleWinningSetup()
     {
-        SetRangeLabel.text = "  Set Time:"
-        SetRangeLabel.font = UIFont.systemFont(ofSize: 40.0)
-        StackView.isHidden = false
-        SetRangeLabel.isHidden = false
+        SingleTimeLabel.isHidden = false
+        MaxTimeLabel.isHidden = true
+        ToLabel.isHidden = true
         MinTimeLabel.isHidden = true
         DistributionLabel.isHidden = true
         DistributionImage.isHidden = true
-        if(!ViewController.darkMode)
-        {
-            MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
-        }
-        else
-        {
-            MinTimeLabel.setTitleColor(UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0), for: .normal)
-        }
-        MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 30.0)
         ToLabel.isHidden = true
         self.changeDistLabels(hide: true)
     }
     
     func rangeWinningSetup()
     {
-        SetRangeLabel.text = "Set Range:"
-        SetRangeLabel.font = UIFont.systemFont(ofSize: 24.0)
-        SetRangeLabel.isHidden = false
-        StackView.isHidden = false
+        SingleTimeLabel.isHidden = true
+        MaxTimeLabel.isHidden = false
+        ToLabel.isHidden = false
         MinTimeLabel.isHidden = false
         DistributionLabel.isHidden = false
         DistributionImage.isHidden = false
-        MaxTimeLabel.titleLabel?.font = UIFont.systemFont(ofSize: 30.0)
-        if(ViewController.darkMode) // if dark, set orange
-        {
-            MinTimeLabel.setTitleColor(ViewController.orangeColor(), for: .normal)
-        }
-        else
-        {
-            MinTimeLabel.setTitleColor(ViewController.blueColor(), for: .normal)
-        }
         ToLabel.isHidden = false
         self.changeDistLabels(hide: false)
     }
@@ -219,24 +203,11 @@ class TargetViewController: UIViewController {
         
         alert.addAction(confirmAction)
         alert.addAction(cancelAction)
-        
         alert.preferredAction = confirmAction
-        
         self.present(alert, animated: true)
         
     }
     @IBAction func MaxTimeTouched(_ sender: Any) {
-        if(TargetViewController.singleWinning)
-        {
-            if(!ViewController.darkMode)
-            {
-                MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
-            }
-            else
-            {
-                MinTimeLabel.setTitleColor(UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0), for: .normal)
-            }
-        }
         let alert = UIAlertController(title: "Enter Maximum Time", message: "", preferredStyle: .alert)
         
         alert.addTextField(configurationHandler: { (textField) in
@@ -255,41 +226,27 @@ class TargetViewController: UIViewController {
             let str = temp.myString
             let intTime = temp.intTime
             
-            if let floatTime = Float(enteredTime)
+            if let _ = Float(enteredTime)
             {
-                
-                if(TargetViewController.rangeWinning) // range winning
+                if(intTime < ViewController.mySession.minTime)
                 {
-                    
-                    if(intTime < ViewController.mySession.minTime)
-                    {
-                        self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
-                        try! self.realm.write
-                        {
-                            ViewController.mySession.minTime = intTime
-                        }
-                    }
-                    self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
+                    self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
                     try! self.realm.write
                     {
-                        ViewController.mySession.maxTime = intTime
+                        ViewController.mySession.minTime = intTime
                     }
-                    self.updateDistributionLabels()
                 }
-                else // single winning time - don't need to check
+                self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
+                try! self.realm.write
                 {
-                    self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
-                    try! self.realm.write
-                    {
-                        ViewController.mySession.maxTime = intTime
-                    }
+                    ViewController.mySession.maxTime = intTime
                 }
+                self.updateDistributionLabels()
             }
             else
             {
                 self.alertValidTime(alertMessage: "Please enter valid time")
             }
-            
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
@@ -299,12 +256,53 @@ class TargetViewController: UIViewController {
         
         alert.addAction(confirmAction)
         alert.addAction(cancelAction)
-        
         alert.preferredAction = confirmAction
-        
         self.present(alert, animated: true)
     }
     
+    @IBAction func SingleTimeTouched(_ sender: Any) {
+        let alert = UIAlertController(title: "Enter Target Time", message: "", preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Time in seconds"
+            textField.keyboardType = .decimalPad
+        })
+        
+        let confirmAction = UIAlertAction(title: "Enter", style: .default, handler: {
+            (action : UIAlertAction!) -> Void in
+            // Confirming deleted solve
+            
+            let textField = alert.textFields![0] // Force unwrapping because we know it exists. Let that textfield string storing your time
+            let enteredTime = textField.text!
+            
+            let temp = SolveTime(enteredTime: enteredTime, scramble: "")
+            let str = temp.myString
+            let intTime = temp.intTime
+            
+            if let _ = Float(enteredTime)
+            {
+                self.SingleTimeLabel.setTitle(str, for: .normal) // set title to string version
+                try! self.realm.write
+                {
+                    ViewController.mySession.singleTime = intTime
+                }
+                self.updateDistributionLabels()
+            }
+            else
+            {
+                self.alertValidTime(alertMessage: "Please enter valid time")
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (action : UIAlertAction!) -> Void in
+        })
+        
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        alert.preferredAction = confirmAction
+        self.present(alert, animated: true)
+    }
     
     
     func alertValidTime(alertMessage: String)
@@ -353,13 +351,7 @@ class TargetViewController: UIViewController {
         BlackWhiteLabels.forEach { (label) in
             label.textColor? = UIColor.white
         }
-        if(TargetViewController.singleWinning)
-        {
-            MinTimeLabel.setTitleColor(UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0), for: .normal)
-        }
-        Segment.tintColor = ViewController.orangeColor()
-        MinTimeLabel.setTitleColor(ViewController.orangeColor(), for: .normal)
-        MaxTimeLabel.setTitleColor(ViewController.orangeColor(), for: .normal)
+        WinningTimeSetting.tintColor = ViewController.orangeColor()
     }
     
     func turnOffDarkMode()
@@ -368,13 +360,7 @@ class TargetViewController: UIViewController {
         BlackWhiteLabels.forEach { (label) in
             label.textColor? = UIColor.black
         }
-        if(TargetViewController.singleWinning)
-        {
-            MinTimeLabel.setTitleColor(UIColor.white, for: .normal)
-        }
-        Segment.tintColor = ViewController.blueColor()
-        MinTimeLabel.setTitleColor(ViewController.blueColor(), for: .normal)
-        MaxTimeLabel.setTitleColor(ViewController.blueColor(), for: .normal)
+        Segment.tintColor = .white
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle

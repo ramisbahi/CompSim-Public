@@ -14,8 +14,9 @@ class Session: Object
     var currentIndex = 0
     
     @objc dynamic var name: String = ""
-    @objc dynamic var minTime = 100 // distributiona
+    @objc dynamic var minTime = 100 // distribution 
     @objc dynamic var maxTime = 200 // distribution
+    @objc dynamic var singleTime = 150 // single time
     
     var minIndex = 0
     var maxIndex = 1
