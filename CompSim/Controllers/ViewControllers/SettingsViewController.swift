@@ -40,7 +40,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var TimerUpdateControl: UISegmentedControl!
     
-    let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Antoine" : "Antoine Cantin"]
+    let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Antoine" : "Antoine Cantin", "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park"]
     
     let realm = try! Realm()
     
@@ -162,11 +162,6 @@ class SettingsViewController: UIViewController {
         {
             DarkModeControl.selectedSegmentIndex = 0
             makeDarkMode()
-            if #available(iOS 13.0, *) {
-                let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-                statusBar.backgroundColor = UIColor.init(red: 29/250, green: 29/250, blue: 29/250, alpha: 1)
-                 view.addSubview(statusBar)
-            }
             print("just made dark")
         }
         else

@@ -26,7 +26,6 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var MyAverageLabel: UILabel!
     @IBOutlet weak var WinningAverageLabel: UILabel!
     
-    @IBOutlet weak var ResultButton: UIButton!
     @IBOutlet weak var TryAgainButton: UIButton!
     
     @IBOutlet var TimesCollection: [UIButton]!
@@ -38,6 +37,13 @@ class ResultViewController: UIViewController {
     // Additional setup after loading the view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        
+        if(ViewController.darkMode)
+        {
+            makeDarkMode()
+        }
+        
         TimerViewController.resultTime = 0 // set to 0 - we done
         labels = [SecondTime1, SecondTime2, SecondTime3, SecondTime4, SecondTime5]
         
@@ -66,10 +72,10 @@ class ResultViewController: UIViewController {
         
         MyAverageLabel.isHidden = false
         TryAgainButton.isHidden = false
+        print(TargetViewController.noWinning)
        if(TargetViewController.noWinning) // no winning time
        {
-            ResultButton.isHidden = true
-            WinningAverageLabel.isHidden = true
+            WinningAverageLabel.text = ""
             BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
             
             try! realm.write {
@@ -82,19 +88,14 @@ class ResultViewController: UIViewController {
        }
        else // winning time
        {
-            ResultButton.isHidden = false
             WinningAverageLabel.isHidden = false
             BackgroundImage.isHidden = false
             try! realm.write {
                 ViewController.mySession.usingWinningTime.append(true)
                      // update winning average label & win/lose
                 }
-            }
-        updateWinningAverage()
-        
-        if(ViewController.darkMode)
-        {
-            makeDarkMode()
+            
+            updateWinningAverage()
         }
     }
     
@@ -103,7 +104,7 @@ class ResultViewController: UIViewController {
         DarkBackground.isHidden = false
         WinningAverageLabel.textColor? = UIColor.white
         MyAverageLabel.textColor? = UIColor.white
-        TryAgainButton.setTitleColor(ViewController.orangeColor(), for: .normal)
+        TryAgainButton.backgroundColor = .darkGray
         TimesCollection.forEach { (button) in
             button.setTitleColor(ViewController.orangeColor(), for: .normal)
         }
@@ -155,7 +156,6 @@ class ResultViewController: UIViewController {
             self.lose() // loss
         }
         
-        ResultButton.isHidden = false
         
     }
     
@@ -165,6 +165,8 @@ class ResultViewController: UIViewController {
             ViewController.mySession.results.append(false)
         }
         BackgroundImage.image = UIImage(named: "sad\(ViewController.cuber)")
+        MyAverageLabel.textColor = .red
+        MyAverageLabel.text = MyAverageLabel.text
     }
     
     func win()
@@ -172,9 +174,9 @@ class ResultViewController: UIViewController {
         try! realm.write {
             ViewController.mySession.results.append(true) // win
         }
-        ResultButton.setTitleColor(UIColor.green, for: .normal)
-        ResultButton.setTitle("You WIN!", for: .normal)
         BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
+        MyAverageLabel.textColor = .green
+        MyAverageLabel.text = MyAverageLabel.text
     }
     
     @IBAction func Time1Touched(_ sender: Any) {

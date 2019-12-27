@@ -18,6 +18,8 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var AverageLabel: UILabel!
     @IBOutlet weak var WinningAverageLabel: UILabel!
     
+    @IBOutlet weak var BackButton: UIButton!
+    
     var averageType = 0
     
     @IBAction func StatsButtonPressed(_ sender: Any) {
@@ -135,7 +137,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         WinningAverageLabel.textColor? = UIColor.white
         AverageLabel.textColor? = UIColor.white // may be changed to red/green afterwards - just changing default
         AverageTableView.backgroundColor = UIColor.init(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
-        
+        BackButton.backgroundColor = .darkGray
     }
     
     func turnOffDarkMode()
@@ -144,6 +146,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         WinningAverageLabel.textColor? = UIColor.black
         AverageLabel.textColor? = UIColor.black // may be changed to red/green afterwards - just changing default
         AverageTableView.backgroundColor = UIColor.white
+        BackButton.backgroundColor = ViewController.darkBlueColor()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle

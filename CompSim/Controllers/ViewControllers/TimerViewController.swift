@@ -34,6 +34,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var SubmitButton: UIButton!
 
     @IBOutlet weak var TimerLabel: UILabel!
+    @IBOutlet weak var CancelButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -55,9 +56,16 @@ class TimerViewController: UIViewController {
         
         if(ViewController.darkMode)
         {
-            DarkBackground.isHidden = false
-            TimerLabel.textColor = .white
+            makeDarkMode()
         }
+    }
+    
+    func makeDarkMode()
+    {
+        DarkBackground.isHidden = false
+        TimerLabel.textColor = .white
+        SubmitButton.backgroundColor = .darkGray
+        CancelButton.backgroundColor = .darkGray
     }
     
     func gestureSetup()
@@ -66,6 +74,12 @@ class TimerViewController: UIViewController {
         TimerViewController.longPress.allowableMovement = 50
         TimerViewController.longPress.minimumPressDuration = TimeInterval(ViewController.holdingTime)
         self.view.addGestureRecognizer(TimerViewController.longPress)
+    }
+    
+    @IBAction func CancelPressed(_ sender: Any) {
+        
+        TimerViewController.resultTime = 0
+        self.performSegue(withIdentifier: "goToViewController", sender: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -220,6 +234,7 @@ class TimerViewController: UIViewController {
         {
             self.view.removeGestureRecognizer(TimerViewController.longPress)
         }
+        CancelButton.isHidden = false
     }
     
     @IBAction func SubmitButton(_ sender: Any) {

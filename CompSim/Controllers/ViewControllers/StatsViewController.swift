@@ -233,13 +233,16 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewWillAppear(false)
         print("in this")
         DeleteButton.isEnabled = ViewController.allSessions.count > 1
+        
         if(ViewController.darkMode)
         {
+            makeDarkMode()
             DarkBackground.isHidden = false
             StatsTableView.backgroundColor = UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
         }
         else
         {
+            turnOffDarkMode()
             DarkBackground.isHidden = true
             StatsTableView.backgroundColor = UIColor.white
         }
@@ -472,7 +475,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         StatsViewController.myIndex = ViewController.mySession.currentAverage - indexPath.row // bc reverse
-        performSegue(withIdentifier: "segue", sender: self)
+        performSegue(withIdentifier: "SlideSegue", sender: self)
     }
     
 
@@ -483,7 +486,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         doubleTapGesture.numberOfTapsRequired = 2
         SessionButton.addGestureRecognizer(doubleTapGesture)
         
-        ViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
+        
         setUpStackView()
         
         // Do any additional setup after loading the view.

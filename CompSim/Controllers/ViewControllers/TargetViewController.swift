@@ -338,8 +338,23 @@ class TargetViewController: UIViewController {
         let num = Int(time * 1000 + 0.5)
         let stringNum: String = String(num)
 
-        let beforeDecimal = String(stringNum.prefix(stringNum.count - 3))
-        let afterDecimal = String(stringNum.suffix(3))
+        var beforeDecimal = ""
+        var afterDecimal = ""
+        
+        if(num < 1000)
+        {
+            beforeDecimal = "0"
+        }
+        
+        if(stringNum.count >= 3)
+        {
+            beforeDecimal = String(stringNum.prefix(max(stringNum.count - 3, 0)))
+        }
+        else
+        {
+            afterDecimal = "0"
+        }
+        afterDecimal += String(stringNum.suffix(3))
         return beforeDecimal + "." + afterDecimal
     }
     

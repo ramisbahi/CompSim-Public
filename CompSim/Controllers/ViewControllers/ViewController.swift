@@ -108,11 +108,15 @@ class ViewController: UIViewController {
             TimerViewController.penalty = 0
             TimerViewController.resultTime = 0
         }
-        else if AverageDetailViewController.justReturned // just returned from avgdetail
+        else
         {
             self.updateTimeLabels()
-            AverageDetailViewController.justReturned = false
+            if AverageDetailViewController.justReturned // just returned from avgdetail
+            {
+                AverageDetailViewController.justReturned = false
+            }
         }
+        
         
         if(ViewController.darkMode) // dark
         {
