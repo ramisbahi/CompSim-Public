@@ -121,11 +121,11 @@ class ResultViewController: UIViewController {
         
         if(ViewController.ao5)
         {
-            WinningAverageLabel.text = "Target Average: " + SolveTime.makeMyString(num: winningAverage) // update label
+            WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Average" // update label
         }
         else if(ViewController.mo3)
         {
-            WinningAverageLabel.text = "Target Mean: " + SolveTime.makeMyString(num: winningAverage) // update label
+            WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Mean" // update label
         }
         WinningAverageLabel.isHidden = false
         

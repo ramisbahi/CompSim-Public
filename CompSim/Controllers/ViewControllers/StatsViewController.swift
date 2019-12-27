@@ -16,6 +16,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var StatsTableView: UITableView!
     
+    @IBOutlet weak var NewButton: UIButton!
     @IBOutlet weak var SessionButton: UIButton!
     
     var SessionCollection: [UIButton] = []
@@ -33,6 +34,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         alert.addTextField(configurationHandler: { (textField) in
             textField.placeholder = "Name"
+            textField.autocapitalizationType = .words
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
@@ -251,6 +253,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         alert.addTextField(configurationHandler: { (textField) in
             textField.placeholder = "Name"
+            textField.autocapitalizationType = .words
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
@@ -292,9 +295,11 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.present(alert, animated: true)
     }
     
+    
+    
     @IBAction func deletePressed(_ sender: Any) {
         
-        let alert = UIAlertController(title: "Delete current session?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Delete \(ViewController.mySession.name) session?", message: "", preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
             (_) in
@@ -344,6 +349,22 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setUpStackView()
     }
     
+    func makeDarkMode()
+    {
+        for button in [NewButton, SessionButton, DeleteButton]
+        {
+            button?.backgroundColor = .darkGray
+        }
+    }
+    
+    func turnOffDarkMode()
+    {
+        for button in [NewButton, SessionButton, DeleteButton]
+        {
+            button?.backgroundColor = ViewController.darkBlueColor()
+        }
+    }
+    
     
     // performed for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -355,6 +376,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.textLabel?.text = ViewController.mySession.allAverages[currentIndex] // set to average
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
+        
+        
         if(ViewController.darkMode)
         {
             cell.textLabel?.textColor? = UIColor.white
@@ -403,26 +426,48 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let currentIndex = ViewController.mySession.currentAverage - indexPath.row // reverse order
+        print("currentIndex: \(currentIndex)")
         if editingStyle == .delete {
-            try! realm.write
-            {
-                deleteAverage(at: currentIndex)
-                
-            }
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            deleteAveragePressed(at: currentIndex, tableView, forRowAt: indexPath)
         }
+    }
+    
+    func deleteAveragePressed(at index: Int, _ tableView: UITableView, forRowAt indexPath: IndexPath)
+    {
+        let alert = UIAlertController(title: "Delete \(ViewController.mySession.allAverages[index]) average?", message: "", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
+            (_) in
+            // Confirming deleted solve
+            self.deleteAverage(at: index)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (_) in
+        })
+        
+        alert.addAction(cancelAction)
+        alert.addAction(confirmAction)
+        alert.preferredAction = confirmAction
+        
+        self.present(alert, animated: true)
     }
     
     func deleteAverage(at index: Int)
     {
+        
         let session = ViewController.mySession
-        session.allAverages.remove(at: index)
-        session.averageTypes.remove(at: index)
-        session.winningAverages.remove(at: index)
-        session.usingWinningTime.remove(at: index)
-        session.results.remove(at: index)
-        session.allTimes.remove(at: index)
-        session.currentAverage -= 1
+        try! realm.write
+        {
+            session.allAverages.remove(at: index)
+            session.averageTypes.remove(at: index)
+            session.winningAverages.remove(at: index)
+            session.usingWinningTime.remove(at: index)
+            session.results.remove(at: index)
+            session.allTimes.remove(at: index)
+            session.currentAverage -= 1
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -438,6 +483,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         doubleTapGesture.numberOfTapsRequired = 2
         SessionButton.addGestureRecognizer(doubleTapGesture)
         
+        ViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
         setUpStackView()
         
         // Do any additional setup after loading the view.

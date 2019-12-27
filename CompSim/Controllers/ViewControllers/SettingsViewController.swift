@@ -14,6 +14,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var Background: UIImageView!
     @IBOutlet weak var DarkModeLabel: UILabel!
     @IBOutlet weak var DarkModeControl: UISegmentedControl!
+    @IBOutlet weak var ScrollView: UIScrollView!
     
     @IBOutlet weak var solveTypeLabel: UILabel!
     @IBOutlet weak var solveTypeControl: UISegmentedControl!
@@ -85,9 +86,23 @@ class SettingsViewController: UIViewController {
         
             label.backgroundColor = UIColor.darkGray
         }
-        DarkModeControl.tintColor = ViewController.orangeColor()
-        solveTypeControl.tintColor = ViewController.orangeColor()
+        
+        
+        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl]
+        {
+            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        }
+        
         setNeedsStatusBarAppearanceUpdate()
+        
+        if #available(iOS 13.0, *) {
+            let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+            statusBar.backgroundColor = UIColor.init(red: 29/250, green: 29/250, blue: 29/250, alpha: 1)
+             view.addSubview(statusBar)
+        }
+        
+        
+        
     }
     
     func turnOffDarkMode()
@@ -96,16 +111,24 @@ class SettingsViewController: UIViewController {
         
         TopButtons.forEach{ (button) in
         
-            button.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+            button.backgroundColor = ViewController.darkBlueColor()
         }
         TopLabels.forEach{ (label) in
-        
-            label.backgroundColor = UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+            label.backgroundColor = ViewController.darkBlueColor()
         }
         
-        DarkModeControl.tintColor = ViewController.blueColor()
-        solveTypeControl.tintColor = ViewController.blueColor()
+        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl]
+        {
+            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+        }
+        
         setNeedsStatusBarAppearanceUpdate()
+        
+        if #available(iOS 13.0, *) {
+            let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+            statusBar.backgroundColor = UIColor.white
+             view.addSubview(statusBar)
+        }
     }
     
     
@@ -135,11 +158,16 @@ class SettingsViewController: UIViewController {
         
         
         
-        
         if(ViewController.darkMode)
         {
             DarkModeControl.selectedSegmentIndex = 0
             makeDarkMode()
+            if #available(iOS 13.0, *) {
+                let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+                statusBar.backgroundColor = UIColor.init(red: 29/250, green: 29/250, blue: 29/250, alpha: 1)
+                 view.addSubview(statusBar)
+            }
+            print("just made dark")
         }
         else
         {
@@ -332,10 +360,15 @@ class SettingsViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
-        if ViewController.darkMode
+        if #available(iOS 13.0, *)
         {
-            return .lightContent
+            if ViewController.darkMode
+            {
+                return .lightContent
+            }
+            
         }
+        
         return .default
     }
     

@@ -516,6 +516,11 @@ class ViewController: UIViewController {
         return UIColor.init(displayP3Red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0)
     }
     
+    static func darkBlueColor() -> UIColor
+    {
+        return UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+    }
+    
     
 }
 

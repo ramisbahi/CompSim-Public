@@ -38,8 +38,6 @@ class TargetViewController: UIViewController {
     @IBOutlet weak var DarkBackground: UIImageView!
     @IBOutlet var BlackWhiteLabels: [UILabel]!
     
-    @IBOutlet weak var Segment: UISegmentedControl!
-    
     let realm = try! Realm()
     
     override func viewWillAppear(_ animated: Bool)
@@ -348,19 +346,31 @@ class TargetViewController: UIViewController {
     func makeDarkMode()
     {
         DarkBackground.isHidden = false
+        for button in [MinTimeLabel, MaxTimeLabel, SingleTimeLabel, DistributionLabel]
+        {
+            button?.backgroundColor = .darkGray
+        }
+        DistributionImage.image = UIImage(named: "DarkModeGaussianCurve")
         BlackWhiteLabels.forEach { (label) in
             label.textColor? = UIColor.white
         }
         WinningTimeSetting.tintColor = ViewController.orangeColor()
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
     }
     
     func turnOffDarkMode()
     {
         DarkBackground.isHidden = true
+        for button in [MinTimeLabel, MaxTimeLabel, SingleTimeLabel, DistributionLabel]
+        {
+            button?.backgroundColor = ViewController.darkBlueColor()
+        }
         BlackWhiteLabels.forEach { (label) in
             label.textColor? = UIColor.black
         }
-        Segment.tintColor = .white
+        DistributionImage.image = UIImage(named: "GaussianCurve")
+        WinningTimeSetting.tintColor = .white
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle
