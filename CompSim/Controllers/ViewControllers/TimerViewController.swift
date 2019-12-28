@@ -52,7 +52,10 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.gestureSetup()
+        if(ViewController.inspection)
+        {
+            self.gestureSetup()
+        }
         
         if(ViewController.darkMode)
         {
@@ -79,6 +82,7 @@ class TimerViewController: UIViewController {
     @IBAction func CancelPressed(_ sender: Any) {
         
         TimerViewController.resultTime = 0
+        
         self.performSegue(withIdentifier: "goToViewController", sender: self)
     }
     
@@ -142,8 +146,10 @@ class TimerViewController: UIViewController {
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer) // time has been done
     {
+        print("timer view controller handling long press")
         if(sender.state == .began && timerPhase == FROZEN || ViewController.holdingTime < 0.01 && timerPhase == INSPECTION) // skip from inspection to ready when 0.0
         {
+            print("called this bitch")
             TimerLabel.textColor = .green
             timerPhase = READY
         }
@@ -161,16 +167,15 @@ class TimerViewController: UIViewController {
         }
     }
     
+    func doMakeReady()
+    {
+        TimerLabel.textColor = .green
+        timerPhase = READY
+    }
+    
     func cancel()
     {
-        if(ViewController.darkMode)
-        {
-            TimerLabel.textColor = UIColor.white
-        }
-        else
-        {
-            TimerLabel.textColor = UIColor.black
-        }
+        TimerLabel.textColor = ViewController.darkMode ? .white : .black
         timerPhase = INSPECTION
     }
     
@@ -195,7 +200,6 @@ class TimerViewController: UIViewController {
                 self.timerTime += 0.01
                 if(self.timerTime < 60.00)
                 {
-                    print("ViewController.timerUpdate \(ViewController.timerUpdate)")
                     if(ViewController.timerUpdate == 0) // timer update
                     {
                         self.TimerLabel.text = String(format: "%.2f", self.timerTime)

@@ -25,6 +25,7 @@ class Session: Object
     
     var myAverage: String = ""
     var myAverageInt: Int = 0
+    var intTotal: Int = 0
     
     // following all persist:
     var allAverages = List<String>()
@@ -106,8 +107,6 @@ class Session: Object
         scrambler.genScramble()
     }
     
-    
-    
     func changePenaltyStatus(index: Int, penalty: Int)
     {
         if(penalty == 0)
@@ -127,7 +126,7 @@ class Session: Object
     
     func updateTimes()
     {
-        var total = 0
+        intTotal = 0
         if(currentIndex >= 3 && ViewController.ao5)
         {
             for i in 0..<currentIndex
@@ -151,7 +150,7 @@ class Session: Object
                 else
                 {
                     times[i].updateString(minMax: false)
-                    total += times[i].intTime // for calculating average (might do)
+                    intTotal += times[i].intTime // for calculating average (might do)
                 }
             }
         }
@@ -162,20 +161,17 @@ class Session: Object
                 times[i].updateString(minMax: false)
                 if(ViewController.mo3)
                 {
-                    total += times[i].intTime
+                    intTotal += times[i].intTime
                 }
             }
         }
         
-        if(currentIndex == 5 && ViewController.ao5 || currentIndex == 3 && (ViewController.mo3 || ViewController.bo3))
-        {
-            finishAverage(total: total)
-        }
+        
         
         
     }
     
-    func finishAverage(total: Int) // give int total
+    func finishAverage() // give int total
     {
         if(currentIndex == 5 && ViewController.ao5) // done with avg5
         {
@@ -188,14 +184,14 @@ class Session: Object
             ViewController.mo3 ? averageTypes.append(1) : averageTypes.append(2)
         }
         allTimes.append(SolveTimeList(times))
-        if(total > 950000) // has DNF
+        if(intTotal > 950000) // has DNF
         {
             myAverage = "DNF"
             myAverageInt = 999999
         }
         else
         {
-            let averageTime = (total + 1) / 3
+            let averageTime = (intTotal + 1) / 3
             myAverageInt = averageTime
             myAverage = SolveTime.makeMyString(num: averageTime)
         }

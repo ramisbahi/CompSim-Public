@@ -94,15 +94,22 @@ class SettingsViewController: UIViewController {
         }
         
         setNeedsStatusBarAppearanceUpdate()
+        updateStatusBarBackground()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        updateStatusBarBackground()
+    }
+    
+    func updateStatusBarBackground()
+    {
         if #available(iOS 13.0, *) {
             let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-            statusBar.backgroundColor = UIColor.init(red: 29/250, green: 29/250, blue: 29/250, alpha: 1)
+            statusBar.backgroundColor = ViewController.darkMode ?  UIColor.init(red: 29/250, green: 29/250, blue: 29/250, alpha: 1) : .white
              view.addSubview(statusBar)
         }
-        
-        
-        
     }
     
     func turnOffDarkMode()
@@ -123,12 +130,7 @@ class SettingsViewController: UIViewController {
         }
         
         setNeedsStatusBarAppearanceUpdate()
-        
-        if #available(iOS 13.0, *) {
-            let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-            statusBar.backgroundColor = UIColor.white
-             view.addSubview(statusBar)
-        }
+        updateStatusBarBackground()
     }
     
     
@@ -144,6 +146,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func handleCuberSelection(_ sender: Any) {
+        
         cuberCollection.forEach { (button) in
             UIView.animate(withDuration: 0.3, animations: {
                 button.isHidden = !button.isHidden
@@ -154,9 +157,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
     {
-        print("view did load")
-        
-        
+        print("view did load") 
         
         if(ViewController.darkMode)
         {

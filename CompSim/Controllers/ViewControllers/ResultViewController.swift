@@ -37,7 +37,9 @@ class ResultViewController: UIViewController {
     // Additional setup after loading the view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        try! realm.write {
+            ViewController.mySession.finishAverage()
+        }
         
         if(ViewController.darkMode)
         {
@@ -175,7 +177,7 @@ class ResultViewController: UIViewController {
             ViewController.mySession.results.append(true) // win
         }
         BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
-        MyAverageLabel.textColor = .green
+        MyAverageLabel.textColor = ViewController.greenColor()
         MyAverageLabel.text = MyAverageLabel.text
     }
     

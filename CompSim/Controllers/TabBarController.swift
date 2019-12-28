@@ -12,14 +12,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if(AverageDetailViewController.justReturned)
-        {
-            self.selectedIndex = 3
-        }
-        else // just came from stats
-        {
-            self.selectedIndex = 1
-        }
+        self.selectedIndex = 1
 
         // Do any additional setup after loading the view.
     }

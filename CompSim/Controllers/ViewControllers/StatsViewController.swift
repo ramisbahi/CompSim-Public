@@ -231,6 +231,9 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
         print("in this")
         DeleteButton.isEnabled = ViewController.allSessions.count > 1
         
@@ -396,7 +399,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.accessoryType = .disclosureIndicator // show little arrow thing on right side of each cell
         if(ViewController.mySession.usingWinningTime[currentIndex]) // if was competing against winning time
         {
-            cell.textLabel?.textColor = ViewController.mySession.results[currentIndex] ? UIColor.green : UIColor.red
+            cell.textLabel?.textColor = ViewController.mySession.results[currentIndex] ? ViewController.greenColor() : UIColor.red
             
         }
         
@@ -475,7 +478,23 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         StatsViewController.myIndex = ViewController.mySession.currentAverage - indexPath.row // bc reverse
-        performSegue(withIdentifier: "SlideSegue", sender: self)
+        
+        slideRightSegue()
+    }
+    
+    func slideRightSegue()
+    {
+        let obj = (self.storyboard?.instantiateViewController(identifier: "AverageDetailViewController"))!
+
+            let transition:CATransition = CATransition()
+            transition.duration = 0.3
+            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            transition.type = .push
+            transition.subtype = .fromRight
+        
+        
+            self.navigationController!.view.layer.add(transition, forKey: kCATransition)
+            self.navigationController?.pushViewController(obj, animated: true)
     }
     
 

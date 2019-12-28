@@ -24,7 +24,20 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func StatsButtonPressed(_ sender: Any) {
         AverageDetailViewController.justReturned = true
-        performSegue(withIdentifier: "returnToStats", sender: self)
+        slideLeftSegue()
+    }
+    
+    func slideLeftSegue()
+    {
+        let transition:CATransition = CATransition()
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+    
+    
+        self.navigationController!.view.layer.add(transition, forKey: kCATransition)
+        self.navigationController?.popViewController(animated: true)
     }
     
     // returns number of rows
@@ -48,7 +61,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         myCell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         
         myCell.detailTextLabel?.text = currentTime.myScramble // each scramble
-        myCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)
+        myCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 12.0)
         
         if(ViewController.darkMode)
         {
@@ -107,7 +120,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         {
             if(ViewController.mySession.results[StatsViewController.myIndex]) // won
             {
-                AverageLabel.textColor = UIColor.green
+                AverageLabel.textColor = ViewController.greenColor()
             }
             else // ost
             {

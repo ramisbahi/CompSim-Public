@@ -39,6 +39,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var SwipeUpLabel: UILabel!
     @IBOutlet weak var SwipeDownLabel: UILabel!
     
+    @IBOutlet weak var SubmitButton: UIButton!
+    
+    @IBOutlet weak var TimerLabel: UILabel!
     // (roundNumber - 1) * 5 + currentIndex = total solve index (starts at 0)
     
     var labels = [UIButton]()
@@ -69,6 +72,15 @@ class ViewController: UIViewController {
     
     static var hasSaved = false
     
+//    static var showTimerLongPress = UILongPressGestureRecognizer()
+    
+    let IDLE = 0
+    let FROZEN = 2
+    let READY = 3
+    static var timerPhase = 0 // IDLE
+    
+    static var longPress = UILongPressGestureRecognizer()
+    
     let realm = try! Realm()
     
     struct Keys
@@ -88,6 +100,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.\
         print("viewcontroller did load")
+        
+        
+        
         
         if(ViewController.justOpened && hasSetSettings())
         {
@@ -110,7 +125,7 @@ class ViewController: UIViewController {
         }
         else
         {
-            self.updateTimeLabels()
+            self.updateLabels()
             if AverageDetailViewController.justReturned // just returned from avgdetail
             {
                 AverageDetailViewController.justReturned = false
@@ -128,8 +143,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(false)
@@ -141,7 +154,7 @@ class ViewController: UIViewController {
         
         if(ViewController.sessionChanged)
         {
-            updateTimeLabels()
+            updateLabels()
             ViewController.mySession.scrambler.genScramble()
             ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
             ViewController.sessionChanged = false
@@ -149,6 +162,21 @@ class ViewController: UIViewController {
         else
         {
             ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
+        }
+        ViewController.timerPhase = self.IDLE
+        
+        if(usingLongPress())
+        {
+            self.view.removeGestureRecognizer(ViewController.longPress) // not sure if necessary
+            ViewController.longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
+            ViewController.longPress.allowableMovement = 50
+            ViewController.longPress.minimumPressDuration = TimeInterval(ViewController.holdingTime)
+            ViewController.longPress.cancelsTouchesInView = false
+            self.view.addGestureRecognizer(ViewController.longPress)
+        }
+        else // inspection or 0.0+noinspection
+        {
+            self.view.removeGestureRecognizer(ViewController.longPress)
         }
     }
     
@@ -165,6 +193,110 @@ class ViewController: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
         self.view.addGestureRecognizer(tap)
+        
+        let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToTwoFingerDoubleTap(gesture:)))
+        twoFingerDoubleTap.numberOfTouchesRequired = 2
+        twoFingerDoubleTap.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(twoFingerDoubleTap)
+        
+    }
+    
+    @objc func handleLongPress(sender: UIGestureRecognizer)
+    {
+        if(sender.state == .began) // reached holding time
+        {
+            if ViewController.timerPhase == self.IDLE
+            {
+                TimerLabel.isHidden = false
+                ViewController.timerPhase = self.FROZEN
+            }
+            else
+            {
+                TimerLabel.textColor = .green
+                ViewController.timerPhase = self.READY
+            }
+        }
+        else if(sender.state == .cancelled)
+        {
+            cancelTimer()
+        }
+        else if(sender.state == .ended && ViewController.timerPhase == self.READY) // did holding time, released
+        {
+            self.performSegue(withIdentifier: "timerSegue", sender: self)
+        }
+        print("handling timer long press")
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touches cancelled")
+        if(usingLongPress())
+        {
+            cancelTimer()
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touches began")
+        if usingLongPress() && ViewController.timerPhase == self.IDLE
+        {
+            TimerLabel.isHidden = false
+            ViewController.timerPhase = self.FROZEN
+            hideAll()
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) // released before minimum hold time
+    {
+        print("touches ended")
+        if(usingLongPress() && ViewController.timerPhase == FROZEN)
+        {
+            cancelTimer()
+        }
+    }
+    
+    func hideAll()
+    {
+        TimesCollection.forEach{ (button) in
+            button.isHidden = true
+        }
+        ScrambleLabel.isHidden = true
+        SwipeUpLabel.isHidden = true
+        SwipeDownLabel.isHidden = true
+        
+    }
+    
+    func showAll()
+    {
+        print("showing all")
+        updateLabels()
+        ScrambleLabel.isHidden = false
+        SwipeUpLabel.isHidden = false
+        SwipeDownLabel.isHidden = false
+        //TODO: show everything that should show
+    }
+    
+    
+    
+    func cancelTimer()
+    {
+        print("cancelling")
+        TimerLabel.isHidden = true
+        ViewController.timerPhase = IDLE
+        showAll()
+    }
+    
+    func removeGestures()
+    {
+        for recognizer in self.view.gestureRecognizers!
+        {
+            self.view.removeGestureRecognizer(recognizer)
+        }
+        
+        // then re-add... improve this
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
+        swipeDown.direction = .down // ...when down swipe is done
+        self.view.addGestureRecognizer(swipeDown) // allow view to recognize
         
         let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToTwoFingerDoubleTap(gesture:)))
         twoFingerDoubleTap.numberOfTouchesRequired = 2
@@ -194,6 +326,11 @@ class ViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+    func usingLongPress() -> Bool
+    {
+        return !ViewController.inspection && ViewController.holdingTime > 0.01 && ViewController.timing
+    }
+    
     func reset()
     {
         try! realm.write
@@ -201,7 +338,7 @@ class ViewController: UIViewController {
             ViewController.mySession.reset()
         }
         ScrambleLabel.text = String(ViewController.mySession.getCurrentScramble()) // next scramble
-        updateTimeLabels()
+        updateLabels()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -209,11 +346,6 @@ class ViewController: UIViewController {
         
         
     }
-    
-    
-    
-    
-    
     
     func alertValidTime(alertMessage: String)
     {
@@ -242,7 +374,7 @@ class ViewController: UIViewController {
                     break
             }
         }
-        else if ViewController.timing // tap gesture, timing
+        else if ViewController.timing && (ViewController.inspection || ViewController.holdingTime < 0.01) // tap gesture, timing
         {
             print("tapped")
             self.performSegue(withIdentifier: "timerSegue", sender: self)
@@ -335,17 +467,9 @@ class ViewController: UIViewController {
         {
             ViewController.mySession.addSolve(time: enteredTime, penalty: penalty)
         }
-        if(ViewController.mySession.currentIndex >= 5 || ViewController.mySession.currentIndex >= 3 && (ViewController.mo3 || ViewController.bo3)) // change view when 5 solves done, or 3 for mo3/bo3
-        {
-            self.performSegue(withIdentifier: "viewControllerToResult", sender: self)
-        }
-        else // next scramble
-        {
-            print("in update times")
-            ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
-        }
+        ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
         
-        updateTimeLabels()
+        updateLabels()
     }
     
     func updateTimes(enteredTime: String)
@@ -356,20 +480,17 @@ class ViewController: UIViewController {
             ViewController.mySession.addSolve(time: enteredTime)
         }
         
-        if(ViewController.mySession.currentIndex >= 5 || ViewController.mySession.currentIndex >= 3 && (ViewController.mo3 || ViewController.bo3)) // change view when 5 solves done, or 3 for mo3/bo3
-        {
-            self.performSegue(withIdentifier: "viewControllerToResult", sender: self)
-        }
-        else // next scramble
-        {
-            print("in update times")
-            ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
-        }
         
-        updateTimeLabels()
+        ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
+        
+        updateLabels()
+        
     }
     
-    func updateTimeLabels()
+    @IBAction func SubmitButtonPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "viewControllerToResult", sender: self)
+    }
+    func updateLabels()
     {
         print("updating time labels")
         for i in 0..<ViewController.mySession.currentIndex
@@ -390,6 +511,23 @@ class ViewController: UIViewController {
         {
             self.labels[i].isHidden = true
         }
+        
+        if(ViewController.mySession.currentIndex == 5)
+        {
+            fiveSolvesDone()
+        }
+        else
+        {
+            ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
+        }
+    }
+    
+    func fiveSolvesDone()
+    {
+        removeGestures()
+        SwipeUpLabel.text = ""
+        SubmitButton.isHidden = false
+        ScrambleLabel.text = ""
     }
     
     @IBAction func Time1Touched(_ sender: Any) {
@@ -431,7 +569,7 @@ class ViewController: UIViewController {
             {
                 ViewController.mySession.changePenaltyStatus(index: num, penalty: 0)
             }
-            self.updateTimeLabels()
+            self.updateLabels()
         })
         
         let plusTwoAction = UIAlertAction(title: "+2", style: .default, handler: {
@@ -441,7 +579,7 @@ class ViewController: UIViewController {
             {
                 ViewController.mySession.changePenaltyStatus(index: num, penalty: 1)
             }
-            self.updateTimeLabels()
+            self.updateLabels()
         })
         
         let DNFAction = UIAlertAction(title: "DNF", style: .default, handler: {
@@ -451,7 +589,7 @@ class ViewController: UIViewController {
             {
                 ViewController.mySession.changePenaltyStatus(index: num, penalty: 2)
             }
-            self.updateTimeLabels()
+            self.updateLabels()
         })
 
         
@@ -472,6 +610,7 @@ class ViewController: UIViewController {
             button.setTitleColor(.white, for: .disabled)
             button.setTitleColor(ViewController.orangeColor(), for: .normal) // orange
         }
+        SubmitButton.backgroundColor = .darkGray
     }
     
     func turnOffDarkMode()
@@ -484,7 +623,7 @@ class ViewController: UIViewController {
             button.setTitleColor(.black, for: .disabled)
             button.setTitleColor(UIColor.link, for: .normal) // orange
         }
-        
+        SubmitButton.backgroundColor = ViewController.darkBlueColor()
     }
     
     func doSettings()
@@ -523,6 +662,11 @@ class ViewController: UIViewController {
     static func darkBlueColor() -> UIColor
     {
         return UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+    }
+    
+    static func greenColor() -> UIColor
+    {
+        return UIColor.init(displayP3Red: 0/255, green: 175/255, blue: 0/255, alpha: 1)
     }
     
     
