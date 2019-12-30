@@ -200,25 +200,7 @@ class TimerViewController: UIViewController {
             if(self.timerPhase == self.TIMING)
             {
                 self.timerTime += 0.01
-                if(self.timerTime < 60.00)
-                {
-                    if(ViewController.timerUpdate == 0) // timer update
-                    {
-                        self.TimerLabel.text = String(format: "%.2f", self.timerTime)
-                    }
-                    else if(ViewController.timerUpdate == 1) // seconds update
-                    {
-                        self.TimerLabel.text = String(format: "%.0f", floor(self.timerTime))
-                    }
-                    else // no update
-                    {
-                        self.TimerLabel.text = "solve"
-                    }
-                }
-                else
-                {
-                    self.TimerLabel.text = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
-                }
+                self.updateLabel()
             }
             else
             {
@@ -228,9 +210,33 @@ class TimerViewController: UIViewController {
         
     }
     
+    func updateLabel()
+    {
+        if(ViewController.timerUpdate == 0) // timer update
+        {
+            self.TimerLabel.text = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
+        }
+        else if(ViewController.timerUpdate == 1) // seconds update
+        {
+            let fullString = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
+            self.TimerLabel.text = self.truncate(fullString)
+        }
+        else // no update
+        {
+            self.TimerLabel.text = "solve"
+        }
+    }
+    
+    func truncate(_ str: String) -> String
+    {
+        let period = str.firstIndex(of: ".")!
+        let sub = str[..<period]
+        return String(sub)
+    }
+    
     func stopTimer()
     {
-        self.TimerLabel.text = String(format: "%.2f", self.timerTime)
+        self.TimerLabel.text = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
         TimerViewController.resultTime = self.timerTime
         timer.invalidate()
         timerPhase = IDLE

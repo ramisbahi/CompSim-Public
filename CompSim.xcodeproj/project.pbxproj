@@ -49,8 +49,10 @@
 		3690EB062316293200CB0B78 /* TwoPhaseScrambler.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231EA22FD08E80044DEF1 /* TwoPhaseScrambler.m */; };
 		3690EB072316293700CB0B78 /* CompSim-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = 361231F022FD0B4E0044DEF1 /* CompSim-Bridging-Header.h */; };
 		3690EB0823162AF800CB0B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF3A22DD699D006657CF /* AppDelegate.swift */; };
+		3696537923BA45F8000784D9 /* AddSolveAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */; };
+		3696537B23BA4671000784D9 /* AddSolveAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */; };
+		3696537D23BA5557000784D9 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696537C23BA5557000784D9 /* AlertService.swift */; };
 		36A0A4AB23AF676600D41938 /* SolveTimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0A4AA23AF676600D41938 /* SolveTimeList.swift */; };
-		36CDFD3A23B5E991002C52AD /* SlideSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CDFD3923B5E991002C52AD /* SlideSegue.swift */; };
 		36CDFD3C23B68FAC002C52AD /* SlideRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CDFD3B23B68FAC002C52AD /* SlideRightSegue.swift */; };
 		C79702DB2D2364D767859210 /* Pods_CompSim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A701408881740019BBE202B5 /* Pods_CompSim.framework */; };
 /* End PBXBuildFile section */
@@ -102,8 +104,10 @@
 		3669CEC1238B13A900F1D002 /* scrambles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scrambles.txt; sourceTree = "<group>"; };
 		3690EAC0231623E300CB0B78 /* CompSim.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CompSim.entitlements; sourceTree = "<group>"; };
 		3690EAE2231627A700CB0B78 /* Pyraminx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pyraminx.m; sourceTree = "<group>"; };
+		3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddSolveAlert.storyboard; sourceTree = "<group>"; };
+		3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSolveAlertViewController.swift; sourceTree = "<group>"; };
+		3696537C23BA5557000784D9 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		36A0A4AA23AF676600D41938 /* SolveTimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveTimeList.swift; sourceTree = "<group>"; };
-		36CDFD3923B5E991002C52AD /* SlideSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideSegue.swift; sourceTree = "<group>"; };
 		36CDFD3B23B68FAC002C52AD /* SlideRightSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SlideRightSegue.swift; path = CompSim/Controllers/SlideRightSegue.swift; sourceTree = "<group>"; };
 		51B11034A5437C664B7F3657 /* Pods-CompSim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompSim.debug.xcconfig"; path = "Target Support Files/Pods-CompSim/Pods-CompSim.debug.xcconfig"; sourceTree = "<group>"; };
 		A701408881740019BBE202B5 /* Pods_CompSim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompSim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,7 +207,9 @@
 			isa = PBXGroup;
 			children = (
 				360F108E22E551E500EEBB75 /* TabBarController.swift */,
-				36CDFD3923B5E991002C52AD /* SlideSegue.swift */,
+				3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */,
+				3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */,
+				3696537C23BA5557000784D9 /* AlertService.swift */,
 				3690EABC2316202100CB0B78 /* ViewControllers */,
 			);
 			path = Controllers;
@@ -321,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3696537923BA45F8000784D9 /* AddSolveAlert.storyboard in Resources */,
 				3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */,
 				3663DF4222DD699E006657CF /* Assets.xcassets in Resources */,
 				3663DF4022DD699D006657CF /* Main.storyboard in Resources */,
@@ -382,7 +389,6 @@
 				3634822823A0615F009A14C7 /* SolveTime.swift in Sources */,
 				3690EAE62316293200CB0B78 /* ScrambleReader.swift in Sources */,
 				3690EAE72316293200CB0B78 /* AverageDetailViewController.swift in Sources */,
-				36CDFD3A23B5E991002C52AD /* SlideSegue.swift in Sources */,
 				3690EAE82316293200CB0B78 /* SettingsViewController.swift in Sources */,
 				3690EAE92316293200CB0B78 /* ResultViewController.swift in Sources */,
 				3690EAEA2316293200CB0B78 /* TargetViewController.swift in Sources */,
@@ -394,6 +400,7 @@
 				3690EB0823162AF800CB0B78 /* AppDelegate.swift in Sources */,
 				36A0A4AB23AF676600D41938 /* SolveTimeList.swift in Sources */,
 				3690EAF02316293200CB0B78 /* Clock.h in Sources */,
+				3696537D23BA5557000784D9 /* AlertService.swift in Sources */,
 				3690EAF12316293200CB0B78 /* Megaminx.h in Sources */,
 				3690EAF22316293200CB0B78 /* Megaminx.m in Sources */,
 				3690EAF32316293200CB0B78 /* Sq1.m in Sources */,
@@ -418,6 +425,7 @@
 				3690EB042316293200CB0B78 /* Search.m in Sources */,
 				3690EB052316293200CB0B78 /* TwoPhaseScrambler.h in Sources */,
 				3690EB062316293200CB0B78 /* TwoPhaseScrambler.m in Sources */,
+				3696537B23BA4671000784D9 /* AddSolveAlertViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

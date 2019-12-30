@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Solve Alert View Controller-->
+        <scene sceneID="tsf-EB-Orq">
+            <objects>
+                <viewController storyboardIdentifier="AddSolveAlertVC" id="Sxc-Bp-rG9" customClass="AddSolveAlertViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WsM-m8-5OG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2C-pC-0xb">
+                                <rect key="frame" x="69.5" y="278" width="275" height="200"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73c-AH-tj7">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="55"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Solve" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BV4-P9-ta3">
+                                                <rect key="frame" x="61.5" y="6.5" width="152" height="42"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="32"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.031372549019607843" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstItem="BV4-P9-ta3" firstAttribute="centerY" secondItem="73c-AH-tj7" secondAttribute="centerY" id="05n-pW-36X"/>
+                                            <constraint firstItem="BV4-P9-ta3" firstAttribute="centerX" secondItem="73c-AH-tj7" secondAttribute="centerX" id="dKS-5F-Kpz"/>
+                                            <constraint firstAttribute="height" constant="55" id="wSo-IZ-Pix"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvf-Ai-eQq">
+                                        <rect key="frame" x="145" y="145" width="120" height="45"/>
+                                        <color key="backgroundColor" red="0.031372549020000001" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="WeE-kt-q0X"/>
+                                            <constraint firstAttribute="width" constant="120" id="unj-XC-FUX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
+                                        <state key="normal" title="Enter">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapEnter:" destination="Sxc-Bp-rG9" eventType="touchUpInside" id="lXh-Dx-xzx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNa-ng-EW4">
+                                        <rect key="frame" x="10" y="145" width="120" height="45"/>
+                                        <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="bma-Je-VTY"/>
+                                            <constraint firstAttribute="height" constant="45" id="yhx-Ks-Vq3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapCancel:" destination="Sxc-Bp-rG9" eventType="touchUpInside" id="UXb-Ma-OEm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="089-Jh-mt8"/>
+                                    <constraint firstAttribute="bottom" secondItem="nNa-ng-EW4" secondAttribute="bottom" constant="10" id="46S-Kw-IU8"/>
+                                    <constraint firstItem="nNa-ng-EW4" firstAttribute="leading" secondItem="V2C-pC-0xb" secondAttribute="leading" constant="10" id="Kwu-2i-xf3"/>
+                                    <constraint firstAttribute="bottom" secondItem="vvf-Ai-eQq" secondAttribute="bottom" constant="10" id="OTo-wv-zl9"/>
+                                    <constraint firstItem="73c-AH-tj7" firstAttribute="leading" secondItem="V2C-pC-0xb" secondAttribute="leading" id="dk9-Xg-sbb"/>
+                                    <constraint firstItem="73c-AH-tj7" firstAttribute="top" secondItem="V2C-pC-0xb" secondAttribute="top" id="eB3-w3-aaZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="73c-AH-tj7" secondAttribute="trailing" id="fHa-uI-KOh"/>
+                                    <constraint firstAttribute="width" constant="275" id="qgi-AB-B0y"/>
+                                    <constraint firstAttribute="trailing" secondItem="vvf-Ai-eQq" secondAttribute="trailing" constant="10" id="sNe-3j-3Il"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                        <size key="value" width="3" height="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                                        <real key="value" value="0.69999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xUz-jZ-EEq">
+                                <rect key="frame" x="102" y="351" width="210" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="Y5m-c6-eEx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEditing" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="xUz-jZ-EEq" firstAttribute="centerY" secondItem="WsM-m8-5OG" secondAttribute="centerY" constant="-70" id="5ev-u7-qjn"/>
+                            <constraint firstItem="xUz-jZ-EEq" firstAttribute="centerX" secondItem="WsM-m8-5OG" secondAttribute="centerX" id="GNh-s1-8UT"/>
+                            <constraint firstItem="V2C-pC-0xb" firstAttribute="centerX" secondItem="WsM-m8-5OG" secondAttribute="centerX" id="t1n-0z-oOM"/>
+                            <constraint firstItem="V2C-pC-0xb" firstAttribute="centerY" secondItem="WsM-m8-5OG" secondAttribute="centerY" constant="-70" id="tQB-uF-YrQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lK9-AU-Onh"/>
+                    </view>
+                    <connections>
+                        <outlet property="TextField" destination="xUz-jZ-EEq" id="B44-pn-koC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VIh-zk-rcJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="13.043478260869566" y="117.85714285714285"/>
+        </scene>
+    </scenes>
+</document>

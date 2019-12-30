@@ -130,6 +130,8 @@ class Session: Object
         intTotal = 0
         if(currentIndex >= 3 && ViewController.ao5)
         {
+            minIndex = 0
+            maxIndex = 1
             for i in 0..<currentIndex
             {
                 if(times[i].intTime < times[minIndex].intTime)
@@ -155,7 +157,7 @@ class Session: Object
                 }
             }
         }
-        else if ViewController.mo3 // mo3 or bo3
+        else if ViewController.mo3
         {
             for i in 0..<currentIndex
             {
@@ -163,8 +165,9 @@ class Session: Object
                 intTotal += times[i].intTime
             }
         }
-        else // best of 3 - set min index and int total
+        else if ViewController.bo3
         {
+            minIndex = 0
             for i in 0..<currentIndex
             {
                 times[i].updateString(minMax: false)

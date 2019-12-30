@@ -409,6 +409,24 @@ class ViewController: UIViewController {
     
     func addSolve()
     {
+        let alertService = AlertService()
+        let alert = alertService.alert(completion: {
+            
+            let inputTime = alertService.myVC.TextField.text!
+            
+            if(inputTime.countInstances(of: ".") <= 1 && inputTime.last != "." && inputTime.count > 0)
+            {
+                self.updateTimes(enteredTime: inputTime) // add time, show label, change parentheses
+            }
+            else
+            {
+                self.alertValidTime(alertMessage: "Please enter valid time")
+            }
+        })
+        
+        self.present(alert, animated: true)
+        
+        /*
         let alert = UIAlertController(title: "Add Solve", message: "", preferredStyle: .alert)
         
         alert.addTextField(configurationHandler: { (textField) in
@@ -450,7 +468,7 @@ class ViewController: UIViewController {
         alert.addAction(enterAction)
         alert.preferredAction = enterAction
         
-        self.present(alert, animated: true)
+        self.present(alert, animated: true)*/
     }
     
     // double is entered, converted to int for hundredth precision (i.e. 4.0 will become 400 now)
