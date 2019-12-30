@@ -30,6 +30,10 @@ class ResultViewController: UIViewController {
     
     @IBOutlet var TimesCollection: [UIButton]!
     
+    let noWinning = 0
+    let singleWinning = 1
+    let rangeWinning = 2
+    
     let realm = try! Realm()
     
     var labels = [UIButton]()
@@ -67,15 +71,23 @@ class ResultViewController: UIViewController {
         {
             MyAverageLabel.text = "= " + ViewController.mySession.myAverage + " Average!" // update my average label
         }
-        else if(ViewController.mo3)
+        else
         {
-            MyAverageLabel.text = "= " + ViewController.mySession.myAverage + " Mean!" // update my average label
+            SecondTime4.isHidden = true
+            SecondTime5.isHidden = true
+            if(ViewController.mo3)
+            {
+                MyAverageLabel.text = "= " + ViewController.mySession.myAverage + " Mean!" // update my average label
+            }
+            else // best of 3
+            {
+                MyAverageLabel.text = "= " + ViewController.mySession.myAverage + " Single!" // update my average label
+            }
         }
         
         MyAverageLabel.isHidden = false
         TryAgainButton.isHidden = false
-        print(TargetViewController.noWinning)
-       if(TargetViewController.noWinning) // no winning time
+        if(ViewController.mySession.targetType == noWinning) // no winning time
        {
             WinningAverageLabel.text = ""
             BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
@@ -115,7 +127,7 @@ class ResultViewController: UIViewController {
     func updateWinningAverage() // calculate average and update label
     {
         var winningAverage: Int = ViewController.mySession.singleTime // for single time
-        if(TargetViewController.rangeWinning)
+        if(ViewController.mySession.targetType == rangeWinning)
         {
             let random = GKRandomSource()
             let winningTimeDistribution = GKGaussianDistribution(randomSource: random, lowestValue: ViewController.mySession.minTime, highestValue: ViewController.mySession.maxTime) // now using ints pays off. Distribution created easily
@@ -129,6 +141,10 @@ class ResultViewController: UIViewController {
         else if(ViewController.mo3)
         {
             WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Mean" // update label
+        }
+        else
+        {
+            WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Single" // update label
         }
         WinningAverageLabel.isHidden = false
         
@@ -218,8 +234,6 @@ class ResultViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
-    
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {

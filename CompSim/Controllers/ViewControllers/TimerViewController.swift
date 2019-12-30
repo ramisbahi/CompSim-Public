@@ -69,6 +69,7 @@ class TimerViewController: UIViewController {
         TimerLabel.textColor = .white
         SubmitButton.backgroundColor = .darkGray
         CancelButton.backgroundColor = .darkGray
+        PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
     }
     
     func gestureSetup()
@@ -76,6 +77,7 @@ class TimerViewController: UIViewController {
         TimerViewController.longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
         TimerViewController.longPress.allowableMovement = 50
         TimerViewController.longPress.minimumPressDuration = TimeInterval(ViewController.holdingTime)
+        
         self.view.addGestureRecognizer(TimerViewController.longPress)
     }
     

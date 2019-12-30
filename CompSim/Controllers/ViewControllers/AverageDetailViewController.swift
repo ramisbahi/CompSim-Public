@@ -84,6 +84,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let time = tableView.cellForRow(at: indexPath)?.textLabel?.text
         let scramble = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text
+        tableView.cellForRow(at: indexPath)?.isSelected = false
         let alert = UIAlertController(title: time, message: scramble, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -92,19 +93,27 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
-        averageType = ViewController.mySession.averageTypes[StatsViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
+        
+        print(averageType)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        averageType = ViewController.mySession.averageTypes[StatsViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
         if(averageType == 0)
         {
             AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " Average"
+            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Average"
         }
         else if(averageType == 1)
         {
             AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " Mean"
+            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Mean"
+        }
+        else
+        {
+            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " Single"
+            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Single"
         }
         
         if(ViewController.darkMode)
@@ -132,14 +141,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
             WinningAverageLabel.isHidden = true
         }
         
-        if(averageType == 0)
-        {
-            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Average"
-        }
-        if(averageType == 1)
-        {
-            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Mean"
-        }
+        
     
         // Do any additional setup after loading the view.
     }

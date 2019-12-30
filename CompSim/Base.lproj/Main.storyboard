@@ -1585,7 +1585,6 @@
                             </label>
                             <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bordered" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Bmd-9i-g2f">
                                 <rect key="frame" x="57" y="472.66666666666669" width="300" height="36"/>
-                                <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="425-qr-lTY"/>
                                     <constraint firstAttribute="height" constant="35" id="iIW-IB-l9K"/>
@@ -1596,6 +1595,7 @@
                                     <segment title="+2"/>
                                 </segments>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="selectedSegmentTintColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </segmentedControl>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HqU-L4-G5C">
                                 <rect key="frame" x="132" y="542.66666666666663" width="150" height="64"/>
@@ -1838,10 +1838,10 @@
         <image name="GaussianCurve" width="372" height="154"/>
         <image name="arrow.turn.down.left" catalog="system" width="64" height="48"/>
         <image name="sadBill" width="387.33334350585938" height="182"/>
-        <image name="settings" width="32.333332061767578" height="32.333332061767578"/>
-        <image name="sizedTarget" width="61" height="66"/>
+        <image name="settings" width="29" height="29"/>
+        <image name="sizedTarget" width="48.666667938232422" height="52.666667938232422"/>
         <image name="stats" width="33.666667938232422" height="33.666667938232422"/>
-        <image name="timer" width="55" height="31.666666030883789"/>
+        <image name="timer" width="49.666667938232422" height="28.666666030883789"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rF2-8b-ORo"/>

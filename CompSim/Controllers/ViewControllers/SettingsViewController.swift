@@ -297,7 +297,6 @@ class SettingsViewController: UIViewController {
             return // doesn't have title
         }
         
-        print(title)
         CuberButton.setTitle("Cuber: \(title)", for: .normal)
         
         let nameArr = title.components(separatedBy: " ")
@@ -319,7 +318,6 @@ class SettingsViewController: UIViewController {
             return // doesn't have title
         }
         
-        print(title)
         ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
         
         try! realm.write

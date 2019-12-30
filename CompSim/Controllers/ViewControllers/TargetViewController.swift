@@ -31,10 +31,6 @@ class TargetViewController: UIViewController {
     
     
     
-    static var noWinning = false // no win
-    static var singleWinning = false
-    static var rangeWinning = true
-    
     @IBOutlet weak var DarkBackground: UIImageView!
     @IBOutlet var BlackWhiteLabels: [UILabel]!
     
@@ -51,21 +47,9 @@ class TargetViewController: UIViewController {
         self.updateDistributionLabels()
         
         // set the selected segment correctly
-        if(TargetViewController.noWinning)
-        {
-            WinningTimeSetting.selectedSegmentIndex = 0
-            noWinningSetup()
-        }
-        else if(TargetViewController.singleWinning)
-        {
-            WinningTimeSetting.selectedSegmentIndex = 1
-            singleWinningSetup()
-        }
-        else
-        {
-            WinningTimeSetting.selectedSegmentIndex = 2
-            rangeWinningSetup()
-        }
+        
+        WinningTimeSetting.selectedSegmentIndex = ViewController.mySession.targetType
+        setup(type: ViewController.mySession.targetType)
         
         if(ViewController.darkMode)
         {
@@ -77,30 +61,29 @@ class TargetViewController: UIViewController {
         }
     }
     
+    func setup(type: Int)
+    {
+        if(type == 0)
+        {
+            noWinningSetup()
+        }
+        else if(type == 1)
+        {
+            singleWinningSetup()
+        }
+        else
+        {
+            rangeWinningSetup()
+        }
+    }
+    
     @IBAction func ValueChanged(_ sender: Any) // value changed on winning time setting
     {
         print("called")
-        if WinningTimeSetting.selectedSegmentIndex == 0 // none
-        {
-            noWinningSetup()
-            TargetViewController.noWinning = true
-            TargetViewController.singleWinning = false
-            TargetViewController.rangeWinning = false
-        }
-        else if WinningTimeSetting.selectedSegmentIndex == 1 // single
-        {
-            singleWinningSetup()
-            TargetViewController.noWinning = false
-            TargetViewController.singleWinning = true
-            TargetViewController.rangeWinning = false
-        }
-        else // range
-        {
-            rangeWinningSetup()
-            
-            TargetViewController.noWinning = false
-            TargetViewController.singleWinning = false
-            TargetViewController.rangeWinning = true
+        
+        setup(type: WinningTimeSetting.selectedSegmentIndex)
+        try! realm.write {
+            ViewController.mySession.targetType = WinningTimeSetting.selectedSegmentIndex
         }
     }
     

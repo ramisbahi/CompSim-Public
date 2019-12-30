@@ -134,7 +134,7 @@ bool ini = false;
 
 -(Skewb *) init {
     if(self = [super init]) {
-        turnSkb = [[NSArray alloc] initWithObjects:@"L", @"R", @"D", @"B", nil];
+        turnSkb = [[NSArray alloc] initWithObjects:@"L", @"R", @"B", @"U", nil];
         sufSkb = [[NSArray alloc] initWithObjects:@"'", @"", nil];
         //initSkb();
         srand((unsigned)time(0));

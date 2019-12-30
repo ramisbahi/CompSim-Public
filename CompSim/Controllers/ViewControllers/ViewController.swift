@@ -70,10 +70,6 @@ class ViewController: UIViewController {
     static var justOpened = true
     static var sessionChanged = false
     
-    static var hasSaved = false
-    
-//    static var showTimerLongPress = UILongPressGestureRecognizer()
-    
     let IDLE = 0
     let FROZEN = 2
     let READY = 3
@@ -512,9 +508,9 @@ class ViewController: UIViewController {
             self.labels[i].isHidden = true
         }
         
-        if(ViewController.mySession.currentIndex == 5)
+        if(ViewController.mySession.currentIndex == 5) || ViewController.mySession.currentIndex == 3 && !ViewController.ao5
         {
-            fiveSolvesDone()
+            allSolvesDone()
         }
         else
         {
@@ -522,7 +518,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func fiveSolvesDone()
+    func allSolvesDone()
     {
         removeGestures()
         SwipeUpLabel.text = ""

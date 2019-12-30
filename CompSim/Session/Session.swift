@@ -17,6 +17,7 @@ class Session: Object
     @objc dynamic var minTime = 100 // distribution 
     @objc dynamic var maxTime = 200 // distribution
     @objc dynamic var singleTime = 150 // single time
+    @objc dynamic var targetType = 2 // 0 = none, 1 = single, 2 = range
     
     var minIndex = 0
     var maxIndex = 1
@@ -154,21 +155,26 @@ class Session: Object
                 }
             }
         }
-        else // mo3 or bo3
+        else if ViewController.mo3 // mo3 or bo3
         {
             for i in 0..<currentIndex
             {
                 times[i].updateString(minMax: false)
-                if(ViewController.mo3)
-                {
-                    intTotal += times[i].intTime
-                }
+                intTotal += times[i].intTime
             }
         }
-        
-        
-        
-        
+        else // best of 3 - set min index and int total
+        {
+            for i in 0..<currentIndex
+            {
+                times[i].updateString(minMax: false)
+                if(times[i].intTime < times[minIndex].intTime)
+                {
+                    minIndex = i
+                }
+            }
+            intTotal = times[minIndex].intTime
+        }
     }
     
     func finishAverage() // give int total
@@ -184,14 +190,23 @@ class Session: Object
             ViewController.mo3 ? averageTypes.append(1) : averageTypes.append(2)
         }
         allTimes.append(SolveTimeList(times))
-        if(intTotal > 950000) // has DNF
+        if(intTotal > 950000) // has counting DNF
         {
             myAverage = "DNF"
             myAverageInt = 999999
         }
         else
         {
-            let averageTime = (intTotal + 1) / 3
+            var averageTime = 0
+            if(ViewController.bo3)
+            {
+                print("we are doing bo3 bitch")
+                averageTime = intTotal
+            }
+            else
+            {
+                averageTime = (intTotal + 1) / 3 // mo3 of ao5
+            }
             myAverageInt = averageTime
             myAverage = SolveTime.makeMyString(num: averageTime)
         }
