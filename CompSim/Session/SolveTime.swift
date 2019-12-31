@@ -16,7 +16,7 @@ class SolveTime: Object
     @objc dynamic var myString: String = ""
     @objc dynamic var myScramble: String = ""
     var isMinMax = false
-    var penalty = 0
+    var penalty = 0 // 0 = OK, 1 = +2, 2 = DNF
     
     // can be min:sec:decimal
     convenience init(enteredTime: String, scramble: String) {

@@ -291,11 +291,11 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CUF-Dg-Qhg">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MgX-Jd-ubN">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1313"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MgX-Jd-ubN">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                         <subviews>
-                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t85-IM-a2x">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1313"/>
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t85-IM-a2x">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                                 <color key="backgroundColor" red="0.11318005181347146" green="0.11318005181347146" blue="0.11318005181347146" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-NK-pgV">
@@ -1272,6 +1272,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="contentStretch" x="0.0" y="0.0" width="0.94999999999999996" height="1"/>
+                        <color key="barTintColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.019607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="mCZ-mM-XSp" kind="relationship" relationship="viewControllers" id="pP9-eJ-Edw"/>
@@ -1292,18 +1294,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bq2-Tm-iZL">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
-                                <color key="backgroundColor" red="0.1131800518" green="0.1131800518" blue="0.1131800518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </imageView>
-                            <label hidden="YES" autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="wordWrap" minimumScaleFactor="0.75" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="94l-PH-qUv">
-                                <rect key="frame" x="96.333333333333329" y="298.66666666666669" width="221.66666666666669" height="138.66666666666669"/>
-                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="113"/>
-                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jjr-t2-MPK">
-                                <rect key="frame" x="15" y="15.000000000000014" width="384" height="227.33333333333337"/>
+                                <rect key="frame" x="15" y="15" width="384" height="231"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="FMg-Wj-RPc">
                                         <rect key="frame" x="192" y="0.0" width="0.0" height="175"/>
@@ -1314,91 +1306,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkF-a5-bB7">
-                                        <rect key="frame" x="69" y="175" width="246" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="↑ Add Solve ↑" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkF-a5-bB7">
+                                        <rect key="frame" x="118.66666666666666" y="175" width="146.99999999999997" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="IuU-Cz-L6z"/>
                                         </constraints>
-                                        <attributedString key="attributedText">
-                                            <fragment content="↑">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="LucidaGrande"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" ">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="GB18030Bitmap"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Swipe">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="Monaco"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" ">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="GB18030Bitmap"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Up">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="Monaco"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" ">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="GB18030Bitmap"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="to">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="Monaco"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" ">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="GB18030Bitmap"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Add">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="Monaco"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" ">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="GB18030Bitmap"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Solve">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="Monaco"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" ">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="GB18030Bitmap"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="↑">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="LucidaGrande"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3P-c9-dr7">
@@ -1466,22 +1380,16 @@
                                             <action selector="Time5Touched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vUc-aM-AKA"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DQ-yx-AYa">
-                                        <rect key="frame" x="47.333333333333343" y="205" width="289.66666666666663" height="22.333333333333343"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="↓ Swipe Down to Delete Solve ↓">
-                                                <attributes>
-                                                    <font key="NSFont" size="19" name="Monaco"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="↓ Delete Solve ↓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DQ-yx-AYa">
+                                        <rect key="frame" x="108.66666666666667" y="205" width="166.66666666666663" height="26"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DX-31-wVt">
-                                <rect key="frame" x="127" y="110" width="160" height="45"/>
+                                <rect key="frame" x="127" y="680" width="160" height="45"/>
                                 <color key="backgroundColor" red="0.031372549020000001" green="0.015686274510000001" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="ELa-aO-gNY"/>
@@ -1506,26 +1414,28 @@
                                     <action selector="SubmitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6in-fP-cEB"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="wordWrap" minimumScaleFactor="0.75" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="94l-PH-qUv">
+                                <rect key="frame" x="96.333333333333329" y="298.66666666666669" width="221.66666666666669" height="138.66666666666669"/>
+                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="113"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bq2-Tm-iZL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1hq-Du-03Q"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bq2-Tm-iZL" secondAttribute="bottom" id="8Tc-ba-DTW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jjr-t2-MPK" secondAttribute="trailing" constant="15" id="NnQ-Qq-XrE"/>
                             <constraint firstItem="1DX-31-wVt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NzC-zk-hpv"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bq2-Tm-iZL" secondAttribute="trailing" id="Rnk-yy-Bu6"/>
                             <constraint firstItem="Jjr-t2-MPK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="XSE-9u-QWY"/>
                             <constraint firstItem="94l-PH-qUv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Xxd-r1-jjb"/>
                             <constraint firstItem="94l-PH-qUv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eR4-0C-Yh8"/>
-                            <constraint firstItem="bq2-Tm-iZL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fLM-iA-CwI"/>
                             <constraint firstItem="Jjr-t2-MPK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="lsp-a3-diq"/>
-                            <constraint firstItem="1DX-31-wVt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="110" id="qff-IC-8SS"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="1DX-31-wVt" secondAttribute="bottom" constant="-38" id="rwh-fv-pHy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="CompSim" image="timer" selectedImage="timer" id="TMk-UC-HpA"/>
                     <connections>
-                        <outlet property="BackgroundImage" destination="bq2-Tm-iZL" id="aCj-rH-T31"/>
+                        <outlet property="BigView" destination="8bC-Xf-vdC" id="FDa-hG-GHd"/>
                         <outlet property="ScrambleLabel" destination="FMg-Wj-RPc" id="CK4-l0-OC9"/>
                         <outlet property="SubmitButton" destination="1DX-31-wVt" id="N0G-d1-4AK"/>
                         <outlet property="SwipeDownLabel" destination="3DQ-yx-AYa" id="72T-K5-G22"/>
@@ -1671,7 +1581,7 @@
                                 <color key="backgroundColor" red="0.1131800518" green="0.1131800518" blue="0.1131800518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target Average: 1.49" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhq-FN-tIS">
-                                <rect key="frame" x="0.0" y="190" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="195" width="414" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="aGq-qU-7P6"/>
                                 </constraints>
@@ -1680,10 +1590,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="M8O-jt-3w3">
-                                <rect key="frame" x="0.0" y="240" width="414" height="436"/>
+                                <rect key="frame" x="0.0" y="245" width="414" height="431"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2em-RB-Jye">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="72.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
                                         <state key="normal" title="1.39"/>
                                         <connections>
@@ -1692,7 +1602,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsx-oU-StS">
-                                        <rect key="frame" x="0.0" y="72.666666666666686" width="414" height="72.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="71.666666666666686"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
                                         <state key="normal" title="1.39"/>
                                         <connections>
@@ -1701,7 +1611,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZI-JG-3AW">
-                                        <rect key="frame" x="0.0" y="145.33333333333331" width="414" height="72.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="143.66666666666669" width="414" height="72"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
                                         <state key="normal" title="1.39"/>
                                         <connections>
@@ -1710,7 +1620,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Off-7F-HIE">
-                                        <rect key="frame" x="0.0" y="218" width="414" height="72.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="215.66666666666669" width="414" height="71.666666666666686"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
                                         <state key="normal" title="1.39"/>
                                         <connections>
@@ -1719,7 +1629,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzy-G9-9Q3">
-                                        <rect key="frame" x="0.0" y="290.66666666666663" width="414" height="72.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="287.33333333333337" width="414" height="72"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
                                         <state key="normal" title="1.39"/>
                                         <connections>
@@ -1728,7 +1638,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="HQv-Ho-HQQ">
-                                        <rect key="frame" x="0.0" y="363.33333333333337" width="414" height="72.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="359.33333333333337" width="414" height="71.666666666666686"/>
                                         <attributedString key="attributedText">
                                             <fragment content="= 2:44.84 Average!">
                                                 <attributes>
@@ -1768,9 +1678,9 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadBill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tu-dJ-3lW">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="190"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="195"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="190" id="XWN-BF-euB"/>
+                                    <constraint firstAttribute="height" constant="195" id="XWN-BF-euB"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -1851,6 +1761,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="z5C-xH-DX3"/>
+        <segue reference="AZA-lg-qSK"/>
     </inferredMetricsTieBreakers>
 </document>

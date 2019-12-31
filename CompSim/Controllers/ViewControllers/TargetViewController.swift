@@ -14,8 +14,7 @@ class TargetViewController: UIViewController {
     @IBOutlet weak var MinTimeLabel: UIButton!
     @IBOutlet weak var MaxTimeLabel: UIButton!
     @IBOutlet weak var SingleTimeLabel: UIButton!
-    
-    
+
     @IBOutlet weak var Dist1: UILabel!
     @IBOutlet weak var Dist2: UILabel!
     @IBOutlet weak var Dist3: UILabel!
@@ -28,8 +27,6 @@ class TargetViewController: UIViewController {
     @IBOutlet weak var DistributionImage: UIImageView!
     @IBOutlet weak var DistributionLabel: UILabel!
     @IBOutlet weak var ToLabel: UILabel!
-    
-    
     
     @IBOutlet weak var DarkBackground: UIImageView!
     @IBOutlet var BlackWhiteLabels: [UILabel]!
@@ -134,95 +131,71 @@ class TargetViewController: UIViewController {
     }
     
     @IBAction func MinTimeTouched(_ sender: Any) {
-        print("running")
-        let alert = UIAlertController(title: "Enter Minimum Time", message: "", preferredStyle: .alert)
         
-        alert.addTextField(configurationHandler: { (textField) in
-            textField.placeholder = "Time in seconds"
-            textField.keyboardType = .decimalPad
-        })
-        
-        let confirmAction = UIAlertAction(title: "Enter", style: .default, handler: {
-            (action : UIAlertAction!) -> Void in
-            // Confirming deleted solve
+        let alertService = AlertService()
+        let alert = alertService.alert(keyboardType: 0, myTitle: "Min Time",
+                                       completion: {
             
-            let textField = alert.textFields![0] // Force unwrapping because we know it exists. Let that textfield string storing your time
-            let enteredTime = textField.text!
-             
-            if let _ = Float(enteredTime)
+            let inputTime = alertService.myVC.TextField.text!
+            
+            if let _ = Float(inputTime)
             {
-                let temp = SolveTime(enteredTime: enteredTime, scramble: "")
-                let str = temp.myString
-                let intTime = temp.intTime
-                
-                if(intTime > ViewController.mySession.maxTime)
-                {
-                    self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
-                    try! self.realm.write
-                    {
-                        ViewController.mySession.maxTime = intTime
-                    }
-                }
-                self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
-                try! self.realm.write
-                {
-                    ViewController.mySession.minTime = intTime
-                }
-                self.updateDistributionLabels()
+               let temp = SolveTime(enteredTime: inputTime, scramble: "")
+               let str = temp.myString
+               let intTime = temp.intTime
+               
+               if(intTime > ViewController.mySession.maxTime)
+               {
+                   self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
+                   try! self.realm.write
+                   {
+                       ViewController.mySession.maxTime = intTime
+                   }
+               }
+               self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
+               try! self.realm.write
+               {
+                   ViewController.mySession.minTime = intTime
+               }
+               self.updateDistributionLabels()
             }
             else
             {
                 self.alertValidTime(alertMessage: "Please enter valid time")
             }
-            
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (action : UIAlertAction!) -> Void in
-            
-        })
-        
-        alert.addAction(confirmAction)
-        alert.addAction(cancelAction)
-        alert.preferredAction = confirmAction
         self.present(alert, animated: true)
         
     }
     @IBAction func MaxTimeTouched(_ sender: Any) {
-        let alert = UIAlertController(title: "Enter Maximum Time", message: "", preferredStyle: .alert)
         
-        alert.addTextField(configurationHandler: { (textField) in
-            textField.placeholder = "Time in seconds"
-            textField.keyboardType = .decimalPad
-        })
-        
-        let confirmAction = UIAlertAction(title: "Enter", style: .default, handler: {
-            (action : UIAlertAction!) -> Void in
-            // Confirming deleted solve
+        let alertService = AlertService()
+        let alert = alertService.alert(keyboardType: 0, myTitle: "Max Time",
+                                       completion: {
             
-            let textField = alert.textFields![0] // Force unwrapping because we know it exists. Let that textfield string storing your time
-            let enteredTime = textField.text!
+            let inputTime = alertService.myVC.TextField.text!
             
-            let temp = SolveTime(enteredTime: enteredTime, scramble: "")
-            let str = temp.myString
-            let intTime = temp.intTime
-            
-            if let _ = Float(enteredTime)
+            if let _ = Float(inputTime)
             {
-                if(intTime < ViewController.mySession.minTime)
-                {
-                    self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
-                    try! self.realm.write
-                    {
-                        ViewController.mySession.minTime = intTime
-                    }
-                }
-                self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
-                try! self.realm.write
-                {
-                    ViewController.mySession.maxTime = intTime
-                }
-                self.updateDistributionLabels()
+               let temp = SolveTime(enteredTime: inputTime, scramble: "")
+               let str = temp.myString
+               let intTime = temp.intTime
+               
+               if(intTime < ViewController.mySession.minTime)
+               {
+                   self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
+                   try! self.realm.write
+                   {
+                       ViewController.mySession.minTime = intTime
+                   }
+               }
+               self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
+               try! self.realm.write
+               {
+                   ViewController.mySession.maxTime = intTime
+               }
+               self.updateDistributionLabels()
             }
             else
             {
@@ -230,44 +203,29 @@ class TargetViewController: UIViewController {
             }
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (action : UIAlertAction!) -> Void in
-            
-        })
-        
-        alert.addAction(confirmAction)
-        alert.addAction(cancelAction)
-        alert.preferredAction = confirmAction
         self.present(alert, animated: true)
     }
     
     @IBAction func SingleTimeTouched(_ sender: Any) {
-        let alert = UIAlertController(title: "Enter Target Time", message: "", preferredStyle: .alert)
         
-        alert.addTextField(configurationHandler: { (textField) in
-            textField.placeholder = "Time in seconds"
-            textField.keyboardType = .decimalPad
-        })
-        
-        let confirmAction = UIAlertAction(title: "Enter", style: .default, handler: {
-            (action : UIAlertAction!) -> Void in
-            // Confirming deleted solve
+        let alertService = AlertService()
+        let alert = alertService.alert(keyboardType: 0, myTitle: "Single Time",
+                                       completion: {
             
-            let textField = alert.textFields![0] // Force unwrapping because we know it exists. Let that textfield string storing your time
-            let enteredTime = textField.text!
+            let inputTime = alertService.myVC.TextField.text!
             
-            let temp = SolveTime(enteredTime: enteredTime, scramble: "")
-            let str = temp.myString
-            let intTime = temp.intTime
-            
-            if let _ = Float(enteredTime)
+            if let _ = Float(inputTime)
             {
-                self.SingleTimeLabel.setTitle(str, for: .normal) // set title to string version
-                try! self.realm.write
-                {
-                    ViewController.mySession.singleTime = intTime
-                }
-                self.updateDistributionLabels()
+               let temp = SolveTime(enteredTime: inputTime, scramble: "")
+               let str = temp.myString
+               let intTime = temp.intTime
+               
+               self.SingleTimeLabel.setTitle(str, for: .normal) // set title to string version
+               try! self.realm.write
+               {
+                   ViewController.mySession.singleTime = intTime
+               }
+               self.updateDistributionLabels()
             }
             else
             {
@@ -275,13 +233,6 @@ class TargetViewController: UIViewController {
             }
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (action : UIAlertAction!) -> Void in
-        })
-        
-        alert.addAction(confirmAction)
-        alert.addAction(cancelAction)
-        alert.preferredAction = confirmAction
         self.present(alert, animated: true)
     }
     

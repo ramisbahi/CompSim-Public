@@ -30,26 +30,12 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let realm = try! Realm()
     
     @IBAction func newSession(_ sender: Any) {
-        let alert = UIAlertController(title: "New Session", message: "", preferredStyle: .alert)
         
-        alert.addTextField(configurationHandler: { (textField) in
-            textField.placeholder = "Name"
-            textField.autocapitalizationType = .words
-        })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (action : UIAlertAction!) -> Void in
-        }
-        )
-        
-        let enterAction = UIAlertAction(title: "Enter", style: .default, handler: {
+        let alertService = AlertService()
+        let alert = alertService.alert(keyboardType: 1, myTitle: "New Session",
+                                       completion: {
             
-            // Everything in here is executed when a time is entered
-            
-            [weak alert] (_) in
-            
-            let textField = alert!.textFields![0] // your time
-            let input = textField.text!
+            let input = alertService.myVC.TextField.text!
             
             let maxCharacters = 20
             
@@ -65,13 +51,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             {
                 self.alertInvalid(alertMessage: "Session name already in use!")
             }
-            
-        }
-        )
-        
-        alert.addAction(cancelAction)
-        alert.addAction(enterAction)
-        alert.preferredAction = enterAction
+        })
         
         self.present(alert, animated: true)
     }
@@ -304,23 +284,10 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     @IBAction func deletePressed(_ sender: Any) {
-        
-        let alert = UIAlertController(title: "Delete \(ViewController.mySession.name) session?", message: "", preferredStyle: .alert)
-        
-        let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
-            (_) in
-            // Confirming deleted solve
+        let alertService = SimpleAlertService()
+        let alert = alertService.alert(myTitle: "Delete \(ViewController.mySession.name) session?", completion: {
             self.deleteSession()
         })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (_) in
-            
-        })
-        
-        alert.addAction(cancelAction)
-        alert.addAction(confirmAction)
-        alert.preferredAction = confirmAction
         
         self.present(alert, animated: true)
     }
@@ -462,7 +429,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func deleteAverage(at index: Int)
     {
-        
         let session = ViewController.mySession
         try! realm.write
         {

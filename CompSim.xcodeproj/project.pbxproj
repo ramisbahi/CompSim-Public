@@ -52,8 +52,13 @@
 		3696537923BA45F8000784D9 /* AddSolveAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */; };
 		3696537B23BA4671000784D9 /* AddSolveAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */; };
 		3696537D23BA5557000784D9 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696537C23BA5557000784D9 /* AlertService.swift */; };
+		3696537F23BA8AEF000784D9 /* SimpleAlertViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3696537E23BA8AEE000784D9 /* SimpleAlertViewController.storyboard */; };
+		3696538123BA8B5C000784D9 /* SimpleAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538023BA8B5C000784D9 /* SimpleAlertViewController.swift */; };
+		3696538323BA8F51000784D9 /* SimpleAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538223BA8F51000784D9 /* SimpleAlertService.swift */; };
+		3696538623BA9B5C000784D9 /* ViewSolveAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3696538523BA9B5C000784D9 /* ViewSolveAlert.storyboard */; };
+		3696538823BA9F46000784D9 /* ViewSolveAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */; };
+		3696538A23BA9F55000784D9 /* ViewSolveAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */; };
 		36A0A4AB23AF676600D41938 /* SolveTimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0A4AA23AF676600D41938 /* SolveTimeList.swift */; };
-		36CDFD3C23B68FAC002C52AD /* SlideRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CDFD3B23B68FAC002C52AD /* SlideRightSegue.swift */; };
 		C79702DB2D2364D767859210 /* Pods_CompSim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A701408881740019BBE202B5 /* Pods_CompSim.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,8 +112,13 @@
 		3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddSolveAlert.storyboard; sourceTree = "<group>"; };
 		3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSolveAlertViewController.swift; sourceTree = "<group>"; };
 		3696537C23BA5557000784D9 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		3696537E23BA8AEE000784D9 /* SimpleAlertViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SimpleAlertViewController.storyboard; sourceTree = "<group>"; };
+		3696538023BA8B5C000784D9 /* SimpleAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlertViewController.swift; sourceTree = "<group>"; };
+		3696538223BA8F51000784D9 /* SimpleAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlertService.swift; sourceTree = "<group>"; };
+		3696538523BA9B5C000784D9 /* ViewSolveAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ViewSolveAlert.storyboard; sourceTree = "<group>"; };
+		3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSolveAlertService.swift; sourceTree = "<group>"; };
+		3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSolveAlertViewController.swift; sourceTree = "<group>"; };
 		36A0A4AA23AF676600D41938 /* SolveTimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveTimeList.swift; sourceTree = "<group>"; };
-		36CDFD3B23B68FAC002C52AD /* SlideRightSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SlideRightSegue.swift; path = CompSim/Controllers/SlideRightSegue.swift; sourceTree = "<group>"; };
 		51B11034A5437C664B7F3657 /* Pods-CompSim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompSim.debug.xcconfig"; path = "Target Support Files/Pods-CompSim/Pods-CompSim.debug.xcconfig"; sourceTree = "<group>"; };
 		A701408881740019BBE202B5 /* Pods_CompSim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompSim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2409226874AB7090A497119 /* Pods-CompSim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompSim.release.xcconfig"; path = "Target Support Files/Pods-CompSim/Pods-CompSim.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,7 +157,6 @@
 		3663DF2E22DD699D006657CF = {
 			isa = PBXGroup;
 			children = (
-				36CDFD3B23B68FAC002C52AD /* SlideRightSegue.swift */,
 				3663DF3922DD699D006657CF /* CompSim */,
 				3663DF3822DD699D006657CF /* Products */,
 				D4BADD2EF749D20246CDFB2A /* Pods */,
@@ -206,10 +215,8 @@
 		3690EABB2316201900CB0B78 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3696538423BA9AD6000784D9 /* AlertViewControllers */,
 				360F108E22E551E500EEBB75 /* TabBarController.swift */,
-				3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */,
-				3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */,
-				3696537C23BA5557000784D9 /* AlertService.swift */,
 				3690EABC2316202100CB0B78 /* ViewControllers */,
 			);
 			path = Controllers;
@@ -247,6 +254,22 @@
 				361231EA22FD08E80044DEF1 /* TwoPhaseScrambler.m */,
 			);
 			path = 3x3Scrambler;
+			sourceTree = "<group>";
+		};
+		3696538423BA9AD6000784D9 /* AlertViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3696537E23BA8AEE000784D9 /* SimpleAlertViewController.storyboard */,
+				3696538023BA8B5C000784D9 /* SimpleAlertViewController.swift */,
+				3696538223BA8F51000784D9 /* SimpleAlertService.swift */,
+				3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */,
+				3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */,
+				3696537C23BA5557000784D9 /* AlertService.swift */,
+				3696538523BA9B5C000784D9 /* ViewSolveAlert.storyboard */,
+				3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */,
+				3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */,
+			);
+			path = AlertViewControllers;
 			sourceTree = "<group>";
 		};
 		D4BADD2EF749D20246CDFB2A /* Pods */ = {
@@ -329,7 +352,9 @@
 			files = (
 				3696537923BA45F8000784D9 /* AddSolveAlert.storyboard in Resources */,
 				3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */,
+				3696537F23BA8AEF000784D9 /* SimpleAlertViewController.storyboard in Resources */,
 				3663DF4222DD699E006657CF /* Assets.xcassets in Resources */,
+				3696538623BA9B5C000784D9 /* ViewSolveAlert.storyboard in Resources */,
 				3663DF4022DD699D006657CF /* Main.storyboard in Resources */,
 				3669CEC2238B13A900F1D002 /* scrambles.txt in Resources */,
 			);
@@ -389,16 +414,18 @@
 				3634822823A0615F009A14C7 /* SolveTime.swift in Sources */,
 				3690EAE62316293200CB0B78 /* ScrambleReader.swift in Sources */,
 				3690EAE72316293200CB0B78 /* AverageDetailViewController.swift in Sources */,
+				3696538123BA8B5C000784D9 /* SimpleAlertViewController.swift in Sources */,
 				3690EAE82316293200CB0B78 /* SettingsViewController.swift in Sources */,
+				3696538823BA9F46000784D9 /* ViewSolveAlertService.swift in Sources */,
 				3690EAE92316293200CB0B78 /* ResultViewController.swift in Sources */,
 				3690EAEA2316293200CB0B78 /* TargetViewController.swift in Sources */,
 				3690EAEB2316293200CB0B78 /* StatsViewController.swift in Sources */,
-				36CDFD3C23B68FAC002C52AD /* SlideRightSegue.swift in Sources */,
 				3690EAEC2316293200CB0B78 /* ViewController.swift in Sources */,
 				3690EAEE2316293200CB0B78 /* TwoByTwoSolver.swift in Sources */,
 				3690EAEF2316293200CB0B78 /* Clock.m in Sources */,
 				3690EB0823162AF800CB0B78 /* AppDelegate.swift in Sources */,
 				36A0A4AB23AF676600D41938 /* SolveTimeList.swift in Sources */,
+				3696538323BA8F51000784D9 /* SimpleAlertService.swift in Sources */,
 				3690EAF02316293200CB0B78 /* Clock.h in Sources */,
 				3696537D23BA5557000784D9 /* AlertService.swift in Sources */,
 				3690EAF12316293200CB0B78 /* Megaminx.h in Sources */,
@@ -415,6 +442,7 @@
 				3690EAFC2316293200CB0B78 /* Util.m in Sources */,
 				3690EAFD2316293200CB0B78 /* Im.m in Sources */,
 				3690EAFE2316293200CB0B78 /* Im.h in Sources */,
+				3696538A23BA9F55000784D9 /* ViewSolveAlertViewController.swift in Sources */,
 				3690EAFF2316293200CB0B78 /* CubieCube.h in Sources */,
 				36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */,
 				3634822A23A06653009A14C7 /* Session.swift in Sources */,

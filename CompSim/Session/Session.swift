@@ -178,6 +178,13 @@ class Session: Object
             }
             intTotal = times[minIndex].intTime
         }
+        else // avg5, but not min/max yet
+        {
+            for i in 0..<currentIndex
+            {
+                times[i].updateString(minMax: false)
+            }
+        }
     }
     
     func finishAverage() // give int total

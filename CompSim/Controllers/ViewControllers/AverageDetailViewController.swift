@@ -82,12 +82,16 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let time = tableView.cellForRow(at: indexPath)?.textLabel?.text
-        let scramble = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text
+        
         tableView.cellForRow(at: indexPath)?.isSelected = false
-        let alert = UIAlertController(title: time, message: scramble, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let myTitle = tableView.cellForRow(at: indexPath)?.textLabel?.text
+        let myScramble = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text
+        
+        let alertService = ViewSolveAlertService()
+        let alert = alertService.alert(usingPenalty: false, title: myTitle!, scramble: myScramble!, penalty: 0, completion:
+        {})
+        
+        self.present(alert, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool)

@@ -107,7 +107,7 @@ class SettingsViewController: UIViewController {
     {
         if #available(iOS 13.0, *) {
             let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-            statusBar.backgroundColor = ViewController.darkMode ?  UIColor.init(red: 29/250, green: 29/250, blue: 29/250, alpha: 1) : .white
+            statusBar.backgroundColor = ViewController.darkMode ?  ViewController.darkModeColor() : .white
              view.addSubview(statusBar)
         }
     }

@@ -33,8 +33,6 @@ class ViewController: UIViewController {
     
     @IBOutlet var TimesCollection: [UIButton]!
     
-    @IBOutlet weak var BackgroundImage: UIImageView!
-    
     @IBOutlet weak var ScrambleLabel: UILabel!
     @IBOutlet weak var SwipeUpLabel: UILabel!
     @IBOutlet weak var SwipeDownLabel: UILabel!
@@ -43,6 +41,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var TimerLabel: UILabel!
     // (roundNumber - 1) * 5 + currentIndex = total solve index (starts at 0)
+    
+    @IBOutlet var BigView: UIView!
     
     var labels = [UIButton]()
     
@@ -97,7 +97,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.\
         print("viewcontroller did load")
         
-        
+        tabBarController?.tabBar.isHidden = false
         
         
         if(ViewController.justOpened && hasSetSettings())
@@ -271,8 +271,6 @@ class ViewController: UIViewController {
         //TODO: show everything that should show
     }
     
-    
-    
     func cancelTimer()
     {
         print("cancelling")
@@ -302,23 +300,10 @@ class ViewController: UIViewController {
     
     @objc func respondToTwoFingerDoubleTap(gesture: UITapGestureRecognizer)
     {
-        let alert = UIAlertController(title: "Reset average?", message: "", preferredStyle: .alert)
-        
-        let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
-            _ in
-            // Confirming deleted solve
+        let alertService = SimpleAlertService()
+        let alert = alertService.alert(myTitle: "Reset Average?", completion: {
             self.reset()
         })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            _ in
-            
-        })
-        
-        alert.addAction(cancelAction)
-        alert.addAction(confirmAction)
-        alert.preferredAction = confirmAction
-        
         self.present(alert, animated: true)
     }
     
@@ -351,8 +336,6 @@ class ViewController: UIViewController {
         // ask again - no input
     }
     
-    
-    
     @objc func respondToGesture(gesture: UIGestureRecognizer) {
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer
@@ -379,11 +362,10 @@ class ViewController: UIViewController {
     
     func deleteSolve()
     {
-        let alert = UIAlertController(title: "Delete last solve?", message: "", preferredStyle: .alert)
-        
-        let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
-            _ in
-            // Confirming deleted solve
+        let alertService = SimpleAlertService()
+        let alert = alertService.alert(myTitle: "Delete Last Solve?",
+                                       completion: {
+            
             try! self.realm.write
             {
                 ViewController.mySession.deleteSolve()
@@ -393,30 +375,22 @@ class ViewController: UIViewController {
             self.labels[ViewController.mySession.currentIndex].isHidden = true
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            _ in
-            
-        })
-        
-        alert.addAction(cancelAction)
-        alert.addAction(confirmAction)
-        alert.preferredAction = confirmAction
-        
         self.present(alert, animated: true)
     }
-    
-    
     
     func addSolve()
     {
         let alertService = AlertService()
-        let alert = alertService.alert(completion: {
+        let alert = alertService.alert(keyboardType: 0, myTitle: "Add Solve",
+                                       completion: {
             
             let inputTime = alertService.myVC.TextField.text!
+            let penalties = [2, 0, 1] // adjust for index
+            let inputPenalty = penalties[alertService.myVC.PenaltySelector.selectedSegmentIndex]
             
-            if(inputTime.countInstances(of: ".") <= 1 && inputTime.last != "." && inputTime.count > 0)
+            if let _ = Float(inputTime)
             {
-                self.updateTimes(enteredTime: inputTime) // add time, show label, change parentheses
+                self.updateTimes(enteredTime: inputTime, penalty: inputPenalty) // add time, show label, change parentheses
             }
             else
             {
@@ -425,50 +399,6 @@ class ViewController: UIViewController {
         })
         
         self.present(alert, animated: true)
-        
-        /*
-        let alert = UIAlertController(title: "Add Solve", message: "", preferredStyle: .alert)
-        
-        alert.addTextField(configurationHandler: { (textField) in
-            textField.placeholder = "Time in seconds"
-            textField.keyboardType = .decimalPad
-        })
-        
-        
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (action : UIAlertAction!) -> Void in
-        }
-        )
-        
-        let enterAction = UIAlertAction(title: "Enter", style: .default, handler: {
-            
-            // Everything in here is executed when a time is entered
-            
-            [weak alert] (_) in
-            
-            let textField = alert!.textFields![0] // your time
-            let inputTime = textField.text!
-            
-            if(inputTime.countInstances(of: ".") <= 1 && inputTime.last != "." && inputTime.count > 0)
-            {
-                self.updateTimes(enteredTime: inputTime) // add time, show label, change parentheses
-            }
-            else
-            {
-                self.alertValidTime(alertMessage: "Please enter valid time")
-            }
-            
-        }
-        )
-        
-        
-        
-        alert.addAction(cancelAction)
-        alert.addAction(enterAction)
-        alert.preferredAction = enterAction
-        
-        self.present(alert, animated: true)*/
     }
     
     // double is entered, converted to int for hundredth precision (i.e. 4.0 will become 400 now)
@@ -542,6 +472,7 @@ class ViewController: UIViewController {
         SwipeUpLabel.text = ""
         SubmitButton.isHidden = false
         ScrambleLabel.text = ""
+        tabBarController?.tabBar.isHidden = true
     }
     
     @IBAction func Time1Touched(_ sender: Any) {
@@ -567,56 +498,29 @@ class ViewController: UIViewController {
     
     func showScramble(num: Int)
     {
-        let myText = self.labels[num].titleLabel!.text
+        let myTitle = self.labels[num].titleLabel!.text
+        let myScramble = ViewController.mySession.times[num].myScramble
+        let myPenalty = ViewController.mySession.times[num].penalty
         
-        /*
-        for scramble in ViewController.mySession.scrambler.scrambles
+        let alertService = ViewSolveAlertService()
+        let alert = alertService.alert(usingPenalty: true, title: myTitle!, scramble: myScramble, penalty: myPenalty, completion:
         {
-            print(scramble)
-        }*/
-        let alert = UIAlertController(title: myText, message: ViewController.mySession.times[num].myScramble, preferredStyle: .alert)
-        
-        let noPenaltyAction = UIAlertAction(title: "No Penalty", style: .default, handler: {
-            _ in
-            // Confirming deleted solve
+            
+            let penalties = [2, 0, 1] // adjust for index
+            let inputPenalty = penalties[alertService.myVC.PenaltySelector.selectedSegmentIndex]
             try! self.realm.write
             {
-                ViewController.mySession.changePenaltyStatus(index: num, penalty: 0)
+                ViewController.mySession.changePenaltyStatus(index: num, penalty: inputPenalty)
             }
             self.updateLabels()
         })
         
-        let plusTwoAction = UIAlertAction(title: "+2", style: .default, handler: {
-            _ in
-            // Confirming deleted solve
-            try! self.realm.write
-            {
-                ViewController.mySession.changePenaltyStatus(index: num, penalty: 1)
-            }
-            self.updateLabels()
-        })
-        
-        let DNFAction = UIAlertAction(title: "DNF", style: .default, handler: {
-            _ in
-            // Confirming deleted solve
-            try! self.realm.write
-            {
-                ViewController.mySession.changePenaltyStatus(index: num, penalty: 2)
-            }
-            self.updateLabels()
-        })
-
-        
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
-        alert.addAction(noPenaltyAction)
-        alert.addAction(plusTwoAction)
-        alert.addAction(DNFAction)
-        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true)
     }
     
     func makeDarkMode()
     {
-        BackgroundImage.isHidden = false
+        BigView.backgroundColor = ViewController.darkModeColor()
         ScrambleLabel.textColor? = UIColor.white
         SwipeUpLabel.textColor? = UIColor.white
         SwipeDownLabel.textColor? = UIColor.white
@@ -629,7 +533,7 @@ class ViewController: UIViewController {
     
     func turnOffDarkMode()
     {
-        BackgroundImage.isHidden = true
+        BigView.backgroundColor = .white
         ScrambleLabel.textColor = UIColor.black
         SwipeUpLabel.textColor = UIColor.black
         SwipeDownLabel.textColor = UIColor.black
@@ -681,6 +585,11 @@ class ViewController: UIViewController {
     static func greenColor() -> UIColor
     {
         return UIColor.init(displayP3Red: 0/255, green: 175/255, blue: 0/255, alpha: 1)
+    }
+    
+    static func darkModeColor() -> UIColor
+    {
+        return UIColor.init(red: 29/250, green: 29/250, blue: 29/250, alpha: 1)
     }
     
     
