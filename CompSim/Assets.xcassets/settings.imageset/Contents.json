@@ -2,10 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "settings1-18.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "cubers3-17.png",
       "scale" : "2x"
     },
     {

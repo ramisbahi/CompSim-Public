@@ -389,17 +389,6 @@ static const int APPEND_LENGTH = 0x4;
  *         solution in less than 0.02 seconds on average. With a maxDepth of 20 it takes about 0.1 seconds on average to find a
  *         solution, but it may take much longer for specific cubes.
  *
- * @param timeOut
- *         defines the maximum computing time of the method in milliseconds. If it does not return with a solution, it returns with
- *         an error code.
- *
- * @param timeMin
- *         defines the minimum computing time of the method in milliseconds. So, if a solution is found within given time, the
- *         computing will continue to find shorter solution(s). Btw, if timeMin > timeOut, timeMin will be set to timeOut.
- *
- * @param verbose
- *         determins the format of the solution(s). see USE_SEPARATOR, INVERSE_SOLUTION, APPEND_LENGTH
- *
  * @return The solution string or an error code:<br>
  *         Error 1: There is not exactly one facelet of each colour<br>
  *         Error 2: Not all 12 edges exist exactly once<br>

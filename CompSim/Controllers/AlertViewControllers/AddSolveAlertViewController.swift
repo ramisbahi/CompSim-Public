@@ -13,11 +13,14 @@ class AddSolveAlertViewController: UIViewController {
     var enterAction: (() -> Void)?
     var myTitle = String()
     var keyboardType = 0 // keyboard: 0 = decimal, 1 = text
+    var usingPenalty: Bool = true
+    var placeholder = String()
     
     @IBOutlet weak var TextField: UITextField!
     @IBOutlet weak var EnterButton: UIButton!
     @IBOutlet weak var AddSolveView: UIView!
     @IBOutlet weak var PenaltySelector: UISegmentedControl!
+    @IBOutlet weak var PenaltyConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var AddSolveTitle: UILabel!
     @IBOutlet weak var AlertView: UIView!
@@ -38,6 +41,15 @@ class AddSolveAlertViewController: UIViewController {
         {
             TextField.keyboardType = .default
         }
+        
+        if(!usingPenalty)
+        {
+            PenaltySelector.isHidden = true
+            PenaltyConstraint.isActive = false
+            EnterButton.topAnchor.constraint(equalTo: TextField.bottomAnchor, constant: 10).isActive = true
+        }
+        
+        TextField.placeholder = placeholder
 
         // Do any additional setup after loading the view.
     }

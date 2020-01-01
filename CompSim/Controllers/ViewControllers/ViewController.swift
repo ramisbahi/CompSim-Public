@@ -44,6 +44,8 @@ class ViewController: UIViewController {
     
     @IBOutlet var BigView: UIView!
     
+    @IBOutlet weak var Logo: UIImageView!
+    
     var labels = [UIButton]()
     
     // settings stuff
@@ -69,6 +71,8 @@ class ViewController: UIViewController {
     
     static var justOpened = true
     static var sessionChanged = false
+    
+    static var inspectionSound = true
     
     let IDLE = 0
     let FROZEN = 2
@@ -381,7 +385,7 @@ class ViewController: UIViewController {
     func addSolve()
     {
         let alertService = AlertService()
-        let alert = alertService.alert(keyboardType: 0, myTitle: "Add Solve",
+        let alert = alertService.alert(placeholder: "Time", usingPenalty: true, keyboardType: 0, myTitle: "Add Solve",
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!
@@ -472,6 +476,7 @@ class ViewController: UIViewController {
         SwipeUpLabel.text = ""
         SubmitButton.isHidden = false
         ScrambleLabel.text = ""
+        Logo.isHidden = false
         tabBarController?.tabBar.isHidden = true
     }
     

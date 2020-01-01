@@ -38,6 +38,8 @@ class ResultViewController: UIViewController {
     
     var labels = [UIButton]()
     
+    var audioPlayer = AVAudioPlayer()
+    
     // Additional setup after loading the view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -231,8 +233,60 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
 
-        // Do any additional setup after loading the view.
+        BackgroundImage.addGestureRecognizer(tapGesture)
+        BackgroundImage.isUserInteractionEnabled = true
+    }
+    
+    @objc func imageTapped()
+    {
+        print("image tapped")
+        do {
+           try AVAudioSession.sharedInstance().setCategory(.playback)
+        } catch(let error) {
+            print(error.localizedDescription)
+        }
+        if(ViewController.mySession.results.last!) // win
+        {
+            winningSound()
+        }
+        else
+        {
+            losingSound()
+        }
+    }
+    
+    func winningSound()
+    {
+        let pathToSound = Bundle.main.path(forResource: "cheer", ofType: "m4a")
+        let url = URL(fileURLWithPath: pathToSound!)
+        print(url)
+        
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer.play()
+        }
+        catch{
+            print("failed to play winning sound")
+        }
+    }
+    
+    func losingSound()
+    {
+        let pathToSound = Bundle.main.path(forResource: "Sad_Trombone", ofType: "mp3")
+        let url = URL(fileURLWithPath: pathToSound!)
+        print(url)
+        
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer.play()
+        }
+        catch{
+            print("failed to play losing sound")
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle

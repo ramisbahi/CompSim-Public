@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GameKit
 import RealmSwift
 
 class TimerViewController: UIViewController {
@@ -29,6 +30,8 @@ class TimerViewController: UIViewController {
     
     static var resultTime: Float = 0.00
     static var penalty = 0
+    
+    var audioPlayer = AVAudioPlayer()
     
     @IBOutlet weak var PenaltySelector: UISegmentedControl!
     @IBOutlet weak var SubmitButton: UIButton!
@@ -126,6 +129,17 @@ class TimerViewController: UIViewController {
                 if(inspectionTime > 0) // stops at 0
                 {
                     self.TimerLabel.text = String(inspectionTime)
+                    if(ViewController.inspectionSound)
+                    {
+                        if(inspectionTime == 7)
+                        {
+                            self.eightSecSound()
+                        }
+                        else if(inspectionTime == 3)
+                        {
+                            self.twelveSecSound()
+                        }
+                    }
                 }
                 else if(inspectionTime > -2)
                 {
@@ -144,6 +158,46 @@ class TimerViewController: UIViewController {
                 return
             }
         })
+    }
+    
+    func eightSecSound()
+    {
+        do {
+           try AVAudioSession.sharedInstance().setCategory(.playback)
+        } catch(let error) {
+            print(error.localizedDescription)
+        }
+        let pathToSound = Bundle.main.path(forResource: "8seconds", ofType: "mp3")
+        let url = URL(fileURLWithPath: pathToSound!)
+        
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer.play()
+        }
+        catch{
+            print("failed to play eight sec sound")
+        }
+    }
+    
+    func twelveSecSound()
+    {
+        do {
+           try AVAudioSession.sharedInstance().setCategory(.playback)
+        } catch(let error) {
+            print(error.localizedDescription)
+        }
+        let pathToSound = Bundle.main.path(forResource: "12seconds", ofType: "mp3")
+        let url = URL(fileURLWithPath: pathToSound!)
+        
+        do
+        {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer.play()
+        }
+        catch{
+            print("failed to play twelve sec sound")
+        }
     }
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer) // time has been done

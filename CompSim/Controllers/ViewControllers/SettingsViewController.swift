@@ -38,6 +38,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var CuberButton: UIButton!
     @IBOutlet weak var ScrambleTypeButton: UIButton!
     
+    @IBOutlet weak var InspectionVoiceAlertsControl: UISegmentedControl!
     @IBOutlet weak var TimerUpdateControl: UISegmentedControl!
     
     let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Antoine" : "Antoine Cantin", "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park"]
@@ -63,16 +64,34 @@ class SettingsViewController: UIViewController {
         {
             ViewController.timing = false
             InspectionControl.isEnabled = false
+            InspectionVoiceAlertsControl.isEnabled = false
         }
         else
         {
             ViewController.timing = true
             InspectionControl.isEnabled = true
+            if(ViewController.inspection)
+            {
+                InspectionVoiceAlertsControl.isEnabled = true
+            }
         }
     }
     
     @IBAction func InspectionChanged(_ sender: Any) {
-        ViewController.inspection = !ViewController.inspection
+        if(ViewController.inspection)
+        {
+            ViewController.inspection = false
+            InspectionVoiceAlertsControl.isEnabled = false
+        }
+        else
+        {
+            ViewController.inspection = true
+            InspectionVoiceAlertsControl.isEnabled = true
+        }
+    }
+    
+    @IBAction func InspectionVoiceAlertsChanged(_ sender: Any) {
+        ViewController.inspectionSound = !ViewController.inspectionSound
     }
     
     func makeDarkMode()
@@ -88,7 +107,7 @@ class SettingsViewController: UIViewController {
         }
         
         
-        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl]
+        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
         {
             control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         }
@@ -124,7 +143,7 @@ class SettingsViewController: UIViewController {
             label.backgroundColor = ViewController.darkBlueColor()
         }
         
-        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl]
+        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
         {
             control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         }
@@ -195,6 +214,10 @@ class SettingsViewController: UIViewController {
             InspectionControl.isEnabled = false
         }
         
+        if(!(ViewController.timing && ViewController.inspection))
+        {
+            InspectionVoiceAlertsControl.isEnabled = false
+        }
         
         if(ViewController.inspection)
         {
@@ -203,6 +226,15 @@ class SettingsViewController: UIViewController {
         else
         {
             InspectionControl.selectedSegmentIndex = 1
+        }
+        
+        if(ViewController.inspectionSound)
+        {
+            InspectionVoiceAlertsControl.selectedSegmentIndex = 0
+        }
+        else
+        {
+            InspectionVoiceAlertsControl.selectedSegmentIndex = 1
         }
         
         CuberButton.setTitle("Cuber: \(cuberDictionary[ViewController.cuber]!)", for: .normal)

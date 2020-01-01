@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,17 +12,17 @@
             <objects>
                 <viewController storyboardIdentifier="SimpleAlertVC" id="E4s-TQ-qd6" customClass="SimpleAlertViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K6Y-9M-5Kf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLA-Qw-t8w">
-                                <rect key="frame" x="69.5" y="318" width="275" height="120"/>
+                                <rect key="frame" x="246.5" y="382" width="275" height="120"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWs-hZ-csw">
                                         <rect key="frame" x="0.0" y="0.0" width="275" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Solve?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRg-Dx-7xP">
-                                                <rect key="frame" x="5" y="8" width="265" height="39"/>
+                                                <rect key="frame" x="10" y="8" width="255" height="39"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -32,8 +32,8 @@
                                         <constraints>
                                             <constraint firstItem="GRg-Dx-7xP" firstAttribute="centerX" secondItem="UWs-hZ-csw" secondAttribute="centerX" id="9qv-MD-gDt"/>
                                             <constraint firstItem="GRg-Dx-7xP" firstAttribute="centerY" secondItem="UWs-hZ-csw" secondAttribute="centerY" id="NhY-So-oPp"/>
-                                            <constraint firstAttribute="trailing" secondItem="GRg-Dx-7xP" secondAttribute="trailing" constant="5" id="UPS-qo-o5W"/>
-                                            <constraint firstItem="GRg-Dx-7xP" firstAttribute="leading" secondItem="UWs-hZ-csw" secondAttribute="leading" constant="5" id="gk4-jP-40I"/>
+                                            <constraint firstAttribute="trailing" secondItem="GRg-Dx-7xP" secondAttribute="trailing" constant="10" id="UPS-qo-o5W"/>
+                                            <constraint firstItem="GRg-Dx-7xP" firstAttribute="leading" secondItem="UWs-hZ-csw" secondAttribute="leading" constant="10" id="gk4-jP-40I"/>
                                             <constraint firstAttribute="height" constant="55" id="wfv-bo-yO8"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>

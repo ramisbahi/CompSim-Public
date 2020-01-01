@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "CroppedGaussianCurve.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "output-onlinepngtools (2).png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "CroppedGaussianCurve.png",
+      "filename" : "output-onlinepngtools (3).png",
       "scale" : "3x"
     }
   ],

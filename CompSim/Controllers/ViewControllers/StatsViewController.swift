@@ -32,7 +32,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func newSession(_ sender: Any) {
         
         let alertService = AlertService()
-        let alert = alertService.alert(keyboardType: 1, myTitle: "New Session",
+        let alert = alertService.alert(placeholder: "Name", usingPenalty: false, keyboardType: 1, myTitle: "New Session",
                                        completion: {
             
             let input = alertService.myVC.TextField.text!
@@ -235,29 +235,12 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc func rename(sender: UIButton) {
         
-        let alert = UIAlertController(title: "Rename Session", message: "", preferredStyle: .alert)
-        
-        alert.addTextField(configurationHandler: { (textField) in
-            textField.placeholder = "Name"
-            textField.autocapitalizationType = .words
-        })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (action : UIAlertAction!) -> Void in
-        }
-        )
-        
-        let enterAction = UIAlertAction(title: "Enter", style: .default, handler: {
+        let alertService = AlertService()
+        let alert = alertService.alert(placeholder: "Name", usingPenalty: false, keyboardType: 1, myTitle: "Rename Session",
+                                       completion: {
             
-            // Everything in here is executed when a time is entered
-            
-            [weak alert] (_) in
-            
-            let textField = alert!.textFields![0] // your time
-            let input = textField.text!
-            
+            let input = alertService.myVC.TextField.text!
             let maxCharacters = 20
-            
             if(input.count < maxCharacters && ViewController.allSessions[input] == nil) // creating new session
             {
                 self.replaceSession(oldName: self.SessionButton.titleLabel?.text! ?? "", newName: input)
@@ -270,13 +253,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             {
                 self.alertInvalid(alertMessage: "Session name already in use!")
             }
-            
-        }
-        )
-        
-        alert.addAction(cancelAction)
-        alert.addAction(enterAction)
-        alert.preferredAction = enterAction
+        })
         
         self.present(alert, animated: true)
     }
@@ -348,7 +325,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
         
         cell.textLabel?.text = ViewController.mySession.allAverages[currentIndex] // set to average
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
+        cell.textLabel?.font = UIFont(name: "Futura", size: 20)
         
         
         if(ViewController.darkMode)
@@ -383,7 +360,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         timeList.append(ViewController.mySession.allTimes[currentIndex].list[numSolves-1].myString)
         
         cell.detailTextLabel?.text = timeList
-        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)
+        cell.detailTextLabel?.font = UIFont(name: "Futura", size: 14)
         
         if(indexPath.row % 2 == 1 && !ViewController.darkMode) // make gray for every other cell
         {

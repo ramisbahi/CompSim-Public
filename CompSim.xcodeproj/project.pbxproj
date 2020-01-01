@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360BC94C23BBE64C00EE8324 /* cheer.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94B23BBE64C00EE8324 /* cheer.m4a */; };
+		360BC95023BBE70B00EE8324 /* Sad_Trombone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94F23BBE70B00EE8324 /* Sad_Trombone.mp3 */; };
 		36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36348225239C6E82009A14C7 /* TimerViewController.swift */; };
 		3634822823A0615F009A14C7 /* SolveTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822723A0615F009A14C7 /* SolveTime.swift */; };
 		3634822A23A06653009A14C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822923A06653009A14C7 /* Session.swift */; };
+		3654A84223BC02280066A48F /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3654A84123BC02280066A48F /* LogoViewController.swift */; };
+		3654A84523BC09610066A48F /* 8seconds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3654A84323BC09610066A48F /* 8seconds.mp3 */; };
+		3654A84623BC09610066A48F /* 12seconds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3654A84423BC09610066A48F /* 12seconds.mp3 */; };
 		3663DF4022DD699D006657CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF3E22DD699D006657CF /* Main.storyboard */; };
 		3663DF4222DD699E006657CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4122DD699E006657CF /* Assets.xcassets */; };
 		3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4322DD699E006657CF /* LaunchScreen.storyboard */; };
@@ -63,6 +68,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		360BC94B23BBE64C00EE8324 /* cheer.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = cheer.m4a; sourceTree = "<group>"; };
+		360BC94F23BBE70B00EE8324 /* Sad_Trombone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sad_Trombone.mp3; sourceTree = "<group>"; };
 		360F108E22E551E500EEBB75 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		361231E022FD06A10044DEF1 /* CoordCube.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoordCube.m; sourceTree = "<group>"; };
 		361231E222FD075B0044DEF1 /* CoordCube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoordCube.h; sourceTree = "<group>"; };
@@ -98,6 +105,9 @@
 		3634822723A0615F009A14C7 /* SolveTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SolveTime.swift; path = CompSim/Session/SolveTime.swift; sourceTree = SOURCE_ROOT; };
 		3634822923A06653009A14C7 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoByTwoSolver.swift; sourceTree = "<group>"; };
+		3654A84123BC02280066A48F /* LogoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogoViewController.swift; path = Controllers/ViewControllers/LogoViewController.swift; sourceTree = "<group>"; };
+		3654A84323BC09610066A48F /* 8seconds.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 8seconds.mp3; sourceTree = "<group>"; };
+		3654A84423BC09610066A48F /* 12seconds.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 12seconds.mp3; sourceTree = "<group>"; };
 		3663DF3722DD699D006657CF /* CompSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3663DF3A22DD699D006657CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3663DF3F22DD699D006657CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -144,6 +154,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		360BC94623BBE56D00EE8324 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				360BC94B23BBE64C00EE8324 /* cheer.m4a */,
+				360BC94F23BBE70B00EE8324 /* Sad_Trombone.mp3 */,
+				3654A84323BC09610066A48F /* 8seconds.mp3 */,
+				3654A84423BC09610066A48F /* 12seconds.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		363B3A9923AAA2CE00000286 /* Session */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +196,7 @@
 		3663DF3922DD699D006657CF /* CompSim */ = {
 			isa = PBXGroup;
 			children = (
+				360BC94623BBE56D00EE8324 /* Sounds */,
 				363B3A9923AAA2CE00000286 /* Session */,
 				3690EAC0231623E300CB0B78 /* CompSim.entitlements */,
 				3690EABB2316201900CB0B78 /* Controllers */,
@@ -183,6 +205,7 @@
 				3663DF3A22DD699D006657CF /* AppDelegate.swift */,
 				361231F022FD0B4E0044DEF1 /* CompSim-Bridging-Header.h */,
 				3663DF4122DD699E006657CF /* Assets.xcassets */,
+				3654A84123BC02280066A48F /* LogoViewController.swift */,
 				3663DF4322DD699E006657CF /* LaunchScreen.storyboard */,
 				3663DF4622DD699E006657CF /* Info.plist */,
 			);
@@ -350,6 +373,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360BC94C23BBE64C00EE8324 /* cheer.m4a in Resources */,
+				360BC95023BBE70B00EE8324 /* Sad_Trombone.mp3 in Resources */,
 				3696537923BA45F8000784D9 /* AddSolveAlert.storyboard in Resources */,
 				3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */,
 				3696537F23BA8AEF000784D9 /* SimpleAlertViewController.storyboard in Resources */,
@@ -357,6 +382,8 @@
 				3696538623BA9B5C000784D9 /* ViewSolveAlert.storyboard in Resources */,
 				3663DF4022DD699D006657CF /* Main.storyboard in Resources */,
 				3669CEC2238B13A900F1D002 /* scrambles.txt in Resources */,
+				3654A84623BC09610066A48F /* 12seconds.mp3 in Resources */,
+				3654A84523BC09610066A48F /* 8seconds.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +463,7 @@
 				3690EAF62316293200CB0B78 /* Skewb.m in Sources */,
 				3690EAF72316293200CB0B78 /* Pyraminx.h in Sources */,
 				3690EAF82316293200CB0B78 /* Pyraminx.m in Sources */,
+				3654A84223BC02280066A48F /* LogoViewController.swift in Sources */,
 				3690EAF92316293200CB0B78 /* BigCubeScrambler.m in Sources */,
 				3690EAFA2316293200CB0B78 /* BigCubeScrambler.h in Sources */,
 				3690EAFB2316293200CB0B78 /* Util.h in Sources */,

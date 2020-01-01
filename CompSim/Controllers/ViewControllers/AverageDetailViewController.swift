@@ -58,7 +58,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         let currentTime = ViewController.mySession.allTimes[StatsViewController.myIndex].list[indexPath.row]
         
         myCell.textLabel?.text = currentTime.myString // each time
-        myCell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
+        myCell.textLabel?.font = UIFont.init(name: "Futura", size: 17.0)
         
         myCell.detailTextLabel?.text = currentTime.myScramble // each scramble
         myCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 12.0)

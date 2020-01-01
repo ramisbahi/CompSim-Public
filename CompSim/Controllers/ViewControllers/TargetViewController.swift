@@ -133,7 +133,7 @@ class TargetViewController: UIViewController {
     @IBAction func MinTimeTouched(_ sender: Any) {
         
         let alertService = AlertService()
-        let alert = alertService.alert(keyboardType: 0, myTitle: "Min Time",
+        let alert = alertService.alert(placeholder: "Time", usingPenalty: false, keyboardType: 0, myTitle: "Min Time",
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!
@@ -171,7 +171,7 @@ class TargetViewController: UIViewController {
     @IBAction func MaxTimeTouched(_ sender: Any) {
         
         let alertService = AlertService()
-        let alert = alertService.alert(keyboardType: 0, myTitle: "Max Time",
+        let alert = alertService.alert(placeholder: "Time", usingPenalty: false, keyboardType: 0, myTitle: "Max Time",
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!
@@ -209,7 +209,7 @@ class TargetViewController: UIViewController {
     @IBAction func SingleTimeTouched(_ sender: Any) {
         
         let alertService = AlertService()
-        let alert = alertService.alert(keyboardType: 0, myTitle: "Single Time",
+        let alert = alertService.alert(placeholder: "Time", usingPenalty: false, keyboardType: 0, myTitle: "Single Time",
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!
@@ -248,21 +248,24 @@ class TargetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SingleTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
+        MinTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
+        MaxTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
         // Do any additional setup after loading the view.
     }
     
     func updateDistributionLabels()
     {
-        let min: Double = Double(ViewController.mySession.minTime) / 100.0
-        let max: Double = Double(ViewController.mySession.maxTime) / 100.0
-        Dist1.text = timeToThous(time: min)
-        Dist7.text = timeToThous(time: max)
-        let std: Double = (max - min) / 6.0
-        Dist2.text = timeToThous(time: min + std)
-        Dist3.text = timeToThous(time: min + 2*std)
-        Dist4.text = timeToThous(time: min + 3*std)
-        Dist5.text = timeToThous(time: min + 4*std)
-        Dist6.text = timeToThous(time: min + 5*std) 
+        let min = ViewController.mySession.minTime
+        let max = ViewController.mySession.maxTime
+        Dist1.text = SolveTime.makeMyString(num: min)
+        Dist7.text = SolveTime.makeMyString(num: max)
+        let std: Float = Float(max - min) / 6.0
+        Dist2.text = SolveTime.makeMyString(num: Int(round(Float(min) + std)))
+        Dist3.text = SolveTime.makeMyString(num: Int(round(Float(min) + 2*std)))
+        Dist4.text = SolveTime.makeMyString(num: Int(round(Float(min) + 3*std)))
+        Dist5.text = SolveTime.makeMyString(num: Int(round(Float(min) + 4*std)))
+        Dist6.text = SolveTime.makeMyString(num: Int(round(Float(min) + 5*std)))
     }
     
     // time is hundredths (i.e. 249 for 2.49)
