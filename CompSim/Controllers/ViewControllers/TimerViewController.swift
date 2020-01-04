@@ -32,6 +32,7 @@ class TimerViewController: UIViewController {
     static var penalty = 0
     
     var audioPlayer = AVAudioPlayer()
+    @IBOutlet var BigView: UIView!
     
     @IBOutlet weak var PenaltySelector: UISegmentedControl!
     @IBOutlet weak var SubmitButton: UIButton!
@@ -54,7 +55,11 @@ class TimerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        TimerLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
+        SubmitButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
+        PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: ViewController.fontToFitHeight(view: BigView, multiplier: 0.025, name: "Futura")], for: .normal)
+        
         if(ViewController.inspection)
         {
             self.gestureSetup()
@@ -72,7 +77,7 @@ class TimerViewController: UIViewController {
         TimerLabel.textColor = .white
         SubmitButton.backgroundColor = .darkGray
         CancelButton.backgroundColor = .darkGray
-        PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        //PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal) - later make white\
     }
     
     func gestureSetup()

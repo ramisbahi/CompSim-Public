@@ -15,7 +15,7 @@ class Session: Object
     
     @objc dynamic var name: String = ""
     @objc dynamic var minTime = 500 // distribution
-    @objc dynamic var maxTime = 1000 // distribution
+    @objc dynamic var maxTime = 900 // distribution
     @objc dynamic var singleTime = 750 // single time
     @objc dynamic var targetType = 2 // 0 = none, 1 = single, 2 = range
     

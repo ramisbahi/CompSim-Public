@@ -24,6 +24,7 @@ extension String {
 }
 
 class ViewController: UIViewController {
+    @IBOutlet var BigView: UIView!
     
     @IBOutlet weak var Time1: UIButton!
     @IBOutlet weak var Time2: UIButton!
@@ -42,7 +43,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var TimerLabel: UILabel!
     // (roundNumber - 1) * 5 + currentIndex = total solve index (starts at 0)
     
-    @IBOutlet var BigView: UIView!
     
     @IBOutlet weak var Logo: UIImageView!
     
@@ -81,6 +81,8 @@ class ViewController: UIViewController {
     
     static var longPress = UILongPressGestureRecognizer()
     
+    static var font: UIFont? = nil
+    
     let realm = try! Realm()
     
     struct Keys
@@ -100,6 +102,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.\
         print("viewcontroller did load")
+        
+        
         
         tabBarController?.tabBar.isHidden = false
         
@@ -141,7 +145,59 @@ class ViewController: UIViewController {
         {
             turnOffDarkMode()
         }
+        
+        if(ViewController.font == nil) // not set yet
+        {
+            ViewController.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.09, name: "Futura")
+        }
+        
+        TimesCollection.forEach{(button) in
+            button.titleLabel?.font = ViewController.font
+        }
+        ScrambleLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
+        TimerLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
+        
+        SubmitButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "Futura")
     }
+    
+    static func fontToFitHeight(view: UIView, multiplier: Float, name: String) -> UIFont
+    {
+        let minFontSize: CGFloat = 1.0 // CGFloat 18
+        let maxFontSize: CGFloat = 300.0     // CGFloat 67
+        var fontSize = maxFontSize
+        let text: NSString = "1.59"
+        var textHeight: CGFloat = 0.0
+        if(name == "System")
+        {
+            textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]).height
+        }
+        else
+        {
+            textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: fontSize)!]).height
+        }
+        let height = view.frame.size.height
+        let multHeight = height * CGFloat(multiplier)
+        
+        while (textHeight > multHeight && fontSize > minFontSize) {
+                fontSize -= 1
+            if(name == "System")
+            {
+                textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]).height
+            }
+            else
+            {
+                textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: fontSize)!]).height
+            }
+            }
+        
+        print(fontSize)
+        if(name == "System")
+        {
+            return UIFont.systemFont(ofSize: fontSize)
+        }
+        return UIFont(name: name, size: fontSize)!
+    }
+    
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -468,6 +524,7 @@ class ViewController: UIViewController {
         {
             ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
         }
+        
     }
     
     func allSolvesDone()

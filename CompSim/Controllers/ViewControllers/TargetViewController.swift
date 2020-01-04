@@ -28,8 +28,12 @@ class TargetViewController: UIViewController {
     @IBOutlet weak var DistributionLabel: UILabel!
     @IBOutlet weak var ToLabel: UILabel!
     
-    @IBOutlet weak var DarkBackground: UIImageView!
+    @IBOutlet var DistLabels: [UILabel]!
+    
+    
     @IBOutlet var BlackWhiteLabels: [UILabel]!
+    
+    @IBOutlet var BigView: UIView!
     
     let realm = try! Realm()
     
@@ -56,6 +60,7 @@ class TargetViewController: UIViewController {
         {
             turnOffDarkMode()
         }
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.font: ViewController.fontToFitHeight(view: BigView, multiplier: 0.03, name: "Futura")], for: .normal)
     }
     
     func setup(type: Int)
@@ -251,8 +256,24 @@ class TargetViewController: UIViewController {
         SingleTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
         MinTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
         MaxTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
-        // Do any additional setup after loading the view.
+        
+        let rangeFont = ViewController.fontToFitHeight(view: BigView, multiplier: 0.06, name: "Futura")
+        MinTimeLabel.titleLabel?.font = rangeFont
+        MaxTimeLabel.titleLabel?.font = rangeFont
+        
+        updateHeights()
     }
+    
+    func updateHeights()
+    {
+        DistLabels.forEach{(label) in
+            let textHeight = label.text?.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: "Futura", size: label.font.pointSize)!]).height
+            
+            
+            label.heightAnchor.constraint(equalToConstant: textHeight!).isActive = true
+        }
+    }
+    
     
     func updateDistributionLabels()
     {
@@ -266,6 +287,7 @@ class TargetViewController: UIViewController {
         Dist4.text = SolveTime.makeMyString(num: Int(round(Float(min) + 3*std)))
         Dist5.text = SolveTime.makeMyString(num: Int(round(Float(min) + 4*std)))
         Dist6.text = SolveTime.makeMyString(num: Int(round(Float(min) + 5*std)))
+        updateHeights()
     }
     
     // time is hundredths (i.e. 249 for 2.49)
@@ -297,7 +319,8 @@ class TargetViewController: UIViewController {
     
     func makeDarkMode()
     {
-        DarkBackground.isHidden = false
+
+        BigView.backgroundColor = ViewController.darkModeColor()
         for button in [MinTimeLabel, MaxTimeLabel, SingleTimeLabel, DistributionLabel]
         {
             button?.backgroundColor = .darkGray
@@ -312,7 +335,7 @@ class TargetViewController: UIViewController {
     
     func turnOffDarkMode()
     {
-        DarkBackground.isHidden = true
+        BigView.backgroundColor = .white
         for button in [MinTimeLabel, MaxTimeLabel, SingleTimeLabel, DistributionLabel]
         {
             button?.backgroundColor = ViewController.darkBlueColor()

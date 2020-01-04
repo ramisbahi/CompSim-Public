@@ -11,7 +11,6 @@ import RealmSwift
 
 class SettingsViewController: UIViewController {
     
-    @IBOutlet weak var Background: UIImageView!
     @IBOutlet weak var DarkModeLabel: UILabel!
     @IBOutlet weak var DarkModeControl: UISegmentedControl!
     @IBOutlet weak var ScrollView: UIScrollView!
@@ -34,6 +33,9 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet var TopLabels: [UILabel]!
     
+    @IBOutlet var BigView: UIView!
+    @IBOutlet weak var LittleView: UIView!
+    
     
     @IBOutlet weak var CuberButton: UIButton!
     @IBOutlet weak var ScrambleTypeButton: UIButton!
@@ -41,7 +43,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var InspectionVoiceAlertsControl: UISegmentedControl!
     @IBOutlet weak var TimerUpdateControl: UISegmentedControl!
     
-    let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Antoine" : "Antoine Cantin", "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park"]
+    let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Random" : "Random", "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park", "Kevin" : "Kevin Hays"]
     
     let realm = try! Realm()
     
@@ -96,7 +98,9 @@ class SettingsViewController: UIViewController {
     
     func makeDarkMode()
     {
-        Background.isHidden = false
+        BigView.backgroundColor = ViewController.darkModeColor()
+        LittleView.backgroundColor = ViewController.darkModeColor()
+        ScrollView.backgroundColor = ViewController.darkModeColor()
         TopButtons.forEach{ (button) in
         
             button.backgroundColor = UIColor.darkGray
@@ -109,6 +113,7 @@ class SettingsViewController: UIViewController {
         
         for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
         {
+            //control!.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Futura", size: 13.0)!], for: .normal) - later - make futura
             control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         }
         
@@ -133,8 +138,9 @@ class SettingsViewController: UIViewController {
     
     func turnOffDarkMode()
     {
-        Background.isHidden = true
-        
+        BigView.backgroundColor = .white
+        LittleView.backgroundColor = .white
+        ScrollView.backgroundColor = .white
         TopButtons.forEach{ (button) in
         
             button.backgroundColor = ViewController.darkBlueColor()
@@ -145,6 +151,7 @@ class SettingsViewController: UIViewController {
         
         for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
         {
+            //control!.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Futura", size: 14.0)!], for: .normal) - later - make futura
             control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         }
         

@@ -84,6 +84,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.cellForRow(at: indexPath)?.isSelected = false
+        
         let myTitle = tableView.cellForRow(at: indexPath)?.textLabel?.text
         let myScramble = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text
         

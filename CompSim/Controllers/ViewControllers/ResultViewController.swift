@@ -13,6 +13,7 @@ import RealmSwift
 
 class ResultViewController: UIViewController {
 
+    @IBOutlet var BigView: UIView!
     @IBOutlet weak var BackgroundImage: UIImageView!
     @IBOutlet weak var DarkBackground: UIImageView!
     
@@ -39,6 +40,8 @@ class ResultViewController: UIViewController {
     var labels = [UIButton]()
     
     var audioPlayer = AVAudioPlayer()
+    
+    let cubers = ["Bill", "Lucas", "Feliks", "Kian", "Rami", "Patrick", "Max", "Kevin"]
     
     // Additional setup after loading the view
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +95,15 @@ class ResultViewController: UIViewController {
         if(ViewController.mySession.targetType == noWinning) // no winning time
        {
             WinningAverageLabel.text = ""
-            BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
+            
+            if(ViewController.cuber == "Random")
+            {
+                BackgroundImage.image = randomImage(happy: true)
+            }
+            else
+            {
+                BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
+            }
             
             try! realm.write {
                 ViewController.mySession.usingWinningTime.append(false)
@@ -113,6 +124,16 @@ class ResultViewController: UIViewController {
             
             updateWinningAverage()
         }
+    }
+    
+    func randomImage(happy: Bool) -> UIImage
+    {
+        let cuber = cubers.randomElement()
+        if happy
+        {
+            return UIImage(named: "happy\(cuber!)")!
+        }
+        return UIImage(named: "sad\(cuber!)")!
     }
     
     func makeDarkMode()
@@ -184,7 +205,14 @@ class ResultViewController: UIViewController {
         try! realm.write {
             ViewController.mySession.results.append(false)
         }
-        BackgroundImage.image = UIImage(named: "sad\(ViewController.cuber)")
+        if(ViewController.cuber == "Random")
+        {
+            BackgroundImage.image = randomImage(happy: false)
+        }
+        else
+        {
+            BackgroundImage.image = UIImage(named: "sad\(ViewController.cuber)")
+        }
         MyAverageLabel.textColor = .red
         MyAverageLabel.text = MyAverageLabel.text
     }
@@ -194,7 +222,14 @@ class ResultViewController: UIViewController {
         try! realm.write {
             ViewController.mySession.results.append(true) // win
         }
-        BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
+        if(ViewController.cuber == "Random")
+        {
+            BackgroundImage.image = randomImage(happy: true)
+        }
+        else
+        {
+            BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
+        }
         MyAverageLabel.textColor = ViewController.greenColor()
         MyAverageLabel.text = MyAverageLabel.text
     }
@@ -218,16 +253,14 @@ class ResultViewController: UIViewController {
     
     func showScramble(num: Int)
     {
-        let myText = self.labels[num].titleLabel!.text
-        /*print(ViewController.mySession.times)
-        print(ViewController.mySession.currentAverage)
-        print((ViewController.mySession.currentAverage + 1) * 5 + num)*/
-        let scramble = ViewController.mySession.times[num].myScramble
+        let myTitle = self.labels[num].titleLabel!.text
+        let myScramble = ViewController.mySession.times[num].myScramble
         
-        let alert = UIAlertController(title: myText, message: scramble, preferredStyle: .alert)
+        let alertService = ViewSolveAlertService()
+        let alert = alertService.alert(usingPenalty: false, title: myTitle!, scramble: myScramble, penalty: 0, completion:
+        {})
         
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true)
     }
     
     override func viewDidLoad() {
@@ -237,6 +270,23 @@ class ResultViewController: UIViewController {
 
         BackgroundImage.addGestureRecognizer(tapGesture)
         BackgroundImage.isUserInteractionEnabled = true
+        
+        timeConstraints()
+        TimesCollection.forEach{(button) in
+            button.titleLabel?.font = ViewController.font!
+        }
+        WinningAverageLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
+        MyAverageLabel.font = ViewController.font!
+        TryAgainButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.06, name: "Futura")
+    }
+    
+    func timeConstraints()
+    {
+        SecondTime1.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 45 + 0.25*BigView.frame.size.height).isActive = true
+        SecondTime2.topAnchor.constraint(equalTo: SecondTime1.bottomAnchor).isActive = true
+        SecondTime3.topAnchor.constraint(equalTo: SecondTime2.bottomAnchor).isActive = true
+        SecondTime4.topAnchor.constraint(equalTo: SecondTime3.bottomAnchor).isActive = true
+        SecondTime5.topAnchor.constraint(equalTo: SecondTime4.bottomAnchor).isActive = true
     }
     
     @objc func imageTapped()

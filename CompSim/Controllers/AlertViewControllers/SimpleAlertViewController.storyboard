@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,17 +12,17 @@
             <objects>
                 <viewController storyboardIdentifier="SimpleAlertVC" id="E4s-TQ-qd6" customClass="SimpleAlertViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K6Y-9M-5Kf">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLA-Qw-t8w">
-                                <rect key="frame" x="246.5" y="382" width="275" height="120"/>
+                                <rect key="frame" x="43.333333333333343" y="226.66666666666669" width="327.33333333333326" height="142.66666666666669"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWs-hZ-csw">
-                                        <rect key="frame" x="0.0" y="0.0" width="275" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Solve?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRg-Dx-7xP">
-                                                <rect key="frame" x="10" y="8" width="255" height="39"/>
+                                                <rect key="frame" x="10" y="8" width="307.33333333333331" height="39"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -42,32 +42,11 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIg-EF-rnM">
-                                        <rect key="frame" x="10" y="65" width="120" height="45"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="0vI-5V-ILl"/>
-                                            <constraint firstAttribute="width" constant="120" id="SXK-aY-Lgh"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
-                                        <state key="normal" title="Cancel">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="cancelPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="KzX-Er-h3I"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbl-pC-1d9">
-                                        <rect key="frame" x="145" y="65" width="120" height="45"/>
+                                        <rect key="frame" x="174.33333333333331" y="79.333333333333343" width="143" height="53.333333333333343"/>
                                         <color key="backgroundColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="9zv-v4-Gwf"/>
-                                            <constraint firstAttribute="height" constant="45" id="K0t-m0-sra"/>
+                                            <constraint firstAttribute="width" secondItem="Xbl-pC-1d9" secondAttribute="height" multiplier="8:3" id="PwX-wX-Gru"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
                                         <state key="normal" title="Yes">
@@ -82,22 +61,42 @@
                                             <action selector="yesPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="e1Y-AJ-stl"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIg-EF-rnM">
+                                        <rect key="frame" x="8" y="78" width="141" height="59"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="PIg-EF-rnM" secondAttribute="height" multiplier="8:3" id="jOC-D7-JfA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="KzX-Er-h3I"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" allowsDirectInteraction="YES"/>
                                 </accessibility>
                                 <constraints>
+                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="height" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="0.375" id="0b5-Su-G7w"/>
                                     <constraint firstAttribute="bottom" secondItem="PIg-EF-rnM" secondAttribute="bottom" constant="10" id="DdY-Fm-HOW"/>
                                     <constraint firstItem="PIg-EF-rnM" firstAttribute="leading" secondItem="MLA-Qw-t8w" secondAttribute="leading" constant="10" id="KwF-EZ-Aen"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="top" secondItem="MLA-Qw-t8w" secondAttribute="top" id="Lzh-WI-bel"/>
+                                    <constraint firstAttribute="width" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="55:24" id="QpU-8Q-6df"/>
                                     <constraint firstAttribute="bottom" secondItem="Xbl-pC-1d9" secondAttribute="bottom" constant="10" id="RhZ-Wc-ndD"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="centerX" secondItem="MLA-Qw-t8w" secondAttribute="centerX" id="ULe-of-teS"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="leading" secondItem="MLA-Qw-t8w" secondAttribute="leading" id="VWL-nK-toV"/>
                                     <constraint firstAttribute="trailing" secondItem="Xbl-pC-1d9" secondAttribute="trailing" constant="10" id="VYX-Wz-O04"/>
-                                    <constraint firstAttribute="width" constant="275" id="bxh-Tv-oJJ"/>
                                     <constraint firstAttribute="trailing" secondItem="UWs-hZ-csw" secondAttribute="trailing" id="cgq-ue-KNd"/>
-                                    <constraint firstAttribute="height" constant="120" id="guy-Vv-fJ4"/>
+                                    <constraint firstItem="PIg-EF-rnM" firstAttribute="height" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="0.375" id="oXJ-aI-sSZ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -109,17 +108,20 @@
                         <constraints>
                             <constraint firstItem="MLA-Qw-t8w" firstAttribute="centerY" secondItem="K6Y-9M-5Kf" secondAttribute="centerY" constant="-70" id="2We-RW-2q1"/>
                             <constraint firstItem="MLA-Qw-t8w" firstAttribute="centerX" secondItem="K6Y-9M-5Kf" secondAttribute="centerX" id="aUD-gf-Jbe"/>
+                            <constraint firstItem="MLA-Qw-t8w" firstAttribute="width" secondItem="K6Y-9M-5Kf" secondAttribute="width" multiplier="0.79" id="bkd-aT-yG2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="99y-dq-5HU"/>
                     </view>
                     <connections>
+                        <outlet property="CancelButton" destination="PIg-EF-rnM" id="e0A-sM-bp7"/>
                         <outlet property="SimpleTitle" destination="GRg-Dx-7xP" id="5KL-Vx-C0e"/>
                         <outlet property="SimpleView" destination="UWs-hZ-csw" id="5NV-el-CKS"/>
+                        <outlet property="YesButton" destination="Xbl-pC-1d9" id="FBL-N0-6Tr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FP0-DP-dg8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="144.92753623188406" y="39.508928571428569"/>
+            <point key="canvasLocation" x="143.47826086956522" y="39.130434782608695"/>
         </scene>
     </scenes>
 </document>

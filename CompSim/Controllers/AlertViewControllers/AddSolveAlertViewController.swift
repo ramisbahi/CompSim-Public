@@ -21,6 +21,7 @@ class AddSolveAlertViewController: UIViewController {
     @IBOutlet weak var AddSolveView: UIView!
     @IBOutlet weak var PenaltySelector: UISegmentedControl!
     @IBOutlet weak var PenaltyConstraint: NSLayoutConstraint!
+    @IBOutlet weak var CancelButton: UIButton!
     
     @IBOutlet weak var AddSolveTitle: UILabel!
     @IBOutlet weak var AlertView: UIView!
@@ -50,7 +51,11 @@ class AddSolveAlertViewController: UIViewController {
         }
         
         TextField.placeholder = placeholder
-
+        
+        EnterButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        CancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Futura", size: 14.0)!], for: .normal)
         // Do any additional setup after loading the view.
     }
 

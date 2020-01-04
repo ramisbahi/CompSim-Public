@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,11 +12,11 @@
             <objects>
                 <viewController storyboardIdentifier="AddSolveAlertVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Sxc-Bp-rG9" customClass="AddSolveAlertViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WsM-m8-5OG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2C-pC-0xb">
-                                <rect key="frame" x="49.5" y="256" width="315" height="244"/>
+                                <rect key="frame" x="2.5" y="48" width="315" height="244"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73c-AH-tj7">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="55"/>
@@ -41,20 +41,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xUz-jZ-EEq">
-                                        <rect key="frame" x="52.5" y="70" width="210" height="54"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="210" id="Y5m-c6-eEx"/>
-                                        </constraints>
+                                        <rect key="frame" x="45" y="70" width="225" height="54"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="decimalPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNa-ng-EW4">
                                         <rect key="frame" x="10" y="189" width="120" height="45"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="bma-Je-VTY"/>
-                                            <constraint firstAttribute="height" constant="45" id="yhx-Ks-Vq3"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -71,10 +64,6 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvf-Ai-eQq">
                                         <rect key="frame" x="185" y="189" width="120" height="45"/>
                                         <color key="backgroundColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="WeE-kt-q0X"/>
-                                            <constraint firstAttribute="width" constant="120" id="unj-XC-FUX"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
                                         <state key="normal" title="Enter">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -89,10 +78,9 @@
                                         </connections>
                                     </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bordered" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="fbc-E9-vfG">
-                                        <rect key="frame" x="7.5" y="139" width="300" height="36"/>
+                                        <rect key="frame" x="5" y="139" width="305" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="LNf-5e-f5P"/>
-                                            <constraint firstAttribute="width" constant="300" id="YwY-em-2vC"/>
                                         </constraints>
                                         <segments>
                                             <segment title="DNF"/>
@@ -108,18 +96,28 @@
                                     <accessibilityTraits key="traits" allowsDirectInteraction="YES"/>
                                 </accessibility>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="2AW-xv-il3"/>
+                                    <constraint firstAttribute="trailing" secondItem="fbc-E9-vfG" secondAttribute="trailing" constant="5" id="3Ey-DU-CZ3"/>
                                     <constraint firstAttribute="bottom" secondItem="nNa-ng-EW4" secondAttribute="bottom" constant="10" id="46S-Kw-IU8"/>
+                                    <constraint firstAttribute="trailing" secondItem="xUz-jZ-EEq" secondAttribute="trailing" constant="45" id="5kh-Zy-tuZ"/>
+                                    <constraint firstItem="nNa-ng-EW4" firstAttribute="height" secondItem="V2C-pC-0xb" secondAttribute="height" multiplier="0.184426" id="AHR-XU-ZfX"/>
+                                    <constraint firstItem="vvf-Ai-eQq" firstAttribute="width" secondItem="V2C-pC-0xb" secondAttribute="width" multiplier="0.380952" id="AyX-3l-pQV"/>
                                     <constraint firstItem="vvf-Ai-eQq" firstAttribute="top" secondItem="fbc-E9-vfG" secondAttribute="bottom" constant="15" id="DAL-B7-V3k"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="JbK-Tm-cJr"/>
                                     <constraint firstItem="nNa-ng-EW4" firstAttribute="leading" secondItem="V2C-pC-0xb" secondAttribute="leading" constant="10" id="Kwu-2i-xf3"/>
                                     <constraint firstAttribute="bottom" secondItem="vvf-Ai-eQq" secondAttribute="bottom" constant="10" id="OTo-wv-zl9"/>
                                     <constraint firstItem="xUz-jZ-EEq" firstAttribute="top" secondItem="73c-AH-tj7" secondAttribute="bottom" constant="15" id="OaC-EJ-erQ"/>
+                                    <constraint firstAttribute="width" secondItem="V2C-pC-0xb" secondAttribute="height" multiplier="315:244" priority="750" id="TCC-zq-WuA"/>
+                                    <constraint firstItem="xUz-jZ-EEq" firstAttribute="leading" secondItem="V2C-pC-0xb" secondAttribute="leading" constant="45" id="V8L-6h-XNo"/>
                                     <constraint firstItem="73c-AH-tj7" firstAttribute="leading" secondItem="V2C-pC-0xb" secondAttribute="leading" id="dk9-Xg-sbb"/>
+                                    <constraint firstItem="vvf-Ai-eQq" firstAttribute="height" secondItem="V2C-pC-0xb" secondAttribute="height" multiplier="0.184426" id="e9C-9J-RG7"/>
                                     <constraint firstItem="73c-AH-tj7" firstAttribute="top" secondItem="V2C-pC-0xb" secondAttribute="top" id="eB3-w3-aaZ"/>
                                     <constraint firstAttribute="trailing" secondItem="73c-AH-tj7" secondAttribute="trailing" id="fHa-uI-KOh"/>
+                                    <constraint firstItem="fbc-E9-vfG" firstAttribute="leading" secondItem="V2C-pC-0xb" secondAttribute="leading" constant="5" id="fnx-r1-lVT"/>
                                     <constraint firstItem="xUz-jZ-EEq" firstAttribute="centerX" secondItem="V2C-pC-0xb" secondAttribute="centerX" id="fzu-I4-1H4"/>
+                                    <constraint firstItem="nNa-ng-EW4" firstAttribute="width" secondItem="V2C-pC-0xb" secondAttribute="width" multiplier="0.380952" id="hUN-h8-lt1"/>
                                     <constraint firstItem="fbc-E9-vfG" firstAttribute="centerX" secondItem="V2C-pC-0xb" secondAttribute="centerX" id="nVe-R5-zMp"/>
                                     <constraint firstItem="fbc-E9-vfG" firstAttribute="top" secondItem="xUz-jZ-EEq" secondAttribute="bottom" constant="15" id="neN-pN-0mR"/>
-                                    <constraint firstAttribute="width" constant="315" id="qgi-AB-B0y"/>
                                     <constraint firstAttribute="trailing" secondItem="vvf-Ai-eQq" secondAttribute="trailing" constant="10" id="sNe-3j-3Il"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -130,6 +128,7 @@
                             </view>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="V2C-pC-0xb" firstAttribute="height" secondItem="WsM-m8-5OG" secondAttribute="height" multiplier="0.272321" priority="750" id="rAY-nb-pgq"/>
                             <constraint firstItem="V2C-pC-0xb" firstAttribute="centerX" secondItem="WsM-m8-5OG" secondAttribute="centerX" id="t1n-0z-oOM"/>
                             <constraint firstItem="V2C-pC-0xb" firstAttribute="centerY" secondItem="WsM-m8-5OG" secondAttribute="centerY" constant="-70" id="tQB-uF-YrQ"/>
                         </constraints>
@@ -139,6 +138,7 @@
                         <outlet property="AddSolveTitle" destination="BV4-P9-ta3" id="rS0-El-fRC"/>
                         <outlet property="AddSolveView" destination="73c-AH-tj7" id="lrM-D5-hWl"/>
                         <outlet property="AlertView" destination="V2C-pC-0xb" id="C2s-2F-eRO"/>
+                        <outlet property="CancelButton" destination="nNa-ng-EW4" id="tuq-0S-bWO"/>
                         <outlet property="EnterButton" destination="vvf-Ai-eQq" id="mB7-Z7-ZZ5"/>
                         <outlet property="PenaltyConstraint" destination="DAL-B7-V3k" id="yb4-4b-h9F"/>
                         <outlet property="PenaltySelector" destination="fbc-E9-vfG" id="rXr-Kh-m1p"/>

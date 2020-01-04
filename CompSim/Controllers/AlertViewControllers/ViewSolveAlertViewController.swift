@@ -27,6 +27,8 @@ class ViewSolveAlertViewController: UIViewController {
     @IBOutlet weak var ViewSolveView: UIView!
     @IBOutlet weak var DoneButton: UIButton!
     
+    @IBOutlet var BigView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +52,10 @@ class ViewSolveAlertViewController: UIViewController {
             PenaltyConstraint.isActive = false
             ScrambleLabel.bottomAnchor.constraint(equalTo: DoneButton.topAnchor, constant: -5).isActive = true
         }
+        
+        ScrambleLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "System")
+        
+        PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Futura", size: 14.0)!], for: .normal)
     }
     
     @IBAction func DonePressed(_ sender: Any) {

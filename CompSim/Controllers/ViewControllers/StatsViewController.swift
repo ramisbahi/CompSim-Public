@@ -80,29 +80,55 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
         case "2x2x2", "2x2":
             session.doEvent(enteredEvent: 0)
+            doAvg()
         case "3x3x3", "3x3":
             session.doEvent(enteredEvent: 1)
+            doAvg()
         case "4x4x4", "4x4":
             session.doEvent(enteredEvent: 2)
+            doAvg()
         case "5x5x5", "5x5":
             session.doEvent(enteredEvent: 3)
+            doAvg()
         case "6x6x6", "6x6":
             session.doEvent(enteredEvent: 4)
+            doMean()
         case "7x7x7", "7x7":
             session.doEvent(enteredEvent: 5)
+            doMean()
         case "pyra", "pyraminx":
             session.doEvent(enteredEvent: 6)
+            doAvg()
         case "mega", "megaminx":
             session.doEvent(enteredEvent: 7)
+            doAvg()
         case "sq-1", "sq1", "square1", "square-1":
             session.doEvent(enteredEvent: 8)
+            doAvg()
         case "skewb", "skoob":
             session.doEvent(enteredEvent: 9)
+            doAvg()
         case "clock":
             session.doEvent(enteredEvent: 10)
+            doAvg()
         default:
             break
         }
+    }
+    
+    func doAvg()
+    {
+        ViewController.mo3 = false
+        ViewController.bo3 = false
+        ViewController.ao5 = true
+    }
+    
+    func doMean()
+    {
+        print("doing mean")
+        ViewController.mo3 = true
+        ViewController.bo3 = false
+        ViewController.ao5 = false
     }
     
     func updateNewSessionStackView()
