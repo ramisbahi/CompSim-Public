@@ -25,7 +25,9 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var SessionStackView: UIStackView!
     
+    @IBOutlet weak var ResetButton: UIButton!
     @IBOutlet weak var DeleteButton: UIButton!
+    
     
     let realm = try! Realm()
     
@@ -54,6 +56,33 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         })
         
         self.present(alert, animated: true)
+    }
+    
+    @IBAction func resetPressed(_ sender: Any) {
+        let alertService = SimpleAlertService()
+        let alert = alertService.alert(myTitle: "Reset \(ViewController.mySession.name) session?", completion: {
+            self.resetSession()
+        })
+        
+        self.present(alert, animated: true)
+    }
+    
+    func resetSession()
+    {
+        let session = ViewController.mySession
+        try! realm.write
+        {
+            session.allAverages.removeAll()
+            session.averageTypes.removeAll()
+            session.winningAverages.removeAll()
+            session.usingWinningTime.removeAll()
+            session.results.removeAll()
+            session.allTimes.removeAll()
+            session.currentAverage = -1
+            session.reset()
+        }
+        ViewController.sessionChanged = true
+        StatsTableView.reloadData()
     }
     
     func createNewSession(name: String)
@@ -327,7 +356,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func makeDarkMode()
     {
-        for button in [NewButton, SessionButton, DeleteButton]
+        for button in [NewButton, SessionButton, ResetButton]
         {
             button?.backgroundColor = .darkGray
         }
@@ -335,7 +364,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func turnOffDarkMode()
     {
-        for button in [NewButton, SessionButton, DeleteButton]
+        for button in [NewButton, SessionButton, ResetButton]
         {
             button?.backgroundColor = ViewController.darkBlueColor()
         }

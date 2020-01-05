@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     static var timing = true
     static var inspection = true
     
-    static var cuber = "Lucas"
+    static var cuber = "Random"
     
     static var ao5 = true
     static var mo3 = false
@@ -121,6 +121,7 @@ class ViewController: UIViewController {
         {
             self.reset() // only when actually starting new round, not when returning from avgdetail or timer
         }*/
+        print("result time \(TimerViewController.resultTime)")
         if(TimerViewController.resultTime != 0) // returned from timer
         {
             self.updateTimes(enteredTime: String(TimerViewController.resultTime), penalty: TimerViewController.penalty)
@@ -250,11 +251,21 @@ class ViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
         self.view.addGestureRecognizer(tap)
         
-        let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToTwoFingerDoubleTap(gesture:)))
-        twoFingerDoubleTap.numberOfTouchesRequired = 2
-        twoFingerDoubleTap.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(twoFingerDoubleTap)
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
+        doubleTap.numberOfTouchesRequired = 1
+        doubleTap.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(doubleTap)
         
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeRight(gesture:)))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        
+    }
+    
+    @objc func respondToSwipeRight(gesture: UIGestureRecognizer)
+    {
+        ViewController.mySession.scrambler.genScramble()
+        ScrambleLabel.text = ViewController.mySession.scrambler.currentScramble
     }
     
     @objc func handleLongPress(sender: UIGestureRecognizer)
@@ -352,13 +363,17 @@ class ViewController: UIViewController {
         swipeDown.direction = .down // ...when down swipe is done
         self.view.addGestureRecognizer(swipeDown) // allow view to recognize
         
-        let twoFingerDoubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToTwoFingerDoubleTap(gesture:)))
-        twoFingerDoubleTap.numberOfTouchesRequired = 2
-        twoFingerDoubleTap.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(twoFingerDoubleTap)
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
+        doubleTap.numberOfTouchesRequired = 1
+        doubleTap.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(doubleTap)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeRight(gesture:)))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
     }
     
-    @objc func respondToTwoFingerDoubleTap(gesture: UITapGestureRecognizer)
+    @objc func respondToDoubleTap(gesture: UITapGestureRecognizer)
     {
         let alertService = SimpleAlertService()
         let alert = alertService.alert(myTitle: "Reset Average?", completion: {
