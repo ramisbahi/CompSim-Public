@@ -259,7 +259,7 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let eventNames = ["2x2x2", "3x3x3", "4x4x4", "5x5x5", "6x6x6", "7x7x7", "Pyraminx", "Megaminx", "Square-1", "Skewb", "Clock", "Non-Mag November"]
+        let eventNames = ["2x2x2", "3x3x3", "4x4x4", "5x5x5", "6x6x6", "7x7x7", "Pyraminx", "Megaminx", "Square-1", "Skewb", "Clock", "3x3x3 BLD"]
         let title = eventNames[ViewController.mySession.scrambler.myEvent]
         ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
         
@@ -319,6 +319,7 @@ class SettingsViewController: UIViewController {
         case sq1 = "Square-1"
         case skewb = "Skewb"
         case clock = "Clock"
+        case BLD = "3x3x3 BLD"
     }
     
     
@@ -385,9 +386,10 @@ class SettingsViewController: UIViewController {
                     ViewController.mySession.doEvent(enteredEvent: 9)
                 case .clock:
                     ViewController.mySession.doEvent(enteredEvent: 10)
+                case .BLD:
+                    ViewController.mySession.doEvent(enteredEvent: 11)
             }
         }
-        
         
     }
     

@@ -57,7 +57,7 @@ class ScrambleReader
     // 8 = sq1
     // 9 = skewb
     // 10 = clock
-    public func genScramble()  // generate and return scramble for current event
+    func genScramble()  // generate and return scramble for current event
     {
         
         switch myEvent
@@ -68,11 +68,11 @@ class ScrambleReader
             currentScramble = threeScrambler.scramble()
         case 2: // 4x4
             currentScramble = bigCubeScrambler.getScrString(byType: 4)
-        case 3: // 4x4
+        case 3: // 5x5
             currentScramble = bigCubeScrambler.getScrString(byType: 5)
-        case 4: // 4x4
+        case 4: // 6x6
             currentScramble = bigCubeScrambler.getScrString(byType: 6)
-        case 5: // 4x4
+        case 5: // 7x7
             currentScramble = bigCubeScrambler.getScrString(byType: 7)
         case 6:
             currentScramble = pyraScrambler.scrPyrm()
@@ -84,9 +84,20 @@ class ScrambleReader
             currentScramble = skewbScrambler.scrSkb()
         case 10:
             currentScramble = clockScrambler.scramble()
+        case 11:
+            currentScramble = BLDscramble()
         default:
             currentScramble = ""
         }
+    }
+    
+    func BLDscramble() -> String
+    {
+        let set1 = [" ", " Rw", " Rw2", " Rw'", " Fw", " Fw'"]
+        let set2 = [" ", " Dw", " Dw2", " Dw'"]
+        
+        let preTrim = (threeScrambler.scramble()?.trimmingCharacters(in: .whitespaces))! + set1.randomElement()! + set2.randomElement()!
+        return preTrim.trimmingCharacters(in: .whitespaces)
     }
     
     

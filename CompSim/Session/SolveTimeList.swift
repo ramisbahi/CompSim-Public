@@ -20,4 +20,6 @@ class SolveTimeList: Object
             list.append(time)
         }
     }
+    
+    
 }

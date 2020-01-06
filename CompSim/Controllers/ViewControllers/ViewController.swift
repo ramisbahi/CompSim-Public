@@ -159,6 +159,8 @@ class ViewController: UIViewController {
         TimerLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
         
         SubmitButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "Futura")
+        
+        
     }
     
     static func fontToFitHeight(view: UIView, multiplier: Float, name: String) -> UIFont
@@ -252,7 +254,7 @@ class ViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
-        doubleTap.numberOfTouchesRequired = 1
+        doubleTap.numberOfTouchesRequired = 2
         doubleTap.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(doubleTap)
         
@@ -364,13 +366,9 @@ class ViewController: UIViewController {
         self.view.addGestureRecognizer(swipeDown) // allow view to recognize
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
-        doubleTap.numberOfTouchesRequired = 1
+        doubleTap.numberOfTouchesRequired = 2
         doubleTap.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(doubleTap)
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeRight(gesture:)))
-        swipeRight.direction = .right
-        self.view.addGestureRecognizer(swipeRight)
     }
     
     @objc func respondToDoubleTap(gesture: UITapGestureRecognizer)
@@ -446,11 +444,24 @@ class ViewController: UIViewController {
                 ViewController.mySession.deleteSolve()
             }
             self.ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
-            self.labels[ViewController.mySession.currentIndex].setTitle("", for: .normal)
-            self.labels[ViewController.mySession.currentIndex].isHidden = true
+            self.updateLabels()
+            print(ViewController.mySession.currentIndex)
+            if(ViewController.mySession.currentIndex == 4) // was all solves done, now 4/5
+            {
+                self.undoAllSolvesDone()
+            }
         })
         
         self.present(alert, animated: true)
+    }
+    
+    func undoAllSolvesDone()
+    {
+        self.gestureSetup()
+        SwipeUpLabel.text = "↑ Add Solve ↑"
+        self.SubmitButton.isHidden = true
+        self.Logo.isHidden = true
+        tabBarController?.tabBar.isHidden = false
     }
     
     func addSolve()
@@ -484,6 +495,7 @@ class ViewController: UIViewController {
         print("updating times w/ penalty")
         try! realm.write
         {
+            print("in the realm write adding")
             ViewController.mySession.addSolve(time: enteredTime, penalty: penalty)
         }
         ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
@@ -538,6 +550,7 @@ class ViewController: UIViewController {
         else
         {
             ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
+            Logo.isHidden = true
         }
         
     }

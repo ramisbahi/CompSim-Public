@@ -12,7 +12,6 @@ import RealmSwift
 class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var DarkBackground: UIImageView!
-    @IBOutlet weak var StatsTitle: UILabel!
     
     @IBOutlet weak var StatsTableView: UITableView!
     
@@ -28,6 +27,11 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var ResetButton: UIButton!
     @IBOutlet weak var DeleteButton: UIButton!
     
+    
+    @IBOutlet weak var BackgroundBar: UIView!
+    @IBOutlet weak var WinningWidth: NSLayoutConstraint!
+    @IBOutlet weak var LosingWidth: NSLayoutConstraint!
+    @IBOutlet var BigView: UIView!
     
     let realm = try! Realm()
     
@@ -67,6 +71,41 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.present(alert, animated: true)
     }
     
+    func updateBarWidth()
+    {
+        let view = StatsTableView
+        
+        let numAverages = ViewController.mySession.results.count
+        var losingCount = 0
+        var winningCount = 0
+        
+        if(numAverages > 0)
+        {
+            for index in 0..<numAverages
+            {
+                if(ViewController.mySession.usingWinningTime[index]) // if was competing against winning time
+                {
+                    if ViewController.mySession.results[index] // win
+                    {
+                        winningCount += 1
+                    }
+                    else // lose
+                    {
+                        losingCount += 1
+                    }
+                }
+            }
+            
+            WinningWidth.constant = view!.frame.size.width * CGFloat(winningCount) / CGFloat(numAverages)
+            LosingWidth.constant = view!.frame.size.width * CGFloat(losingCount) / CGFloat(numAverages)
+        }
+        else
+        {
+            WinningWidth.constant = 0
+            LosingWidth.constant = 0
+        }
+    }
+    
     func resetSession()
     {
         let session = ViewController.mySession
@@ -83,6 +122,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         ViewController.sessionChanged = true
         StatsTableView.reloadData()
+        updateBarWidth()
     }
     
     func createNewSession(name: String)
@@ -101,6 +141,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.updateNewSessionStackView()
         StatsTableView.reloadData()
         ViewController.sessionChanged = true
+        updateBarWidth()
     }
     
     func smartEvent(name: String, session: Session)
@@ -168,7 +209,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let newButton = createButton(name: ViewController.mySession.name)
         SessionCollection.append(newButton)
         SessionStackView.addArrangedSubview(newButton)
-        
     }
     
     // called whenever something changed with sessions
@@ -236,7 +276,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print(SessionCollection[0])
     }
     
-    @objc @IBAction func SessionSelected(_ sender: UIButton) {
+    @objc func SessionSelected(_ sender: UIButton) {
         SessionCollection.forEach { (button) in
             UIView.animate(withDuration: 0.3, animations: {
                 button.isHidden = !button.isHidden
@@ -337,6 +377,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         hideAll()
         setUpStackView()
         StatsTableView.reloadData()
+        updateBarWidth()
     }
     
     
@@ -360,6 +401,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
             button?.backgroundColor = .darkGray
         }
+        
+        BackgroundBar.backgroundColor = .white
     }
     
     func turnOffDarkMode()
@@ -368,6 +411,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
             button?.backgroundColor = ViewController.darkBlueColor()
         }
+        
+        BackgroundBar.backgroundColor = .black
     }
     
     
@@ -472,6 +517,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             session.allTimes.remove(at: index)
             session.currentAverage -= 1
         }
+        updateBarWidth()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -502,6 +548,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector (rename))
         doubleTapGesture.numberOfTapsRequired = 2
         SessionButton.addGestureRecognizer(doubleTapGesture)
+        
+        updateBarWidth()
         
         
         setUpStackView()

@@ -11,7 +11,7 @@ import RealmSwift
 
 class Session: Object
 {
-    var currentIndex = 0
+    @objc dynamic var currentIndex = 0 // new
     
     @objc dynamic var name: String = ""
     @objc dynamic var minTime = 500 // distribution
@@ -19,10 +19,10 @@ class Session: Object
     @objc dynamic var singleTime = 750 // single time
     @objc dynamic var targetType = 2 // 0 = none, 1 = single, 2 = range
     
-    var minIndex = 0
-    var maxIndex = 1
+    @objc dynamic var minIndex = 0 // new
+    @objc dynamic var maxIndex = 1 // new
     
-    var times = [SolveTime]() // current times
+    let times = List<SolveTime>() // current times // new
     
     var myAverage: String = ""
     var myAverageInt: Int = 0
@@ -64,7 +64,7 @@ class Session: Object
     func reset()
     {
         currentIndex = 0
-        times = []
+        times.removeAll()
         minIndex = 0
         maxIndex = 1
         myAverage = ""
@@ -84,11 +84,13 @@ class Session: Object
     
     func addSolve(time: String)
     {
+        print("adding solve")
         let myTime = SolveTime(enteredTime: time, scramble: scrambler.currentScramble)
         times.append(myTime)
         currentIndex += 1
         updateTimes()
         scrambler.genScramble()
+        
     }
     
     func addSolve(time: String, penalty: Int)
@@ -103,9 +105,14 @@ class Session: Object
             myTime.setDNF()
         }
         times.append(myTime)
+        for time in times
+        {
+            print(time.myString)
+        }
         currentIndex += 1
         updateTimes()
         scrambler.genScramble()
+        
     }
     
     func changePenaltyStatus(index: Int, penalty: Int)
@@ -127,6 +134,7 @@ class Session: Object
     
     func updateTimes()
     {
+        print(times)
         intTotal = 0
         if(currentIndex >= 3 && ViewController.ao5)
         {
@@ -199,7 +207,8 @@ class Session: Object
             times.append(SolveTime(enteredTime: "0", scramble: ""))
             ViewController.mo3 ? averageTypes.append(1) : averageTypes.append(2)
         }
-        allTimes.append(SolveTimeList(times))
+        let timesArray = Array(times)
+        allTimes.append(SolveTimeList(timesArray))
         if(intTotal > 950000) // has counting DNF
         {
             myAverage = "DNF"

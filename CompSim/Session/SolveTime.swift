@@ -11,12 +11,15 @@ import RealmSwift
 
 class SolveTime: Object
 {
-    var intTime = 0
-    var originalIntTime = 0 // only use when switching to DNF
+    // new 
+    @objc dynamic var intTime = 0
+    @objc dynamic var originalIntTime = 0 // only use when switching to DNF
+    @objc dynamic var isMinMax = false
+    @objc dynamic var penalty = 0 // 0 = OK, 1 = +2, 2 = DNF
+    
     @objc dynamic var myString: String = ""
     @objc dynamic var myScramble: String = ""
-    var isMinMax = false
-    var penalty = 0 // 0 = OK, 1 = +2, 2 = DNF
+    
     
     // can be min:sec:decimal
     convenience init(enteredTime: String, scramble: String) {
