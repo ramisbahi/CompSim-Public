@@ -11,6 +11,20 @@ import UIKit
 import GameKit
 import RealmSwift
 
+// get device name
+extension UIDevice {
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        return identifier
+    }
+}
+
 class ResultViewController: UIViewController {
 
     @IBOutlet var BigView: UIView!
@@ -23,6 +37,7 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var SecondTime4: UIButton!
     @IBOutlet weak var SecondTime5: UIButton!
     
+    @IBOutlet weak var ImageConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var MyAverageLabel: UILabel!
     @IBOutlet weak var WinningAverageLabel: UILabel!
@@ -123,6 +138,11 @@ class ResultViewController: UIViewController {
                 }
             
             updateWinningAverage()
+        }
+        
+        // last thing done - reset
+        try! realm.write {
+            ViewController.mySession.reset()
         }
     }
     
@@ -271,12 +291,30 @@ class ResultViewController: UIViewController {
         BackgroundImage.addGestureRecognizer(tapGesture)
         BackgroundImage.isUserInteractionEnabled = true
         
+        let deviceName: String = UIDevice.current.modelName
+        print(deviceName)
+        let changeConstraintDevices = ["x86_64", "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,4", "iPhone11,6", "iPhone11,8", "iPhone12,1", "iPhone12,3", "iPhone12,5"]
+        
+        if changeConstraintDevices.contains(deviceName)
+        {
+            ImageConstraint.isActive = false
+            BackgroundImage.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
+            WinningAverageLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.06, name: "Futura")
+            MyAverageLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.075, name: "Futura")
+        }
+        else
+        {
+            WinningAverageLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
+            MyAverageLabel.font = ViewController.font!
+        }
+        
         timeConstraints()
         TimesCollection.forEach{(button) in
             button.titleLabel?.font = ViewController.font!
         }
-        WinningAverageLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
-        MyAverageLabel.font = ViewController.font!
+        MyAverageLabel.adjustsFontSizeToFitWidth = true
+        WinningAverageLabel.adjustsFontSizeToFitWidth = true
+        
         TryAgainButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.06, name: "Futura")
     }
     
@@ -346,16 +384,6 @@ class ResultViewController: UIViewController {
             return .lightContent
         }
         return .default
-    }
-    
-    // MARK: - Navigation
-
-//     In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("called prepare")
-        try! realm.write {
-            ViewController.mySession.reset()
-        }
     }
     
 

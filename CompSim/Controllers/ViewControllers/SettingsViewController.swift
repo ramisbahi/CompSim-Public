@@ -113,8 +113,7 @@ class SettingsViewController: UIViewController {
         
         for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
         {
-            //control!.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Futura", size: 13.0)!], for: .normal) - later - make futura
-            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Futura", size: 13)!], for: .normal)
         }
         
         setNeedsStatusBarAppearanceUpdate()
@@ -151,8 +150,7 @@ class SettingsViewController: UIViewController {
         
         for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
         {
-            //control!.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Futura", size: 14.0)!], for: .normal) - later - make futura
-            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "Futura", size: 13)!], for: .normal)
         }
         
         setNeedsStatusBarAppearanceUpdate()

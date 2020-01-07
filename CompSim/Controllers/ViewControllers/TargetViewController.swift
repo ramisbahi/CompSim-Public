@@ -60,7 +60,7 @@ class TargetViewController: UIViewController {
         {
             turnOffDarkMode()
         }
-        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.font: ViewController.fontToFitHeight(view: BigView, multiplier: 0.03, name: "Futura")], for: .normal)
+        
     }
     
     func setup(type: Int)
@@ -330,7 +330,7 @@ class TargetViewController: UIViewController {
             label.textColor? = UIColor.white
         }
         WinningTimeSetting.tintColor = ViewController.orangeColor()
-        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: BigView, multiplier: 0.03, name: "Futura")], for: .normal)
     }
     
     func turnOffDarkMode()
@@ -345,7 +345,7 @@ class TargetViewController: UIViewController {
         }
         DistributionImage.image = UIImage(named: "GaussianCurve")
         WinningTimeSetting.tintColor = .white
-        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: BigView, multiplier: 0.03, name: "Futura")], for: .normal)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle

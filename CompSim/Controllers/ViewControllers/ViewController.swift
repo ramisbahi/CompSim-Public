@@ -107,15 +107,17 @@ class ViewController: UIViewController {
         
         tabBarController?.tabBar.isHidden = false
         
-        
-        if(ViewController.justOpened && hasSetSettings())
-        {
-            doSettings()
-            ViewController.justOpened = false
-        }
-        
         self.gestureSetup()
         self.labels = [Time1, Time2, Time3, Time4, Time5] // add labels to labels array - one time thing
+        
+        if(ViewController.justOpened)
+        {
+            if hasSetSettings()
+            {
+                doSettings()
+                ViewController.justOpened = false
+            }
+        }
         
         /*if(!AverageDetailViewController.justReturned && TimerViewController.resultTime == 0)
         {
@@ -158,8 +160,9 @@ class ViewController: UIViewController {
         ScrambleLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
         TimerLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
         
-        SubmitButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "Futura")
+        SubmitButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.045, name: "Futura")
         
+        print(ViewController.mySession.currentIndex)
         
     }
     
@@ -237,6 +240,12 @@ class ViewController: UIViewController {
         {
             self.view.removeGestureRecognizer(ViewController.longPress)
         }
+        
+        
+        /*if ViewController.mySession.currentIndex == 5
+        {
+            allSolvesDone()
+        }*/
     }
     
     

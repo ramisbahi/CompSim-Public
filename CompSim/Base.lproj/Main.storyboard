@@ -1620,9 +1620,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bordered" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Bmd-9i-g2f">
-                                <rect key="frame" x="51.666666666666657" y="476.66666666666669" width="310.66666666666674" height="35.333333333333314"/>
+                                <rect key="frame" x="51.666666666666657" y="476.66666666666669" width="310.66666666666674" height="39.666666666666686"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Bmd-9i-g2f" secondAttribute="height" multiplier="9:1" id="BJm-2o-ifx"/>
+                                    <constraint firstAttribute="width" secondItem="Bmd-9i-g2f" secondAttribute="height" multiplier="8:1" id="BJm-2o-ifx"/>
                                 </constraints>
                                 <segments>
                                     <segment title="DNF"/>
@@ -1700,13 +1700,13 @@
                                 <color key="backgroundColor" red="0.1131800518" green="0.1131800518" blue="0.1131800518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target Average: 1.49" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhq-FN-tIS">
-                                <rect key="frame" x="0.0" y="1092" width="414" height="51.666666666666742"/>
+                                <rect key="frame" x="0.0" y="546" width="414" height="51.666666666666629"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2em-RB-Jye">
-                                <rect key="frame" x="192" y="1148.6666666666667" width="30" height="66"/>
+                                <rect key="frame" x="192" y="602.66666666666663" width="30" height="66"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
                                 <connections>
                                     <action selector="Time1Touched:" destination="aUe-TH-pA1" eventType="touchUpInside" id="nqd-eY-dRo"/>
@@ -1765,10 +1765,10 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" alpha="0.84999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happyKevin" translatesAutoresizingMaskIntoConstraints="NO" id="4Tu-dJ-3lW">
-                                <rect key="frame" x="-955" y="0.0" width="2324" height="1092"/>
+                                <rect key="frame" x="-374" y="0.0" width="1162" height="546"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="HQv-Ho-HQQ">
-                                <rect key="frame" x="6" y="657" width="402" height="93.666666666666742"/>
+                                <rect key="frame" x="0.0" y="657" width="414" height="93.666666666666742"/>
                                 <attributedString key="attributedText">
                                     <fragment content="= 2:44.84 Average!">
                                         <attributes>
@@ -1784,7 +1784,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Bsx-oU-StS" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="0Rz-gk-Sdd"/>
-                            <constraint firstItem="zhq-FN-tIS" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.07" id="1EW-Mo-Uda"/>
+                            <constraint firstItem="zhq-FN-tIS" firstAttribute="height" secondItem="srE-kU-o46" secondAttribute="height" multiplier="0.07" id="1EW-Mo-Uda"/>
                             <constraint firstItem="4Tu-dJ-3lW" firstAttribute="top" secondItem="Bd8-uC-vl3" secondAttribute="top" id="6ph-Wz-3ww"/>
                             <constraint firstItem="0ZI-JG-3AW" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.09" id="7e5-n0-AWW"/>
                             <constraint firstItem="0Ff-PU-ZUX" firstAttribute="top" secondItem="Bd8-uC-vl3" secondAttribute="top" id="8pa-uo-Hcd"/>
@@ -1799,10 +1799,12 @@
                             <constraint firstItem="0ZI-JG-3AW" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="T80-zG-htN"/>
                             <constraint firstItem="srE-kU-o46" firstAttribute="trailing" secondItem="0Ff-PU-ZUX" secondAttribute="trailing" id="VXa-R2-hFn"/>
                             <constraint firstItem="2em-RB-Jye" firstAttribute="top" secondItem="zhq-FN-tIS" secondAttribute="bottom" constant="5" id="Wgx-zh-emH"/>
+                            <constraint firstItem="HQv-Ho-HQQ" firstAttribute="leading" secondItem="srE-kU-o46" secondAttribute="leading" id="Wsd-gI-E1u"/>
                             <constraint firstItem="0Ff-PU-ZUX" firstAttribute="leading" secondItem="srE-kU-o46" secondAttribute="leading" id="Zzo-FR-9gd"/>
                             <constraint firstItem="zhq-FN-tIS" firstAttribute="trailing" secondItem="srE-kU-o46" secondAttribute="trailing" id="aQK-Yo-55V"/>
+                            <constraint firstItem="srE-kU-o46" firstAttribute="trailing" secondItem="HQv-Ho-HQQ" secondAttribute="trailing" id="asd-iA-iNp"/>
                             <constraint firstItem="2em-RB-Jye" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="eQ5-XK-sNM"/>
-                            <constraint firstItem="srE-kU-o46" firstAttribute="bottom" secondItem="xhR-M0-HcP" secondAttribute="bottom" constant="10" id="gmT-iW-fpf"/>
+                            <constraint firstAttribute="bottom" secondItem="xhR-M0-HcP" secondAttribute="bottom" constant="10" id="gmT-iW-fpf"/>
                             <constraint firstItem="zhq-FN-tIS" firstAttribute="top" secondItem="4Tu-dJ-3lW" secondAttribute="bottom" id="hEu-rk-1f3"/>
                             <constraint firstItem="kzy-G9-9Q3" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.09" id="hN9-vA-QsN"/>
                             <constraint firstAttribute="bottom" secondItem="0Ff-PU-ZUX" secondAttribute="bottom" id="hbO-Cb-Dqw"/>
@@ -1816,6 +1818,7 @@
                         <outlet property="BackgroundImage" destination="4Tu-dJ-3lW" id="e1G-3l-z5q"/>
                         <outlet property="BigView" destination="Bd8-uC-vl3" id="pIq-8E-aLp"/>
                         <outlet property="DarkBackground" destination="0Ff-PU-ZUX" id="OXB-Nx-2hr"/>
+                        <outlet property="ImageConstraint" destination="6ph-Wz-3ww" id="Re9-7j-Bhv"/>
                         <outlet property="MyAverageLabel" destination="HQv-Ho-HQQ" id="GMn-js-A7I"/>
                         <outlet property="SecondTime1" destination="2em-RB-Jye" id="4dH-x6-MY3"/>
                         <outlet property="SecondTime2" destination="Bsx-oU-StS" id="Dc5-G0-JZo"/>
@@ -1868,7 +1871,7 @@
         <image name="xmark.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rF2-8b-ORo"/>
-        <segue reference="z5C-xH-DX3"/>
+        <segue reference="PIq-RF-q2x"/>
+        <segue reference="TfV-nY-2Oj"/>
     </inferredMetricsTieBreakers>
 </document>
