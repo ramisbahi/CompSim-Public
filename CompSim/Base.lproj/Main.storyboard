@@ -1510,7 +1510,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fQe-f8-jUV">
-                                <rect key="frame" x="0.0" y="-170" width="414" height="583.33333333333337"/>
+                                <rect key="frame" x="0.0" y="-170" width="414" height="1166"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1700,13 +1700,13 @@
                                 <color key="backgroundColor" red="0.1131800518" green="0.1131800518" blue="0.1131800518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target Average: 1.49" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhq-FN-tIS">
-                                <rect key="frame" x="0.0" y="546" width="414" height="51.666666666666629"/>
+                                <rect key="frame" x="0.0" y="1092" width="414" height="51.666666666666742"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2em-RB-Jye">
-                                <rect key="frame" x="192" y="602.66666666666663" width="30" height="66"/>
+                                <rect key="frame" x="192" y="1148.6666666666667" width="30" height="66"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
                                 <connections>
                                     <action selector="Time1Touched:" destination="aUe-TH-pA1" eventType="touchUpInside" id="nqd-eY-dRo"/>
@@ -1765,7 +1765,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" alpha="0.84999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happyKevin" translatesAutoresizingMaskIntoConstraints="NO" id="4Tu-dJ-3lW">
-                                <rect key="frame" x="-374" y="0.0" width="1162" height="546"/>
+                                <rect key="frame" x="-955" y="0.0" width="2324" height="1092"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="HQv-Ho-HQQ">
                                 <rect key="frame" x="6" y="657" width="402" height="93.666666666666742"/>
