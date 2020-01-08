@@ -36,13 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 2,
+            schemaVersion: 3,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 2) {
+                if (oldSchemaVersion < 3) {
                     // Nothing to do!
                     // Realm will automatically detect new properties and removed properties
                     // And will update the schema on disk automatically
@@ -144,9 +144,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         defaults.set(ViewController.darkMode, forKey: AppDelegate.darkMode)
         defaults.set(ViewController.cuber, forKey: AppDelegate.cuber)
-        defaults.set(ViewController.ao5, forKey: AppDelegate.ao5)
-        defaults.set(ViewController.mo3, forKey: AppDelegate.mo3)
-        defaults.set(ViewController.bo3, forKey: AppDelegate.bo3)
         defaults.set(ViewController.timing, forKey: AppDelegate.timing)
         defaults.set(ViewController.inspection, forKey: AppDelegate.inspection)
         defaults.set(ViewController.holdingTime, forKey: AppDelegate.holdingTime)

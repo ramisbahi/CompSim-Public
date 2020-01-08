@@ -310,7 +310,7 @@ class TimerViewController: UIViewController {
     
     @IBAction func SubmitButton(_ sender: Any) {
         
-        if(ViewController.mySession.currentIndex < 4 && ViewController.ao5 || ViewController.mySession.currentIndex < 2 && (ViewController.mo3 || ViewController.bo3))
+        if(ViewController.mySession.currentIndex < 4 && ViewController.mySession.solveType == 0 || ViewController.mySession.currentIndex < 2 && (ViewController.mySession.solveType > 0))
         {
             self.performSegue(withIdentifier: "goToViewController", sender: self)
         }

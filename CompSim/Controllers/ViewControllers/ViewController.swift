@@ -58,10 +58,6 @@ class ViewController: UIViewController {
     
     static var cuber = "Random"
     
-    static var ao5 = true
-    static var mo3 = false
-    static var bo3 = false
-    
     static var holdingTime: Float = 0.55 
     
     static var mySession = Session(name: "3x3", enteredEvent: 1)
@@ -552,7 +548,7 @@ class ViewController: UIViewController {
             self.labels[i].isHidden = true
         }
         
-        if(ViewController.mySession.currentIndex == 5) || ViewController.mySession.currentIndex == 3 && !ViewController.ao5
+        if(ViewController.mySession.currentIndex == 5) || ViewController.mySession.currentIndex == 3 && ViewController.mySession.solveType > 0
         {
             allSolvesDone()
         }
@@ -647,9 +643,6 @@ class ViewController: UIViewController {
     {
         ViewController.darkMode = UserDefaults.standard.bool(forKey: AppDelegate.darkMode)
         ViewController.cuber = UserDefaults.standard.string(forKey: AppDelegate.cuber) ?? "Lucas"
-        ViewController.ao5 = UserDefaults.standard.bool(forKey: AppDelegate.ao5)
-        ViewController.bo3 = UserDefaults.standard.bool(forKey: AppDelegate.bo3)
-        ViewController.mo3 = UserDefaults.standard.bool(forKey: AppDelegate.mo3)
         ViewController.timing = UserDefaults.standard.bool(forKey: AppDelegate.timing)
         ViewController.inspection = UserDefaults.standard.bool(forKey: AppDelegate.inspection)
         ViewController.holdingTime = UserDefaults.standard.float(forKey: AppDelegate.holdingTime)

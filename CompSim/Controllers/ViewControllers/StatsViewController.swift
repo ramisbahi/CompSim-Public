@@ -73,7 +73,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func updateBarWidth()
     {
-        let view = StatsTableView
+        let view = BigView // change
         
         let numAverages = ViewController.mySession.results.count
         var losingCount = 0
@@ -131,74 +131,20 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let newSession = Session(name: name, enteredEvent: 1)
         
         
+        
+        
+        ViewController.mySession = newSession // now current session
+        ViewController.allSessions[name] = newSession // map with name
+        
         try! realm.write {
             realm.add(newSession)
             smartEvent(name: newSession.name, session: newSession)
         }
         
-        ViewController.mySession = newSession // now current session
-        ViewController.allSessions[name] = newSession // map with name
         self.updateNewSessionStackView()
         StatsTableView.reloadData()
         ViewController.sessionChanged = true
         updateBarWidth()
-    }
-    
-    func smartEvent(name: String, session: Session)
-    {
-        switch name.lowercased()
-        {
-        case "2x2x2", "2x2":
-            session.doEvent(enteredEvent: 0)
-            doAvg()
-        case "3x3x3", "3x3":
-            session.doEvent(enteredEvent: 1)
-            doAvg()
-        case "4x4x4", "4x4":
-            session.doEvent(enteredEvent: 2)
-            doAvg()
-        case "5x5x5", "5x5":
-            session.doEvent(enteredEvent: 3)
-            doAvg()
-        case "6x6x6", "6x6":
-            session.doEvent(enteredEvent: 4)
-            doMean()
-        case "7x7x7", "7x7":
-            session.doEvent(enteredEvent: 5)
-            doMean()
-        case "pyra", "pyraminx":
-            session.doEvent(enteredEvent: 6)
-            doAvg()
-        case "mega", "megaminx":
-            session.doEvent(enteredEvent: 7)
-            doAvg()
-        case "sq-1", "sq1", "square1", "square-1":
-            session.doEvent(enteredEvent: 8)
-            doAvg()
-        case "skewb", "skoob":
-            session.doEvent(enteredEvent: 9)
-            doAvg()
-        case "clock":
-            session.doEvent(enteredEvent: 10)
-            doAvg()
-        default:
-            break
-        }
-    }
-    
-    func doAvg()
-    {
-        ViewController.mo3 = false
-        ViewController.bo3 = false
-        ViewController.ao5 = true
-    }
-    
-    func doMean()
-    {
-        print("doing mean")
-        ViewController.mo3 = true
-        ViewController.bo3 = false
-        ViewController.ao5 = false
     }
     
     func updateNewSessionStackView()
@@ -209,7 +155,65 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let newButton = createButton(name: ViewController.mySession.name)
         SessionCollection.append(newButton)
         SessionStackView.addArrangedSubview(newButton)
+        setUpStackView()
     }
+    
+    func smartEvent(name: String, session: Session)
+    {
+        switch name.lowercased()
+        {
+        case "2x2x2", "2x2":
+            session.doEvent(enteredEvent: 0)
+            //session.solveType = 0 - default anyway
+        case "3x3x3", "3x3":
+            session.doEvent(enteredEvent: 1)
+            //session.solveType = 0
+        case "4x4x4", "4x4":
+            session.doEvent(enteredEvent: 2)
+            //session.solveType = 0
+        case "5x5x5", "5x5":
+            session.doEvent(enteredEvent: 3)
+            //session.solveType = 0
+        case "6x6x6", "6x6":
+            session.doEvent(enteredEvent: 4)
+            session.solveType = 1
+        case "7x7x7", "7x7":
+            session.doEvent(enteredEvent: 5)
+            session.solveType = 1
+        case "pyra", "pyraminx":
+            session.doEvent(enteredEvent: 6)
+            //session.solveType = 0
+        case "mega", "megaminx":
+            session.doEvent(enteredEvent: 7)
+            //session.solveType = 0
+        case "sq-1", "sq1", "square1", "square-1":
+            session.doEvent(enteredEvent: 8)
+            //session.solveType = 0
+        case "skewb", "skoob":
+            session.doEvent(enteredEvent: 9)
+            //session.solveType = 0
+        case "clock":
+            session.doEvent(enteredEvent: 10)
+            //session.solveType = 0
+        case "bld", "3bld", "blindfolded", "3x3 bld", "3x3 blindfolded":
+            session.doEvent(enteredEvent: 11)
+            session.solveType = 2
+        default:
+            break
+        }
+    }
+    
+    func doAvg()
+    {
+        ViewController.mySession.solveType = 0
+    }
+    
+    func doMean()
+    {
+        ViewController.mySession.solveType = 1
+    }
+    
+    
     
     // called whenever something changed with sessions
     func setUpStackView()
@@ -246,7 +250,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         retButton.setTitleColor(.white, for: .normal)
         retButton.titleLabel?.font = UIFont(name: "Futura", size: 17)
         retButton.backgroundColor = ViewController.orangeColor()
-        retButton.layer.cornerRadius = 20
+        retButton.layer.cornerRadius = 18
         retButton.isUserInteractionEnabled = true
         retButton.addTarget(self, action: #selector(SessionSelected(_:)), for: UIControl.Event.touchUpInside)
         return retButton
@@ -291,12 +295,13 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         print(title)
         SessionButton.setTitle(title, for: .normal)
-        if ViewController.allSessions[title] != nil && title != ViewController.mySession.name // exists, not same
+        if ViewController.allSessions[title] != nil && title != ViewController.mySession.name // exists, not same - so switch session
         {
             ViewController.mySession = ViewController.allSessions[title]!
             ViewController.mySession.updateScrambler()
             ViewController.sessionChanged = true
             StatsTableView.reloadData()
+            updateBarWidth()
             print("changed session successfully")
         }
         

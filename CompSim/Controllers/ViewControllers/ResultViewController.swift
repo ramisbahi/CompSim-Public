@@ -31,6 +31,7 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var BackgroundImage: UIImageView!
     @IBOutlet weak var DarkBackground: UIImageView!
     
+    @IBOutlet weak var LogoImage: UIImageView!
     @IBOutlet weak var SecondTime1: UIButton!
     @IBOutlet weak var SecondTime2: UIButton!
     @IBOutlet weak var SecondTime3: UIButton!
@@ -73,11 +74,9 @@ class ResultViewController: UIViewController {
         TimerViewController.resultTime = 0 // set to 0 - we done
         labels = [SecondTime1, SecondTime2, SecondTime3, SecondTime4, SecondTime5]
         
-        print("ao5: \(ViewController.ao5)")
-        print("mo3: \(ViewController.mo3)")
         
         var numTimes = 3
-        if(ViewController.ao5)
+        if(ViewController.mySession.solveType == 0)
         {
             numTimes = 5
         }
@@ -87,7 +86,7 @@ class ResultViewController: UIViewController {
             labels[i].isHidden = false
         }
         
-        if(ViewController.ao5)
+        if(ViewController.mySession.solveType == 0)
         {
             MyAverageLabel.text = "= " + ViewController.mySession.myAverage + " Average!" // update my average label
         }
@@ -95,7 +94,7 @@ class ResultViewController: UIViewController {
         {
             SecondTime4.isHidden = true
             SecondTime5.isHidden = true
-            if(ViewController.mo3)
+            if(ViewController.mySession.solveType == 1)
             {
                 MyAverageLabel.text = "= " + ViewController.mySession.myAverage + " Mean!" // update my average label
             }
@@ -111,14 +110,8 @@ class ResultViewController: UIViewController {
        {
             WinningAverageLabel.text = ""
             
-            if(ViewController.cuber == "Random")
-            {
-                BackgroundImage.image = randomImage(happy: true)
-            }
-            else
-            {
-                BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
-            }
+            BackgroundImage.isHidden = true
+            LogoImage.isHidden = false
             
             try! realm.write {
                 ViewController.mySession.usingWinningTime.append(false)
@@ -177,11 +170,11 @@ class ResultViewController: UIViewController {
             winningAverage = winningTimeDistribution.nextInt()
         }
         
-        if(ViewController.ao5)
+        if(ViewController.mySession.solveType == 0)
         {
             WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Average" // update label
         }
-        else if(ViewController.mo3)
+        else if(ViewController.mySession.solveType == 1)
         {
             WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Mean" // update label
         }

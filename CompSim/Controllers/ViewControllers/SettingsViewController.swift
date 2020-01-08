@@ -194,19 +194,7 @@ class SettingsViewController: UIViewController {
             turnOffDarkMode()
         }
         
-        
-        if(ViewController.ao5)
-        {
-            solveTypeControl.selectedSegmentIndex = 0
-        }
-        else if(ViewController.mo3)
-        {
-            solveTypeControl.selectedSegmentIndex = 1
-        }
-        else
-        {
-            solveTypeControl.selectedSegmentIndex = 2
-        }
+        print("solve type \(ViewController.mySession.solveType)")
         
         
         if(ViewController.timing)
@@ -261,6 +249,8 @@ class SettingsViewController: UIViewController {
         let title = eventNames[ViewController.mySession.scrambler.myEvent]
         ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
         
+        
+        
         super.viewWillAppear(false)
         eventCollection.forEach { (button) in
             button.isHidden = true
@@ -268,6 +258,7 @@ class SettingsViewController: UIViewController {
         
         
         solveTypeControl.isEnabled = ViewController.mySession.currentIndex < 1
+        solveTypeControl.selectedSegmentIndex = ViewController.mySession.solveType
     }
     
     @IBAction func HoldingTimeChanged(_ sender: Any) {
@@ -283,22 +274,8 @@ class SettingsViewController: UIViewController {
     {
         super.viewWillDisappear(false)
         
-        switch(solveTypeControl.selectedSegmentIndex)
-        {
-        case 0:
-            ViewController.ao5 = true
-            ViewController.mo3 = false
-            ViewController.bo3 = false
-            break
-        case 1:
-            ViewController.mo3 = true
-            ViewController.ao5 = false
-            ViewController.bo3 = false
-            break
-        default:
-            ViewController.bo3 = true
-            ViewController.ao5 = false
-            ViewController.mo3 = false
+        try! realm.write {
+            ViewController.mySession.solveType = solveTypeControl.selectedSegmentIndex
         }
         
         ViewController.timerUpdate = TimerUpdateControl.selectedSegmentIndex

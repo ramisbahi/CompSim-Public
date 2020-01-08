@@ -22,6 +22,8 @@ class Session: Object
     @objc dynamic var minIndex = 0 // new
     @objc dynamic var maxIndex = 1 // new
     
+    @objc dynamic var solveType: Int = 0 // 0 = ao5, 1 = mo3, 2 = bo3
+    
     let times = List<SolveTime>() // current times // new
     
     var myAverage: String = ""
@@ -136,7 +138,7 @@ class Session: Object
     {
         print(times)
         intTotal = 0
-        if(currentIndex >= 3 && ViewController.ao5)
+        if(currentIndex >= 3 && ViewController.mySession.solveType == 0)
         {
             minIndex = 0
             maxIndex = 1
@@ -165,7 +167,7 @@ class Session: Object
                 }
             }
         }
-        else if ViewController.mo3
+        else if ViewController.mySession.solveType == 1
         {
             for i in 0..<currentIndex
             {
@@ -173,7 +175,7 @@ class Session: Object
                 intTotal += times[i].intTime
             }
         }
-        else if ViewController.bo3
+        else if ViewController.mySession.solveType == 2
         {
             minIndex = 0
             for i in 0..<currentIndex
@@ -197,15 +199,15 @@ class Session: Object
     
     func finishAverage() // give int total
     {
-        if(currentIndex == 5 && ViewController.ao5) // done with avg5
+        if(currentIndex == 5 && ViewController.mySession.solveType == 0) // done with avg5
         {
             averageTypes.append(0)
         }
-        else if(currentIndex == 3 && (ViewController.mo3 || ViewController.bo3)) // done with mo3 / bo3
+        else if(currentIndex == 3 && ViewController.mySession.solveType > 0) // done with mo3 / bo3
         {
             times.append(SolveTime(enteredTime: "0", scramble: ""))
             times.append(SolveTime(enteredTime: "0", scramble: ""))
-            ViewController.mo3 ? averageTypes.append(1) : averageTypes.append(2)
+            ViewController.mySession.solveType == 1 ? averageTypes.append(1) : averageTypes.append(2)
         }
         let timesArray = Array(times)
         allTimes.append(SolveTimeList(timesArray))
@@ -217,9 +219,9 @@ class Session: Object
         else
         {
             var averageTime = 0
-            if(ViewController.bo3)
+            if ViewController.mySession.solveType == 2
             {
-                print("we are doing bo3 bitch")
+                print("we are doing bo3")
                 averageTime = intTotal
             }
             else

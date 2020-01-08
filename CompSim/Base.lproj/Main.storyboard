@@ -594,7 +594,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="uNF-Ym-YWU"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <state key="normal" title="Random">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -613,7 +613,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="UOZ-nt-Yl0"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <state key="normal" title="Bill Wang">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -632,7 +632,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="2wM-2o-oeg"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <state key="normal" title="Feliks Zemdegs">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -651,7 +651,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="esj-5z-8yu"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <state key="normal" title="Kian Mansour">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -670,7 +670,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="P2I-ap-gzh"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <state key="normal" title="Lucas Etter">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -689,7 +689,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="jmi-Mw-ioM"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <state key="normal" title="Max Park">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -708,7 +708,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="SaQ-jz-Bjr"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <state key="normal" title="Patrick Ponce">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -727,7 +727,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="X7O-OG-lxf"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <state key="normal" title="Rami Sbahi">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -746,7 +746,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="g46-eW-voI"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                                         <state key="normal" title="Kevin Hays">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -1183,13 +1183,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="qbn-Pf-yTX">
-                                <rect key="frame" x="-41.333333333333343" y="76.333333333333314" width="496.66666666666674" height="583.33333333333348"/>
+                                <rect key="frame" x="72.333333333333343" y="-132" width="269.33333333333326" height="1000"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="qbn-Pf-yTX" firstAttribute="centerY" secondItem="onG-oC-39f" secondAttribute="centerY" id="2O7-Va-SHX"/>
-                            <constraint firstItem="qbn-Pf-yTX" firstAttribute="width" secondItem="onG-oC-39f" secondAttribute="width" multiplier="1.2" id="V75-hx-H2J"/>
+                            <constraint firstItem="qbn-Pf-yTX" firstAttribute="width" secondItem="onG-oC-39f" secondAttribute="width" multiplier="0.65" id="V75-hx-H2J"/>
                             <constraint firstItem="qbn-Pf-yTX" firstAttribute="centerX" secondItem="onG-oC-39f" secondAttribute="centerX" id="kvi-ls-brc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yyd-2N-H6H"/>
@@ -1315,7 +1315,7 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="19"/>
+                                                <integer key="value" value="18"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -1510,19 +1510,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fQe-f8-jUV">
-                                <rect key="frame" x="0.0" y="-170" width="414" height="1166"/>
+                                <rect key="frame" x="96.666666666666671" y="18.333333333333343" width="220.66666666666663" height="221"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fQe-f8-jUV" secondAttribute="height" multiplier="1:1" id="mFi-VM-Ym7"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kkF-a5-bB7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0a2-Ty-We2"/>
+                            <constraint firstItem="fQe-f8-jUV" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.3" id="14G-YD-g4a"/>
                             <constraint firstItem="1DX-31-wVt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="38B-Dn-bDp"/>
                             <constraint firstItem="Z7F-jU-2b1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4sE-LM-C5b"/>
                             <constraint firstItem="f3P-c9-dr7" firstAttribute="top" secondItem="kkF-a5-bB7" secondAttribute="bottom" id="5Vo-BG-EN6"/>
                             <constraint firstItem="RUu-Ml-8x3" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.09" id="6B4-Lh-QS3"/>
                             <constraint firstItem="nMw-Mu-qR6" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.09" id="8AA-3k-vXG"/>
                             <constraint firstItem="f3P-c9-dr7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CMf-rR-IbT"/>
-                            <constraint firstItem="fQe-f8-jUV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-170" id="KSm-ZJ-Opu"/>
+                            <constraint firstItem="fQe-f8-jUV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.35" id="Ez1-Xx-k5m"/>
                             <constraint firstItem="Z7F-jU-2b1" firstAttribute="top" secondItem="f3P-c9-dr7" secondAttribute="bottom" id="LUc-zb-7Rb"/>
                             <constraint firstItem="RUu-Ml-8x3" firstAttribute="top" secondItem="Z7F-jU-2b1" secondAttribute="bottom" id="Lus-IM-527"/>
                             <constraint firstItem="94l-PH-qUv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Oap-Fb-UIC"/>
@@ -1538,7 +1542,6 @@
                             <constraint firstItem="Z7F-jU-2b1" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.09" id="eGI-I1-z1N"/>
                             <constraint firstItem="94l-PH-qUv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eR4-0C-Yh8"/>
                             <constraint firstItem="94l-PH-qUv" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="fU6-z7-HFf"/>
-                            <constraint firstItem="fQe-f8-jUV" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ky9-PN-uFk"/>
                             <constraint firstItem="3DQ-yx-AYa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kyV-Bv-oqQ"/>
                             <constraint firstItem="FMg-Wj-RPc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="nYG-3G-qAt"/>
                             <constraint firstItem="a0e-a9-1ER" firstAttribute="top" secondItem="nMw-Mu-qR6" secondAttribute="bottom" id="oG4-bj-R96"/>
@@ -1767,6 +1770,12 @@
                             <imageView clipsSubviews="YES" alpha="0.84999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happyKevin" translatesAutoresizingMaskIntoConstraints="NO" id="4Tu-dJ-3lW">
                                 <rect key="frame" x="-374" y="0.0" width="1162" height="546"/>
                             </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="1Vm-8i-lBH">
+                                <rect key="frame" x="96.666666666666671" y="18.333333333333343" width="220.66666666666663" height="221"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1Vm-8i-lBH" secondAttribute="height" multiplier="1:1" id="alu-kY-2P6"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="HQv-Ho-HQQ">
                                 <rect key="frame" x="0.0" y="657" width="414" height="93.666666666666742"/>
                                 <attributedString key="attributedText">
@@ -1794,9 +1803,12 @@
                             <constraint firstItem="Off-7F-HIE" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.09" id="DdH-6K-tNR"/>
                             <constraint firstItem="zhq-FN-tIS" firstAttribute="leading" secondItem="srE-kU-o46" secondAttribute="leading" id="FSs-4h-w32"/>
                             <constraint firstItem="xhR-M0-HcP" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="Gv8-Wj-Oz7"/>
+                            <constraint firstItem="1Vm-8i-lBH" firstAttribute="centerY" secondItem="Bd8-uC-vl3" secondAttribute="centerY" multiplier="0.35" id="Hb3-gI-X84"/>
+                            <constraint firstItem="1Vm-8i-lBH" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.3" id="KbV-cX-vja"/>
                             <constraint firstItem="4Tu-dJ-3lW" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="NVX-oY-5Ak"/>
                             <constraint firstItem="kzy-G9-9Q3" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="Ojc-qT-72S"/>
                             <constraint firstItem="0ZI-JG-3AW" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="T80-zG-htN"/>
+                            <constraint firstItem="1Vm-8i-lBH" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="UsK-pu-rk9"/>
                             <constraint firstItem="srE-kU-o46" firstAttribute="trailing" secondItem="0Ff-PU-ZUX" secondAttribute="trailing" id="VXa-R2-hFn"/>
                             <constraint firstItem="2em-RB-Jye" firstAttribute="top" secondItem="zhq-FN-tIS" secondAttribute="bottom" constant="5" id="Wgx-zh-emH"/>
                             <constraint firstItem="HQv-Ho-HQQ" firstAttribute="leading" secondItem="srE-kU-o46" secondAttribute="leading" id="Wsd-gI-E1u"/>
@@ -1819,6 +1831,7 @@
                         <outlet property="BigView" destination="Bd8-uC-vl3" id="pIq-8E-aLp"/>
                         <outlet property="DarkBackground" destination="0Ff-PU-ZUX" id="OXB-Nx-2hr"/>
                         <outlet property="ImageConstraint" destination="6ph-Wz-3ww" id="Re9-7j-Bhv"/>
+                        <outlet property="LogoImage" destination="1Vm-8i-lBH" id="Q3c-oK-oFg"/>
                         <outlet property="MyAverageLabel" destination="HQv-Ho-HQQ" id="GMn-js-A7I"/>
                         <outlet property="SecondTime1" destination="2em-RB-Jye" id="4dH-x6-MY3"/>
                         <outlet property="SecondTime2" destination="Bsx-oU-StS" id="Dc5-G0-JZo"/>
@@ -1863,7 +1876,7 @@
         <image name="GaussianCurve" width="1116" height="462"/>
         <image name="arrow.turn.down.left" catalog="system" width="64" height="48"/>
         <image name="happyKevin" width="1162" height="546"/>
-        <image name="logo" width="1037" height="583.33331298828125"/>
+        <image name="logo" width="1000" height="1000"/>
         <image name="settings" width="29" height="29"/>
         <image name="sizedTarget" width="48.666667938232422" height="52.666667938232422"/>
         <image name="stats" width="33.666667938232422" height="33.666667938232422"/>
@@ -1871,7 +1884,7 @@
         <image name="xmark.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PIq-RF-q2x"/>
-        <segue reference="TfV-nY-2Oj"/>
+        <segue reference="rF2-8b-ORo"/>
+        <segue reference="z5C-xH-DX3"/>
     </inferredMetricsTieBreakers>
 </document>
