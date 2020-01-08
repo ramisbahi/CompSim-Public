@@ -11,20 +11,6 @@ import UIKit
 import GameKit
 import RealmSwift
 
-// get device name
-extension UIDevice {
-    var modelName: String {
-        var systemInfo = utsname()
-        uname(&systemInfo)
-        let machineMirror = Mirror(reflecting: systemInfo.machine)
-        let identifier = machineMirror.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8, value != 0 else { return identifier }
-            return identifier + String(UnicodeScalar(UInt8(value)))
-        }
-        return identifier
-    }
-}
-
 class ResultViewController: UIViewController {
 
     @IBOutlet var BigView: UIView!
@@ -284,11 +270,10 @@ class ResultViewController: UIViewController {
         BackgroundImage.addGestureRecognizer(tapGesture)
         BackgroundImage.isUserInteractionEnabled = true
         
-        let deviceName: String = UIDevice.current.modelName
-        print(deviceName)
-        let changeConstraintDevices = ["x86_64", "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,4", "iPhone11,6", "iPhone11,8", "iPhone12,1", "iPhone12,3", "iPhone12,5"]
         
-        if changeConstraintDevices.contains(deviceName)
+        let newDevices = ["x86_64", "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,4", "iPhone11,6", "iPhone11,8", "iPhone12,1", "iPhone12,3", "iPhone12,5"] // have weird thing at top of screen
+        
+        if newDevices.contains(ViewController.deviceName)
         {
             ImageConstraint.isActive = false
             BackgroundImage.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true

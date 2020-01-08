@@ -9,9 +9,22 @@
 import UIKit
 import RealmSwift
 
+
+// get device name
+extension UIDevice {
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        return identifier
+    }
+}
+
 @UIApplicationMain
-
-
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -48,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     // And will update the schema on disk automatically
                 }
             })
+        
+        ViewController.deviceName = UIDevice.current.modelName
 
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config

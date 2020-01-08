@@ -79,6 +79,8 @@ class ViewController: UIViewController {
     
     static var font: UIFont? = nil
     
+    static var deviceName: String = ""
+    
     let realm = try! Realm()
     
     struct Keys

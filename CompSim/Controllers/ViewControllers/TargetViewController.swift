@@ -250,16 +250,20 @@ class TargetViewController: UIViewController {
         // ask again - no input
     }
     
+    override func viewDidLayoutSubviews() {
+        let rangeFont = ViewController.fontToFitHeight(view: MinTimeLabel, multiplier: 0.9, name: "Futura")
+        MinTimeLabel.titleLabel?.font = rangeFont
+        MaxTimeLabel.titleLabel?.font = rangeFont
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         SingleTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
         MinTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
         MaxTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
+    
         
-        let rangeFont = ViewController.fontToFitHeight(view: BigView, multiplier: 0.06, name: "Futura")
-        MinTimeLabel.titleLabel?.font = rangeFont
-        MaxTimeLabel.titleLabel?.font = rangeFont
         
         updateHeights()
     }
@@ -330,7 +334,7 @@ class TargetViewController: UIViewController {
             label.textColor? = UIColor.white
         }
         WinningTimeSetting.tintColor = ViewController.orangeColor()
-        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: BigView, multiplier: 0.03, name: "Futura")], for: .normal)
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: WinningTimeSetting, multiplier: 0.6, name: "Futura")], for: .normal)
     }
     
     func turnOffDarkMode()
@@ -345,7 +349,7 @@ class TargetViewController: UIViewController {
         }
         DistributionImage.image = UIImage(named: "GaussianCurve")
         WinningTimeSetting.tintColor = .white
-        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: BigView, multiplier: 0.03, name: "Futura")], for: .normal)
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: WinningTimeSetting, multiplier: 0.6, name: "Futura")], for: .normal)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle
