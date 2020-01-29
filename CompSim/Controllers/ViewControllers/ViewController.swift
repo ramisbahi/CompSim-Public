@@ -265,11 +265,6 @@ class ViewController: UIViewController {
             self.view.removeGestureRecognizer(ViewController.longPress)
         }
         
-        
-        /*if ViewController.mySession.currentIndex == 5
-        {
-            allSolvesDone()
-        }*/
     }
     
     
@@ -492,22 +487,9 @@ class ViewController: UIViewController {
             self.ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
             self.updateLabels()
             print(ViewController.mySession.currentIndex)
-            if(ViewController.mySession.currentIndex == 4) // was all solves done, now 4/5
-            {
-                self.undoAllSolvesDone()
-            }
         })
         
         self.present(alert, animated: true)
-    }
-    
-    func undoAllSolvesDone()
-    {
-        self.gestureSetup()
-        SwipeUpLabel.text = "↑ Add Solve ↑"
-        self.SubmitButton.isHidden = true
-        self.Logo.isHidden = true
-        tabBarController?.tabBar.isHidden = false
     }
     
     func addSolve()
@@ -600,7 +582,7 @@ class ViewController: UIViewController {
         
         if(ViewController.mySession.currentIndex == 5) || ViewController.mySession.currentIndex == 3 && ViewController.mySession.solveType > 0
         {
-            allSolvesDone()
+            self.performSegue(withIdentifier: "viewControllerToResult", sender: self)
         }
         else
         {
@@ -608,16 +590,6 @@ class ViewController: UIViewController {
             Logo.isHidden = true
         }
         
-    }
-    
-    func allSolvesDone()
-    {
-        removeGestures()
-        SwipeUpLabel.text = ""
-        SubmitButton.isHidden = false
-        ScrambleLabel.text = ""
-        Logo.isHidden = false
-        tabBarController?.tabBar.isHidden = true
     }
     
     @IBAction func Time1Touched(_ sender: Any) {

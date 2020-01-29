@@ -45,6 +45,8 @@ class ResultViewController: UIViewController {
     
     let cubers = ["Bill", "Lucas", "Feliks", "Kian", "Rami", "Patrick", "Max", "Kevin"]
     
+    var times: [SolveTime] = []
+    
     // Additional setup after loading the view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -118,6 +120,8 @@ class ResultViewController: UIViewController {
             
             updateWinningAverage()
         }
+        
+        times = Array(ViewController.mySession.times)
         
         // last thing done - reset
         try! realm.write {
@@ -253,7 +257,7 @@ class ResultViewController: UIViewController {
     func showScramble(num: Int)
     {
         let myTitle = self.labels[num].titleLabel!.text
-        let myScramble = ViewController.mySession.times[num].myScramble
+        let myScramble = times[num].myScramble
         
         let alertService = ViewSolveAlertService()
         let alert = alertService.alert(usingPenalty: false, title: myTitle!, scramble: myScramble, penalty: 0, completion:

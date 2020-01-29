@@ -498,22 +498,11 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func deleteAveragePressed(at index: Int, _ tableView: UITableView, forRowAt indexPath: IndexPath)
     {
-        let alert = UIAlertController(title: "Delete \(ViewController.mySession.allAverages[index]) average?", message: "", preferredStyle: .alert)
-        
-        let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: {
-            (_) in
-            // Confirming deleted solve
+        let alertService = SimpleAlertService()
+        let alert = alertService.alert(myTitle: "Delete \(ViewController.mySession.allAverages[index]) average?", completion: {
             self.deleteAverage(at: index)
             tableView.deleteRows(at: [indexPath], with: .fade)
         })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (_) in
-        })
-        
-        alert.addAction(cancelAction)
-        alert.addAction(confirmAction)
-        alert.preferredAction = confirmAction
         
         self.present(alert, animated: true)
     }
