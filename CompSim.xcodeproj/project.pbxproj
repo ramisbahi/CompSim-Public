@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		360BC94C23BBE64C00EE8324 /* cheer.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94B23BBE64C00EE8324 /* cheer.m4a */; };
 		360BC95023BBE70B00EE8324 /* Sad_Trombone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94F23BBE70B00EE8324 /* Sad_Trombone.mp3 */; };
+		3617752323DE1A5A00FC6DCE /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3617752223DE1A5A00FC6DCE /* HelpViewController.swift */; };
 		36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36348225239C6E82009A14C7 /* TimerViewController.swift */; };
 		3634822823A0615F009A14C7 /* SolveTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822723A0615F009A14C7 /* SolveTime.swift */; };
 		3634822A23A06653009A14C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822923A06653009A14C7 /* Session.swift */; };
+		363D562223C7B2E000357368 /* NotificationAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D562123C7B2E000357368 /* NotificationAlertViewController.swift */; };
+		363D562423C7B41A00357368 /* NotificationAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 363D562323C7B41A00357368 /* NotificationAlert.storyboard */; };
 		3654A84223BC02280066A48F /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3654A84123BC02280066A48F /* LogoViewController.swift */; };
 		3654A84523BC09610066A48F /* 8seconds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3654A84323BC09610066A48F /* 8seconds.mp3 */; };
 		3654A84623BC09610066A48F /* 12seconds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3654A84423BC09610066A48F /* 12seconds.mp3 */; };
@@ -64,6 +67,7 @@
 		3696538823BA9F46000784D9 /* ViewSolveAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */; };
 		3696538A23BA9F55000784D9 /* ViewSolveAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */; };
 		36A0A4AB23AF676600D41938 /* SolveTimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0A4AA23AF676600D41938 /* SolveTimeList.swift */; };
+		36B88A9123C7AD93004262CA /* NotificationAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B88A9023C7AD93004262CA /* NotificationAlertService.swift */; };
 		C79702DB2D2364D767859210 /* Pods_CompSim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A701408881740019BBE202B5 /* Pods_CompSim.framework */; };
 /* End PBXBuildFile section */
 
@@ -101,9 +105,12 @@
 		3612321823005DA00044DEF1 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3612321F2300C2CB0044DEF1 /* TargetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetViewController.swift; sourceTree = "<group>"; };
 		361232212300C48E0044DEF1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		3617752223DE1A5A00FC6DCE /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		36348225239C6E82009A14C7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		3634822723A0615F009A14C7 /* SolveTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SolveTime.swift; path = CompSim/Session/SolveTime.swift; sourceTree = SOURCE_ROOT; };
 		3634822923A06653009A14C7 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		363D562123C7B2E000357368 /* NotificationAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertViewController.swift; sourceTree = "<group>"; };
+		363D562323C7B41A00357368 /* NotificationAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotificationAlert.storyboard; sourceTree = "<group>"; };
 		36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoByTwoSolver.swift; sourceTree = "<group>"; };
 		3654A84123BC02280066A48F /* LogoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogoViewController.swift; path = Controllers/ViewControllers/LogoViewController.swift; sourceTree = "<group>"; };
 		3654A84323BC09610066A48F /* 8seconds.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 8seconds.mp3; sourceTree = "<group>"; };
@@ -129,6 +136,7 @@
 		3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSolveAlertService.swift; sourceTree = "<group>"; };
 		3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSolveAlertViewController.swift; sourceTree = "<group>"; };
 		36A0A4AA23AF676600D41938 /* SolveTimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveTimeList.swift; sourceTree = "<group>"; };
+		36B88A9023C7AD93004262CA /* NotificationAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertService.swift; sourceTree = "<group>"; };
 		51B11034A5437C664B7F3657 /* Pods-CompSim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompSim.debug.xcconfig"; path = "Target Support Files/Pods-CompSim/Pods-CompSim.debug.xcconfig"; sourceTree = "<group>"; };
 		A701408881740019BBE202B5 /* Pods_CompSim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompSim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2409226874AB7090A497119 /* Pods-CompSim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompSim.release.xcconfig"; path = "Target Support Files/Pods-CompSim/Pods-CompSim.release.xcconfig"; sourceTree = "<group>"; };
@@ -256,6 +264,7 @@
 				3612321323005D9F0044DEF1 /* ViewController.swift */,
 				3663DF4C22DEBB5C006657CF /* ResultViewController.swift */,
 				36348225239C6E82009A14C7 /* TimerViewController.swift */,
+				3617752223DE1A5A00FC6DCE /* HelpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -282,6 +291,8 @@
 		3696538423BA9AD6000784D9 /* AlertViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				363D562123C7B2E000357368 /* NotificationAlertViewController.swift */,
+				36B88A9023C7AD93004262CA /* NotificationAlertService.swift */,
 				3696537E23BA8AEE000784D9 /* SimpleAlertViewController.storyboard */,
 				3696538023BA8B5C000784D9 /* SimpleAlertViewController.swift */,
 				3696538223BA8F51000784D9 /* SimpleAlertService.swift */,
@@ -291,6 +302,7 @@
 				3696538523BA9B5C000784D9 /* ViewSolveAlert.storyboard */,
 				3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */,
 				3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */,
+				363D562323C7B41A00357368 /* NotificationAlert.storyboard */,
 			);
 			path = AlertViewControllers;
 			sourceTree = "<group>";
@@ -375,6 +387,7 @@
 			files = (
 				360BC94C23BBE64C00EE8324 /* cheer.m4a in Resources */,
 				360BC95023BBE70B00EE8324 /* Sad_Trombone.mp3 in Resources */,
+				363D562423C7B41A00357368 /* NotificationAlert.storyboard in Resources */,
 				3696537923BA45F8000784D9 /* AddSolveAlert.storyboard in Resources */,
 				3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */,
 				3696537F23BA8AEF000784D9 /* SimpleAlertViewController.storyboard in Resources */,
@@ -436,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3617752323DE1A5A00FC6DCE /* HelpViewController.swift in Sources */,
 				3690EB072316293700CB0B78 /* CompSim-Bridging-Header.h in Sources */,
 				3690EAE52316293200CB0B78 /* TabBarController.swift in Sources */,
 				3634822823A0615F009A14C7 /* SolveTime.swift in Sources */,
@@ -445,6 +459,7 @@
 				3690EAE82316293200CB0B78 /* SettingsViewController.swift in Sources */,
 				3696538823BA9F46000784D9 /* ViewSolveAlertService.swift in Sources */,
 				3690EAE92316293200CB0B78 /* ResultViewController.swift in Sources */,
+				36B88A9123C7AD93004262CA /* NotificationAlertService.swift in Sources */,
 				3690EAEA2316293200CB0B78 /* TargetViewController.swift in Sources */,
 				3690EAEB2316293200CB0B78 /* StatsViewController.swift in Sources */,
 				3690EAEC2316293200CB0B78 /* ViewController.swift in Sources */,
@@ -481,6 +496,7 @@
 				3690EB042316293200CB0B78 /* Search.m in Sources */,
 				3690EB052316293200CB0B78 /* TwoPhaseScrambler.h in Sources */,
 				3690EB062316293200CB0B78 /* TwoPhaseScrambler.m in Sources */,
+				363D562223C7B2E000357368 /* NotificationAlertViewController.swift in Sources */,
 				3696537B23BA4671000784D9 /* AddSolveAlertViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,14 +646,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = JJ3T82U92L;
 				INFOPLIST_FILE = CompSim/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramisbahi.CompSim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CompSim/CompSim-Bridging-Header.h";
@@ -654,14 +670,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = JJ3T82U92L;
 				INFOPLIST_FILE = CompSim/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramisbahi.CompSim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CompSim/CompSim-Bridging-Header.h";

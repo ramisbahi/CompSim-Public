@@ -81,15 +81,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if results.count > 0 // has a session saved
         {
             ViewController.allSessions.removeAll()
-            ViewController.mySession = results[0]
+            ViewController.mySession = results[0] // will change to last session, just in case
             for result in results
             {
                 if(result.name == UserDefaults.standard.string(forKey: AppDelegate.sessionName)) // last session left on
                 {
                     ViewController.mySession = result
+                    ViewController.mySession.updateScrambler()
                 }
-                ViewController.mySession.updateScrambler()
-                ViewController.allSessions[result.name] = result
+                ViewController.allSessions.append(result)
                 print("created \(result.name) session")
             }
         }

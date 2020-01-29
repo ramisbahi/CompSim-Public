@@ -143,7 +143,7 @@ class TargetViewController: UIViewController {
             
             let inputTime = alertService.myVC.TextField.text!
             
-            if let _ = Float(inputTime)
+            if ViewController.validEntryTime(time: inputTime)
             {
                let temp = SolveTime(enteredTime: inputTime, scramble: "")
                let str = temp.myString
@@ -166,7 +166,7 @@ class TargetViewController: UIViewController {
             }
             else
             {
-                self.alertValidTime(alertMessage: "Please enter valid time")
+                self.alertValidTime()
             }
         })
         
@@ -181,7 +181,7 @@ class TargetViewController: UIViewController {
             
             let inputTime = alertService.myVC.TextField.text!
             
-            if let _ = Float(inputTime)
+            if ViewController.validEntryTime(time: inputTime)
             {
                let temp = SolveTime(enteredTime: inputTime, scramble: "")
                let str = temp.myString
@@ -204,7 +204,7 @@ class TargetViewController: UIViewController {
             }
             else
             {
-                self.alertValidTime(alertMessage: "Please enter valid time")
+                self.alertValidTime()
             }
         })
         
@@ -219,7 +219,7 @@ class TargetViewController: UIViewController {
             
             let inputTime = alertService.myVC.TextField.text!
             
-            if let _ = Float(inputTime)
+            if ViewController.validEntryTime(time: inputTime)
             {
                let temp = SolveTime(enteredTime: inputTime, scramble: "")
                let str = temp.myString
@@ -234,18 +234,17 @@ class TargetViewController: UIViewController {
             }
             else
             {
-                self.alertValidTime(alertMessage: "Please enter valid time")
+                self.alertValidTime()
             }
         })
         
         self.present(alert, animated: true)
     }
     
-    
-    func alertValidTime(alertMessage: String)
+    func alertValidTime()
     {
-        let alert = UIAlertController(title: alertMessage, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+        let alertService = NotificationAlertService()
+        let alert = alertService.alert(myTitle: "Invalid Time")
         self.present(alert, animated: true, completion: nil)
         // ask again - no input
     }

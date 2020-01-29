@@ -45,7 +45,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             let maxCharacters = 20
             
-            if(input.count < maxCharacters && ViewController.allSessions[input] == nil) // creating new session
+            if(input.count < maxCharacters && self.sessionNamed(title: input) == nil) // creating new session
             {
                 self.createNewSession(name: input)
             }
@@ -130,11 +130,9 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print("creating new session...")
         let newSession = Session(name: name, enteredEvent: 1)
         
-        
-        
-        
         ViewController.mySession = newSession // now current session
-        ViewController.allSessions[name] = newSession // map with name
+        ViewController.allSessions.append(newSession)
+//        ViewController.allSessions[name] = newSession // map with name
         
         try! realm.write {
             realm.add(newSession)
@@ -221,14 +219,11 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         DeleteButton.isEnabled = ViewController.allSessions.count > 1
         SessionButton.setTitle(ViewController.mySession.name, for: .normal)
         SessionCollection = []
-        for (sessionName, _) in ViewController.allSessions
+        for session in ViewController.allSessions
         {
-            if(ViewController.allSessions[sessionName] != nil)
-            {
-                let newButton = createButton(name: sessionName)
-                SessionCollection.append(newButton)
-                SessionStackView.addArrangedSubview(newButton)
-            }
+            let newButton = createButton(name: session.name)
+            SessionCollection.append(newButton)
+            SessionStackView.addArrangedSubview(newButton)
         }
     }
     
@@ -258,8 +253,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func alertInvalid(alertMessage: String)
     {
-        let alert = UIAlertController(title: alertMessage, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+        let alertService = NotificationAlertService()
+        let alert = alertService.alert(myTitle: alertMessage)
         self.present(alert, animated: true, completion: nil)
         // ask again - no input
     }
@@ -295,9 +290,9 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         print(title)
         SessionButton.setTitle(title, for: .normal)
-        if ViewController.allSessions[title] != nil && title != ViewController.mySession.name // exists, not same - so switch session
+        if title != ViewController.mySession.name // exists,// not same - so switch session
         {
-            ViewController.mySession = ViewController.allSessions[title]!
+            ViewController.mySession = sessionNamed(title: title)!
             ViewController.mySession.updateScrambler()
             ViewController.sessionChanged = true
             StatsTableView.reloadData()
@@ -307,12 +302,22 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-    
+    func sessionNamed(title: String) -> Session?
+    {
+        for session in ViewController.allSessions
+        {
+            if session.name == title
+            {
+                return session
+            }
+        }
+        return nil
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
         
         print("in this")
         DeleteButton.isEnabled = ViewController.allSessions.count > 1
@@ -341,7 +346,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             let input = alertService.myVC.TextField.text!
             let maxCharacters = 20
-            if(input.count < maxCharacters && ViewController.allSessions[input] == nil) // creating new session
+            
+            if(input.count < maxCharacters && self.sessionNamed(title: input) == nil) // creating new session
             {
                 self.replaceSession(oldName: self.SessionButton.titleLabel?.text! ?? "", newName: input)
             }
@@ -373,12 +379,17 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         let sessionName: String = (SessionButton.titleLabel?.text)!
         
+        
+        
+        let index = ViewController.allSessions.firstIndex(of: self.sessionNamed(title: sessionName)!)!
+        
+        let removedSession: Session = ViewController.allSessions.remove(at: index) // remove from array
+    
         try! realm.write {
-            realm.delete(ViewController.allSessions[sessionName]!)
+            realm.delete(removedSession)
         }
-        ViewController.allSessions[sessionName] = nil // map with name
-        var iterator = ViewController.allSessions.values.makeIterator()
-        ViewController.mySession = iterator.next()!
+        
+        ViewController.mySession = ViewController.allSessions[index % ViewController.allSessions.count]
         hideAll()
         setUpStackView()
         StatsTableView.reloadData()
@@ -389,13 +400,11 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func replaceSession(oldName: String, newName: String)
     {
         print("replacing session...")
-        let session = ViewController.allSessions[oldName]
+        let session = sessionNamed(title: oldName)!
         try! realm.write
         {
-            session?.name = newName
+            session.name = newName
         }
-        ViewController.allSessions[oldName] = nil // map with name
-        ViewController.allSessions[newName] = session
         hideAll()
         setUpStackView()
     }
@@ -525,6 +534,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         updateBarWidth()
     }
     
+    // average pressed
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         StatsViewController.myIndex = ViewController.mySession.currentAverage - indexPath.row // bc reverse
         
@@ -549,6 +559,8 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
 
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector (rename))
         doubleTapGesture.numberOfTapsRequired = 2

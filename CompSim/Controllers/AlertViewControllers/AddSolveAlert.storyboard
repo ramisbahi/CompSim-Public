@@ -126,7 +126,8 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="V2C-pC-0xb" firstAttribute="height" secondItem="WsM-m8-5OG" secondAttribute="height" multiplier="0.4" id="rAY-nb-pgq"/>
+                            <constraint firstItem="V2C-pC-0xb" firstAttribute="width" relation="lessThanOrEqual" secondItem="WsM-m8-5OG" secondAttribute="width" multiplier="0.95" id="cnX-Hp-hoa"/>
+                            <constraint firstItem="V2C-pC-0xb" firstAttribute="height" secondItem="WsM-m8-5OG" secondAttribute="height" multiplier="0.4" priority="750" id="rAY-nb-pgq"/>
                             <constraint firstItem="V2C-pC-0xb" firstAttribute="centerX" secondItem="WsM-m8-5OG" secondAttribute="centerX" id="t1n-0z-oOM"/>
                             <constraint firstItem="V2C-pC-0xb" firstAttribute="centerY" secondItem="WsM-m8-5OG" secondAttribute="centerY" constant="-70" id="tQB-uF-YrQ"/>
                         </constraints>

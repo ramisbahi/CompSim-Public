@@ -32,6 +32,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var Time4: UIButton!
     @IBOutlet weak var Time5: UIButton!
     
+    @IBOutlet weak var ResetButton: UIButton!
+    @IBOutlet weak var NewScrambleButton: UIButton!
+    @IBOutlet weak var HelpButton: UIButton!
+    
     @IBOutlet var TimesCollection: [UIButton]!
     
     @IBOutlet weak var ScrambleLabel: UILabel!
@@ -61,7 +65,8 @@ class ViewController: UIViewController {
     static var holdingTime: Float = 0.55 
     
     static var mySession = Session(name: "3x3", enteredEvent: 1)
-    static var allSessions: [String : Session] = ["3x3" : ViewController.mySession]
+    static var allSessions: [Session] = [ViewController.mySession]
+    
     
     static var timerUpdate = 0 // 0 = update, 1 = seconds, 2 = none
     
@@ -95,15 +100,18 @@ class ViewController: UIViewController {
         || UserDefaults.standard.bool(forKey: AppDelegate.mo3)
     }
     
+    override func viewDidLayoutSubviews() {
+        HelpButton.layer.cornerRadius = HelpButton.frame.size.height / 2.0
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.\
         print("viewcontroller did load")
         
-        
-        
         tabBarController?.tabBar.isHidden = false
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         self.gestureSetup()
         self.labels = [Time1, Time2, Time3, Time4, Time5] // add labels to labels array - one time thing
@@ -202,6 +210,24 @@ class ViewController: UIViewController {
         return UIFont(name: name, size: fontSize)!
     }
     
+    @IBAction func HelpPressed(_ sender: Any) {
+        segueToHelp()
+    }
+    
+    func segueToHelp()
+    {
+        let obj = (self.storyboard?.instantiateViewController(identifier: "HelpViewController"))!
+
+                   let transition:CATransition = CATransition()
+                   transition.duration = 0.3
+                   transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+                   transition.type = .push
+                   transition.subtype = .fromRight
+               
+               
+                self.navigationController!.view.layer.add(transition, forKey: kCATransition)
+                   self.navigationController?.pushViewController(obj, animated: true)
+    }
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -260,22 +286,22 @@ class ViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
         self.view.addGestureRecognizer(tap)
         
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
+        /*let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
         doubleTap.numberOfTouchesRequired = 2
         doubleTap.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(doubleTap)
+        self.view.addGestureRecognizer(doubleTap)*/
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeRight(gesture:)))
+        /*let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeRight(gesture:)))
         swipeRight.direction = .right
-        self.view.addGestureRecognizer(swipeRight)
+        self.view.addGestureRecognizer(swipeRight)*/
         
     }
     
-    @objc func respondToSwipeRight(gesture: UIGestureRecognizer)
+    /*@objc func respondToSwipeRight(gesture: UIGestureRecognizer)
     {
         ViewController.mySession.scrambler.genScramble()
         ScrambleLabel.text = ViewController.mySession.scrambler.currentScramble
-    }
+    }*/
     
     @objc func handleLongPress(sender: UIGestureRecognizer)
     {
@@ -372,20 +398,33 @@ class ViewController: UIViewController {
         swipeDown.direction = .down // ...when down swipe is done
         self.view.addGestureRecognizer(swipeDown) // allow view to recognize
         
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
+        /*let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
         doubleTap.numberOfTouchesRequired = 2
         doubleTap.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(doubleTap)
+        self.view.addGestureRecognizer(doubleTap)*/
     }
     
-    @objc func respondToDoubleTap(gesture: UITapGestureRecognizer)
-    {
+    @IBAction func resetPressed(_ sender: Any) {
         let alertService = SimpleAlertService()
         let alert = alertService.alert(myTitle: "Reset Average?", completion: {
             self.reset()
         })
         self.present(alert, animated: true)
     }
+    
+    @IBAction func newScramblePressed(_ sender: Any) {
+        ViewController.mySession.scrambler.genScramble()
+        ScrambleLabel.text = ViewController.mySession.scrambler.currentScramble
+    }
+    
+    /*@objc func respondToDoubleTap(gesture: UITapGestureRecognizer)
+    {
+        let alertService = SimpleAlertService()
+        let alert = alertService.alert(myTitle: "Reset Average?", completion: {
+            self.reset()
+        })
+        self.present(alert, animated: true)
+    }*/
     
     func usingLongPress() -> Bool
     {
@@ -410,8 +449,8 @@ class ViewController: UIViewController {
     
     func alertValidTime(alertMessage: String)
     {
-        let alert = UIAlertController(title: alertMessage, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+        let alertService = NotificationAlertService()
+        let alert = alertService.alert(myTitle: "Invalid Time")
         self.present(alert, animated: true, completion: nil)
         // ask again - no input
     }
@@ -481,7 +520,7 @@ class ViewController: UIViewController {
             let penalties = [2, 0, 1] // adjust for index
             let inputPenalty = penalties[alertService.myVC.PenaltySelector.selectedSegmentIndex]
             
-            if let _ = Float(inputTime)
+            if ViewController.validEntryTime(time: inputTime)
             {
                 self.updateTimes(enteredTime: inputTime, penalty: inputPenalty) // add time, show label, change parentheses
             }
@@ -492,6 +531,15 @@ class ViewController: UIViewController {
         })
         
         self.present(alert, animated: true)
+    }
+    
+    static func validEntryTime(time: String) -> Bool
+    {
+        if let _ = Float(time.replacingOccurrences(of: ",", with: "."))
+        {
+            return true
+        }
+        return false
     }
     
     // double is entered, converted to int for hundredth precision (i.e. 4.0 will become 400 now)
@@ -626,6 +674,12 @@ class ViewController: UIViewController {
             button.setTitleColor(ViewController.orangeColor(), for: .normal) // orange
         }
         SubmitButton.backgroundColor = .darkGray
+        HelpButton.backgroundColor = .darkGray
+        HelpButton.tintColor = .white
+        ResetButton.backgroundColor = .darkGray
+        ResetButton.titleLabel?.textColor = .white
+        NewScrambleButton.backgroundColor = .darkGray
+        NewScrambleButton.titleLabel?.textColor = .white
     }
     
     func turnOffDarkMode()
@@ -639,6 +693,13 @@ class ViewController: UIViewController {
             button.setTitleColor(UIColor.link, for: .normal) // orange
         }
         SubmitButton.backgroundColor = ViewController.darkBlueColor()
+        HelpButton.backgroundColor = ViewController.darkBlueColor()
+        HelpButton.tintColor = .white //ViewController.darkBlueColor()
+        ResetButton.backgroundColor = ViewController.darkBlueColor()
+        ResetButton.titleLabel?.textColor = .white
+        NewScrambleButton.backgroundColor = ViewController.darkBlueColor()
+        NewScrambleButton.titleLabel?.textColor = .white
+        
     }
     
     func doSettings()

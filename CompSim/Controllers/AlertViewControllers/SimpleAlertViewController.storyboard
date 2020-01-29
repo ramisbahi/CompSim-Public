@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLA-Qw-t8w">
-                                <rect key="frame" x="43.333333333333343" y="226.66666666666669" width="327.33333333333326" height="142.66666666666669"/>
+                                <rect key="frame" x="43.333333333333343" y="238" width="327.33333333333326" height="120"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWs-hZ-csw">
                                         <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="55"/>
@@ -28,7 +28,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.031372549020000001" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.029578437289999999" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="GRg-Dx-7xP" firstAttribute="centerX" secondItem="UWs-hZ-csw" secondAttribute="centerX" id="9qv-MD-gDt"/>
                                             <constraint firstItem="GRg-Dx-7xP" firstAttribute="centerY" secondItem="UWs-hZ-csw" secondAttribute="centerY" id="NhY-So-oPp"/>
@@ -43,11 +43,8 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbl-pC-1d9">
-                                        <rect key="frame" x="174.33333333333331" y="79.333333333333343" width="143" height="53.333333333333343"/>
+                                        <rect key="frame" x="178.66666666666669" y="65" width="138.66666666666669" height="45"/>
                                         <color key="backgroundColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Xbl-pC-1d9" secondAttribute="height" multiplier="8:3" id="PwX-wX-Gru"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
                                         <state key="normal" title="Yes">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -61,12 +58,9 @@
                                             <action selector="yesPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="e1Y-AJ-stl"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIg-EF-rnM">
-                                        <rect key="frame" x="8" y="78" width="141" height="59"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIg-EF-rnM">
+                                        <rect key="frame" x="10" y="65" width="138.66666666666666" height="45"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="PIg-EF-rnM" secondAttribute="height" multiplier="8:3" id="jOC-D7-JfA"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -87,14 +81,17 @@
                                 </accessibility>
                                 <constraints>
                                     <constraint firstItem="Xbl-pC-1d9" firstAttribute="height" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="0.375" id="0b5-Su-G7w"/>
+                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="bottom" constant="10" id="2xd-T7-Dbv"/>
+                                    <constraint firstItem="PIg-EF-rnM" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="bottom" constant="10" id="9JB-5e-dkz"/>
                                     <constraint firstAttribute="bottom" secondItem="PIg-EF-rnM" secondAttribute="bottom" constant="10" id="DdY-Fm-HOW"/>
+                                    <constraint firstItem="PIg-EF-rnM" firstAttribute="width" secondItem="Xbl-pC-1d9" secondAttribute="width" id="J3o-Zm-T4p"/>
                                     <constraint firstItem="PIg-EF-rnM" firstAttribute="leading" secondItem="MLA-Qw-t8w" secondAttribute="leading" constant="10" id="KwF-EZ-Aen"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="top" secondItem="MLA-Qw-t8w" secondAttribute="top" id="Lzh-WI-bel"/>
-                                    <constraint firstAttribute="width" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="55:24" id="QpU-8Q-6df"/>
                                     <constraint firstAttribute="bottom" secondItem="Xbl-pC-1d9" secondAttribute="bottom" constant="10" id="RhZ-Wc-ndD"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="centerX" secondItem="MLA-Qw-t8w" secondAttribute="centerX" id="ULe-of-teS"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="leading" secondItem="MLA-Qw-t8w" secondAttribute="leading" id="VWL-nK-toV"/>
                                     <constraint firstAttribute="trailing" secondItem="Xbl-pC-1d9" secondAttribute="trailing" constant="10" id="VYX-Wz-O04"/>
+                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="leading" secondItem="PIg-EF-rnM" secondAttribute="trailing" constant="30" id="arU-eu-rjj"/>
                                     <constraint firstAttribute="trailing" secondItem="UWs-hZ-csw" secondAttribute="trailing" id="cgq-ue-KNd"/>
                                     <constraint firstItem="PIg-EF-rnM" firstAttribute="height" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="0.375" id="oXJ-aI-sSZ"/>
                                 </constraints>

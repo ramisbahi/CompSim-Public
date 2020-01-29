@@ -58,7 +58,7 @@ class TimerViewController: UIViewController {
         
         TimerLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
         SubmitButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
-        PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: ViewController.fontToFitHeight(view: BigView, multiplier: 0.03, name: "Futura")], for: .normal)
+        
         
         if(ViewController.inspection)
         {
@@ -71,13 +71,24 @@ class TimerViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        if(ViewController.darkMode)
+        {
+            PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal) //- later make white\
+        }
+        else
+        {
+            PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: ViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal)
+        }
+    }
+    
     func makeDarkMode()
     {
         DarkBackground.isHidden = false
         TimerLabel.textColor = .white
         SubmitButton.backgroundColor = .darkGray
         CancelButton.backgroundColor = .darkGray
-        PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: BigView, multiplier: 0.03, name: "Futura")], for: .normal) //- later make white\
+        
     }
     
     func gestureSetup()
@@ -126,6 +137,8 @@ class TimerViewController: UIViewController {
         timerPhase = INSPECTION
         var inspectionTime = 15
         TimerLabel.text = String(inspectionTime)
+        let eightPlayer = setUpEightSecSound()
+        let twelvePlayer = setUpTwelveSecSound()
         inspectionTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block:
             { (time) in
             if(self.timerPhase == self.INSPECTION || self.timerPhase == self.FROZEN || self.timerPhase == self.READY)
@@ -136,13 +149,32 @@ class TimerViewController: UIViewController {
                     self.TimerLabel.text = String(inspectionTime)
                     if(ViewController.inspectionSound)
                     {
-                        if(inspectionTime == 7)
+                        if(inspectionTime == 8)
                         {
-                            self.eightSecSound()
+                            DispatchQueue.global(qos: .utility).async
+                            {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) // call 0.3 sec early
+                                {
+                                    if(self.timerPhase == self.INSPECTION)
+                                    {
+                                        eightPlayer!.play()
+                                    }
+                                }
+                            }
+                            
                         }
-                        else if(inspectionTime == 3)
+                        else if(inspectionTime == 4)
                         {
-                            self.twelveSecSound()
+                            DispatchQueue.global(qos: .utility).async
+                                {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) // call 0.3 sec early
+                                {
+                                    if(self.timerPhase == self.INSPECTION)
+                                    {
+                                        twelvePlayer!.play()
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -165,12 +197,13 @@ class TimerViewController: UIViewController {
         })
     }
     
-    func eightSecSound()
+    func setUpEightSecSound() -> AVAudioPlayer?
     {
         do {
-           try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setCategory(.ambient)
         } catch(let error) {
             print(error.localizedDescription)
+            return nil
         }
         let pathToSound = Bundle.main.path(forResource: "8seconds", ofType: "mp3")
         let url = URL(fileURLWithPath: pathToSound!)
@@ -178,19 +211,22 @@ class TimerViewController: UIViewController {
         do
         {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer.play()
+            audioPlayer.prepareToPlay()
+            return audioPlayer
         }
         catch{
             print("failed to play eight sec sound")
+            return nil
         }
     }
     
-    func twelveSecSound()
+    func setUpTwelveSecSound() -> AVAudioPlayer?
     {
         do {
-           try AVAudioSession.sharedInstance().setCategory(.playback)
+           try AVAudioSession.sharedInstance().setCategory(.ambient)
         } catch(let error) {
             print(error.localizedDescription)
+            return nil
         }
         let pathToSound = Bundle.main.path(forResource: "12seconds", ofType: "mp3")
         let url = URL(fileURLWithPath: pathToSound!)
@@ -198,10 +234,12 @@ class TimerViewController: UIViewController {
         do
         {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer.play()
+            audioPlayer.prepareToPlay()
+            return audioPlayer
         }
         catch{
-            print("failed to play twelve sec sound")
+            print("failed to play eight sec sound")
+            return nil
         }
     }
     

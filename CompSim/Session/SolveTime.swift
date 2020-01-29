@@ -21,26 +21,30 @@ class SolveTime: Object
     @objc dynamic var myScramble: String = ""
     
     
+    
     // can be min:sec:decimal
     convenience init(enteredTime: String, scramble: String) {
         self.init()
         
+        var decimalTime = enteredTime.replacingOccurrences(of: ",", with: ".")
+        
         myScramble = scramble
         var floatTime: Float = 0.0
-        if(enteredTime.countInstances(of: ".") == 1 || enteredTime.count <= 2) // i.e. 67.01 --> 1:07.01
+        if(decimalTime.countInstances(of: ".") == 1 || decimalTime.count <= 2) // i.e. 67.01 --> 1:07.01
         {
-            floatTime = Float(enteredTime)!
+            floatTime = Float(decimalTime)!
         }
+    
         else // no decimal, more than 2 characters
         {
-            if(enteredTime.count <= 4)
+            if(decimalTime.count <= 4)
             {
-                floatTime = Float(enteredTime)! / 100
+                floatTime = Float(decimalTime)! / 100
             }
             else // 5+ characters, no decimal // example: 21965 (2:19.65)
             {
-                let min = Int(String(enteredTime.prefix(enteredTime.count - 4)))! // 2
-                let rest = Int(String(enteredTime.suffix(4)))! // 1965
+                let min = Int(String(decimalTime.prefix(decimalTime.count - 4)))! // 2
+                let rest = Int(String(decimalTime.suffix(4)))! // 1965
                 let minSec = min * 60
                 let restSec: Float = Float(rest) / 100
                 floatTime = Float(minSec) + restSec
@@ -167,6 +171,20 @@ class SolveTime: Object
             }
             afterDecimal = String(stringNum.suffix(2))
         }
-        return beforeDecimal + "." + afterDecimal
+        
+        let fullString = beforeDecimal + "." + afterDecimal
+        
+        let formatter = NumberFormatter()
+        formatter.locale = NSLocale.current
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.usesGroupingSeparator = true
+        let usingComma: Bool = formatter.string(from: 2.5)!.contains(",")
+        print("using comma \(usingComma)")
+        
+        if(usingComma) // european style
+        {
+            return fullString.replacingOccurrences(of: ".", with: ",")
+        }
+        return fullString // normal
     }
 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Notification Alert View Controller-->
+        <scene sceneID="qj6-2A-eq6">
+            <objects>
+                <viewController storyboardIdentifier="NotificationAlertVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Gb-Wn-yT0" customClass="NotificationAlertViewController" customModule="Pods_CompSim" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qTg-Dw-KC0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-eC-0ZH">
+                                <rect key="frame" x="105.5" y="318" width="203" height="120"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qc8-6K-oHA">
+                                        <rect key="frame" x="0.0" y="0.0" width="203" height="55"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alL-wr-bU6">
+                                                <rect key="frame" x="20" y="8" width="163" height="39"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.029578437289999999" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstItem="alL-wr-bU6" firstAttribute="leading" secondItem="Qc8-6K-oHA" secondAttribute="leading" constant="20" id="2KX-vI-OR5"/>
+                                            <constraint firstItem="alL-wr-bU6" firstAttribute="centerY" secondItem="Qc8-6K-oHA" secondAttribute="centerY" id="3eY-sh-0Ua"/>
+                                            <constraint firstItem="alL-wr-bU6" firstAttribute="centerX" secondItem="Qc8-6K-oHA" secondAttribute="centerX" id="7Lp-EC-dMa"/>
+                                            <constraint firstAttribute="trailing" secondItem="alL-wr-bU6" secondAttribute="trailing" constant="20" id="PaO-yC-bYc"/>
+                                            <constraint firstAttribute="height" constant="55" id="SyQ-QO-l7a"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7a-NK-qnc">
+                                        <rect key="frame" x="36.5" y="65" width="130" height="45"/>
+                                        <color key="backgroundColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="130" id="2s8-TI-MMX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
+                                        <state key="normal" title="OK">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="OKPressed:" destination="8Gb-Wn-yT0" eventType="touchUpInside" id="nw3-An-CN3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" allowsDirectInteraction="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Qc8-6K-oHA" secondAttribute="trailing" id="2pt-nf-aae"/>
+                                    <constraint firstItem="Qc8-6K-oHA" firstAttribute="leading" secondItem="JM3-eC-0ZH" secondAttribute="leading" id="7fs-5O-bwQ"/>
+                                    <constraint firstItem="y7a-NK-qnc" firstAttribute="centerX" secondItem="JM3-eC-0ZH" secondAttribute="centerX" id="QM5-GW-Q8V"/>
+                                    <constraint firstAttribute="bottom" secondItem="y7a-NK-qnc" secondAttribute="bottom" constant="10" id="WZe-wI-Mw1"/>
+                                    <constraint firstItem="y7a-NK-qnc" firstAttribute="height" secondItem="JM3-eC-0ZH" secondAttribute="height" multiplier="0.375" id="krr-Gx-F9i"/>
+                                    <constraint firstItem="Qc8-6K-oHA" firstAttribute="top" secondItem="JM3-eC-0ZH" secondAttribute="top" id="ofL-5M-PRc"/>
+                                    <constraint firstItem="y7a-NK-qnc" firstAttribute="top" secondItem="Qc8-6K-oHA" secondAttribute="bottom" constant="10" id="wnA-gC-Xgg"/>
+                                    <constraint firstItem="Qc8-6K-oHA" firstAttribute="centerX" secondItem="JM3-eC-0ZH" secondAttribute="centerX" id="zDx-wf-c9Y"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="JM3-eC-0ZH" firstAttribute="centerX" secondItem="qTg-Dw-KC0" secondAttribute="centerX" id="7gQ-xr-ZFi"/>
+                            <constraint firstItem="JM3-eC-0ZH" firstAttribute="width" relation="greaterThanOrEqual" secondItem="qTg-Dw-KC0" secondAttribute="width" multiplier="0.3" id="7xb-ZM-K17"/>
+                            <constraint firstItem="JM3-eC-0ZH" firstAttribute="centerY" secondItem="qTg-Dw-KC0" secondAttribute="centerY" constant="-70" id="cnH-Ju-ePD"/>
+                            <constraint firstItem="JM3-eC-0ZH" firstAttribute="width" relation="lessThanOrEqual" secondItem="qTg-Dw-KC0" secondAttribute="width" multiplier="0.8" id="fZd-HQ-wJI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="U5v-mc-uF7"/>
+                    </view>
+                    <connections>
+                        <outlet property="NotifTitle" destination="alL-wr-bU6" id="VXf-jd-Atg"/>
+                        <outlet property="NotifView" destination="Qc8-6K-oHA" id="YRC-hx-rEd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pyX-Eu-fOG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="143.47826086956522" y="39.130434782608695"/>
+        </scene>
+    </scenes>
+</document>
