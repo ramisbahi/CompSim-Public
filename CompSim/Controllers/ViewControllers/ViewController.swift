@@ -102,6 +102,11 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         HelpButton.layer.cornerRadius = HelpButton.frame.size.height / 2.0
+        if(NewScrambleButton.frame.size.width < 120)
+        {
+            NewScrambleButton.setTitle("New Scr.", for: .normal)
+        }
+        print(NewScrambleButton.frame.size.width)
     }
     
     override func viewDidLoad() {
@@ -168,9 +173,10 @@ class ViewController: UIViewController {
         
         SubmitButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.045, name: "Futura")
         
-        print(ViewController.mySession.currentIndex)
         
     }
+    
+    
     
     static func fontToFitHeight(view: UIView, multiplier: Float, name: String) -> UIFont
     {
@@ -202,7 +208,6 @@ class ViewController: UIViewController {
             }
             }
         
-        print(fontSize)
         if(name == "System")
         {
             return UIFont.systemFont(ofSize: fontSize)
@@ -321,11 +326,9 @@ class ViewController: UIViewController {
         {
             self.performSegue(withIdentifier: "timerSegue", sender: self)
         }
-        print("handling timer long press")
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches cancelled")
         if(usingLongPress())
         {
             cancelTimer()
@@ -333,7 +336,7 @@ class ViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches began")
+        //print("touches began")
         if usingLongPress() && ViewController.timerPhase == self.IDLE
         {
             TimerLabel.isHidden = false
@@ -344,7 +347,7 @@ class ViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) // released before minimum hold time
     {
-        print("touches ended")
+        //print("touches ended")
         if(usingLongPress() && ViewController.timerPhase == FROZEN)
         {
             cancelTimer()
@@ -364,7 +367,7 @@ class ViewController: UIViewController {
     
     func showAll()
     {
-        print("showing all")
+        //print("showing all")
         updateLabels()
         ScrambleLabel.isHidden = false
         SwipeUpLabel.isHidden = false
@@ -374,7 +377,7 @@ class ViewController: UIViewController {
     
     func cancelTimer()
     {
-        print("cancelling")
+        //print("cancelling")
         TimerLabel.isHidden = true
         ViewController.timerPhase = IDLE
         showAll()
@@ -469,7 +472,7 @@ class ViewController: UIViewController {
         }
         else if ViewController.timing && (ViewController.inspection || ViewController.holdingTime < 0.01) // tap gesture, timing
         {
-            print("tapped")
+            //print("tapped")
             self.performSegue(withIdentifier: "timerSegue", sender: self)
         }
     }

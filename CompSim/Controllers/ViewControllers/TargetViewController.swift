@@ -253,6 +253,9 @@ class TargetViewController: UIViewController {
         let rangeFont = ViewController.fontToFitHeight(view: MinTimeLabel, multiplier: 0.9, name: "Futura")
         MinTimeLabel.titleLabel?.font = rangeFont
         MaxTimeLabel.titleLabel?.font = rangeFont
+        
+   
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: ViewController.darkMode ? UIColor.white : UIColor.black, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: WinningTimeSetting, multiplier: 0.6, name: "Futura")], for: .normal)
     }
     
     override func viewDidLoad() {

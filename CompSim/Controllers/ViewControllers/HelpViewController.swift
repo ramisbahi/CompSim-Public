@@ -12,12 +12,13 @@ class HelpViewController: UIViewController {
 
     @IBOutlet var BigView: UIView!
     @IBOutlet weak var LittleView: UIView!
+    @IBOutlet weak var BackButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("hi")
+        BackButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         // Do any additional setup after loading the view.
     }
