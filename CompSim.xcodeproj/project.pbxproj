@@ -246,6 +246,7 @@
 		3690EABB2316201900CB0B78 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				36E94F4C23FCEFEF00C0CC79 /* ScrambleViewControllers */,
 				3696538423BA9AD6000784D9 /* AlertViewControllers */,
 				360F108E22E551E500EEBB75 /* TabBarController.swift */,
 				3690EABC2316202100CB0B78 /* ViewControllers */,
@@ -305,6 +306,13 @@
 				363D562323C7B41A00357368 /* NotificationAlert.storyboard */,
 			);
 			path = AlertViewControllers;
+			sourceTree = "<group>";
+		};
+		36E94F4C23FCEFEF00C0CC79 /* ScrambleViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ScrambleViewControllers;
 			sourceTree = "<group>";
 		};
 		D4BADD2EF749D20246CDFB2A /* Pods */ = {

@@ -26,6 +26,10 @@ extension String {
 class ViewController: UIViewController {
     @IBOutlet var BigView: UIView!
     
+    @IBOutlet weak var ScrambleArea: UIView!
+    @IBOutlet weak var GestureArea: UIView!
+    
+
     @IBOutlet weak var Time1: UIButton!
     @IBOutlet weak var Time2: UIButton!
     @IBOutlet weak var Time3: UIButton!
@@ -258,16 +262,16 @@ class ViewController: UIViewController {
         
         if(usingLongPress())
         {
-            self.view.removeGestureRecognizer(ViewController.longPress) // not sure if necessary
+            GestureArea.removeGestureRecognizer(ViewController.longPress) // not sure if necessary
             ViewController.longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
             ViewController.longPress.allowableMovement = 50
             ViewController.longPress.minimumPressDuration = TimeInterval(ViewController.holdingTime)
             ViewController.longPress.cancelsTouchesInView = false
-            self.view.addGestureRecognizer(ViewController.longPress)
+            GestureArea.addGestureRecognizer(ViewController.longPress)
         }
         else // inspection or 0.0+noinspection
         {
-            self.view.removeGestureRecognizer(ViewController.longPress)
+            GestureArea.removeGestureRecognizer(ViewController.longPress)
         }
         
     }
@@ -277,31 +281,23 @@ class ViewController: UIViewController {
     {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToGesture(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
         swipeUp.direction = .up // ...when up swipe is done
-        self.view.addGestureRecognizer(swipeUp) // allow view to recognize
+        GestureArea.addGestureRecognizer(swipeUp) // allow view to recognize
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
         swipeDown.direction = .down // ...when down swipe is done
-        self.view.addGestureRecognizer(swipeDown) // allow view to recognize
+        GestureArea.addGestureRecognizer(swipeDown) // allow view to recognize
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
-        self.view.addGestureRecognizer(tap)
+        GestureArea.addGestureRecognizer(tap)
         
-        /*let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
-        doubleTap.numberOfTouchesRequired = 2
-        doubleTap.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(doubleTap)*/
-        
-        /*let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeRight(gesture:)))
-        swipeRight.direction = .right
-        self.view.addGestureRecognizer(swipeRight)*/
-        
+        let tapScramble = UITapGestureRecognizer(target: self, action: #selector(scrambleTapped(gesture:)))
+        ScrambleArea.addGestureRecognizer(tapScramble)
     }
     
-    /*@objc func respondToSwipeRight(gesture: UIGestureRecognizer)
+    @objc func scrambleTapped(gesture: UIGestureRecognizer)
     {
-        ViewController.mySession.scrambler.genScramble()
-        ScrambleLabel.text = ViewController.mySession.scrambler.currentScramble
-    }*/
+        print("tapped")
+    }
     
     @objc func handleLongPress(sender: UIGestureRecognizer)
     {
@@ -336,8 +332,18 @@ class ViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //print("touches began")
-        if usingLongPress() && ViewController.timerPhase == self.IDLE
+        print("touches began")
+        
+        var inGestureArea = false
+        for touch in touches
+        {
+            if(touch.location(in: GestureArea).y > 0)
+            {
+                inGestureArea = true
+            }
+        }
+        
+        if inGestureArea && usingLongPress() && ViewController.timerPhase == self.IDLE
         {
             TimerLabel.isHidden = false
             ViewController.timerPhase = self.FROZEN
@@ -347,12 +353,14 @@ class ViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) // released before minimum hold time
     {
-        //print("touches ended")
+        print("touches ended")
         if(usingLongPress() && ViewController.timerPhase == FROZEN)
         {
             cancelTimer()
         }
     }
+    
+    
     
     func hideAll()
     {
@@ -385,21 +393,17 @@ class ViewController: UIViewController {
     
     func removeGestures()
     {
-        for recognizer in self.view.gestureRecognizers!
+        
+        for recognizer in GestureArea.gestureRecognizers!
         {
-            self.view.removeGestureRecognizer(recognizer)
+            GestureArea.removeGestureRecognizer(recognizer)
         }
         
         // then re-add... improve this
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:))) // swipeUp is a gesture recognizer that will run respondToUpSwipe function and will be its parameter
         swipeDown.direction = .down // ...when down swipe is done
-        self.view.addGestureRecognizer(swipeDown) // allow view to recognize
-        
-        /*let doubleTap = UITapGestureRecognizer(target: self, action: #selector(respondToDoubleTap(gesture:)))
-        doubleTap.numberOfTouchesRequired = 2
-        doubleTap.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(doubleTap)*/
+        GestureArea.addGestureRecognizer(swipeDown) // allow view to recognize
     }
     
     @IBAction func resetPressed(_ sender: Any) {
@@ -414,15 +418,6 @@ class ViewController: UIViewController {
         ViewController.mySession.scrambler.genScramble()
         ScrambleLabel.text = ViewController.mySession.scrambler.currentScramble
     }
-    
-    /*@objc func respondToDoubleTap(gesture: UITapGestureRecognizer)
-    {
-        let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Reset Average?", completion: {
-            self.reset()
-        })
-        self.present(alert, animated: true)
-    }*/
     
     func usingLongPress() -> Bool
     {
