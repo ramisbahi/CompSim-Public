@@ -29,7 +29,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var ScrambleArea: UIView!
     @IBOutlet weak var GestureArea: UIView!
     
-
+    @IBOutlet weak var DrawScrambleView: UIView!
+    
     @IBOutlet weak var Time1: UIButton!
     @IBOutlet weak var Time2: UIButton!
     @IBOutlet weak var Time3: UIButton!
@@ -71,7 +72,6 @@ class ViewController: UIViewController {
     static var mySession = Session(name: "3x3", enteredEvent: 1)
     static var allSessions: [Session] = [ViewController.mySession]
     
-    
     static var timerUpdate = 0 // 0 = update, 1 = seconds, 2 = none
     
     static var justOpened = true
@@ -96,6 +96,25 @@ class ViewController: UIViewController {
     {
         static let darkMode = "darkMode"
     }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    /*func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 9
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        print("called")
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sticker", for: indexPath)
+        
+        cell.backgroundColor = .blue
+        
+        
+        return cell
+    }*/
     
     func hasSetSettings() -> Bool // one must be true
     {
@@ -296,7 +315,7 @@ class ViewController: UIViewController {
     
     @objc func scrambleTapped(gesture: UIGestureRecognizer)
     {
-        print("tapped")
+        DrawScrambleView.isHidden = !DrawScrambleView.isHidden
     }
     
     @objc func handleLongPress(sender: UIGestureRecognizer)

@@ -10,6 +10,7 @@
 		360BC94C23BBE64C00EE8324 /* cheer.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94B23BBE64C00EE8324 /* cheer.m4a */; };
 		360BC95023BBE70B00EE8324 /* Sad_Trombone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94F23BBE70B00EE8324 /* Sad_Trombone.mp3 */; };
 		3617752323DE1A5A00FC6DCE /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3617752223DE1A5A00FC6DCE /* HelpViewController.swift */; };
+		361C625F240479FF0003D26F /* DrawScrambleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361C625E240479FF0003D26F /* DrawScrambleViewController.swift */; };
 		36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36348225239C6E82009A14C7 /* TimerViewController.swift */; };
 		3634822823A0615F009A14C7 /* SolveTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822723A0615F009A14C7 /* SolveTime.swift */; };
 		3634822A23A06653009A14C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822923A06653009A14C7 /* Session.swift */; };
@@ -106,6 +107,7 @@
 		3612321F2300C2CB0044DEF1 /* TargetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetViewController.swift; sourceTree = "<group>"; };
 		361232212300C48E0044DEF1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3617752223DE1A5A00FC6DCE /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		361C625E240479FF0003D26F /* DrawScrambleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawScrambleViewController.swift; sourceTree = "<group>"; };
 		36348225239C6E82009A14C7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		3634822723A0615F009A14C7 /* SolveTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SolveTime.swift; path = CompSim/Session/SolveTime.swift; sourceTree = SOURCE_ROOT; };
 		3634822923A06653009A14C7 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				3663DF4C22DEBB5C006657CF /* ResultViewController.swift */,
 				36348225239C6E82009A14C7 /* TimerViewController.swift */,
 				3617752223DE1A5A00FC6DCE /* HelpViewController.swift */,
+				361C625E240479FF0003D26F /* DrawScrambleViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				3654A84223BC02280066A48F /* LogoViewController.swift in Sources */,
 				3690EAF92316293200CB0B78 /* BigCubeScrambler.m in Sources */,
 				3690EAFA2316293200CB0B78 /* BigCubeScrambler.h in Sources */,
+				361C625F240479FF0003D26F /* DrawScrambleViewController.swift in Sources */,
 				3690EAFB2316293200CB0B78 /* Util.h in Sources */,
 				3690EAFC2316293200CB0B78 /* Util.m in Sources */,
 				3690EAFD2316293200CB0B78 /* Im.m in Sources */,

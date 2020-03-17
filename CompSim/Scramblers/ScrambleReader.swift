@@ -69,6 +69,7 @@ class ScrambleReader
         case 1: // 3x3
             currentScramble = threeScrambler.scramble()
             drawScramble = getDrawArray(scramble: currentScramble)
+            print(currentScramble)
         case 2: // 4x4
             currentScramble = bigCubeScrambler.getScrString(byType: 4)
         case 3: // 5x5
