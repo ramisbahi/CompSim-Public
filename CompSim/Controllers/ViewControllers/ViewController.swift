@@ -244,7 +244,7 @@ class ViewController: UIViewController {
     
     func segueToHelp()
     {
-        let obj = (self.storyboard?.instantiateViewController(identifier: "HelpViewController"))!
+        let obj = (self.storyboard?.instantiateViewController(withIdentifier: "HelpViewController"))!
 
                    let transition:CATransition = CATransition()
                    transition.duration = 0.3
@@ -315,7 +315,15 @@ class ViewController: UIViewController {
     
     @objc func scrambleTapped(gesture: UIGestureRecognizer)
     {
-        DrawScrambleView.isHidden = !DrawScrambleView.isHidden
+        if(ViewController.mySession.scrambler.myEvent == 1)
+        {
+            DrawScrambleView.isHidden = !DrawScrambleView.isHidden
+        }
+        else
+        {
+            DrawScrambleView.isHidden = true
+            self.respondToGesture(gesture: gesture)
+        }
     }
     
     @objc func handleLongPress(sender: UIGestureRecognizer)
@@ -655,6 +663,8 @@ class ViewController: UIViewController {
     func makeDarkMode()
     {
         BigView.backgroundColor = ViewController.darkModeColor()
+        ScrambleArea.backgroundColor = ViewController.darkModeColor()
+        GestureArea.backgroundColor = ViewController.darkModeColor()
         ScrambleLabel.textColor? = UIColor.white
         SwipeUpLabel.textColor? = UIColor.white
         SwipeDownLabel.textColor? = UIColor.white
@@ -669,17 +679,36 @@ class ViewController: UIViewController {
         ResetButton.titleLabel?.textColor = .white
         NewScrambleButton.backgroundColor = .darkGray
         NewScrambleButton.titleLabel?.textColor = .white
+        
+        setNeedsStatusBarAppearanceUpdate()
+        updateStatusBarBackground()
+    }
+    
+    func updateStatusBarBackground()
+    {
+        if #available(iOS 13.0, *) {
+            let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+            statusBar.backgroundColor = ViewController.darkMode ?  ViewController.darkModeColor() : .white
+             view.addSubview(statusBar)
+        }
     }
     
     func turnOffDarkMode()
     {
+        ScrambleArea.backgroundColor = .white
+        GestureArea.backgroundColor = .white
         BigView.backgroundColor = .white
         ScrambleLabel.textColor = UIColor.black
         SwipeUpLabel.textColor = UIColor.black
         SwipeDownLabel.textColor = UIColor.black
         TimesCollection.forEach { (button) in
             button.setTitleColor(.black, for: .disabled)
-            button.setTitleColor(UIColor.link, for: .normal) // orange
+            if #available(iOS 13.0, *) {
+                button.setTitleColor(UIColor.link, for: .normal)
+            } else {
+                button.setTitleColor(UIColor(displayP3Red: 0, green: 122.0/255, blue: 1, alpha: 1.0), for: .normal)
+                // Fallback on earlier versions
+            } // link
         }
         SubmitButton.backgroundColor = ViewController.darkBlueColor()
         HelpButton.backgroundColor = ViewController.darkBlueColor()
@@ -689,10 +718,14 @@ class ViewController: UIViewController {
         NewScrambleButton.backgroundColor = ViewController.darkBlueColor()
         NewScrambleButton.titleLabel?.textColor = .white
         
+        setNeedsStatusBarAppearanceUpdate()
+        updateStatusBarBackground()
+        
     }
     
     func doSettings()
     {
+        print("doing the settings")
         ViewController.darkMode = UserDefaults.standard.bool(forKey: AppDelegate.darkMode)
         ViewController.cuber = UserDefaults.standard.string(forKey: AppDelegate.cuber) ?? "Lucas"
         ViewController.timing = UserDefaults.standard.bool(forKey: AppDelegate.timing)
@@ -738,4 +771,5 @@ class ViewController: UIViewController {
     
     
 }
+
 

@@ -532,7 +532,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func slideRightSegue()
     {
-        let obj = (self.storyboard?.instantiateViewController(identifier: "AverageDetailViewController"))!
+        let obj = (self.storyboard?.instantiateViewController(withIdentifier: "AverageDetailViewController"))!
 
             let transition:CATransition = CATransition()
             transition.duration = 0.3
