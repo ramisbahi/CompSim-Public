@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let event = "event"
     static let sessionName = "sessionName"
     static let timerUpdate = "timerUpdate"
+    static let hasSet = "hasSet"
+    static let totalAverages = "totalAverages"
     
     lazy var realm = try! Realm()
     
@@ -70,6 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
         retrieveSessions()
+        
+        application.isIdleTimerDisabled = true
         return true
     }
     
@@ -166,6 +170,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.set(ViewController.mySession.scrambler.myEvent, forKey: AppDelegate.event)
         defaults.set(ViewController.mySession.name, forKey: AppDelegate.sessionName)
         defaults.set(ViewController.timerUpdate, forKey: AppDelegate.timerUpdate)
+        defaults.set(true, forKey: AppDelegate.hasSet)
+        defaults.set(ViewController.totalAverages, forKey: AppDelegate.totalAverages)
+        
     }
 
 //    // MARK: UISceneSession Lifecycle

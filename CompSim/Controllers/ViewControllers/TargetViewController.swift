@@ -49,6 +49,12 @@ class TargetViewController: UIViewController {
         
         // set the selected segment correctly
         
+        if(ViewController.mySession.targetType == 2)
+        {
+            try! realm.write {
+                ViewController.mySession.targetType = 1
+            }
+        }
         WinningTimeSetting.selectedSegmentIndex = ViewController.mySession.targetType
         setup(type: ViewController.mySession.targetType)
         
@@ -214,7 +220,7 @@ class TargetViewController: UIViewController {
     @IBAction func SingleTimeTouched(_ sender: Any) {
         
         let alertService = AlertService()
-        let alert = alertService.alert(placeholder: "Time", usingPenalty: false, keyboardType: 0, myTitle: "Single Time",
+        let alert = alertService.alert(placeholder: "Time", usingPenalty: false, keyboardType: 0, myTitle: "Target Time",
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!

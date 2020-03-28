@@ -10,6 +10,7 @@ import UIKit
 
 import GameKit
 import RealmSwift
+import StoreKit
 
 class ResultViewController: UIViewController {
 
@@ -52,6 +53,20 @@ class ResultViewController: UIViewController {
         super.viewWillAppear(true)
         try! realm.write {
             ViewController.mySession.finishAverage()
+        }
+        
+        ViewController.totalAverages += 1 // add 1 to dat
+        print("\(ViewController.totalAverages) averages done!")
+        
+        let ratings = [3, 10, 50, 200, 500, 1000, 1500, 2000, 2500, 3000]
+        
+        if(ratings.contains(ViewController.totalAverages))
+        {
+            
+            if #available( iOS 10.3,*){
+                print("okay requesting review")
+                SKStoreReviewController.requestReview()
+            }
         }
         
         if(ViewController.darkMode)

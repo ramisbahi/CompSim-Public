@@ -90,6 +90,8 @@ class ViewController: UIViewController {
     
     static var deviceName: String = ""
     
+    static var totalAverages: Int = 0 // for keeping track of user engagement
+    
     let realm = try! Realm()
     
     struct Keys
@@ -116,11 +118,9 @@ class ViewController: UIViewController {
         return cell
     }*/
     
-    func hasSetSettings() -> Bool // one must be true
+    static func hasSetSettings() -> Bool // one must be true
     {
-        return UserDefaults.standard.bool(forKey: AppDelegate.ao5)
-        || UserDefaults.standard.bool(forKey: AppDelegate.bo3)
-        || UserDefaults.standard.bool(forKey: AppDelegate.mo3)
+        return UserDefaults.standard.bool(forKey: AppDelegate.hasSet)
     }
     
     override func viewDidLayoutSubviews() {
@@ -146,7 +146,7 @@ class ViewController: UIViewController {
         
         if(ViewController.justOpened)
         {
-            if hasSetSettings()
+            if ViewController.hasSetSettings()
             {
                 doSettings()
                 ViewController.justOpened = false
@@ -727,12 +727,17 @@ class ViewController: UIViewController {
     {
         print("doing the settings")
         ViewController.darkMode = UserDefaults.standard.bool(forKey: AppDelegate.darkMode)
-        ViewController.cuber = UserDefaults.standard.string(forKey: AppDelegate.cuber) ?? "Lucas"
+        print(ViewController.darkMode)
+        ViewController.cuber = UserDefaults.standard.string(forKey: AppDelegate.cuber) ?? "Random"
         ViewController.timing = UserDefaults.standard.bool(forKey: AppDelegate.timing)
         ViewController.inspection = UserDefaults.standard.bool(forKey: AppDelegate.inspection)
         ViewController.holdingTime = UserDefaults.standard.float(forKey: AppDelegate.holdingTime)
         ViewController.timerUpdate = UserDefaults.standard.integer(forKey: AppDelegate.timerUpdate)
         ViewController.mySession.scrambler.doEvent(event: UserDefaults.standard.integer(forKey: AppDelegate.event))
+        if(ViewController.hasSetSettings())
+        {
+            ViewController.totalAverages = UserDefaults.standard.integer(forKey: AppDelegate.totalAverages)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle
