@@ -9,6 +9,7 @@
 import UIKit
 import GameKit
 import RealmSwift
+import Foundation
 
 class TimerViewController: UIViewController {
     
@@ -281,8 +282,8 @@ class TimerViewController: UIViewController {
     func startTimer()
     {
         inspectionTimer.invalidate()
-        timerTime = 0
         timerPhase = TIMING
+        
         if(ViewController.darkMode)
         {
             TimerLabel.textColor = UIColor.white
@@ -292,12 +293,17 @@ class TimerViewController: UIViewController {
             TimerLabel.textColor = UIColor.black
         }
         
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        nf.minimumFractionDigits = 2
+        nf.maximumFractionDigits = 2
+        
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: {_ in
             
             if(self.timerPhase == self.TIMING)
             {
                 self.timerTime += 0.01
-                self.updateLabel()
+                self.updateLabel(format: nf)
             }
             else
             {
@@ -307,16 +313,30 @@ class TimerViewController: UIViewController {
         
     }
     
-    func updateLabel()
+    func updateLabel(format: NumberFormatter)
     {
         if(ViewController.timerUpdate == 0) // timer update
         {
-            self.TimerLabel.text = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
+            if(self.timerTime < 60)
+            {
+                self.TimerLabel.text = format.string(from: NSNumber(value: self.timerTime))!
+            }
+            else
+            {
+                self.TimerLabel.text = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
+            }
         }
         else if(ViewController.timerUpdate == 1) // seconds update
         {
-            let fullString = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
-            self.TimerLabel.text = self.truncate(fullString)
+            if(self.timerTime < 60)
+            {
+                self.TimerLabel.text = String(Int(self.timerTime))
+            }
+            else
+            {
+                let fullString = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
+                self.TimerLabel.text = self.truncate(fullString)
+            }
         }
         else // no update
         {

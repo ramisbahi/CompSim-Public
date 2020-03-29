@@ -73,6 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // will automatically perform the migration
         retrieveSessions()
         
+        SolveTime.initializeStuff()
+        
         application.isIdleTimerDisabled = true
         return true
     }

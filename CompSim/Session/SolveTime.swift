@@ -20,7 +20,7 @@ class SolveTime: Object
     @objc dynamic var myString: String = ""
     @objc dynamic var myScramble: String = ""
     
-    
+    static var usingComma: Bool = false
     
     // can be min:sec:decimal
     convenience init(enteredTime: String, scramble: String) {
@@ -136,6 +136,14 @@ class SolveTime: Object
         
         myString = final
     }
+    
+    static func initializeStuff() {
+        let formatter = NumberFormatter()
+        formatter.locale = NSLocale.current
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.usesGroupingSeparator = true
+        SolveTime.usingComma = formatter.string(from: 2.5)!.contains(",")
+    }
 
     // does NOT take into account penalties
     static func makeMyString(num: Int) -> String // 149 --> 1.49
@@ -158,6 +166,7 @@ class SolveTime: Object
         else //
         {
             beforeDecimal = String(stringNum.prefix(stringNum.count - 2))
+            
             if(num >= 6000) // longer than a minute
             {
                 let beforeDecimalNum = Int(beforeDecimal)! // i.e. 157 for 2:37.65 --> 15765
@@ -169,19 +178,13 @@ class SolveTime: Object
                 }
                 beforeDecimal = beforeColon + ":" + afterColon
             }
+            
             afterDecimal = String(stringNum.suffix(2))
         }
         
         let fullString = beforeDecimal + "." + afterDecimal
         
-        let formatter = NumberFormatter()
-        formatter.locale = NSLocale.current
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.usesGroupingSeparator = true
-        let usingComma: Bool = formatter.string(from: 2.5)!.contains(",")
-        print("using comma \(usingComma)")
-        
-        if(usingComma) // european style
+        if(SolveTime.usingComma) // european style
         {
             return fullString.replacingOccurrences(of: ".", with: ",")
         }
