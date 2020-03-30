@@ -19,17 +19,19 @@ class TimerViewController: UIViewController {
     let READY = 3
     let TIMING = 4
     var timerPhase = 0
-    var timerTime: Float = 0.00
+    var timerTime: TimeInterval = 0.00
     var inspectionTimer = Timer()
     var timer = Timer()
     let penalties = [2, 0, 1] // index of selector --> penalty (DNF, none, +2)
+    
+    var startTime: UInt64 = 0
     
     
     static var longPress = UILongPressGestureRecognizer()
     
     @IBOutlet weak var DarkBackground: UIImageView!
     
-    static var resultTime: Float = 0.00
+    static var resultTime: TimeInterval = 0.0
     static var penalty = 0
     
     var audioPlayer = AVAudioPlayer()
@@ -40,6 +42,9 @@ class TimerViewController: UIViewController {
 
     @IBOutlet weak var TimerLabel: UILabel!
     @IBOutlet weak var CancelButton: UIButton!
+    
+    static let fractionFormatter = NumberFormatter()
+    static let timeFormatter = DateComponentsFormatter()
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -83,6 +88,17 @@ class TimerViewController: UIViewController {
         }
     }
     
+    static func initializeFormatters()
+    {
+        TimerViewController.timeFormatter.allowedUnits = [.minute, .second]
+        TimerViewController.timeFormatter.unitsStyle = .positional
+        TimerViewController.timeFormatter.zeroFormattingBehavior = .dropLeading
+        
+        TimerViewController.fractionFormatter.maximumIntegerDigits = 0
+        TimerViewController.fractionFormatter.minimumFractionDigits = 2
+        TimerViewController.fractionFormatter.maximumFractionDigits = 2
+    }
+    
     func makeDarkMode()
     {
         DarkBackground.isHidden = false
@@ -109,7 +125,6 @@ class TimerViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches began")
         if timerPhase == INSPECTION && ViewController.holdingTime > 0.01
         {
             TimerLabel.textColor = UIColor.red
@@ -123,7 +138,6 @@ class TimerViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) // released before minimum hold time
     {
-        print("touches ended")
         if(ViewController.holdingTime > 0.01)
         {
             if (timerPhase == FROZEN)
@@ -216,7 +230,6 @@ class TimerViewController: UIViewController {
             return audioPlayer
         }
         catch{
-            print("failed to play eight sec sound")
             return nil
         }
     }
@@ -239,17 +252,14 @@ class TimerViewController: UIViewController {
             return audioPlayer
         }
         catch{
-            print("failed to play eight sec sound")
             return nil
         }
     }
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer) // time has been done
     {
-        print("timer view controller handling long press")
         if(sender.state == .began && timerPhase == FROZEN || ViewController.holdingTime < 0.01 && timerPhase == INSPECTION) // skip from inspection to ready when 0.0
         {
-            print("called this bitch")
             TimerLabel.textColor = .green
             timerPhase = READY
         }
@@ -293,17 +303,13 @@ class TimerViewController: UIViewController {
             TimerLabel.textColor = UIColor.black
         }
         
-        let nf = NumberFormatter()
-        nf.numberStyle = .decimal
-        nf.minimumFractionDigits = 2
-        nf.maximumFractionDigits = 2
+        self.startTime = mach_absolute_time()
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: {_ in
             
             if(self.timerPhase == self.TIMING)
             {
-                self.timerTime += 0.01
-                self.updateLabel(format: nf)
+                self.updateLabel()
             }
             else
             {
@@ -313,30 +319,16 @@ class TimerViewController: UIViewController {
         
     }
     
-    func updateLabel(format: NumberFormatter)
+    func updateLabel()
     {
         if(ViewController.timerUpdate == 0) // timer update
         {
-            if(self.timerTime < 60)
-            {
-                self.TimerLabel.text = format.string(from: NSNumber(value: self.timerTime))!
-            }
-            else
-            {
-                self.TimerLabel.text = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
-            }
+            setTimerTime()
+            self.TimerLabel.text = self.timerTime.format(allowsFractionalUnits: true)
         }
-        else if(ViewController.timerUpdate == 1) // seconds update
-        {
-            if(self.timerTime < 60)
-            {
-                self.TimerLabel.text = String(Int(self.timerTime))
-            }
-            else
-            {
-                let fullString = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
-                self.TimerLabel.text = self.truncate(fullString)
-            }
+        else if(ViewController.timerUpdate == 1) {// seconds update
+            setTimerTime()
+            self.TimerLabel.text = self.timerTime.format(allowsFractionalUnits: false)
         }
         else // no update
         {
@@ -344,16 +336,19 @@ class TimerViewController: UIViewController {
         }
     }
     
-    func truncate(_ str: String) -> String
+    func setTimerTime()
     {
-        let period = str.firstIndex(of: ".")!
-        let sub = str[..<period]
-        return String(sub)
+        var info = mach_timebase_info()
+        guard mach_timebase_info(&info) == KERN_SUCCESS else { return }
+        let currentTime = mach_absolute_time()
+        let nano = UInt64(currentTime - self.startTime) * UInt64(info.numer) / UInt64(info.denom)
+        self.timerTime =  Double(nano) / 1000000000.0
     }
     
     func stopTimer()
     {
-        self.TimerLabel.text = SolveTime.makeMyString(num: SolveTime.makeIntTime(num: self.timerTime))
+        setTimerTime()
+        self.TimerLabel.text = self.timerTime.format(allowsFractionalUnits: true)
         TimerViewController.resultTime = self.timerTime
         timer.invalidate()
         timerPhase = IDLE
@@ -409,4 +404,26 @@ class TimerViewController: UIViewController {
     }
     */
 
+}
+
+extension TimeInterval {
+    func format(allowsFractionalUnits: Bool) -> String?
+    {
+        var fractionString = ""
+        if allowsFractionalUnits
+        {
+            let fractionalPart = NSNumber(value: self.truncatingRemainder(dividingBy: 1))
+            fractionString = TimerViewController.fractionFormatter.string(from: fractionalPart) ?? ""
+        }
+         
+        if let beforeDecimal = TimerViewController.timeFormatter.string(from: self)
+        {
+            return beforeDecimal + fractionString
+        }
+        else
+        {
+            return nil
+        }
+        
+    }
 }

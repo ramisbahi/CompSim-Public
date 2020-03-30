@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // will automatically perform the migration
         retrieveSessions()
         
-        SolveTime.initializeStuff()
+        TimerViewController.initializeFormatters()
         
         application.isIdleTimerDisabled = true
         return true

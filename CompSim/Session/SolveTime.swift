@@ -20,13 +20,12 @@ class SolveTime: Object
     @objc dynamic var myString: String = ""
     @objc dynamic var myScramble: String = ""
     
-    static var usingComma: Bool = false
     
     // can be min:sec:decimal
     convenience init(enteredTime: String, scramble: String) {
         self.init()
         
-        var decimalTime = enteredTime.replacingOccurrences(of: ",", with: ".")
+        let decimalTime = enteredTime.replacingOccurrences(of: ",", with: ".")
         
         myScramble = scramble
         var floatTime: Float = 0.0
@@ -136,58 +135,11 @@ class SolveTime: Object
         
         myString = final
     }
-    
-    static func initializeStuff() {
-        let formatter = NumberFormatter()
-        formatter.locale = NSLocale.current
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.usesGroupingSeparator = true
-        SolveTime.usingComma = formatter.string(from: 2.5)!.contains(",")
-    }
 
     // does NOT take into account penalties
     static func makeMyString(num: Int) -> String // 149 --> 1.49
     {
-        let stringNum: String = String(num)
-        var beforeDecimal = ""
-        var afterDecimal = ""
-        if(stringNum.count <= 2) // 4 --> 0.04, 40 --> 0.40
-        {
-            beforeDecimal = "0"
-            if(stringNum.count == 1)
-            {
-                afterDecimal = "0" + stringNum
-            }
-            else // length 2
-            {
-                afterDecimal = stringNum
-            }
-        }
-        else //
-        {
-            beforeDecimal = String(stringNum.prefix(stringNum.count - 2))
-            
-            if(num >= 6000) // longer than a minute
-            {
-                let beforeDecimalNum = Int(beforeDecimal)! // i.e. 157 for 2:37.65 --> 15765
-                let beforeColon = String(beforeDecimalNum / 60)
-                var afterColon = String(beforeDecimalNum % 60)
-                if(afterColon.count == 1) // i.e. 2:3.79 --> 2:03.79
-                {
-                    afterColon = "0" + afterColon
-                }
-                beforeDecimal = beforeColon + ":" + afterColon
-            }
-            
-            afterDecimal = String(stringNum.suffix(2))
-        }
-        
-        let fullString = beforeDecimal + "." + afterDecimal
-        
-        if(SolveTime.usingComma) // european style
-        {
-            return fullString.replacingOccurrences(of: ".", with: ",")
-        }
-        return fullString // normal
+        let interval: TimeInterval = Double(num) / 100.0
+        return interval.format(allowsFractionalUnits: true)!
     }
 }
