@@ -13,9 +13,11 @@ class ViewSolveAlertViewController: UIViewController {
     
     // below 4 are all entered
     var enterAction: (() -> Void)?
+    var deleteAction: (() -> Void)?
     var myTitle = String()
     var myScramble = String()
     var penalty: Int = 0 // 0 = OK, 1 = +2, 2 = DNF
+    var delete: Bool = true
     
     var penalties = [1, 2, 0]
     var usingPenalty: Bool = true
@@ -26,6 +28,8 @@ class ViewSolveAlertViewController: UIViewController {
     @IBOutlet weak var PenaltySelector: UISegmentedControl!
     @IBOutlet weak var ViewSolveView: UIView!
     @IBOutlet weak var DoneButton: UIButton!
+    @IBOutlet weak var DeleteButton: UIButton!
+    @IBOutlet weak var DoneCenterConstraint: NSLayoutConstraint!
     
     @IBOutlet var BigView: UIView!
     
@@ -53,6 +57,12 @@ class ViewSolveAlertViewController: UIViewController {
             ScrambleLabel.bottomAnchor.constraint(equalTo: DoneButton.topAnchor, constant: -5).isActive = true
         }
         
+        if(delete)
+        {
+            DeleteButton.isHidden = false
+            DoneCenterConstraint.isActive = false
+        }
+        
         ScrambleLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "System")
         
         PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Futura", size: 14.0)!], for: .normal)
@@ -62,6 +72,12 @@ class ViewSolveAlertViewController: UIViewController {
         dismiss(animated: true)
         enterAction?()
     }
+    
+    @IBAction func DeletePressed(_ sender: Any) {
+        dismiss(animated: true)
+        deleteAction?()
+    }
+    
     
     /*
     // MARK: - Navigation

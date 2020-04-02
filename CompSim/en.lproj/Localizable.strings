@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  CompSim
+
+  Created by Rami Sbahi on 4/2/20.
+  Copyright © 2020 Rami Sbahi. All rights reserved.
+*/
+"Random" = "Random";
+"New Scr." = "New Scr.";
+"Reset Average?" = "Reset Average?";
+"Invalid Time" = "Invalid Time";
+"Delete Last Solve?" = "Delete Last Solve?";
+"Time" = "Time";
+"Add Solve" = "Add Solve";
+"Please enter valid time" = "Please enter valid time";

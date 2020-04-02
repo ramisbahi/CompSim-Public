@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -50,11 +50,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3B-kK-PSt">
-                                        <rect key="frame" x="104.66666666666666" y="237" width="120" height="45"/>
+                                        <rect key="frame" x="109.66666666666666" y="237" width="110" height="45"/>
                                         <color key="backgroundColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Y6h-GD-zge"/>
-                                            <constraint firstAttribute="width" constant="120" id="va6-VI-urS"/>
+                                            <constraint firstAttribute="width" constant="110" id="va6-VI-urS"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
                                         <state key="normal" title="Done">
@@ -85,6 +85,26 @@
                                             <action selector="PenaltySelector:" destination="MED-jH-uTn" eventType="valueChanged" id="td5-no-g1g"/>
                                         </connections>
                                     </segmentedControl>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dM1-DV-6dl">
+                                        <rect key="frame" x="5" y="237" width="110" height="45"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="110" id="4yn-AQ-IHB"/>
+                                            <constraint firstAttribute="height" constant="45" id="h6D-8x-Eyv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
+                                        <state key="normal" title="Delete">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="DeletePressed:" destination="s1b-WJ-Edh" eventType="touchUpInside" id="9QS-TP-5Fo"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -94,6 +114,8 @@
                                     <constraint firstItem="YgF-71-2o0" firstAttribute="centerX" secondItem="iTK-pR-QIJ" secondAttribute="centerX" id="0P5-ex-2D9"/>
                                     <constraint firstItem="YgF-71-2o0" firstAttribute="top" secondItem="hJd-o7-0nm" secondAttribute="bottom" constant="10" id="9Li-0D-hiY"/>
                                     <constraint firstAttribute="bottom" secondItem="n3B-kK-PSt" secondAttribute="bottom" constant="5" id="AzW-rc-Pt5"/>
+                                    <constraint firstAttribute="bottom" secondItem="dM1-DV-6dl" secondAttribute="bottom" constant="5" id="EDX-uJ-4Oa"/>
+                                    <constraint firstAttribute="trailing" secondItem="n3B-kK-PSt" secondAttribute="trailing" priority="750" constant="5" id="P19-tB-4wB"/>
                                     <constraint firstAttribute="trailing" secondItem="YgF-71-2o0" secondAttribute="trailing" constant="15" id="RX0-6w-zvF"/>
                                     <constraint firstItem="YgF-71-2o0" firstAttribute="leading" secondItem="iTK-pR-QIJ" secondAttribute="leading" constant="15" id="Ydc-L4-JtK"/>
                                     <constraint firstItem="ue8-JV-7ll" firstAttribute="top" secondItem="iTK-pR-QIJ" secondAttribute="top" id="fsk-Gb-iOY"/>
@@ -104,6 +126,7 @@
                                     <constraint firstItem="hJd-o7-0nm" firstAttribute="leading" secondItem="iTK-pR-QIJ" secondAttribute="leading" constant="10" id="sfv-1A-2fJ"/>
                                     <constraint firstItem="n3B-kK-PSt" firstAttribute="centerX" secondItem="iTK-pR-QIJ" secondAttribute="centerX" id="t7V-ZP-hzU"/>
                                     <constraint firstAttribute="trailing" secondItem="hJd-o7-0nm" secondAttribute="trailing" constant="10" id="u6C-63-Ia5"/>
+                                    <constraint firstItem="dM1-DV-6dl" firstAttribute="leading" secondItem="iTK-pR-QIJ" secondAttribute="leading" constant="5" id="w69-8v-4Z3"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -121,7 +144,9 @@
                     </view>
                     <connections>
                         <outlet property="BigView" destination="OAb-aQ-hhW" id="clh-jk-8aZ"/>
+                        <outlet property="DeleteButton" destination="dM1-DV-6dl" id="16n-5d-Yj6"/>
                         <outlet property="DoneButton" destination="n3B-kK-PSt" id="nyd-Ax-5BP"/>
+                        <outlet property="DoneCenterConstraint" destination="t7V-ZP-hzU" id="Jhh-dS-bYr"/>
                         <outlet property="PenaltyConstraint" destination="9Li-0D-hiY" id="qJk-PT-JdB"/>
                         <outlet property="PenaltySelector" destination="YgF-71-2o0" id="vKB-MV-e5p"/>
                         <outlet property="ScrambleLabel" destination="hJd-o7-0nm" id="NMR-CO-6Ri"/>

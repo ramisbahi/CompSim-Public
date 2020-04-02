@@ -89,7 +89,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         let myScramble = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text
         
         let alertService = ViewSolveAlertService()
-        let alert = alertService.alert(usingPenalty: false, title: myTitle!, scramble: myScramble!, penalty: 0, completion:
+        let alert = alertService.alert(usingPenalty: false, delete: false, title: myTitle!, scramble: myScramble!, penalty: 0, completion:
         {})
         
         self.present(alert, animated: true)

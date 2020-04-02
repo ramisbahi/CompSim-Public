@@ -223,7 +223,7 @@ class ResultViewController: UIViewController {
         try! realm.write {
             ViewController.mySession.results.append(false)
         }
-        if(ViewController.cuber == "Random")
+        if ViewController.cuber == NSLocalizedString("Random", comment: "")
         {
             BackgroundImage.image = randomImage(happy: false)
         }
@@ -240,7 +240,7 @@ class ResultViewController: UIViewController {
         try! realm.write {
             ViewController.mySession.results.append(true) // win
         }
-        if(ViewController.cuber == "Random")
+        if(ViewController.cuber == NSLocalizedString("Random", comment: ""))
         {
             BackgroundImage.image = randomImage(happy: true)
         }
@@ -275,7 +275,7 @@ class ResultViewController: UIViewController {
         let myScramble = times[num].myScramble
         
         let alertService = ViewSolveAlertService()
-        let alert = alertService.alert(usingPenalty: false, title: myTitle!, scramble: myScramble, penalty: 0, completion:
+        let alert = alertService.alert(usingPenalty: false, delete: false, title: myTitle!, scramble: myScramble, penalty: 0, completion:
         {})
         
         self.present(alert, animated: true)
@@ -312,7 +312,9 @@ class ResultViewController: UIViewController {
         MyAverageLabel.adjustsFontSizeToFitWidth = true
         WinningAverageLabel.adjustsFontSizeToFitWidth = true
         
-        TryAgainButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.06, name: "Futura")
+        TryAgainButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.055, name: "Futura")
+        let stringSize = TryAgainButton.titleLabel?.intrinsicContentSize.width
+        TryAgainButton.widthAnchor.constraint(equalToConstant: stringSize! + 20).isActive = true
     }
     
     func timeConstraints()

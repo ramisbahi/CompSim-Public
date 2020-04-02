@@ -19,7 +19,24 @@ class ViewSolveAlertService
     var myVC = ViewSolveAlertViewController()
     
     // keyboard: 0 = decimal, 1 = text
-    func alert(usingPenalty: Bool, title: String, scramble: String, penalty: Int, completion: @escaping () -> Void) -> ViewSolveAlertViewController
+    func alert(usingPenalty: Bool, delete: Bool, title: String, scramble: String, penalty: Int, completion: @escaping () -> Void, deletion: @escaping () -> Void) -> ViewSolveAlertViewController
+    {
+        let storyboard = UIStoryboard(name: "ViewSolveAlert", bundle: .main)
+        let alertVC = storyboard.instantiateViewController(withIdentifier: "ViewSolveAlertVC") as! ViewSolveAlertViewController
+        
+        alertVC.enterAction = completion
+        alertVC.deleteAction = deletion
+        alertVC.myTitle = title
+        alertVC.myScramble = scramble
+        alertVC.penalty = penalty
+        alertVC.usingPenalty = usingPenalty
+        alertVC.delete = delete
+        
+        myVC = alertVC
+        return alertVC
+    }
+    
+    func alert(usingPenalty: Bool, delete: Bool, title: String, scramble: String, penalty: Int, completion: @escaping () -> Void) -> ViewSolveAlertViewController
     {
         let storyboard = UIStoryboard(name: "ViewSolveAlert", bundle: .main)
         let alertVC = storyboard.instantiateViewController(withIdentifier: "ViewSolveAlertVC") as! ViewSolveAlertViewController
@@ -29,6 +46,7 @@ class ViewSolveAlertService
         alertVC.myScramble = scramble
         alertVC.penalty = penalty
         alertVC.usingPenalty = usingPenalty
+        alertVC.delete = delete
         
         myVC = alertVC
         return alertVC

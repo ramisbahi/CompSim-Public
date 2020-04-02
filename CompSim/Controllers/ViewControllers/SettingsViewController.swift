@@ -43,7 +43,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var InspectionVoiceAlertsControl: UISegmentedControl!
     @IBOutlet weak var TimerUpdateControl: UISegmentedControl!
     
-    let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Random" : "Random", "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park", "Kevin" : "Kevin Hays"]
+    let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Random" : NSLocalizedString("Random", comment: ""), NSLocalizedString("Random", comment: "") : NSLocalizedString("Random", comment: ""), "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park", "Kevin" : "Kevin Hays"]
     
     let realm = try! Realm()
     
@@ -181,20 +181,16 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
     {
-        print("view did load") 
         
         if(ViewController.darkMode)
         {
             DarkModeControl.selectedSegmentIndex = 0
             makeDarkMode()
-            print("just made dark")
         }
         else
         {
             turnOffDarkMode()
         }
-        
-        print("solve type \(ViewController.mySession.solveType)")
         
         
         if(ViewController.timing)
@@ -230,6 +226,7 @@ class SettingsViewController: UIViewController {
             InspectionVoiceAlertsControl.selectedSegmentIndex = 1
         }
         
+        print("cuber \(ViewController.cuber)")
         CuberButton.setTitle("Cuber: \(cuberDictionary[ViewController.cuber]!)", for: .normal)
         
         HoldingTimeSlider.value = ViewController.holdingTime

@@ -172,7 +172,7 @@ class TimerViewController: UIViewController {
                                 {
                                     if(self.timerPhase == self.INSPECTION)
                                     {
-                                        eightPlayer!.play()
+                                        eightPlayer?.play()
                                     }
                                 }
                             }
@@ -181,12 +181,12 @@ class TimerViewController: UIViewController {
                         else if(inspectionTime == 4)
                         {
                             DispatchQueue.global(qos: .utility).async
-                                {
+                            {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) // call 0.3 sec early
                                 {
                                     if(self.timerPhase == self.INSPECTION)
                                     {
-                                        twelvePlayer!.play()
+                                        twelvePlayer?.play()
                                     }
                                 }
                             }

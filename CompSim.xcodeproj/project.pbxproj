@@ -23,6 +23,7 @@
 		3663DF4222DD699E006657CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4122DD699E006657CF /* Assets.xcassets */; };
 		3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4322DD699E006657CF /* LaunchScreen.storyboard */; };
 		3669CEC2238B13A900F1D002 /* scrambles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3669CEC1238B13A900F1D002 /* scrambles.txt */; };
+		368859EF2436456A00635856 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 368859F12436456A00635856 /* Localizable.strings */; };
 		3690EAE52316293200CB0B78 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360F108E22E551E500EEBB75 /* TabBarController.swift */; };
 		3690EAE62316293200CB0B78 /* ScrambleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF5022DEE4E5006657CF /* ScrambleReader.swift */; };
 		3690EAE72316293200CB0B78 /* AverageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612321423005D9F0044DEF1 /* AverageDetailViewController.swift */; };
@@ -126,6 +127,11 @@
 		3663DF4C22DEBB5C006657CF /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		3663DF5022DEE4E5006657CF /* ScrambleReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrambleReader.swift; sourceTree = "<group>"; };
 		3669CEC1238B13A900F1D002 /* scrambles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scrambles.txt; sourceTree = "<group>"; };
+		368859EB24362ED000635856 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		368859EC24362ED100635856 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		368859F02436456A00635856 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		368859F22436456C00635856 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		368859F424364F5600635856 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		3690EAC0231623E300CB0B78 /* CompSim.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CompSim.entitlements; sourceTree = "<group>"; };
 		3690EAE2231627A700CB0B78 /* Pyraminx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pyraminx.m; sourceTree = "<group>"; };
 		3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddSolveAlert.storyboard; sourceTree = "<group>"; };
@@ -212,6 +218,7 @@
 				3690EABB2316201900CB0B78 /* Controllers */,
 				3690EABA23161FCC00CB0B78 /* Scramblers */,
 				3663DF3E22DD699D006657CF /* Main.storyboard */,
+				368859F12436456A00635856 /* Localizable.strings */,
 				3663DF3A22DD699D006657CF /* AppDelegate.swift */,
 				361231F022FD0B4E0044DEF1 /* CompSim-Bridging-Header.h */,
 				3663DF4122DD699E006657CF /* Assets.xcassets */,
@@ -380,6 +387,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 3663DF2E22DD699D006657CF;
 			productRefGroup = 3663DF3822DD699D006657CF /* Products */;
@@ -405,6 +413,7 @@
 				3663DF4222DD699E006657CF /* Assets.xcassets in Resources */,
 				3696538623BA9B5C000784D9 /* ViewSolveAlert.storyboard in Resources */,
 				3663DF4022DD699D006657CF /* Main.storyboard in Resources */,
+				368859EF2436456A00635856 /* Localizable.strings in Resources */,
 				3669CEC2238B13A900F1D002 /* scrambles.txt in Resources */,
 				3654A84623BC09610066A48F /* 12seconds.mp3 in Resources */,
 				3654A84523BC09610066A48F /* 8seconds.mp3 in Resources */,
@@ -520,6 +529,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				3663DF3F22DD699D006657CF /* Base */,
+				368859EB24362ED000635856 /* es */,
+				368859F424364F5600635856 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -528,8 +539,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				3663DF4422DD699E006657CF /* Base */,
+				368859EC24362ED100635856 /* es */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		368859F12436456A00635856 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				368859F02436456A00635856 /* en */,
+				368859F22436456C00635856 /* es */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -539,6 +560,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -586,7 +608,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -600,6 +622,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -641,7 +664,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -658,15 +681,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = JJ3T82U92L;
 				INFOPLIST_FILE = CompSim/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.4;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramisbahi.CompSim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CompSim/CompSim-Bridging-Header.h";
@@ -683,15 +706,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = JJ3T82U92L;
 				INFOPLIST_FILE = CompSim/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.4;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramisbahi.CompSim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CompSim/CompSim-Bridging-Header.h";

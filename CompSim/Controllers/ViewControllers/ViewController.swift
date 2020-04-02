@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import AVFoundation
+import Speech
 
 extension String {
     /// stringToFind must be at least 1 character.
@@ -23,7 +25,9 @@ extension String {
     }
 }
 
-class ViewController: UIViewController {
+@available(iOS 13.0, *)
+@available(iOS 13.0, *)
+class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet var BigView: UIView!
     
     @IBOutlet weak var ScrambleArea: UIView!
@@ -44,14 +48,13 @@ class ViewController: UIViewController {
     @IBOutlet var TimesCollection: [UIButton]!
     
     @IBOutlet weak var ScrambleLabel: UILabel!
-    @IBOutlet weak var SwipeUpLabel: UILabel!
-    @IBOutlet weak var SwipeDownLabel: UILabel!
     
     @IBOutlet weak var SubmitButton: UIButton!
     
     @IBOutlet weak var TimerLabel: UILabel!
     // (roundNumber - 1) * 5 + currentIndex = total solve index (starts at 0)
     
+    @IBOutlet weak var MicButton: UIButton!
     
     @IBOutlet weak var Logo: UIImageView!
     
@@ -65,7 +68,7 @@ class ViewController: UIViewController {
     static var timing = true
     static var inspection = true
     
-    static var cuber = "Random"
+    static var cuber = NSLocalizedString("Random", comment: "")
     
     static var holdingTime: Float = 0.55 
     
@@ -92,6 +95,14 @@ class ViewController: UIViewController {
     
     static var totalAverages: Int = 0 // for keeping track of user engagement
     
+    var hasTurnedOnMic = false
+    static var usingMic = false
+    static var micAuthorized = false
+    private let speechRecognizer = SFSpeechRecognizer()
+    private let audioEngine = AVAudioEngine()
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    
     let realm = try! Realm()
     
     struct Keys
@@ -103,20 +114,6 @@ class ViewController: UIViewController {
         return 1
     }
     
-    /*func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        print("called")
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sticker", for: indexPath)
-        
-        cell.backgroundColor = .blue
-        
-        
-        return cell
-    }*/
     
     static func hasSetSettings() -> Bool // one must be true
     {
@@ -125,18 +122,27 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         HelpButton.layer.cornerRadius = HelpButton.frame.size.height / 2.0
-        if(NewScrambleButton.frame.size.width < 120)
+        
+        var stringSize = NewScrambleButton.titleLabel?.intrinsicContentSize.width
+        NewScrambleButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
+        print("width \(NewScrambleButton.frame.size.width)")
+        if(NewScrambleButton.frame.size.width > 150)
         {
-            NewScrambleButton.setTitle("New Scr.", for: .normal)
+            NewScrambleButton.setTitle(NSLocalizedString("New Scr.", comment: ""), for: .normal)
+            stringSize = NewScrambleButton.titleLabel?.intrinsicContentSize.width
+            NewScrambleButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
         }
-        print(NewScrambleButton.frame.size.width)
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        // Do any additional setup after loading the view.\
-        print("viewcontroller did load")
+        // Do any additional setup after loading the view.
+        
+        if(ViewController.micAuthorized && ViewController.usingMic)
+        {
+            turnOnMic()
+        }
         
         tabBarController?.tabBar.isHidden = false
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -157,7 +163,6 @@ class ViewController: UIViewController {
         {
             self.reset() // only when actually starting new round, not when returning from avgdetail or timer
         }*/
-        print("result time \(TimerViewController.resultTime)")
         if(TimerViewController.resultTime != 0) // returned from timer
         {
             self.updateTimes(enteredTime: String(TimerViewController.resultTime), penalty: TimerViewController.penalty)
@@ -199,7 +204,125 @@ class ViewController: UIViewController {
         
     }
     
+    public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
+        if available {
+            MicButton.isEnabled = true
+            print("mic available!")
+        } else {
+            MicButton.isEnabled = false
+            print("mic not available")
+        }
+    }
     
+    
+    @available(iOS 13.0, *)
+    @IBAction func MicTapped(_ sender: Any) {
+        ViewController.usingMic ? turnOffMic(changeStatus: true) : turnOnMic()
+        
+    }
+    
+    func turnOffMic(changeStatus: Bool)
+    {
+        MicButton.setImage(UIImage(systemName: "mic.slash.fill"), for: .normal)
+        self.audioEngine.stop()
+        self.audioEngine.inputNode.removeTap(onBus: 0)
+        self.recognitionRequest = nil
+        self.recognitionTask?.cancel()
+        self.recognitionTask?.finish()
+        self.recognitionTask = nil
+        if(changeStatus)
+        {
+            ViewController.usingMic = false
+        }
+    }
+    
+    func turnOnMic()
+    {
+        hasTurnedOnMic = true
+        if(!ViewController.micAuthorized)
+        {
+            requestAuthorization()
+        }
+        else
+        {
+            MicButton.setImage(UIImage(systemName: "mic.fill"), for: .normal)
+            ViewController.usingMic = true
+        }
+        configureAudioSession()
+    }
+    
+    @available(iOS 13.0, *)
+    func requestAuthorization()
+    {
+        SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
+            OperationQueue.main.addOperation
+            {
+                if authStatus == .authorized
+                {
+                    print("Good to go!")
+                    ViewController.micAuthorized = true
+                    ViewController.usingMic = true
+                    self.MicButton.setImage(UIImage(systemName: "mic.fill"), for: .normal)
+                }
+                else
+                {
+                    print("Transcription permission was declined.")
+                    ViewController.micAuthorized = false
+                    ViewController.usingMic = false
+                }
+            }
+        }
+    }
+    
+    func configureAudioSession()
+    {
+        // Configure the audio session for the app.
+        let audioSession = AVAudioSession.sharedInstance()
+        try! audioSession.setCategory(.record, mode: .spokenAudio, options: .mixWithOthers)
+        try! audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        let inputNode = audioEngine.inputNode
+        
+        audioEngine.prepare()
+        try! audioEngine.start()
+        
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        guard let recognitionRequest = recognitionRequest
+            else {
+                fatalError("Unable to create a SFSpeechAudioBufferRecognitionRequest object")
+            }
+        recognitionRequest.shouldReportPartialResults = true
+        
+        // Configure the microphone input.
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            self.recognitionRequest?.append(buffer)
+        }
+            
+        // Create a recognition task for the speech recognition session.
+        // Keep a reference to the task so that it can be canceled.
+        recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest) { result, error in
+            var isFinal = false
+            
+            if result != nil
+            {
+                // Update the text view with the results.
+                isFinal = result!.isFinal
+                print(result!.bestTranscription.formattedString)
+            }
+            
+            if error != nil || isFinal
+            {
+                self.turnOffMic(changeStatus: true)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(hasTurnedOnMic)
+        {
+            turnOffMic(changeStatus: false)
+        }
+    }
     
     static func fontToFitHeight(view: UIView, multiplier: Float, name: String) -> UIFont
     {
@@ -255,6 +378,11 @@ class ViewController: UIViewController {
                
                 self.navigationController!.view.layer.add(transition, forKey: kCATransition)
                    self.navigationController?.pushViewController(obj, animated: true)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
+        ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -359,7 +487,6 @@ class ViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches began")
         
         var inGestureArea = false
         for touch in touches
@@ -380,7 +507,6 @@ class ViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) // released before minimum hold time
     {
-        print("touches ended")
         if(usingLongPress() && ViewController.timerPhase == FROZEN)
         {
             cancelTimer()
@@ -395,8 +521,6 @@ class ViewController: UIViewController {
             button.isHidden = true
         }
         ScrambleLabel.isHidden = true
-        SwipeUpLabel.isHidden = true
-        SwipeDownLabel.isHidden = true
         
     }
     
@@ -405,8 +529,6 @@ class ViewController: UIViewController {
         //print("showing all")
         updateLabels()
         ScrambleLabel.isHidden = false
-        SwipeUpLabel.isHidden = false
-        SwipeDownLabel.isHidden = false
         //TODO: show everything that should show
     }
     
@@ -435,7 +557,7 @@ class ViewController: UIViewController {
     
     @IBAction func resetPressed(_ sender: Any) {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Reset Average?", completion: {
+        let alert = alertService.alert(myTitle: NSLocalizedString("Reset Average?", comment: ""), completion: {
             self.reset()
         })
         self.present(alert, animated: true)
@@ -470,7 +592,7 @@ class ViewController: UIViewController {
     func alertValidTime(alertMessage: String)
     {
         let alertService = NotificationAlertService()
-        let alert = alertService.alert(myTitle: "Invalid Time")
+        let alert = alertService.alert(myTitle: NSLocalizedString("Invalid Time", comment: ""))
         self.present(alert, animated: true, completion: nil)
         // ask again - no input
     }
@@ -497,12 +619,16 @@ class ViewController: UIViewController {
             //print("tapped")
             self.performSegue(withIdentifier: "timerSegue", sender: self)
         }
+        else if !ViewController.timing // not timing... addsolve
+        {
+            addSolve()
+        }
     }
     
     func deleteSolve()
     {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Delete Last Solve?",
+        let alert = alertService.alert(myTitle: NSLocalizedString("Delete Last Solve?", comment: ""),
                                        completion: {
             
             try! self.realm.write
@@ -511,7 +637,6 @@ class ViewController: UIViewController {
             }
             self.ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
             self.updateLabels()
-            print(ViewController.mySession.currentIndex)
         })
         
         self.present(alert, animated: true)
@@ -520,7 +645,7 @@ class ViewController: UIViewController {
     func addSolve()
     {
         let alertService = AlertService()
-        let alert = alertService.alert(placeholder: "Time", usingPenalty: true, keyboardType: 0, myTitle: "Add Solve",
+        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""), usingPenalty: true, keyboardType: 0, myTitle: NSLocalizedString("Add Solve", comment: ""),
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!
@@ -533,7 +658,7 @@ class ViewController: UIViewController {
             }
             else
             {
-                self.alertValidTime(alertMessage: "Please enter valid time")
+                self.alertValidTime(alertMessage: NSLocalizedString("Please enter valid time", comment: ""))
             }
         })
         
@@ -554,10 +679,8 @@ class ViewController: UIViewController {
     
     func updateTimes(enteredTime: String, penalty: Int)
     {
-        print("updating times w/ penalty")
         try! realm.write
         {
-            print("in the realm write adding")
             ViewController.mySession.addSolve(time: enteredTime, penalty: penalty)
         }
         ScrambleLabel.text = ViewController.mySession.getCurrentScramble() // change scramble
@@ -567,7 +690,6 @@ class ViewController: UIViewController {
     
     func updateTimes(enteredTime: String)
     {
-        print("updating times")
         try! realm.write
         {
             ViewController.mySession.addSolve(time: enteredTime)
@@ -585,7 +707,6 @@ class ViewController: UIViewController {
     }
     func updateLabels()
     {
-        print("updating time labels")
         for i in 0..<ViewController.mySession.currentIndex
         {
             self.labels[i].setTitle(ViewController.mySession.times[i].myString, for: .normal)
@@ -645,17 +766,25 @@ class ViewController: UIViewController {
         let myPenalty = ViewController.mySession.times[num].penalty
         
         let alertService = ViewSolveAlertService()
-        let alert = alertService.alert(usingPenalty: true, title: myTitle!, scramble: myScramble, penalty: myPenalty, completion:
-        {
-            
-            let penalties = [2, 0, 1] // adjust for index
-            let inputPenalty = penalties[alertService.myVC.PenaltySelector.selectedSegmentIndex]
-            try! self.realm.write
+        let alert = alertService.alert(usingPenalty: true, delete: true, title: myTitle!, scramble: myScramble, penalty: myPenalty, completion:
             {
-                ViewController.mySession.changePenaltyStatus(index: num, penalty: inputPenalty)
+                let penalties = [2, 0, 1] // adjust for index
+                let inputPenalty = penalties[alertService.myVC.PenaltySelector.selectedSegmentIndex]
+                try! self.realm.write
+                {
+                    ViewController.mySession.changePenaltyStatus(index: num, penalty: inputPenalty)
+                }
+                self.updateLabels()
+            }, deletion:
+            {
+                try! self.realm.write
+                {
+                    ViewController.mySession.deleteSolve()
+                }
+                self.ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
+                self.updateLabels()
             }
-            self.updateLabels()
-        })
+        )
         
         self.present(alert, animated: true)
     }
@@ -666,8 +795,6 @@ class ViewController: UIViewController {
         ScrambleArea.backgroundColor = ViewController.darkModeColor()
         GestureArea.backgroundColor = ViewController.darkModeColor()
         ScrambleLabel.textColor? = UIColor.white
-        SwipeUpLabel.textColor? = UIColor.white
-        SwipeDownLabel.textColor? = UIColor.white
         TimesCollection.forEach { (button) in
             button.setTitleColor(.white, for: .disabled)
             button.setTitleColor(ViewController.orangeColor(), for: .normal) // orange
@@ -699,8 +826,6 @@ class ViewController: UIViewController {
         GestureArea.backgroundColor = .white
         BigView.backgroundColor = .white
         ScrambleLabel.textColor = UIColor.black
-        SwipeUpLabel.textColor = UIColor.black
-        SwipeDownLabel.textColor = UIColor.black
         TimesCollection.forEach { (button) in
             button.setTitleColor(.black, for: .disabled)
             if #available(iOS 13.0, *) {
@@ -725,9 +850,7 @@ class ViewController: UIViewController {
     
     func doSettings()
     {
-        print("doing the settings")
         ViewController.darkMode = UserDefaults.standard.bool(forKey: AppDelegate.darkMode)
-        print(ViewController.darkMode)
         ViewController.cuber = UserDefaults.standard.string(forKey: AppDelegate.cuber) ?? "Random"
         ViewController.timing = UserDefaults.standard.bool(forKey: AppDelegate.timing)
         ViewController.inspection = UserDefaults.standard.bool(forKey: AppDelegate.inspection)
