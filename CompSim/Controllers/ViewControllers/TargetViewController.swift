@@ -30,6 +30,7 @@ class TargetViewController: UIViewController {
     
     @IBOutlet var DistLabels: [UILabel]!
     
+    @IBOutlet weak var TargetSettingLabel: UILabel!
     
     @IBOutlet var BlackWhiteLabels: [UILabel]!
     
@@ -87,7 +88,6 @@ class TargetViewController: UIViewController {
     
     @IBAction func ValueChanged(_ sender: Any) // value changed on winning time setting
     {
-        print("called")
         
         setup(type: WinningTimeSetting.selectedSegmentIndex)
         try! realm.write {
@@ -144,7 +144,7 @@ class TargetViewController: UIViewController {
     @IBAction func MinTimeTouched(_ sender: Any) {
         
         let alertService = AlertService()
-        let alert = alertService.alert(placeholder: "Time", usingPenalty: false, keyboardType: 0, myTitle: "Min Time",
+        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""), usingPenalty: false, keyboardType: 0, myTitle: NSLocalizedString("Min Time", comment: ""),
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!
@@ -182,7 +182,7 @@ class TargetViewController: UIViewController {
     @IBAction func MaxTimeTouched(_ sender: Any) {
         
         let alertService = AlertService()
-        let alert = alertService.alert(placeholder: "Time", usingPenalty: false, keyboardType: 0, myTitle: "Max Time",
+        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""), usingPenalty: false, keyboardType: 0, myTitle: NSLocalizedString("Max Time", comment: ""),
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!
@@ -270,7 +270,7 @@ class TargetViewController: UIViewController {
         SingleTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
         MinTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
         MaxTimeLabel.titleLabel?.adjustsFontSizeToFitWidth = true
-    
+        TargetSettingLabel.text = NSLocalizedString("Target Setting", comment: "")
         
         
         updateHeights()

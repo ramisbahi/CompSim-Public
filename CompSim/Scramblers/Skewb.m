@@ -173,6 +173,11 @@ bool ini = false;
     while (skbCd[cp][co][fco] < 0);
     for (int depth = 0; depth < 12; depth++) {
         if([self search:fp cp:cp co:co fco:fco d:depth l:-1]) {
+            if(depth < 7)
+            {
+                return [self scrSkb];
+            }
+            
             NSMutableString *s = [NSMutableString string];
             for(int i=1; i<=depth; i++) {
                 [s appendFormat:@"%@%@ ", [turnSkb objectAtIndex:(solSkb[i]>>1)], [sufSkb objectAtIndex:(solSkb[i]&1)]];

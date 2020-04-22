@@ -269,6 +269,7 @@ int sollen;
     
     NSMutableString *scramble = [NSMutableString string];
     for (int i = 1; i <= sollen; i++) {
+        
         [scramble appendFormat:@"%@%@ ", [facePym objectAtIndex:(solPym[i]>>1)], [sufPym objectAtIndex:(solPym[i]&1)]];
     }
     for (int i = 0; i < 4; i++) {

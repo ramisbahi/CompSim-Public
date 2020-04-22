@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "2.59"; ObjectID = "4Aa-xs-kbh"; */
+"4Aa-xs-kbh.text" = "2.59";
+
+/* Class = "UISegmentedControl"; YgF-71-2o0.segmentTitles[0] = "DNF"; ObjectID = "YgF-71-2o0"; */
+"YgF-71-2o0.segmentTitles[0]" = "DNF";
+
+/* Class = "UISegmentedControl"; YgF-71-2o0.segmentTitles[1] = "OK"; ObjectID = "YgF-71-2o0"; */
+"YgF-71-2o0.segmentTitles[1]" = "OK";
+
+/* Class = "UISegmentedControl"; YgF-71-2o0.segmentTitles[2] = "+2"; ObjectID = "YgF-71-2o0"; */
+"YgF-71-2o0.segmentTitles[2]" = "+2";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "dM1-DV-6dl"; */
+"dM1-DV-6dl.normalTitle" = "Delete";
+
+/* Class = "UILabel"; text = "L B' Uw2 Bw2 L Dw2 U' Rw2 Dw Bw U2 Dw2 Rw U Lw' F Uw Bw2 Rw' B2 L2 U2 Rw' Bw' Fw' B Uw U L' F2 Bw2 B2 Lw Fw Rw R' B2 R Rw2 D2 Rw2 Lw2 Dw R2 Lw Uw' Rw Lw2 B U2 B2 Dw' L2 U' B2 F2 L2 Rw Lw U"; ObjectID = "hJd-o7-0nm"; */
+"hJd-o7-0nm.text" = "L B' Uw2 Bw2 L Dw2 U' Rw2 Dw Bw U2 Dw2 Rw U Lw' F Uw Bw2 Rw' B2 L2 U2 Rw' Bw' Fw' B Uw U L' F2 Bw2 B2 Lw Fw Rw R' B2 R Rw2 D2 Rw2 Lw2 Dw R2 Lw Uw' Rw Lw2 B U2 B2 Dw' L2 U' B2 F2 L2 Rw Lw U";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "n3B-kK-PSt"; */
+"n3B-kK-PSt.normalTitle" = "Done";

@@ -19,12 +19,13 @@ class DrawScrambleViewController: UIViewController {
     @IBOutlet weak var Collection5: UICollectionView!
     @IBOutlet weak var Collection6: UICollectionView!
     
+    var timer = Timer()
     
     override func viewDidLoad()
     {
         let currentWidth = Int(Collection1.frame.size.width)
-    
         
+        scheduledTimerWithTimeInterval()
         Collection1.widthAnchor.constraint(equalToConstant: CGFloat(currentWidth - currentWidth % 3)).isActive = true
     }
     
@@ -32,6 +33,25 @@ class DrawScrambleViewController: UIViewController {
         super.viewWillAppear(false)
         
         
+        
+        updateScramble()
+    }
+    
+    func scheduledTimerWithTimeInterval(){
+        // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
+    }
+
+    @objc func updateCounting(){
+        if(ViewController.scrambleChanged)
+        {
+            updateScramble()
+            ViewController.scrambleChanged = false
+        }
+    }
+    
+    func updateScramble()
+    {
         drawSide(side: Collection1, colors: Array(ViewController.mySession.scrambler.drawScramble[0..<9]))
         drawSide(side: Collection2, colors: Array(ViewController.mySession.scrambler.drawScramble[9..<18]))
         drawSide(side: Collection3, colors: Array(ViewController.mySession.scrambler.drawScramble[18..<27]))

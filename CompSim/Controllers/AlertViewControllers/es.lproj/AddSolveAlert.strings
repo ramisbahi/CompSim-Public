@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Add Solve"; ObjectID = "BV4-P9-ta3"; */
+"BV4-P9-ta3.text" = "Agrega Tiempo";
+
+/* Class = "UISegmentedControl"; fbc-E9-vfG.segmentTitles[0] = "DNF"; ObjectID = "fbc-E9-vfG"; */
+"fbc-E9-vfG.segmentTitles[0]" = "DNF";
+
+/* Class = "UISegmentedControl"; fbc-E9-vfG.segmentTitles[1] = "OK"; ObjectID = "fbc-E9-vfG"; */
+"fbc-E9-vfG.segmentTitles[1]" = "OK";
+
+/* Class = "UISegmentedControl"; fbc-E9-vfG.segmentTitles[2] = "+2"; ObjectID = "fbc-E9-vfG"; */
+"fbc-E9-vfG.segmentTitles[2]" = "+2";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "nNa-ng-EW4"; */
+"nNa-ng-EW4.normalTitle" = "Cancelar";
+
+/* Class = "UIButton"; normalTitle = "Enter"; ObjectID = "vvf-Ai-eQq"; */
+"vvf-Ai-eQq.normalTitle" = "Enviar";
+
+/* Class = "UITextField"; placeholder = "Time"; ObjectID = "xUz-jZ-EEq"; */
+"xUz-jZ-EEq.placeholder" = "Tiempo";

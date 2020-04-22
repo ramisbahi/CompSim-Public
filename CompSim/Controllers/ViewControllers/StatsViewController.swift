@@ -127,7 +127,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func createNewSession(name: String)
     {
-        print("creating new session...")
         let newSession = Session(name: name, enteredEvent: 1)
         
         ViewController.mySession = newSession // now current session
@@ -272,7 +271,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.view.layoutIfNeeded()
             })
         }
-        print(SessionCollection[0])
     }
     
     @objc func SessionSelected(_ sender: UIButton) {
@@ -288,7 +286,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return // doesn't have title
         }
         
-        print(title)
         SessionButton.setTitle(title, for: .normal)
         if title != ViewController.mySession.name // exists,// not same - so switch session
         {
@@ -297,7 +294,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             ViewController.sessionChanged = true
             StatsTableView.reloadData()
             updateBarWidth()
-            print("changed session successfully")
         }
         
     }
@@ -317,9 +313,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
-        
-        
-        print("in this")
         DeleteButton.isEnabled = ViewController.allSessions.count > 1
         
         if(ViewController.darkMode)
@@ -399,7 +392,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func replaceSession(oldName: String, newName: String)
     {
-        print("replacing session...")
         let session = sessionNamed(title: oldName)!
         try! realm.write
         {
@@ -432,7 +424,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // performed for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("table view")
         let currentIndex = ViewController.mySession.currentAverage - indexPath.row // reverse order
         
         
@@ -466,8 +457,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let numSolves = ViewController.mySession.averageTypes[currentIndex] == 0 ? 5 : 3 // ao5 vs mo3/bo3
         for i in 0..<numSolves-1
         {
-            print(ViewController.mySession.allTimes[currentIndex].list[i])
-            print(ViewController.mySession.allTimes[currentIndex].list[i].myString)
             timeList.append(ViewController.mySession.allTimes[currentIndex].list[i].myString)
             timeList.append(", ")
         }
@@ -490,7 +479,6 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let currentIndex = ViewController.mySession.currentAverage - indexPath.row // reverse order
-        print("currentIndex: \(currentIndex)")
         if editingStyle == .delete {
             deleteAveragePressed(at: currentIndex, tableView, forRowAt: indexPath)
         }

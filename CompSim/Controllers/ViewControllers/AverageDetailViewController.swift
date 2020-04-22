@@ -99,26 +99,29 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     {
         super.viewWillAppear(true)
         
-        print(averageType)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        BackButton.titleLabel?.font = ViewController.fontToFitHeight(view: self.view, multiplier: 0.04, name: "Futura")
+        let stringSize = BackButton.titleLabel?.intrinsicContentSize.width
+        BackButton.widthAnchor.constraint(equalToConstant: stringSize! + 40).isActive = true
+        
         averageType = ViewController.mySession.averageTypes[StatsViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
         if(averageType == 0)
         {
-            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " Average"
-            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Average"
+            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
+            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
         }
         else if(averageType == 1)
         {
-            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " Mean"
-            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Mean"
+            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
+            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
         }
         else
         {
             AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " Single"
-            WinningAverageLabel.text = "Target: " +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Single"
+            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Single"
         }
         
         if(ViewController.darkMode)

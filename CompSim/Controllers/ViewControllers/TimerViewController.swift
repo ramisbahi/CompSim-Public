@@ -75,6 +75,9 @@ class TimerViewController: UIViewController {
         {
             makeDarkMode()
         }
+        CancelButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "Futura")
+        let stringSize = CancelButton.titleLabel?.intrinsicContentSize.width
+        CancelButton.widthAnchor.constraint(equalToConstant: stringSize! + 40).isActive = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,7 +93,7 @@ class TimerViewController: UIViewController {
     
     static func initializeFormatters()
     {
-        TimerViewController.timeFormatter.allowedUnits = [.minute, .second]
+        TimerViewController.timeFormatter.allowedUnits = [.hour, .minute, .second]
         TimerViewController.timeFormatter.unitsStyle = .positional
         TimerViewController.timeFormatter.zeroFormattingBehavior = .dropLeading
         
@@ -170,7 +173,7 @@ class TimerViewController: UIViewController {
                             {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) // call 0.3 sec early
                                 {
-                                    if(self.timerPhase == self.INSPECTION)
+                                    if(self.timerPhase == self.INSPECTION || self.timerPhase == self.FROZEN || self.timerPhase == self.READY)
                                     {
                                         eightPlayer?.play()
                                     }
@@ -184,7 +187,7 @@ class TimerViewController: UIViewController {
                             {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) // call 0.3 sec early
                                 {
-                                    if(self.timerPhase == self.INSPECTION)
+                                    if(self.timerPhase == self.INSPECTION || self.timerPhase == self.FROZEN || self.timerPhase == self.READY)
                                     {
                                         twelvePlayer?.play()
                                     }
@@ -342,7 +345,7 @@ class TimerViewController: UIViewController {
         guard mach_timebase_info(&info) == KERN_SUCCESS else { return }
         let currentTime = mach_absolute_time()
         let nano = UInt64(currentTime - self.startTime) * UInt64(info.numer) / UInt64(info.denom)
-        self.timerTime =  Double(nano) / 1000000000.0
+        self.timerTime =  TimeInterval(nano) / 1000000000.0
     }
     
     func stopTimer()

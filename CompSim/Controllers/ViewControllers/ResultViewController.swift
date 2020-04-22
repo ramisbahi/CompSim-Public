@@ -56,7 +56,6 @@ class ResultViewController: UIViewController {
         }
         
         ViewController.totalAverages += 1 // add 1 to dat
-        print("\(ViewController.totalAverages) averages done!")
         
         let ratings = [3, 10, 50, 200, 500, 1000, 1500, 2000, 2500, 3000]
         
@@ -64,7 +63,6 @@ class ResultViewController: UIViewController {
         {
             
             if #available( iOS 10.3,*){
-                print("okay requesting review")
                 SKStoreReviewController.requestReview()
             }
         }
@@ -289,6 +287,8 @@ class ResultViewController: UIViewController {
         BackgroundImage.addGestureRecognizer(tapGesture)
         BackgroundImage.isUserInteractionEnabled = true
         
+        MyAverageLabel.adjustsFontSizeToFitWidth = true
+        WinningAverageLabel.adjustsFontSizeToFitWidth = true
         
         let newDevices = ["x86_64", "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,4", "iPhone11,6", "iPhone11,8", "iPhone12,1", "iPhone12,3", "iPhone12,5"] // have weird thing at top of screen
         
@@ -296,21 +296,42 @@ class ResultViewController: UIViewController {
         {
             ImageConstraint.isActive = false
             BackgroundImage.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
-            WinningAverageLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.06, name: "Futura")
-            MyAverageLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.075, name: "Futura")
+            
+            let winningNewFont = ViewController.fontToFitHeight(view: BigView, multiplier: 0.06, name: "Futura")
+            
+            if(winningNewFont.pointSize < WinningAverageLabel.font.pointSize)
+            {
+                WinningAverageLabel.font = winningNewFont
+            }
+            
+            let newFont = ViewController.fontToFitHeight(view: BigView, multiplier: 0.075, name: "Futura")
+            if(newFont.pointSize < MyAverageLabel.font.pointSize)
+            {
+                MyAverageLabel.font = newFont
+            }
         }
         else
         {
-            WinningAverageLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
-            MyAverageLabel.font = ViewController.font!
+            let winningNewFont = ViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
+            if(winningNewFont.pointSize < WinningAverageLabel.font.pointSize)
+            {
+                WinningAverageLabel.font = winningNewFont
+            }
+            
+            let newFont = ViewController.font
+            if(newFont!.pointSize < MyAverageLabel.font.pointSize)
+            {
+                MyAverageLabel.font = newFont
+            }
+            //MyAverageLabel.font = ViewController.font!
         }
         
         timeConstraints()
         TimesCollection.forEach{(button) in
             button.titleLabel?.font = ViewController.font!
         }
-        MyAverageLabel.adjustsFontSizeToFitWidth = true
-        WinningAverageLabel.adjustsFontSizeToFitWidth = true
+        
+       
         
         TryAgainButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.055, name: "Futura")
         let stringSize = TryAgainButton.titleLabel?.intrinsicContentSize.width
@@ -328,7 +349,6 @@ class ResultViewController: UIViewController {
     
     @objc func imageTapped()
     {
-        print("image tapped")
         do {
            try AVAudioSession.sharedInstance().setCategory(.playback)
         } catch(let error) {
@@ -348,7 +368,6 @@ class ResultViewController: UIViewController {
     {
         let pathToSound = Bundle.main.path(forResource: "cheer", ofType: "m4a")
         let url = URL(fileURLWithPath: pathToSound!)
-        print(url)
         
         do
         {
@@ -364,7 +383,6 @@ class ResultViewController: UIViewController {
     {
         let pathToSound = Bundle.main.path(forResource: "Sad_Trombone", ofType: "mp3")
         let url = URL(fileURLWithPath: pathToSound!)
-        print(url)
         
         do
         {

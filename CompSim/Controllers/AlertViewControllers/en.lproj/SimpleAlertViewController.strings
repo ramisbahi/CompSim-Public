@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "Delete Solve?"; ObjectID = "GRg-Dx-7xP"; */
+"GRg-Dx-7xP.text" = "Delete Solve?";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "PIg-EF-rnM"; */
+"PIg-EF-rnM.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Yes"; ObjectID = "Xbl-pC-1d9"; */
+"Xbl-pC-1d9.normalTitle" = "Yes";

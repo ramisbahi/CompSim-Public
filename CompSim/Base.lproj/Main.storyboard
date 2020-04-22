@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YCs-P2-xce">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,20 +15,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UR7-js-Vec">
-                                <rect key="frame" x="60" y="0.0" width="294" height="90"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target Setting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UR7-js-Vec">
+                                <rect key="frame" x="57" y="0.0" width="300" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="yn3-CP-sax"/>
                                 </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="Target Setting">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="47" name="Futura-Medium"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="48"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2pc-dx-UvZ">
@@ -240,6 +233,7 @@
                         <outlet property="MaxTimeLabel" destination="CVg-Dn-ZTu" id="iV3-0w-hmG"/>
                         <outlet property="MinTimeLabel" destination="2pc-dx-UvZ" id="bk1-Wz-SVy"/>
                         <outlet property="SingleTimeLabel" destination="tDk-13-DpW" id="nGF-yB-8uC"/>
+                        <outlet property="TargetSettingLabel" destination="UR7-js-Vec" id="bGW-Fv-pOP"/>
                         <outlet property="ToLabel" destination="Ymu-h8-TEh" id="wCr-rd-t1C"/>
                         <outlet property="WinningTimeSetting" destination="mUr-Jm-UAb" id="QsI-8N-DMX"/>
                         <outletCollection property="BlackWhiteLabels" destination="UR7-js-Vec" collectionClass="NSMutableArray" id="svJ-Xl-uvh"/>
@@ -277,7 +271,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MgX-Jd-ubN">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="729"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="879"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-NK-pgV">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -946,23 +940,74 @@
                                                     <action selector="TimingChanged:" destination="0Bl-oR-f5Z" eventType="valueChanged" id="7Dd-EY-4GM"/>
                                                 </connections>
                                             </segmentedControl>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTZ-LD-Niw">
+                                                <rect key="frame" x="155.33333333333334" y="704" width="103.33333333333334" height="44.333333333333371"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="BTZ-LD-Niw" secondAttribute="height" multiplier="82:35" id="Kz0-EH-7TS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <state key="normal" title="Website">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="WebsiteButtonTouched:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="y1m-jn-I2u"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GqU-g2-2in">
+                                                <rect key="frame" x="155.33333333333334" y="773.33333333333337" width="103.33333333333334" height="44"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="GqU-g2-2in" secondAttribute="height" multiplier="82:35" id="09b-Va-Qlb"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <state key="normal" title="Email">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="EmailButtonTouched:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="lbt-am-2Lm"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRJ-Gy-2ml">
+                                                <rect key="frame" x="176" y="842.33333333333337" width="62.333333333333343" height="22.333333333333371"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstItem="Ms5-6S-Cbn" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="0fz-VN-1ZO"/>
+                                            <constraint firstItem="BTZ-LD-Niw" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.25" id="1dB-NO-7UK"/>
+                                            <constraint firstItem="GqU-g2-2in" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="26y-lg-EHn"/>
                                             <constraint firstItem="lgK-5W-Uhl" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="2Ys-Wf-5Kc"/>
                                             <constraint firstAttribute="trailing" secondItem="6uq-uX-5mP" secondAttribute="trailing" id="3aR-Eu-nWT"/>
                                             <constraint firstItem="LA3-i5-aRu" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="3sx-yx-0Gp"/>
                                             <constraint firstItem="6uq-uX-5mP" firstAttribute="top" secondItem="ljr-tg-h7i" secondAttribute="bottom" constant="10" id="7go-rZ-Go8"/>
-                                            <constraint firstAttribute="bottom" secondItem="42Y-ms-qTs" secondAttribute="bottom" constant="50" id="AJ9-pJ-qYF"/>
+                                            <constraint firstItem="GqU-g2-2in" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.25" id="8d8-7j-RN7"/>
+                                            <constraint firstItem="XRJ-Gy-2ml" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="8s4-jx-9qC"/>
+                                            <constraint firstAttribute="bottom" secondItem="42Y-ms-qTs" secondAttribute="bottom" constant="200" id="AJ9-pJ-qYF"/>
                                             <constraint firstItem="xBE-BR-iFx" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="ALp-P2-Gq7"/>
                                             <constraint firstItem="uwH-WR-wfc" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="BL3-gK-UAy"/>
                                             <constraint firstAttribute="trailing" secondItem="dIR-c7-qh2" secondAttribute="trailing" id="BLW-nh-5ad"/>
                                             <constraint firstItem="0mn-7A-bip" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="C07-CN-f99"/>
+                                            <constraint firstItem="GqU-g2-2in" firstAttribute="centerX" secondItem="BTZ-LD-Niw" secondAttribute="centerX" id="D3X-Xi-bhs"/>
                                             <constraint firstItem="Ms5-6S-Cbn" firstAttribute="top" secondItem="7Lm-QJ-n9i" secondAttribute="bottom" constant="10" id="DIq-SA-yuS"/>
                                             <constraint firstItem="LrE-n2-Lfh" firstAttribute="top" secondItem="6uq-uX-5mP" secondAttribute="bottom" constant="10" id="Fdz-vl-dq9"/>
+                                            <constraint firstItem="GqU-g2-2in" firstAttribute="top" secondItem="BTZ-LD-Niw" secondAttribute="bottom" constant="25" id="Iiy-QN-h1n"/>
                                             <constraint firstItem="lgK-5W-Uhl" firstAttribute="top" secondItem="ePi-pz-Za3" secondAttribute="bottom" constant="10" id="Jkv-V4-SXZ"/>
                                             <constraint firstAttribute="trailing" secondItem="uwH-WR-wfc" secondAttribute="trailing" id="K2J-Km-Hd4"/>
+                                            <constraint firstItem="XRJ-Gy-2ml" firstAttribute="top" secondItem="GqU-g2-2in" secondAttribute="bottom" constant="25" id="KP2-mr-Ra4"/>
                                             <constraint firstItem="R04-Tx-5Ya" firstAttribute="top" secondItem="wXm-KH-6ct" secondAttribute="bottom" constant="10" id="NGn-2y-pGV"/>
                                             <constraint firstAttribute="trailing" secondItem="R04-Tx-5Ya" secondAttribute="trailing" id="SbL-LK-8cI"/>
                                             <constraint firstAttribute="trailing" secondItem="7Lm-QJ-n9i" secondAttribute="trailing" id="UCr-pf-Cp7"/>
@@ -971,6 +1016,7 @@
                                             <constraint firstAttribute="trailing" secondItem="ePi-pz-Za3" secondAttribute="trailing" id="Vr2-a2-sLX"/>
                                             <constraint firstItem="7Lm-QJ-n9i" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="ZXU-Sl-71L"/>
                                             <constraint firstItem="6uq-uX-5mP" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="aPI-77-i6W"/>
+                                            <constraint firstItem="BTZ-LD-Niw" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="bka-jL-BdC"/>
                                             <constraint firstItem="R04-Tx-5Ya" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="bwr-Mx-C0V"/>
                                             <constraint firstItem="ePi-pz-Za3" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="eKC-N2-HFo"/>
                                             <constraint firstItem="LA3-i5-aRu" firstAttribute="top" secondItem="R04-Tx-5Ya" secondAttribute="bottom" constant="10" id="ege-Tj-X99"/>
@@ -989,6 +1035,8 @@
                                             <constraint firstItem="LrE-n2-Lfh" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="nZA-J2-Rhe"/>
                                             <constraint firstItem="42Y-ms-qTs" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="sbp-4y-D7L"/>
                                             <constraint firstItem="TWC-NK-pgV" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="u2a-36-7yl"/>
+                                            <constraint firstItem="XRJ-Gy-2ml" firstAttribute="centerX" secondItem="BTZ-LD-Niw" secondAttribute="centerX" id="vfS-lJ-iVe"/>
+                                            <constraint firstItem="BTZ-LD-Niw" firstAttribute="top" secondItem="42Y-ms-qTs" secondAttribute="bottom" constant="25" id="wcc-La-fax"/>
                                             <constraint firstItem="7Lm-QJ-n9i" firstAttribute="top" secondItem="LrE-n2-Lfh" secondAttribute="bottom" constant="10" id="wnx-eH-VIb"/>
                                             <constraint firstItem="dIR-c7-qh2" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="wt9-Q5-hRE"/>
                                             <constraint firstItem="wXm-KH-6ct" firstAttribute="top" secondItem="TWC-NK-pgV" secondAttribute="bottom" constant="10" id="zO7-U3-ncY"/>
@@ -1023,6 +1071,7 @@
                         <outlet property="CuberButton" destination="PJq-5N-yCt" id="z3v-uN-ubB"/>
                         <outlet property="DarkModeControl" destination="LA3-i5-aRu" id="FrW-tU-ZMy"/>
                         <outlet property="DarkModeLabel" destination="R04-Tx-5Ya" id="aMb-Yb-kSf"/>
+                        <outlet property="EmailButton" destination="GqU-g2-2in" id="Tk2-4a-KsC"/>
                         <outlet property="HoldingTimeLabel" destination="ePi-pz-Za3" id="F89-Ra-Y1V"/>
                         <outlet property="HoldingTimeSlider" destination="lgK-5W-Uhl" id="NSJ-JT-JsY"/>
                         <outlet property="InspectionControl" destination="LrE-n2-Lfh" id="R0g-Zs-TsN"/>
@@ -1032,6 +1081,8 @@
                         <outlet property="ScrollView" destination="CUF-Dg-Qhg" id="6xj-pk-yzS"/>
                         <outlet property="TimerUpdateControl" destination="xBE-BR-iFx" id="FO0-Dw-IeD"/>
                         <outlet property="TimingControl" destination="ljr-tg-h7i" id="96s-IP-aq7"/>
+                        <outlet property="VersionLabel" destination="XRJ-Gy-2ml" id="wAV-4Q-qPO"/>
+                        <outlet property="WebsiteButton" destination="BTZ-LD-Niw" id="UlZ-U1-edS"/>
                         <outlet property="solveTypeControl" destination="42Y-ms-qTs" id="VZh-4e-UpW"/>
                         <outlet property="solveTypeLabel" destination="0mn-7A-bip" id="a4W-ic-mHZ"/>
                         <outletCollection property="eventCollection" destination="nMK-mq-VW3" collectionClass="NSMutableArray" id="l0D-kd-G6L"/>
@@ -1068,7 +1119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jIH-Sc-q0c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1717.5999999999999" y="1458.6206896551726"/>
+            <point key="canvasLocation" x="-1718.840579710145" y="1458.4239130434785"/>
         </scene>
         <!--Average Detail View Controller-->
         <scene sceneID="uHH-dz-DL6">
@@ -1119,7 +1170,7 @@
                                 <rect key="frame" x="10" y="10" width="80" height="38"/>
                                 <color key="backgroundColor" red="0.029578437289999999" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="QZM-74-Z8U"/>
+                                    <constraint firstAttribute="width" priority="750" constant="80" id="QZM-74-Z8U"/>
                                     <constraint firstAttribute="height" constant="38" id="WVV-Xr-UU5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
@@ -1418,7 +1469,7 @@
                                 <rect key="frame" x="0.0" y="266" width="414" height="421"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edN-gV-HS0">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edN-gV-HS0">
                                 <rect key="frame" x="10" y="642" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="B0o-f4-4Zs"/>
@@ -1701,7 +1752,7 @@
                                 <color key="backgroundColor" red="0.029578437289999999" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UKn-tl-hQZ"/>
-                                    <constraint firstAttribute="width" constant="105" id="Y8k-oP-rWY"/>
+                                    <constraint firstAttribute="width" priority="750" constant="105" id="Y8k-oP-rWY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4036,7 +4087,7 @@ Cg
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="z5C-xH-DX3"/>
+        <segue reference="AZA-lg-qSK"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="GaussianCurve" width="1116" height="462"/>

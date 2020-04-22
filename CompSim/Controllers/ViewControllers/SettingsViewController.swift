@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MessageUI
 import RealmSwift
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var DarkModeLabel: UILabel!
     @IBOutlet weak var DarkModeControl: UISegmentedControl!
@@ -43,7 +44,15 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var InspectionVoiceAlertsControl: UISegmentedControl!
     @IBOutlet weak var TimerUpdateControl: UISegmentedControl!
     
-    let cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Random" : NSLocalizedString("Random", comment: ""), NSLocalizedString("Random", comment: "") : NSLocalizedString("Random", comment: ""), "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park", "Kevin" : "Kevin Hays"]
+    @IBOutlet weak var VersionLabel: UILabel!
+    
+    @IBOutlet weak var WebsiteButton: UIButton!
+    
+    @IBOutlet weak var EmailButton: UIButton!
+    
+    
+    
+    var cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Random" : NSLocalizedString("Random", comment: ""), "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park", "Kevin" : "Kevin Hays"]
     
     let realm = try! Realm()
     
@@ -77,6 +86,36 @@ class SettingsViewController: UIViewController {
                 InspectionVoiceAlertsControl.isEnabled = true
             }
         }
+    }
+    
+    @IBAction func WebsiteButtonTouched(_ sender: Any) {
+        guard let url = URL(string: "http://www.compsim.net") else {
+          return //be safe
+        }
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    @IBAction func EmailButtonTouched(_ sender: Any) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["compsimcubing@gmail.com"])
+            mail.setSubject("CompSim Inquiry")
+            mail.setMessageBody("<p>Dear CompSim,</p>", isHTML: true)
+
+            present(mail, animated: true)
+        } else {
+            print("fail")
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
     
     @IBAction func InspectionChanged(_ sender: Any) {
@@ -181,7 +220,15 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
     {
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
+        VersionLabel.text = "Version: \(appVersion)"
+        
+        cuberDictionary["Aleatorio"] = NSLocalizedString("Random", comment: "") // need to go through each
+        if(cuberDictionary[NSLocalizedString("Random", comment: "")] == nil)
+        {
+            cuberDictionary[NSLocalizedString("Random", comment: "")] = NSLocalizedString("Random", comment: "")
+        }
         if(ViewController.darkMode)
         {
             DarkModeControl.selectedSegmentIndex = 0
@@ -226,11 +273,12 @@ class SettingsViewController: UIViewController {
             InspectionVoiceAlertsControl.selectedSegmentIndex = 1
         }
         
-        print("cuber \(ViewController.cuber)")
-        CuberButton.setTitle("Cuber: \(cuberDictionary[ViewController.cuber]!)", for: .normal)
+        let cuber = NSLocalizedString("Cuber", comment: "")
+        CuberButton.setTitle("\(cuber): \(cuberDictionary[ViewController.cuber]!)", for: .normal)
         
         HoldingTimeSlider.value = ViewController.holdingTime
-        HoldingTimeLabel.text = String(format: "Holding Time: %.2f", ViewController.holdingTime)
+        let holdingTime = NSLocalizedString("Holding Time", comment: "")
+        HoldingTimeLabel.text = String(format: "\(holdingTime): %.2f", ViewController.holdingTime)
         
         TimerUpdateControl.selectedSegmentIndex = ViewController.timerUpdate
         
@@ -244,7 +292,8 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         let eventNames = ["2x2x2", "3x3x3", "4x4x4", "5x5x5", "6x6x6", "7x7x7", "Pyraminx", "Megaminx", "Square-1", "Skewb", "Clock", "3x3x3 BLD"]
         let title = eventNames[ViewController.mySession.scrambler.myEvent]
-        ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
+        let scrType = NSLocalizedString("Scramble Type", comment: "")
+        ScrambleTypeButton.setTitle("\(scrType): \(title)", for: .normal)
         
         
         
@@ -261,7 +310,8 @@ class SettingsViewController: UIViewController {
     @IBAction func HoldingTimeChanged(_ sender: Any) {
         
         let roundedTime = round(HoldingTimeSlider.value * 20) / 20 // 0.29 --> 0.3, 0.27 --> 0.25
-        HoldingTimeLabel.text = String(format: "Holding Time: %.2f", roundedTime)
+        let holdingTime = NSLocalizedString("Holding Time", comment: "")
+        HoldingTimeLabel.text = String(format: "\(holdingTime): %.2f", roundedTime)
         ViewController.holdingTime = roundedTime
         
         
@@ -309,7 +359,8 @@ class SettingsViewController: UIViewController {
             return // doesn't have title
         }
         
-        CuberButton.setTitle("Cuber: \(title)", for: .normal)
+        let cuber = NSLocalizedString("Cuber", comment: "")
+        CuberButton.setTitle("\(cuber): \(title)", for: .normal)
         
         let nameArr = title.components(separatedBy: " ")
         ViewController.cuber = nameArr[0]
@@ -330,7 +381,8 @@ class SettingsViewController: UIViewController {
             return // doesn't have title
         }
         
-        ScrambleTypeButton.setTitle("Scramble Type: \(title)", for: .normal)
+        let scrType = NSLocalizedString("Scramble Type", comment: "")
+        ScrambleTypeButton.setTitle("\(scrType): \(title)", for: .normal)
         
         try! realm.write
         {

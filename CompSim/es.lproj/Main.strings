@@ -294,7 +294,7 @@
 "eLU-vY-iiZ.normalTitle" = "6x6x6";
 
 /* Class = "UILabel"; text = "Holding Time: 0.3 "; ObjectID = "ePi-pz-Za3"; */
-"ePi-pz-Za3.text" = "Tiempo de Apretar: 0.3 ";
+"ePi-pz-Za3.text" = "Tiempo para Apretar: 0.3 ";
 
 /* Class = "UIButton"; normalTitle = "Random"; ObjectID = "gh6-AO-aXv"; */
 "gh6-AO-aXv.normalTitle" = "Aleatorio";

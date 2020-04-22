@@ -58,6 +58,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     @IBOutlet weak var Logo: UIImageView!
     
+    static var scrambleChanged = false
+    
     var labels = [UIButton]()
     
     // settings stuff
@@ -95,14 +97,14 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     static var totalAverages: Int = 0 // for keeping track of user engagement
     
-    var hasTurnedOnMic = false
+    /*var hasTurnedOnMic = false
     static var usingMic = false
     static var micAuthorized = false
     private let speechRecognizer = SFSpeechRecognizer()
     private let audioEngine = AVAudioEngine()
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
-    
+    */
     let realm = try! Realm()
     
     struct Keys
@@ -125,7 +127,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         var stringSize = NewScrambleButton.titleLabel?.intrinsicContentSize.width
         NewScrambleButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
-        print("width \(NewScrambleButton.frame.size.width)")
         if(NewScrambleButton.frame.size.width > 150)
         {
             NewScrambleButton.setTitle(NSLocalizedString("New Scr.", comment: ""), for: .normal)
@@ -139,10 +140,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        if(ViewController.micAuthorized && ViewController.usingMic)
+        /*if(ViewController.micAuthorized && ViewController.usingMic)
         {
             turnOnMic()
-        }
+        }*/
+        
+        TimerViewController.initializeFormatters() // have to do this once in a while....
         
         tabBarController?.tabBar.isHidden = false
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -204,7 +207,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
     }
     
-    public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
+    /*public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
             MicButton.isEnabled = true
             print("mic available!")
@@ -214,13 +217,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
     }
     
-    
+    */
     @available(iOS 13.0, *)
     @IBAction func MicTapped(_ sender: Any) {
-        ViewController.usingMic ? turnOffMic(changeStatus: true) : turnOnMic()
+       // ViewController.usingMic ? turnOffMic(changeStatus: true) : turnOnMic()
         
     }
-    
+    /*
     func turnOffMic(changeStatus: Bool)
     {
         MicButton.setImage(UIImage(systemName: "mic.slash.fill"), for: .normal)
@@ -322,8 +325,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         {
             turnOffMic(changeStatus: false)
         }
-    }
+    }*/
     
+
     static func fontToFitHeight(view: UIView, multiplier: Float, name: String) -> UIFont
     {
         let minFontSize: CGFloat = 1.0 // CGFloat 18
@@ -777,12 +781,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 self.updateLabels()
             }, deletion:
             {
-                try! self.realm.write
-                {
-                    ViewController.mySession.deleteSolve()
-                }
-                self.ScrambleLabel.text = ViewController.mySession.getCurrentScramble()
-                self.updateLabels()
+                self.deleteSolve()
             }
         )
         
@@ -874,7 +873,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     static func orangeColor() -> UIColor
     {
-        return UIColor.init(displayP3Red: 255/255, green: 165/255, blue: 61/255, alpha: 1.0)
+        return UIColor(displayP3Red: 255/255, green: 165/255, blue: 61/255, alpha: 1.0)
     }
     
     static func blueColor() ->  UIColor

@@ -69,6 +69,7 @@ class ScrambleReader
         case 1: // 3x3
             currentScramble = threeScrambler.scramble()
             drawScramble = getDrawArray(scramble: currentScramble)
+            ViewController.scrambleChanged = true
             print(currentScramble)
         case 2: // 4x4
             currentScramble = bigCubeScrambler.getScrString(byType: 4)
@@ -83,7 +84,15 @@ class ScrambleReader
         case 7:
             currentScramble = megaScrambler.scrMinx()
         case 8:
-            currentScramble = sq1Scrambler.sq1_scramble(1) // might have to fix
+            currentScramble = sq1Scrambler.sq1_scramble(1) // boom
+            /*print("0")
+            print(sq1Scrambler.sq1_scramble(0))
+            print("1")
+            print(sq1Scrambler.sq1_scramble(1))
+            print("2")
+            print(sq1Scrambler.sq1_scramble(2))
+            print("3")
+            print(sq1Scrambler.sq1_scramble(3))*/
         case 9:
             currentScramble = skewbScrambler.scrSkb()
         case 10:

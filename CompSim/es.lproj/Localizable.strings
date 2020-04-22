@@ -13,3 +13,14 @@
 "Time" = "Tiempo";
 "Add Solve" = "Agregar Tiempo";
 "Please enter valid time" = "Por favor entre tiempo válido";
+"Target Setting" = "Fijar Objetivo";
+"Scramble Type" = "Tipo de Mezcla";
+"Cuber" = "Cubero";
+"Holding Time" = "Tiempo para Apretar";
+"Min Time" = "Tiempo Mínimo";
+"Max Time" = "Tiempo Máximo";
+"Target" = "Objetivo";
+"Target: " = "Objetivo: ";
+"Average" = "Media";
+"Mean" = "Media";
+"Average: " = "Media: ";

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3602BC3424379DD60050406C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3602BC3324379DD60050406C /* State.swift */; };
+		3602BC362437A3280050406C /* CubeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3602BC352437A3280050406C /* CubeState.swift */; };
+		3602BC382437A4310050406C /* Square1Solver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3602BC372437A4310050406C /* Square1Solver.swift */; };
+		3602BC3A2437AC220050406C /* IndexMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3602BC392437AC220050406C /* IndexMapping.swift */; };
+		3602BC3C2437CF5E0050406C /* Square1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3602BC3B2437CF5E0050406C /* Square1.swift */; };
+		3602BC3D24390BCA0050406C /* ViewSolveAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3602BC3F24390BCA0050406C /* ViewSolveAlert.storyboard */; };
+		3602BC4424390BFA0050406C /* AddSolveAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3602BC4624390BFA0050406C /* AddSolveAlert.storyboard */; };
+		3602BC4B24390C2D0050406C /* SimpleAlertViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3602BC4D24390C2D0050406C /* SimpleAlertViewController.storyboard */; };
+		3602BC5224390C4F0050406C /* NotificationAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3602BC5424390C4F0050406C /* NotificationAlert.storyboard */; };
 		360BC94C23BBE64C00EE8324 /* cheer.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94B23BBE64C00EE8324 /* cheer.m4a */; };
 		360BC95023BBE70B00EE8324 /* Sad_Trombone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94F23BBE70B00EE8324 /* Sad_Trombone.mp3 */; };
 		3617752323DE1A5A00FC6DCE /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3617752223DE1A5A00FC6DCE /* HelpViewController.swift */; };
@@ -15,7 +24,6 @@
 		3634822823A0615F009A14C7 /* SolveTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822723A0615F009A14C7 /* SolveTime.swift */; };
 		3634822A23A06653009A14C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822923A06653009A14C7 /* Session.swift */; };
 		363D562223C7B2E000357368 /* NotificationAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D562123C7B2E000357368 /* NotificationAlertViewController.swift */; };
-		363D562423C7B41A00357368 /* NotificationAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 363D562323C7B41A00357368 /* NotificationAlert.storyboard */; };
 		3654A84223BC02280066A48F /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3654A84123BC02280066A48F /* LogoViewController.swift */; };
 		3654A84523BC09610066A48F /* 8seconds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3654A84323BC09610066A48F /* 8seconds.mp3 */; };
 		3654A84623BC09610066A48F /* 12seconds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3654A84423BC09610066A48F /* 12seconds.mp3 */; };
@@ -59,13 +67,10 @@
 		3690EB062316293200CB0B78 /* TwoPhaseScrambler.m in Sources */ = {isa = PBXBuildFile; fileRef = 361231EA22FD08E80044DEF1 /* TwoPhaseScrambler.m */; };
 		3690EB072316293700CB0B78 /* CompSim-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = 361231F022FD0B4E0044DEF1 /* CompSim-Bridging-Header.h */; };
 		3690EB0823162AF800CB0B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF3A22DD699D006657CF /* AppDelegate.swift */; };
-		3696537923BA45F8000784D9 /* AddSolveAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */; };
 		3696537B23BA4671000784D9 /* AddSolveAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */; };
 		3696537D23BA5557000784D9 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696537C23BA5557000784D9 /* AlertService.swift */; };
-		3696537F23BA8AEF000784D9 /* SimpleAlertViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3696537E23BA8AEE000784D9 /* SimpleAlertViewController.storyboard */; };
 		3696538123BA8B5C000784D9 /* SimpleAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538023BA8B5C000784D9 /* SimpleAlertViewController.swift */; };
 		3696538323BA8F51000784D9 /* SimpleAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538223BA8F51000784D9 /* SimpleAlertService.swift */; };
-		3696538623BA9B5C000784D9 /* ViewSolveAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3696538523BA9B5C000784D9 /* ViewSolveAlert.storyboard */; };
 		3696538823BA9F46000784D9 /* ViewSolveAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */; };
 		3696538A23BA9F55000784D9 /* ViewSolveAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */; };
 		36A0A4AB23AF676600D41938 /* SolveTimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0A4AA23AF676600D41938 /* SolveTimeList.swift */; };
@@ -74,6 +79,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3602BC3324379DD60050406C /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		3602BC352437A3280050406C /* CubeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeState.swift; sourceTree = "<group>"; };
+		3602BC372437A4310050406C /* Square1Solver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square1Solver.swift; sourceTree = "<group>"; };
+		3602BC392437AC220050406C /* IndexMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexMapping.swift; sourceTree = "<group>"; };
+		3602BC3B2437CF5E0050406C /* Square1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square1.swift; sourceTree = "<group>"; };
+		3602BC3E24390BCA0050406C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ViewSolveAlert.storyboard; sourceTree = "<group>"; };
+		3602BC4124390BCE0050406C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ViewSolveAlert.strings; sourceTree = "<group>"; };
+		3602BC4324390BCF0050406C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ViewSolveAlert.strings; sourceTree = "<group>"; };
+		3602BC4524390BFA0050406C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AddSolveAlert.storyboard; sourceTree = "<group>"; };
+		3602BC4824390BFF0050406C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AddSolveAlert.strings; sourceTree = "<group>"; };
+		3602BC4A24390C020050406C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AddSolveAlert.strings; sourceTree = "<group>"; };
+		3602BC4C24390C2D0050406C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SimpleAlertViewController.storyboard; sourceTree = "<group>"; };
+		3602BC4F24390C320050406C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SimpleAlertViewController.strings; sourceTree = "<group>"; };
+		3602BC5124390C320050406C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SimpleAlertViewController.strings; sourceTree = "<group>"; };
+		3602BC5324390C4F0050406C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NotificationAlert.storyboard; sourceTree = "<group>"; };
+		3602BC5624390C530050406C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NotificationAlert.strings; sourceTree = "<group>"; };
+		3602BC5824390C530050406C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/NotificationAlert.strings; sourceTree = "<group>"; };
 		360BC94B23BBE64C00EE8324 /* cheer.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = cheer.m4a; sourceTree = "<group>"; };
 		360BC94F23BBE70B00EE8324 /* Sad_Trombone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sad_Trombone.mp3; sourceTree = "<group>"; };
 		360F108E22E551E500EEBB75 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -113,7 +135,6 @@
 		3634822723A0615F009A14C7 /* SolveTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SolveTime.swift; path = CompSim/Session/SolveTime.swift; sourceTree = SOURCE_ROOT; };
 		3634822923A06653009A14C7 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		363D562123C7B2E000357368 /* NotificationAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertViewController.swift; sourceTree = "<group>"; };
-		363D562323C7B41A00357368 /* NotificationAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotificationAlert.storyboard; sourceTree = "<group>"; };
 		36412EEC22EE787E0034E0FC /* TwoByTwoSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoByTwoSolver.swift; sourceTree = "<group>"; };
 		3654A84123BC02280066A48F /* LogoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogoViewController.swift; path = Controllers/ViewControllers/LogoViewController.swift; sourceTree = "<group>"; };
 		3654A84323BC09610066A48F /* 8seconds.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 8seconds.mp3; sourceTree = "<group>"; };
@@ -134,13 +155,10 @@
 		368859F424364F5600635856 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		3690EAC0231623E300CB0B78 /* CompSim.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CompSim.entitlements; sourceTree = "<group>"; };
 		3690EAE2231627A700CB0B78 /* Pyraminx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pyraminx.m; sourceTree = "<group>"; };
-		3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddSolveAlert.storyboard; sourceTree = "<group>"; };
 		3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSolveAlertViewController.swift; sourceTree = "<group>"; };
 		3696537C23BA5557000784D9 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
-		3696537E23BA8AEE000784D9 /* SimpleAlertViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SimpleAlertViewController.storyboard; sourceTree = "<group>"; };
 		3696538023BA8B5C000784D9 /* SimpleAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlertViewController.swift; sourceTree = "<group>"; };
 		3696538223BA8F51000784D9 /* SimpleAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlertService.swift; sourceTree = "<group>"; };
-		3696538523BA9B5C000784D9 /* ViewSolveAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ViewSolveAlert.storyboard; sourceTree = "<group>"; };
 		3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSolveAlertService.swift; sourceTree = "<group>"; };
 		3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSolveAlertViewController.swift; sourceTree = "<group>"; };
 		36A0A4AA23AF676600D41938 /* SolveTimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveTimeList.swift; sourceTree = "<group>"; };
@@ -168,6 +186,18 @@
 				A701408881740019BBE202B5 /* Pods_CompSim.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3602BC3224379DC50050406C /* Sq1 */ = {
+			isa = PBXGroup;
+			children = (
+				3602BC3324379DD60050406C /* State.swift */,
+				3602BC352437A3280050406C /* CubeState.swift */,
+				3602BC372437A4310050406C /* Square1Solver.swift */,
+				3602BC392437AC220050406C /* IndexMapping.swift */,
+				3602BC3B2437CF5E0050406C /* Square1.swift */,
+			);
+			path = Sq1;
 			sourceTree = "<group>";
 		};
 		360BC94623BBE56D00EE8324 /* Sounds */ = {
@@ -248,6 +278,7 @@
 				3612320822FDC5F80044DEF1 /* BigCubeScrambler.m */,
 				3612320A22FDC7050044DEF1 /* BigCubeScrambler.h */,
 				3690EABF2316227600CB0B78 /* 3x3Scrambler */,
+				3602BC3224379DC50050406C /* Sq1 */,
 			);
 			path = Scramblers;
 			sourceTree = "<group>";
@@ -304,16 +335,16 @@
 			children = (
 				363D562123C7B2E000357368 /* NotificationAlertViewController.swift */,
 				36B88A9023C7AD93004262CA /* NotificationAlertService.swift */,
-				3696537E23BA8AEE000784D9 /* SimpleAlertViewController.storyboard */,
+				3602BC4D24390C2D0050406C /* SimpleAlertViewController.storyboard */,
 				3696538023BA8B5C000784D9 /* SimpleAlertViewController.swift */,
 				3696538223BA8F51000784D9 /* SimpleAlertService.swift */,
 				3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */,
-				3696537823BA45F8000784D9 /* AddSolveAlert.storyboard */,
+				3602BC4624390BFA0050406C /* AddSolveAlert.storyboard */,
 				3696537C23BA5557000784D9 /* AlertService.swift */,
-				3696538523BA9B5C000784D9 /* ViewSolveAlert.storyboard */,
+				3602BC3F24390BCA0050406C /* ViewSolveAlert.storyboard */,
 				3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */,
 				3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */,
-				363D562323C7B41A00357368 /* NotificationAlert.storyboard */,
+				3602BC5424390C4F0050406C /* NotificationAlert.storyboard */,
 			);
 			path = AlertViewControllers;
 			sourceTree = "<group>";
@@ -406,12 +437,12 @@
 			files = (
 				360BC94C23BBE64C00EE8324 /* cheer.m4a in Resources */,
 				360BC95023BBE70B00EE8324 /* Sad_Trombone.mp3 in Resources */,
-				363D562423C7B41A00357368 /* NotificationAlert.storyboard in Resources */,
-				3696537923BA45F8000784D9 /* AddSolveAlert.storyboard in Resources */,
+				3602BC5224390C4F0050406C /* NotificationAlert.storyboard in Resources */,
+				3602BC4424390BFA0050406C /* AddSolveAlert.storyboard in Resources */,
 				3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */,
-				3696537F23BA8AEF000784D9 /* SimpleAlertViewController.storyboard in Resources */,
+				3602BC4B24390C2D0050406C /* SimpleAlertViewController.storyboard in Resources */,
 				3663DF4222DD699E006657CF /* Assets.xcassets in Resources */,
-				3696538623BA9B5C000784D9 /* ViewSolveAlert.storyboard in Resources */,
+				3602BC3D24390BCA0050406C /* ViewSolveAlert.storyboard in Resources */,
 				3663DF4022DD699D006657CF /* Main.storyboard in Resources */,
 				368859EF2436456A00635856 /* Localizable.strings in Resources */,
 				3669CEC2238B13A900F1D002 /* scrambles.txt in Resources */,
@@ -495,6 +526,7 @@
 				3690EAF32316293200CB0B78 /* Sq1.m in Sources */,
 				3690EAF42316293200CB0B78 /* Sq1.h in Sources */,
 				3690EAF52316293200CB0B78 /* Skewb.h in Sources */,
+				3602BC362437A3280050406C /* CubeState.swift in Sources */,
 				3690EAF62316293200CB0B78 /* Skewb.m in Sources */,
 				3690EAF72316293200CB0B78 /* Pyraminx.h in Sources */,
 				3690EAF82316293200CB0B78 /* Pyraminx.m in Sources */,
@@ -503,19 +535,23 @@
 				3690EAFA2316293200CB0B78 /* BigCubeScrambler.h in Sources */,
 				361C625F240479FF0003D26F /* DrawScrambleViewController.swift in Sources */,
 				3690EAFB2316293200CB0B78 /* Util.h in Sources */,
+				3602BC3424379DD60050406C /* State.swift in Sources */,
 				3690EAFC2316293200CB0B78 /* Util.m in Sources */,
+				3602BC3C2437CF5E0050406C /* Square1.swift in Sources */,
 				3690EAFD2316293200CB0B78 /* Im.m in Sources */,
 				3690EAFE2316293200CB0B78 /* Im.h in Sources */,
 				3696538A23BA9F55000784D9 /* ViewSolveAlertViewController.swift in Sources */,
 				3690EAFF2316293200CB0B78 /* CubieCube.h in Sources */,
 				36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */,
 				3634822A23A06653009A14C7 /* Session.swift in Sources */,
+				3602BC3A2437AC220050406C /* IndexMapping.swift in Sources */,
 				3690EB002316293200CB0B78 /* CubieCube.m in Sources */,
 				3690EB012316293200CB0B78 /* CoordCube.m in Sources */,
 				3690EB022316293200CB0B78 /* CoordCube.h in Sources */,
 				3690EB032316293200CB0B78 /* Search.h in Sources */,
 				3690EB042316293200CB0B78 /* Search.m in Sources */,
 				3690EB052316293200CB0B78 /* TwoPhaseScrambler.h in Sources */,
+				3602BC382437A4310050406C /* Square1Solver.swift in Sources */,
 				3690EB062316293200CB0B78 /* TwoPhaseScrambler.m in Sources */,
 				363D562223C7B2E000357368 /* NotificationAlertViewController.swift in Sources */,
 				3696537B23BA4671000784D9 /* AddSolveAlertViewController.swift in Sources */,
@@ -525,6 +561,46 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3602BC3F24390BCA0050406C /* ViewSolveAlert.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3602BC3E24390BCA0050406C /* Base */,
+				3602BC4124390BCE0050406C /* en */,
+				3602BC4324390BCF0050406C /* es */,
+			);
+			name = ViewSolveAlert.storyboard;
+			sourceTree = "<group>";
+		};
+		3602BC4624390BFA0050406C /* AddSolveAlert.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3602BC4524390BFA0050406C /* Base */,
+				3602BC4824390BFF0050406C /* es */,
+				3602BC4A24390C020050406C /* en */,
+			);
+			name = AddSolveAlert.storyboard;
+			sourceTree = "<group>";
+		};
+		3602BC4D24390C2D0050406C /* SimpleAlertViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3602BC4C24390C2D0050406C /* Base */,
+				3602BC4F24390C320050406C /* en */,
+				3602BC5124390C320050406C /* es */,
+			);
+			name = SimpleAlertViewController.storyboard;
+			sourceTree = "<group>";
+		};
+		3602BC5424390C4F0050406C /* NotificationAlert.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3602BC5324390C4F0050406C /* Base */,
+				3602BC5624390C530050406C /* en */,
+				3602BC5824390C530050406C /* es */,
+			);
+			name = NotificationAlert.storyboard;
+			sourceTree = "<group>";
+		};
 		3663DF3E22DD699D006657CF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
