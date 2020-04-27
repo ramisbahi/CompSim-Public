@@ -812,11 +812,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     func updateStatusBarBackground()
     {
-        if #available(iOS 13.0, *) {
-            let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-            statusBar.backgroundColor = ViewController.darkMode ?  ViewController.darkModeColor() : .white
-             view.addSubview(statusBar)
-        }
+        let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+        statusBar.backgroundColor = ViewController.darkMode ?  ViewController.darkModeColor() : .white
+         view.addSubview(statusBar)
     }
     
     func turnOffDarkMode()

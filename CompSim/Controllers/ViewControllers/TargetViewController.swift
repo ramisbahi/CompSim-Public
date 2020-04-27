@@ -220,7 +220,7 @@ class TargetViewController: UIViewController {
     @IBAction func SingleTimeTouched(_ sender: Any) {
         
         let alertService = AlertService()
-        let alert = alertService.alert(placeholder: "Time", usingPenalty: false, keyboardType: 0, myTitle: "Target Time",
+        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""), usingPenalty: false, keyboardType: 0, myTitle: NSLocalizedString("Target Time", comment: ""),
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!
@@ -250,7 +250,7 @@ class TargetViewController: UIViewController {
     func alertValidTime()
     {
         let alertService = NotificationAlertService()
-        let alert = alertService.alert(myTitle: "Invalid Time")
+        let alert = alertService.alert(myTitle: NSLocalizedString("Invalid Time", comment: ""))
         self.present(alert, animated: true, completion: nil)
         // ask again - no input
     }

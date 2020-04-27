@@ -271,7 +271,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MgX-Jd-ubN">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="879"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="879.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-NK-pgV">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -941,12 +941,12 @@
                                                 </connections>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTZ-LD-Niw">
-                                                <rect key="frame" x="155.33333333333334" y="704" width="103.33333333333334" height="44.333333333333371"/>
+                                                <rect key="frame" x="103.66666666666669" y="704" width="207" height="44.333333333333371"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="BTZ-LD-Niw" secondAttribute="height" multiplier="82:35" id="Kz0-EH-7TS"/>
+                                                    <constraint firstAttribute="width" secondItem="BTZ-LD-Niw" secondAttribute="height" multiplier="164:35" id="Kz0-EH-7TS"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                                 <state key="normal" title="Website">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
@@ -960,12 +960,12 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GqU-g2-2in">
-                                                <rect key="frame" x="155.33333333333334" y="773.33333333333337" width="103.33333333333334" height="44"/>
+                                                <rect key="frame" x="103.66666666666669" y="773.33333333333337" width="207" height="44"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="GqU-g2-2in" secondAttribute="height" multiplier="82:35" id="09b-Va-Qlb"/>
+                                                    <constraint firstAttribute="width" secondItem="GqU-g2-2in" secondAttribute="height" multiplier="164:35" id="09b-Va-Qlb"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                                 <state key="normal" title="Email">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
@@ -988,15 +988,14 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstItem="Ms5-6S-Cbn" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="0fz-VN-1ZO"/>
-                                            <constraint firstItem="BTZ-LD-Niw" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.25" id="1dB-NO-7UK"/>
+                                            <constraint firstItem="BTZ-LD-Niw" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.5" id="1dB-NO-7UK"/>
                                             <constraint firstItem="GqU-g2-2in" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="26y-lg-EHn"/>
                                             <constraint firstItem="lgK-5W-Uhl" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="2Ys-Wf-5Kc"/>
                                             <constraint firstAttribute="trailing" secondItem="6uq-uX-5mP" secondAttribute="trailing" id="3aR-Eu-nWT"/>
                                             <constraint firstItem="LA3-i5-aRu" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="3sx-yx-0Gp"/>
                                             <constraint firstItem="6uq-uX-5mP" firstAttribute="top" secondItem="ljr-tg-h7i" secondAttribute="bottom" constant="10" id="7go-rZ-Go8"/>
-                                            <constraint firstItem="GqU-g2-2in" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.25" id="8d8-7j-RN7"/>
+                                            <constraint firstItem="GqU-g2-2in" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.5" id="8d8-7j-RN7"/>
                                             <constraint firstItem="XRJ-Gy-2ml" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="8s4-jx-9qC"/>
-                                            <constraint firstAttribute="bottom" secondItem="42Y-ms-qTs" secondAttribute="bottom" constant="200" id="AJ9-pJ-qYF"/>
                                             <constraint firstItem="xBE-BR-iFx" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="ALp-P2-Gq7"/>
                                             <constraint firstItem="uwH-WR-wfc" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="BL3-gK-UAy"/>
                                             <constraint firstAttribute="trailing" secondItem="dIR-c7-qh2" secondAttribute="trailing" id="BLW-nh-5ad"/>
@@ -1035,6 +1034,7 @@
                                             <constraint firstItem="LrE-n2-Lfh" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="nZA-J2-Rhe"/>
                                             <constraint firstItem="42Y-ms-qTs" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="sbp-4y-D7L"/>
                                             <constraint firstItem="TWC-NK-pgV" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="u2a-36-7yl"/>
+                                            <constraint firstAttribute="bottom" secondItem="XRJ-Gy-2ml" secondAttribute="bottom" constant="15" id="uc0-3Y-nYD"/>
                                             <constraint firstItem="XRJ-Gy-2ml" firstAttribute="centerX" secondItem="BTZ-LD-Niw" secondAttribute="centerX" id="vfS-lJ-iVe"/>
                                             <constraint firstItem="BTZ-LD-Niw" firstAttribute="top" secondItem="42Y-ms-qTs" secondAttribute="bottom" constant="25" id="wcc-La-fax"/>
                                             <constraint firstItem="7Lm-QJ-n9i" firstAttribute="top" secondItem="LrE-n2-Lfh" secondAttribute="bottom" constant="10" id="wnx-eH-VIb"/>
@@ -1119,7 +1119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jIH-Sc-q0c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1718.840579710145" y="1458.4239130434785"/>
+            <point key="canvasLocation" x="-1842" y="1635"/>
         </scene>
         <!--Average Detail View Controller-->
         <scene sceneID="uHH-dz-DL6">
@@ -2505,8 +2505,18 @@ Cg
                     <connections>
                         <outlet property="BackButton" destination="jT1-YK-Ex7" id="C1Z-W0-9LI"/>
                         <outlet property="BigView" destination="5cU-cQ-6uP" id="Uvc-rd-MJp"/>
+                        <outlet property="DescriptionLabel" destination="ffY-a0-sOZ" id="mmg-MO-E9j"/>
+                        <outlet property="HelpLabel" destination="apc-dx-OWj" id="uXd-NI-tyb"/>
                         <outlet property="LittleView" destination="RuN-rN-4d6" id="FFp-id-idB"/>
                         <outlet property="ScrollView" destination="AaZ-ZB-r8k" id="2Za-vo-eFg"/>
+                        <outlet property="Step1Label" destination="ASq-9X-y9I" id="Ith-Xw-M4C"/>
+                        <outlet property="Step1descLabel" destination="tro-OP-hu6" id="hFE-0s-L5v"/>
+                        <outlet property="Step2Label" destination="Vxx-uR-Spc" id="aB0-fH-0hh"/>
+                        <outlet property="Step2descLabel" destination="UV1-eJ-gev" id="vQT-bO-Cpe"/>
+                        <outlet property="Step3Label" destination="Wde-93-Pjp" id="H2i-Lv-Yo8"/>
+                        <outlet property="Step3descLabel" destination="0vo-Jm-RwB" id="6Fu-dV-2sl"/>
+                        <outlet property="Step4Label" destination="VB7-Gi-1w2" id="ZE2-6F-vAz"/>
+                        <outlet property="Step4descLabel" destination="fpo-Ho-INC" id="pPO-yn-oxu"/>
                         <outletCollection property="MyLabels" destination="Wde-93-Pjp" collectionClass="NSMutableArray" id="WgW-lF-hci"/>
                         <outletCollection property="MyLabels" destination="ASq-9X-y9I" collectionClass="NSMutableArray" id="onc-Q3-4u1"/>
                         <outletCollection property="MyLabels" destination="ffY-a0-sOZ" collectionClass="NSMutableArray" id="XsI-iJ-gQe"/>

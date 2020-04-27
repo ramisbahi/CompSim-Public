@@ -24,3 +24,21 @@
 "Average" = "Average";
 "Average: " = "Average: ";
 "Mean" = "Mean";
+"Website" = "Website";
+"Email" = "Email";
+"Version" = "Version";
+"Help" = "Help";
+
+"CompSim Description" = "CompSim is a professional speedcubing competition simulator. This is different from a regular timer; with CompSim, you do solves in an average of 5, mean of 3, or best of 3 format, depending on the event you are doing. In many ways, it works like a normal cubing timer, but it comes with its own unique features as well.";
+
+"Step1" = "1. Set your target.";
+"Step1desc" = "Your target is your goal to beat, which represents the average of your \“competitor.\”\n\nAt the end of your average, if you beat this time, you will get a (green) winning average. Otherwise, you will get a (red) losing average.\n\nThere is also an option for no target, if you simply wish to simulate competition solves without the aspect of “competing” against others.";
+
+"Step2" = "2. Adjust your settings.";
+"Step2desc" = "In the settings, you can set your scramble type, cuber (image that appears after the average), dark mode, some classic timer settings (many of which are new to mobile), and average of 5 / mean of 3 / best of 3 format.";
+
+"Step3" = "3. Time your solves.";
+"Step3desc" = "If inspection is turned on, tap to begin inspection. Then, hold to start. Official competitions have a minimum 0.55 seconds of holding time, but you may adjust this in the settings, along with various other features. Tap to stop. Add penalty if applicable and submit.\n\nIf you wish to fully simulate the competitive environment and input times from your stackmat, simply swipe up to add a solve. You can also turn off \"timing\" in the settings and tap anywhere to do this. No decimal is necessary (but it is permitted). For instance, “5.68” can be inputted as “568” and “3:28.19” can be inputted as “32819”. Add penalty if applicable.\n\nAt the top, you can reset your current average or click new scramble to go to the next scramble if necessary. You can also click the scramble to see the \"draw scamble\" (for 3x3 only).\n\nClicking on the most recent solve reveals the scramble and allows you to change the penalty status as needed. This also allows you to delete this solve.\n\nOnce five solves are done (for avg5, or three for mo3/bo3), your result average along with the target will be revealed. Click “Try Again” to continue.";
+
+"Step4" = "4. Analyze your session.";
+"Step4desc" = "In the session tab, you can view your averages. If you click on an average, you can view it in more detail (i.e. with scrambles). Here, you can see the average time and the target average time. If you wish to see the full scramble of a given solve in a larger font, you can click on the solve.\n\nIf you wish to delete an average in a session, swipe left on it and click delete.\n\nThe colored bar shows the proportions of wins (green), losses (red), and non-targeted averages (black/white).\n\nYou can create a new session, normally for a new event, by clicking on “New”, and you will be prompted to name the session. If you name the session by a traditional event name (i.e. 6x6 or pyraminx), the application will automatically adjust to the settings for those events (i.e. mo3 / 7x7 scramble and ao5 / pyraminx scramble).\n\nIf you click “Reset”, the entire session will be reset (i.e. all averages deleted).\n\nIf you double tap on the session name, you can rename the session.\n\nIf you press the \"X\" by the session name, you can delete the session.";

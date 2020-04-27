@@ -155,6 +155,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Futura", size: 13)!], for: .normal)
         }
         
+        VersionLabel.textColor = .white
+        
         setNeedsStatusBarAppearanceUpdate()
         updateStatusBarBackground()
         
@@ -192,6 +194,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "Futura", size: 13)!], for: .normal)
         }
         
+        VersionLabel.textColor = .black
         setNeedsStatusBarAppearanceUpdate()
         updateStatusBarBackground()
     }
@@ -222,7 +225,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
-        VersionLabel.text = "Version: \(appVersion)"
         
         cuberDictionary["Aleatorio"] = NSLocalizedString("Random", comment: "") // need to go through each
         if(cuberDictionary[NSLocalizedString("Random", comment: "")] == nil)
@@ -281,6 +283,10 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         HoldingTimeLabel.text = String(format: "\(holdingTime): %.2f", ViewController.holdingTime)
         
         TimerUpdateControl.selectedSegmentIndex = ViewController.timerUpdate
+        
+        WebsiteButton.setTitle(NSLocalizedString("Website", comment: ""), for: .normal)
+        EmailButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)
+        VersionLabel.text = NSLocalizedString("Version", comment: "") + ": \(appVersion)"
         
         super.viewDidLoad()
         

@@ -15,13 +15,37 @@ class HelpViewController: UIViewController {
     @IBOutlet weak var BackButton: UIButton!
     @IBOutlet weak var ScrollView: UIScrollView!
     
+    @IBOutlet weak var HelpLabel: UILabel!
+    @IBOutlet weak var DescriptionLabel: UILabel!
+    @IBOutlet weak var Step1Label: UILabel!
+    @IBOutlet weak var Step1descLabel: UILabel!
+    @IBOutlet weak var Step2Label: UILabel!
+    @IBOutlet weak var Step2descLabel: UILabel!
+    @IBOutlet weak var Step3Label: UILabel!
+    @IBOutlet weak var Step3descLabel: UILabel!
+    @IBOutlet weak var Step4Label: UILabel!
+    @IBOutlet weak var Step4descLabel: UILabel!
+    
+    
     @IBOutlet var MyLabels: [UILabel]!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        HelpLabel.text = NSLocalizedString("Help", comment: "")
+        DescriptionLabel.text = NSLocalizedString("CompSim Description", comment: "")
+        Step1Label.text = NSLocalizedString("Step1", comment: "")
+        Step1descLabel.text = NSLocalizedString("Step1desc", comment: "")
+        Step2Label.text = NSLocalizedString("Step2", comment: "")
+        Step2descLabel.text = NSLocalizedString("Step2desc", comment: "")
+        Step3Label.text = NSLocalizedString("Step3", comment: "")
+        Step3descLabel.text = NSLocalizedString("Step3desc", comment: "")
+        Step4Label.text = NSLocalizedString("Step4", comment: "")
+        Step4descLabel.text = NSLocalizedString("Step4desc", comment: "")
         BackButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        
         
         if(ViewController.darkMode)
         {
@@ -32,6 +56,7 @@ class HelpViewController: UIViewController {
             for label in MyLabels
             {
                 label.textColor = .white
+                print(label.text!)
             }
         }
 

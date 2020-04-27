@@ -76,13 +76,11 @@ class AddSolveAlertViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        print("view did layout subviews")
         
         if(count < 2) // only need to do this "twice"
         {
             if count == 1 // do this only on second time this method is called
             {
-                print("count \(count)")
                 TextField.font = ViewController.fontToFitHeight(view: TextField, multiplier: 0.85, name: "Futura")
                 TextField.adjustsFontSizeToFitWidth = true
                 CancelButton.titleLabel?.font = ViewController.fontToFitHeight(view: CancelButton, multiplier: 1.0, name: "Futura")

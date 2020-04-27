@@ -44,7 +44,6 @@ class Session: Object
     var scrambler: ScrambleReader = ScrambleReader(event: 1)
     
     convenience init(name: String, enteredEvent: Int) {
-        print("convenience init")
         self.init()
         self.name = name
         scrambler = ScrambleReader(event: enteredEvent)
@@ -86,7 +85,6 @@ class Session: Object
     
     func addSolve(time: String)
     {
-        print("adding solve")
         let myTime = SolveTime(enteredTime: time, scramble: scrambler.currentScramble)
         times.append(myTime)
         currentIndex += 1
@@ -107,10 +105,6 @@ class Session: Object
             myTime.setDNF()
         }
         times.append(myTime)
-        for time in times
-        {
-            print(time.myString)
-        }
         currentIndex += 1
         updateTimes()
         scrambler.genScramble()
@@ -136,7 +130,6 @@ class Session: Object
     
     func updateTimes()
     {
-        print(times)
         intTotal = 0
         if(currentIndex >= 3 && ViewController.mySession.solveType == 0)
         {
@@ -221,7 +214,6 @@ class Session: Object
             var averageTime = 0
             if ViewController.mySession.solveType == 2
             {
-                print("we are doing bo3")
                 averageTime = intTotal
             }
             else

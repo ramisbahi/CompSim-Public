@@ -19,8 +19,28 @@
 "Holding Time" = "Tiempo para Apretar";
 "Min Time" = "Tiempo Mínimo";
 "Max Time" = "Tiempo Máximo";
+"Target Time" = "Tiempo de Objetivo";
 "Target" = "Objetivo";
 "Target: " = "Objetivo: ";
 "Average" = "Media";
 "Mean" = "Media";
 "Average: " = "Media: ";
+"Website" = "Sitio Web";
+"Email" = "Correo Electrónico";
+"Version" = "Versión";
+"Help" = "Ayuda";
+
+"CompSim Description" = "CompSim es un simulador de competencia de speedcubing profesional. Este es diferente a un cronómetro normal; con CompSim, se puede practicar en los formatos de media de 5, media de 3 y mejor de 3, dependiendo del evento que se haga. De muchas maneras, funciona como un cronómetro normal, pero tiene sus propios distintivos también.";
+
+"Step1" = "1. Fijar su Objetivo.";
+"Step1desc" = "Su objetivo es su meta a conquistar, que representa la media de su \"rival.\"\n\nAl final de su media, si supera el tiempo, conseguirá una media ganadora (verde). Si no, conseguirá una media perdedora (roja).\n\nTambién hay como opción no ponerse un objetivo, si simplemente se quiere simular la competencia sin el aspecto de \"competencia\" contra otros.";
+
+"Step2" = "2. Fijar sus ajustes.";
+"Step2desc" = "En los ajustes, se puede elegir el tipo de mezcla, cubero (la imagen que aparece después de la media), modo oscuro, algunos ajustes clásicos de cronómetros y el formato media de 5 / media de 3 / mejor de 3.";
+
+"Step3" = "3. Cronometrar sus tiempos.";
+"Step3desc" = "Si está activa la inspección, toque para comenzar la inspección. Entonces, aprete para empezar. Las competencias oficiales tienen un mínimo de 0.55 segundos de tiempo de apretado, pero esto se puede ajustar en los ajustes. Toque para parar el cronómetro. Agregue una penalización si aplica y entregar.\n\nSi desea simular completamente el medio ambiente competitivo y agregar tiempos del stackmat, simplemente deslice hacia arriba para agregar un tiempo. También se puede desactivar \"cronometrar\" en los ajustes tocando en cualquier lugar para hacer esto. El decimal no es necesario (pero se permite). Por ejemplo, se puede entrar \"568\" en vez de \"5.68\" y \"32819\" en vez de \"3:28.19.\" Agregue una penalización si aplica y entregar.\n\nAdemás, se puede reinciar su media o tocar nueva mezcla para ver la próxima mezcla si es necesario. También se puede tocar la mezcla para verla dibujada en 3x3.\n\nTocar el tiempo más reciente revela la mezcla y le permite cambiar la penalización si es necesario. Además, le deja borrar este tiempo.\n\nCuando se termina la media, su resultado y el objetivo se revelarán. Toque \"Volver a Intentar\" para continuar.";
+
+"Step4" = "4. Analizar su sesión.";
+"Step4desc" = "En la pestaña de sesión, se pueden ver sus medias. Si hace click en la media, puede verla con más detalles (i.e. con las mezclas). Aquí, se puede ver el tiempo de la media y el tiempo del objetivo. Si desea ver la mezcla completa más grande, puede hacer click en el tiempo.\n\nSi desea borrar la media de una sesión, deslice a la izquierda sobre ella y bórrela.\n\nLa barra a color muestra las proporciones de triunfos (verde), pérdidas (rojo) y medias sin objetivo (negro/blanco).\n\nSe puede crear una nueva sesión, normalmente para un nuevo evento. Al hacer click en \"Nuevo\" y nombrando la sesión. Si la nombra como un evento tradicional (i.e. 6x6 o pyraminx), la aplicación automáticamente cambiará los ajustes para aquellos eventos (i.e. media de 3 para 6x6 o media de 5 para pyraminx).\n\nSi hace click en \"Reiniciar,\" la sesión entera se reinicia (i.e. todas las medias se borran).\n\nSi toca dos veces en el nombre de la sesión, puede cambiar el nombre a la sesión.\n\nSi toca la \"X\" junto al nombre de la sesión, puede borrar la sesión.";
+
