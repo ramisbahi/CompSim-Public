@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import GoogleMobileAds
 
 
 // get device name
@@ -48,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var realm = try! Realm()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
@@ -64,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
         
-        ViewController.deviceName = UIDevice.current.modelName
+        HomeViewController.deviceName = UIDevice.current.modelName
 
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
@@ -76,6 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TimerViewController.initializeFormatters()
         
         application.isIdleTimerDisabled = true
+        
+        
         return true
     }
     
@@ -86,16 +91,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let results = realm.objects(Session.self)
         if results.count > 0 // has a session saved
         {
-            ViewController.allSessions.removeAll()
-            ViewController.mySession = results[0] // will change to last session, just in case
+            HomeViewController.allSessions.removeAll()
+            HomeViewController.mySession = results[0] // will change to last session, just in case
             for result in results
             {
                 if(result.name == UserDefaults.standard.string(forKey: AppDelegate.sessionName)) // last session left on
                 {
-                    ViewController.mySession = result
-                    ViewController.mySession.updateScrambler()
+                    HomeViewController.mySession = result
+                    HomeViewController.mySession.updateScrambler()
                 }
-                ViewController.allSessions.append(result)
+                HomeViewController.allSessions.append(result)
                 print("created \(result.name) session")
             }
         }
@@ -107,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func addFirstSession()
     {
-        let session = ViewController.mySession
+        let session = HomeViewController.mySession
         try! realm.write
         {
             realm.add(session)
@@ -124,11 +129,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         print("entered background")
-        if ViewController.mySession.currentIndex == 5 // temporary solution
+        if HomeViewController.mySession.currentIndex == 5 // temporary solution
         {
             try! realm.write
             {
-                ViewController.mySession.reset()
+                HomeViewController.mySession.reset()
             }
         }
         saveSettings()
@@ -148,11 +153,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         print("will terminate")
-        if ViewController.mySession.currentIndex == 5 // temporary solution
+        if HomeViewController.mySession.currentIndex == 5 // temporary solution
         {
             try! realm.write
             {
-                ViewController.mySession.reset()
+                HomeViewController.mySession.reset()
             }
         }
         saveSettings()
@@ -160,20 +165,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func saveSettings()
     {
-        print("setting to \(ViewController.darkMode)")
+        print("setting to \(HomeViewController.darkMode)")
         
         let defaults = UserDefaults.standard
         
-        defaults.set(ViewController.darkMode, forKey: AppDelegate.darkMode)
-        defaults.set(ViewController.cuber, forKey: AppDelegate.cuber)
-        defaults.set(ViewController.timing, forKey: AppDelegate.timing)
-        defaults.set(ViewController.inspection, forKey: AppDelegate.inspection)
-        defaults.set(ViewController.holdingTime, forKey: AppDelegate.holdingTime)
-        defaults.set(ViewController.mySession.scrambler.myEvent, forKey: AppDelegate.event)
-        defaults.set(ViewController.mySession.name, forKey: AppDelegate.sessionName)
-        defaults.set(ViewController.timerUpdate, forKey: AppDelegate.timerUpdate)
+        defaults.set(HomeViewController.darkMode, forKey: AppDelegate.darkMode)
+        defaults.set(HomeViewController.cuber, forKey: AppDelegate.cuber)
+        defaults.set(HomeViewController.timing, forKey: AppDelegate.timing)
+        defaults.set(HomeViewController.inspection, forKey: AppDelegate.inspection)
+        defaults.set(HomeViewController.holdingTime, forKey: AppDelegate.holdingTime)
+        defaults.set(HomeViewController.mySession.scrambler.myEvent, forKey: AppDelegate.event)
+        defaults.set(HomeViewController.mySession.name, forKey: AppDelegate.sessionName)
+        defaults.set(HomeViewController.timerUpdate, forKey: AppDelegate.timerUpdate)
         defaults.set(true, forKey: AppDelegate.hasSet)
-        defaults.set(ViewController.totalAverages, forKey: AppDelegate.totalAverages)
+        defaults.set(HomeViewController.totalAverages, forKey: AppDelegate.totalAverages)
         
     }
 

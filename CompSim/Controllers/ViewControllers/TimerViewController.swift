@@ -49,7 +49,7 @@ class TimerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(false)
-        if(ViewController.inspection)
+        if(HomeViewController.inspection)
         {
             startInspection()
         }
@@ -62,32 +62,32 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        TimerLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
-        SubmitButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
+        TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
+        SubmitButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
         
         
-        if(ViewController.inspection)
+        if(HomeViewController.inspection)
         {
             self.gestureSetup()
         }
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             makeDarkMode()
         }
-        CancelButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "Futura")
+        CancelButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: CancelButton, multiplier: 0.9, name: "Futura")
         let stringSize = CancelButton.titleLabel?.intrinsicContentSize.width
-        CancelButton.widthAnchor.constraint(equalToConstant: stringSize! + 40).isActive = true
+        CancelButton.widthAnchor.constraint(equalToConstant: stringSize! + 45).isActive = true
     }
     
     override func viewDidLayoutSubviews() {
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
-            PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal) //- later make white\
+            PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal) //- later make white\
         }
         else
         {
-            PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: ViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal)
+            PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal)
         }
     }
     
@@ -100,6 +100,7 @@ class TimerViewController: UIViewController {
         TimerViewController.fractionFormatter.maximumIntegerDigits = 0
         TimerViewController.fractionFormatter.minimumFractionDigits = 2
         TimerViewController.fractionFormatter.maximumFractionDigits = 2
+        TimerViewController.fractionFormatter.roundingMode = .down
     }
     
     func makeDarkMode()
@@ -115,7 +116,7 @@ class TimerViewController: UIViewController {
     {
         TimerViewController.longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
         TimerViewController.longPress.allowableMovement = 50
-        TimerViewController.longPress.minimumPressDuration = TimeInterval(ViewController.holdingTime)
+        TimerViewController.longPress.minimumPressDuration = TimeInterval(HomeViewController.holdingTime)
         
         self.view.addGestureRecognizer(TimerViewController.longPress)
     }
@@ -128,7 +129,7 @@ class TimerViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if timerPhase == INSPECTION && ViewController.holdingTime > 0.01
+        if timerPhase == INSPECTION && HomeViewController.holdingTime > 0.01
         {
             TimerLabel.textColor = UIColor.red
             timerPhase = FROZEN
@@ -141,7 +142,7 @@ class TimerViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) // released before minimum hold time
     {
-        if(ViewController.holdingTime > 0.01)
+        if(HomeViewController.holdingTime > 0.01)
         {
             if (timerPhase == FROZEN)
             {
@@ -165,7 +166,7 @@ class TimerViewController: UIViewController {
                 if(inspectionTime > 0) // stops at 0
                 {
                     self.TimerLabel.text = String(inspectionTime)
-                    if(ViewController.inspectionSound)
+                    if(HomeViewController.inspectionSound)
                     {
                         if(inspectionTime == 8)
                         {
@@ -261,12 +262,12 @@ class TimerViewController: UIViewController {
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer) // time has been done
     {
-        if(sender.state == .began && timerPhase == FROZEN || ViewController.holdingTime < 0.01 && timerPhase == INSPECTION) // skip from inspection to ready when 0.0
+        if(sender.state == .began && timerPhase == FROZEN || HomeViewController.holdingTime < 0.01 && timerPhase == INSPECTION) // skip from inspection to ready when 0.0
         {
             TimerLabel.textColor = .green
             timerPhase = READY
         }
-        else if(ViewController.holdingTime < 0.01 && timerPhase == TIMING)
+        else if(HomeViewController.holdingTime < 0.01 && timerPhase == TIMING)
         {
             stopTimer()
         }
@@ -288,7 +289,7 @@ class TimerViewController: UIViewController {
     
     func cancel()
     {
-        TimerLabel.textColor = ViewController.darkMode ? .white : .black
+        TimerLabel.textColor = HomeViewController.darkMode ? .white : .black
         timerPhase = INSPECTION
     }
     
@@ -297,7 +298,7 @@ class TimerViewController: UIViewController {
         inspectionTimer.invalidate()
         timerPhase = TIMING
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             TimerLabel.textColor = UIColor.white
         }
@@ -324,12 +325,12 @@ class TimerViewController: UIViewController {
     
     func updateLabel()
     {
-        if(ViewController.timerUpdate == 0) // timer update
+        if(HomeViewController.timerUpdate == 0) // timer update
         {
             setTimerTime()
             self.TimerLabel.text = self.timerTime.format(allowsFractionalUnits: true)
         }
-        else if(ViewController.timerUpdate == 1) {// seconds update
+        else if(HomeViewController.timerUpdate == 1) {// seconds update
             setTimerTime()
             self.TimerLabel.text = self.timerTime.format(allowsFractionalUnits: false)
         }
@@ -351,13 +352,14 @@ class TimerViewController: UIViewController {
     func stopTimer()
     {
         setTimerTime()
+        print("1 \(self.timerTime)")
         self.TimerLabel.text = self.timerTime.format(allowsFractionalUnits: true)
         TimerViewController.resultTime = self.timerTime
         timer.invalidate()
         timerPhase = IDLE
         PenaltySelector.isHidden = false
         SubmitButton.isHidden = false
-        if(ViewController.holdingTime < 0.01)
+        if(HomeViewController.holdingTime < 0.01)
         {
             self.view.removeGestureRecognizer(TimerViewController.longPress)
         }
@@ -366,15 +368,15 @@ class TimerViewController: UIViewController {
     
     @IBAction func SubmitButton(_ sender: Any) {
         
-        if(ViewController.mySession.currentIndex < 4 && ViewController.mySession.solveType == 0 || ViewController.mySession.currentIndex < 2 && (ViewController.mySession.solveType > 0))
+        if(HomeViewController.mySession.currentIndex < 4 && HomeViewController.mySession.solveType == 0 || HomeViewController.mySession.currentIndex < 2 && (HomeViewController.mySession.solveType > 0))
         {
             self.performSegue(withIdentifier: "goToViewController", sender: self)
         }
-        else // (ViewController.currentIndex == 4)
+        else // (HomeViewController.currentIndex == 4)
         {
             let realm = try! Realm()
             try! realm.write {
-                ViewController.mySession.addSolve(time: String(TimerViewController.resultTime), penalty: penalties[PenaltySelector.selectedSegmentIndex])
+                HomeViewController.mySession.addSolve(time: self.timerTime.format(allowsFractionalUnits: true)!, penalty: penalties[PenaltySelector.selectedSegmentIndex])
             }
             self.performSegue(withIdentifier: "goToResultViewController", sender: self)
         }
@@ -382,7 +384,7 @@ class TimerViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(ViewController.mySession.currentIndex < 4)
+        if(HomeViewController.mySession.currentIndex < 4)
         {
             TimerViewController.penalty = penalties[PenaltySelector.selectedSegmentIndex]
         }
@@ -390,7 +392,7 @@ class TimerViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
-        if ViewController.darkMode
+        if HomeViewController.darkMode
         {
             return .lightContent
         }
@@ -412,6 +414,7 @@ class TimerViewController: UIViewController {
 extension TimeInterval {
     func format(allowsFractionalUnits: Bool) -> String?
     {
+        print(self)
         var fractionString = ""
         if allowsFractionalUnits
         {
@@ -419,8 +422,13 @@ extension TimeInterval {
             fractionString = TimerViewController.fractionFormatter.string(from: fractionalPart) ?? ""
         }
          
-        if let beforeDecimal = TimerViewController.timeFormatter.string(from: self)
+        if var beforeDecimal = TimerViewController.timeFormatter.string(from: self)
         {
+            // temporary solution to leading zeros which still can randomly appear 
+            if self < 10 && self >= 1 && beforeDecimal[beforeDecimal.startIndex] == "0" || self < 1 && beforeDecimal == "00"
+            {
+                beforeDecimal = String(beforeDecimal.suffix(beforeDecimal.count - 1))
+            }
             return beforeDecimal + fractionString
         }
         else

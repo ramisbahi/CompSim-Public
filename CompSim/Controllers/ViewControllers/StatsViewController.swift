@@ -64,7 +64,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func resetPressed(_ sender: Any) {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Reset \(ViewController.mySession.name) session?", completion: {
+        let alert = alertService.alert(myTitle: "Reset \(HomeViewController.mySession.name) session?", completion: {
             self.resetSession()
         })
         
@@ -75,7 +75,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         let view = BigView // change
         
-        let numAverages = ViewController.mySession.results.count
+        let numAverages = HomeViewController.mySession.results.count
         var losingCount = 0
         var winningCount = 0
         
@@ -83,9 +83,9 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
             for index in 0..<numAverages
             {
-                if(ViewController.mySession.usingWinningTime[index]) // if was competing against winning time
+                if(HomeViewController.mySession.usingWinningTime[index]) // if was competing against winning time
                 {
-                    if ViewController.mySession.results[index] // win
+                    if HomeViewController.mySession.results[index] // win
                     {
                         winningCount += 1
                     }
@@ -108,7 +108,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func resetSession()
     {
-        let session = ViewController.mySession
+        let session = HomeViewController.mySession
         try! realm.write
         {
             session.allAverages.removeAll()
@@ -120,7 +120,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             session.currentAverage = -1
             session.reset()
         }
-        ViewController.sessionChanged = true
+        HomeViewController.sessionChanged = true
         StatsTableView.reloadData()
         updateBarWidth()
     }
@@ -129,9 +129,9 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         let newSession = Session(name: name, enteredEvent: 1)
         
-        ViewController.mySession = newSession // now current session
-        ViewController.allSessions.append(newSession)
-//        ViewController.allSessions[name] = newSession // map with name
+        HomeViewController.mySession = newSession // now current session
+        HomeViewController.allSessions.append(newSession)
+//        HomeViewController.allSessions[name] = newSession // map with name
         
         try! realm.write {
             realm.add(newSession)
@@ -140,16 +140,16 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.updateNewSessionStackView()
         StatsTableView.reloadData()
-        ViewController.sessionChanged = true
+        HomeViewController.sessionChanged = true
         updateBarWidth()
     }
     
     func updateNewSessionStackView()
     {
         hideAll()
-        DeleteButton.isEnabled = ViewController.allSessions.count > 1
-        SessionButton.setTitle(ViewController.mySession.name, for: .normal)
-        let newButton = createButton(name: ViewController.mySession.name)
+        DeleteButton.isEnabled = HomeViewController.allSessions.count > 1
+        SessionButton.setTitle(HomeViewController.mySession.name, for: .normal)
+        let newButton = createButton(name: HomeViewController.mySession.name)
         SessionCollection.append(newButton)
         SessionStackView.addArrangedSubview(newButton)
         setUpStackView()
@@ -202,12 +202,12 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func doAvg()
     {
-        ViewController.mySession.solveType = 0
+        HomeViewController.mySession.solveType = 0
     }
     
     func doMean()
     {
-        ViewController.mySession.solveType = 1
+        HomeViewController.mySession.solveType = 1
     }
     
     
@@ -215,10 +215,10 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // called whenever something changed with sessions
     func setUpStackView()
     {
-        DeleteButton.isEnabled = ViewController.allSessions.count > 1
-        SessionButton.setTitle(ViewController.mySession.name, for: .normal)
+        DeleteButton.isEnabled = HomeViewController.allSessions.count > 1
+        SessionButton.setTitle(HomeViewController.mySession.name, for: .normal)
         SessionCollection = []
-        for session in ViewController.allSessions
+        for session in HomeViewController.allSessions
         {
             let newButton = createButton(name: session.name)
             SessionCollection.append(newButton)
@@ -243,7 +243,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         retButton.isHidden = true
         retButton.setTitleColor(.white, for: .normal)
         retButton.titleLabel?.font = UIFont(name: "Futura", size: 17)
-        retButton.backgroundColor = ViewController.orangeColor()
+        retButton.backgroundColor = HomeViewController.orangeColor()
         retButton.layer.cornerRadius = 18
         retButton.isUserInteractionEnabled = true
         retButton.addTarget(self, action: #selector(SessionSelected(_:)), for: UIControl.Event.touchUpInside)
@@ -261,7 +261,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // returns number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return ViewController.mySession.currentAverage + 1 // returns # items
+        return HomeViewController.mySession.currentAverage + 1 // returns # items
     }
     
     @IBAction func SessionButtonClicked(_ sender: Any) {
@@ -287,11 +287,11 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         SessionButton.setTitle(title, for: .normal)
-        if title != ViewController.mySession.name // exists,// not same - so switch session
+        if title != HomeViewController.mySession.name // exists,// not same - so switch session
         {
-            ViewController.mySession = sessionNamed(title: title)!
-            ViewController.mySession.updateScrambler()
-            ViewController.sessionChanged = true
+            HomeViewController.mySession = sessionNamed(title: title)!
+            HomeViewController.mySession.updateScrambler()
+            HomeViewController.sessionChanged = true
             StatsTableView.reloadData()
             updateBarWidth()
         }
@@ -300,7 +300,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func sessionNamed(title: String) -> Session?
     {
-        for session in ViewController.allSessions
+        for session in HomeViewController.allSessions
         {
             if session.name == title
             {
@@ -313,9 +313,9 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
-        DeleteButton.isEnabled = ViewController.allSessions.count > 1
+        DeleteButton.isEnabled = HomeViewController.allSessions.count > 1
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             makeDarkMode()
             DarkBackground.isHidden = false
@@ -361,7 +361,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func deletePressed(_ sender: Any) {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Delete \(ViewController.mySession.name) session?", completion: {
+        let alert = alertService.alert(myTitle: "Delete \(HomeViewController.mySession.name) session?", completion: {
             self.deleteSession()
         })
         
@@ -374,15 +374,15 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
-        let index = ViewController.allSessions.firstIndex(of: self.sessionNamed(title: sessionName)!)!
+        let index = HomeViewController.allSessions.firstIndex(of: self.sessionNamed(title: sessionName)!)!
         
-        let removedSession: Session = ViewController.allSessions.remove(at: index) // remove from array
+        let removedSession: Session = HomeViewController.allSessions.remove(at: index) // remove from array
     
         try! realm.write {
             realm.delete(removedSession)
         }
         
-        ViewController.mySession = ViewController.allSessions[index % ViewController.allSessions.count]
+        HomeViewController.mySession = HomeViewController.allSessions[index % HomeViewController.allSessions.count]
         hideAll()
         setUpStackView()
         StatsTableView.reloadData()
@@ -415,7 +415,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         for button in [NewButton, SessionButton, ResetButton]
         {
-            button?.backgroundColor = ViewController.darkBlueColor()
+            button?.backgroundColor = HomeViewController.darkBlueColor()
         }
         
         BackgroundBar.backgroundColor = .black
@@ -424,16 +424,16 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // performed for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentIndex = ViewController.mySession.currentAverage - indexPath.row // reverse order
+        let currentIndex = HomeViewController.mySession.currentAverage - indexPath.row // reverse order
         
         
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
         
-        cell.textLabel?.text = ViewController.mySession.allAverages[currentIndex] // set to average
+        cell.textLabel?.text = HomeViewController.mySession.allAverages[currentIndex] // set to average
         cell.textLabel?.font = UIFont(name: "Futura", size: 20)
         
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             cell.textLabel?.textColor? = UIColor.white
             cell.detailTextLabel?.textColor? = UIColor.white
@@ -446,30 +446,30 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.backgroundColor = UIColor.white
         }
         cell.accessoryType = .disclosureIndicator // show little arrow thing on right side of each cell
-        if(ViewController.mySession.usingWinningTime[currentIndex]) // if was competing against winning time
+        if(HomeViewController.mySession.usingWinningTime[currentIndex]) // if was competing against winning time
         {
-            cell.textLabel?.textColor = ViewController.mySession.results[currentIndex] ? ViewController.greenColor() : UIColor.red
+            cell.textLabel?.textColor = HomeViewController.mySession.results[currentIndex] ? HomeViewController.greenColor() : UIColor.red
             
         }
         
         var timeList: String = ""
         
-        let numSolves = ViewController.mySession.averageTypes[currentIndex] == 0 ? 5 : 3 // ao5 vs mo3/bo3
+        let numSolves = HomeViewController.mySession.averageTypes[currentIndex] == 0 ? 5 : 3 // ao5 vs mo3/bo3
         for i in 0..<numSolves-1
         {
-            timeList.append(ViewController.mySession.allTimes[currentIndex].list[i].myString)
+            timeList.append(HomeViewController.mySession.allTimes[currentIndex].list[i].myString)
             timeList.append(", ")
         }
-        timeList.append(ViewController.mySession.allTimes[currentIndex].list[numSolves-1].myString)
+        timeList.append(HomeViewController.mySession.allTimes[currentIndex].list[numSolves-1].myString)
         
         cell.detailTextLabel?.text = timeList
         cell.detailTextLabel?.font = UIFont(name: "Futura", size: 14)
         
-        if(indexPath.row % 2 == 1 && !ViewController.darkMode) // make gray for every other cell
+        if(indexPath.row % 2 == 1 && !HomeViewController.darkMode) // make gray for every other cell
         {
             cell.backgroundColor = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
         }
-        else if(indexPath.row % 2 == 0 && ViewController.darkMode)
+        else if(indexPath.row % 2 == 0 && HomeViewController.darkMode)
         {
             cell.backgroundColor = UIColor.darkGray
         }
@@ -478,7 +478,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let currentIndex = ViewController.mySession.currentAverage - indexPath.row // reverse order
+        let currentIndex = HomeViewController.mySession.currentAverage - indexPath.row // reverse order
         if editingStyle == .delete {
             deleteAveragePressed(at: currentIndex, tableView, forRowAt: indexPath)
         }
@@ -487,7 +487,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func deleteAveragePressed(at index: Int, _ tableView: UITableView, forRowAt indexPath: IndexPath)
     {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Delete \(ViewController.mySession.allAverages[index]) average?", completion: {
+        let alert = alertService.alert(myTitle: "Delete \(HomeViewController.mySession.allAverages[index]) average?", completion: {
             self.deleteAverage(at: index)
             tableView.deleteRows(at: [indexPath], with: .fade)
         })
@@ -497,7 +497,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func deleteAverage(at index: Int)
     {
-        let session = ViewController.mySession
+        let session = HomeViewController.mySession
         try! realm.write
         {
             session.allAverages.remove(at: index)
@@ -513,7 +513,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // average pressed
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        StatsViewController.myIndex = ViewController.mySession.currentAverage - indexPath.row // bc reverse
+        StatsViewController.myIndex = HomeViewController.mySession.currentAverage - indexPath.row // bc reverse
         
         slideRightSegue()
     }
@@ -555,7 +555,7 @@ class StatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
-        if ViewController.darkMode
+        if HomeViewController.darkMode
         {
             return .lightContent
         }

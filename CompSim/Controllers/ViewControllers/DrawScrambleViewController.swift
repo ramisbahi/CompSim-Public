@@ -43,21 +43,21 @@ class DrawScrambleViewController: UIViewController {
     }
 
     @objc func updateCounting(){
-        if(ViewController.scrambleChanged)
+        if(HomeViewController.scrambleChanged)
         {
             updateScramble()
-            ViewController.scrambleChanged = false
+            HomeViewController.scrambleChanged = false
         }
     }
     
     func updateScramble()
     {
-        drawSide(side: Collection1, colors: Array(ViewController.mySession.scrambler.drawScramble[0..<9]))
-        drawSide(side: Collection2, colors: Array(ViewController.mySession.scrambler.drawScramble[9..<18]))
-        drawSide(side: Collection3, colors: Array(ViewController.mySession.scrambler.drawScramble[18..<27]))
-        drawSide(side: Collection4, colors: Array(ViewController.mySession.scrambler.drawScramble[27..<36]))
-        drawSide(side: Collection5, colors: Array(ViewController.mySession.scrambler.drawScramble[36..<45]))
-        drawSide(side: Collection6, colors: Array(ViewController.mySession.scrambler.drawScramble[45..<54]))
+        drawSide(side: Collection1, colors: Array(HomeViewController.mySession.scrambler.drawScramble[0..<9]))
+        drawSide(side: Collection2, colors: Array(HomeViewController.mySession.scrambler.drawScramble[9..<18]))
+        drawSide(side: Collection3, colors: Array(HomeViewController.mySession.scrambler.drawScramble[18..<27]))
+        drawSide(side: Collection4, colors: Array(HomeViewController.mySession.scrambler.drawScramble[27..<36]))
+        drawSide(side: Collection5, colors: Array(HomeViewController.mySession.scrambler.drawScramble[36..<45]))
+        drawSide(side: Collection6, colors: Array(HomeViewController.mySession.scrambler.drawScramble[45..<54]))
     }
     
     func drawSide(side: UIView, colors: [String])

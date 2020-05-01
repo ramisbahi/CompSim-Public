@@ -55,7 +55,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         let myCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "myCell")
         
-        let currentTime = ViewController.mySession.allTimes[StatsViewController.myIndex].list[indexPath.row]
+        let currentTime = HomeViewController.mySession.allTimes[StatsViewController.myIndex].list[indexPath.row]
         
         myCell.textLabel?.text = currentTime.myString // each time
         myCell.textLabel?.font = UIFont.init(name: "Futura", size: 17.0)
@@ -63,17 +63,17 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         myCell.detailTextLabel?.text = currentTime.myScramble // each scramble
         myCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 12.0)
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             myCell.backgroundColor = UIColor(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
             myCell.textLabel?.textColor = .white
             myCell.detailTextLabel?.textColor = .white
         }
-        if(indexPath.row % 2 == 1 && !ViewController.darkMode) // make gray for every other cell
+        if(indexPath.row % 2 == 1 && !HomeViewController.darkMode) // make gray for every other cell
         {
             myCell.backgroundColor = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
         }
-        else if(indexPath.row % 2 == 0 && ViewController.darkMode)
+        else if(indexPath.row % 2 == 0 && HomeViewController.darkMode)
         {
             myCell.backgroundColor = .darkGray
         }
@@ -103,28 +103,28 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        BackButton.titleLabel?.font = ViewController.fontToFitHeight(view: self.view, multiplier: 0.04, name: "Futura")
+        BackButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: self.view, multiplier: 0.04, name: "Futura")
         let stringSize = BackButton.titleLabel?.intrinsicContentSize.width
         BackButton.widthAnchor.constraint(equalToConstant: stringSize! + 40).isActive = true
         
-        averageType = ViewController.mySession.averageTypes[StatsViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
+        averageType = HomeViewController.mySession.averageTypes[StatsViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
         if(averageType == 0)
         {
-            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
-            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
+            AverageLabel.text = HomeViewController.mySession.allAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
+            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  HomeViewController.mySession.winningAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
         }
         else if(averageType == 1)
         {
-            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
-            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
+            AverageLabel.text = HomeViewController.mySession.allAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
+            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  HomeViewController.mySession.winningAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
         }
         else
         {
-            AverageLabel.text = ViewController.mySession.allAverages[StatsViewController.myIndex] + " Single"
-            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  ViewController.mySession.winningAverages[StatsViewController.myIndex] + " Single"
+            AverageLabel.text = HomeViewController.mySession.allAverages[StatsViewController.myIndex] + " Single"
+            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  HomeViewController.mySession.winningAverages[StatsViewController.myIndex] + " Single"
         }
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             makeDarkMode()
         }
@@ -133,11 +133,11 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
             turnOffDarkMode()
         }
         
-        if(ViewController.mySession.usingWinningTime[StatsViewController.myIndex]) // was going against a winning time
+        if(HomeViewController.mySession.usingWinningTime[StatsViewController.myIndex]) // was going against a winning time
         {
-            if(ViewController.mySession.results[StatsViewController.myIndex]) // won
+            if(HomeViewController.mySession.results[StatsViewController.myIndex]) // won
             {
-                AverageLabel.textColor = ViewController.greenColor()
+                AverageLabel.textColor = HomeViewController.greenColor()
             }
             else // ost
             {
@@ -169,12 +169,12 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         WinningAverageLabel.textColor? = UIColor.black
         AverageLabel.textColor? = UIColor.black // may be changed to red/green afterwards - just changing default
         AverageTableView.backgroundColor = UIColor.white
-        BackButton.backgroundColor = ViewController.darkBlueColor()
+        BackButton.backgroundColor = HomeViewController.darkBlueColor()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
-        if ViewController.darkMode
+        if HomeViewController.darkMode
         {
             return .lightContent
         }

@@ -42,24 +42,24 @@ class TargetViewController: UIViewController {
     {
         super.viewWillAppear(animated);
        
-        MinTimeLabel.setTitle(SolveTime.makeMyString(num: ViewController.mySession.minTime), for: .normal) // set label to min
-        MaxTimeLabel.setTitle(SolveTime.makeMyString(num: ViewController.mySession.maxTime), for: .normal) // set label to max
-        SingleTimeLabel.setTitle(SolveTime.makeMyString(num: ViewController.mySession.singleTime), for: .normal)
+        MinTimeLabel.setTitle(SolveTime.makeMyString(num: HomeViewController.mySession.minTime), for: .normal) // set label to min
+        MaxTimeLabel.setTitle(SolveTime.makeMyString(num: HomeViewController.mySession.maxTime), for: .normal) // set label to max
+        SingleTimeLabel.setTitle(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime), for: .normal)
         
         self.updateDistributionLabels()
         
         // set the selected segment correctly
         
-        if(ViewController.mySession.targetType == 2)
+        if(HomeViewController.mySession.targetType == 2)
         {
             try! realm.write {
-                ViewController.mySession.targetType = 1
+                HomeViewController.mySession.targetType = 1
             }
         }
-        WinningTimeSetting.selectedSegmentIndex = ViewController.mySession.targetType
-        setup(type: ViewController.mySession.targetType)
+        WinningTimeSetting.selectedSegmentIndex = HomeViewController.mySession.targetType
+        setup(type: HomeViewController.mySession.targetType)
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             makeDarkMode()
         }
@@ -91,7 +91,7 @@ class TargetViewController: UIViewController {
         
         setup(type: WinningTimeSetting.selectedSegmentIndex)
         try! realm.write {
-            ViewController.mySession.targetType = WinningTimeSetting.selectedSegmentIndex
+            HomeViewController.mySession.targetType = WinningTimeSetting.selectedSegmentIndex
         }
     }
     
@@ -149,24 +149,24 @@ class TargetViewController: UIViewController {
             
             let inputTime = alertService.myVC.TextField.text!
             
-            if ViewController.validEntryTime(time: inputTime)
+            if HomeViewController.validEntryTime(time: inputTime)
             {
                let temp = SolveTime(enteredTime: inputTime, scramble: "")
                let str = temp.myString
                let intTime = temp.intTime
                
-               if(intTime > ViewController.mySession.maxTime)
+               if(intTime > HomeViewController.mySession.maxTime)
                {
                    self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
                    try! self.realm.write
                    {
-                       ViewController.mySession.maxTime = intTime
+                       HomeViewController.mySession.maxTime = intTime
                    }
                }
                self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
                try! self.realm.write
                {
-                   ViewController.mySession.minTime = intTime
+                   HomeViewController.mySession.minTime = intTime
                }
                self.updateDistributionLabels()
             }
@@ -187,24 +187,24 @@ class TargetViewController: UIViewController {
             
             let inputTime = alertService.myVC.TextField.text!
             
-            if ViewController.validEntryTime(time: inputTime)
+            if HomeViewController.validEntryTime(time: inputTime)
             {
                let temp = SolveTime(enteredTime: inputTime, scramble: "")
                let str = temp.myString
                let intTime = temp.intTime
                
-               if(intTime < ViewController.mySession.minTime)
+               if(intTime < HomeViewController.mySession.minTime)
                {
                    self.MinTimeLabel.setTitle(str, for: .normal) // set title to string version
                    try! self.realm.write
                    {
-                       ViewController.mySession.minTime = intTime
+                       HomeViewController.mySession.minTime = intTime
                    }
                }
                self.MaxTimeLabel.setTitle(str, for: .normal) // set title to string version
                try! self.realm.write
                {
-                   ViewController.mySession.maxTime = intTime
+                   HomeViewController.mySession.maxTime = intTime
                }
                self.updateDistributionLabels()
             }
@@ -225,7 +225,7 @@ class TargetViewController: UIViewController {
             
             let inputTime = alertService.myVC.TextField.text!
             
-            if ViewController.validEntryTime(time: inputTime)
+            if HomeViewController.validEntryTime(time: inputTime)
             {
                let temp = SolveTime(enteredTime: inputTime, scramble: "")
                let str = temp.myString
@@ -234,7 +234,7 @@ class TargetViewController: UIViewController {
                self.SingleTimeLabel.setTitle(str, for: .normal) // set title to string version
                try! self.realm.write
                {
-                   ViewController.mySession.singleTime = intTime
+                   HomeViewController.mySession.singleTime = intTime
                }
                self.updateDistributionLabels()
             }
@@ -256,12 +256,12 @@ class TargetViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        let rangeFont = ViewController.fontToFitHeight(view: MinTimeLabel, multiplier: 0.9, name: "Futura")
+        let rangeFont = HomeViewController.fontToFitHeight(view: MinTimeLabel, multiplier: 0.9, name: "Futura")
         MinTimeLabel.titleLabel?.font = rangeFont
         MaxTimeLabel.titleLabel?.font = rangeFont
         
    
-        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: ViewController.darkMode ? UIColor.white : UIColor.black, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: WinningTimeSetting, multiplier: 0.6, name: "Futura")], for: .normal)
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: HomeViewController.darkMode ? UIColor.white : UIColor.black, NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: WinningTimeSetting, multiplier: 0.6, name: "Futura")], for: .normal)
     }
     
     override func viewDidLoad() {
@@ -289,8 +289,8 @@ class TargetViewController: UIViewController {
     
     func updateDistributionLabels()
     {
-        let min = ViewController.mySession.minTime
-        let max = ViewController.mySession.maxTime
+        let min = HomeViewController.mySession.minTime
+        let max = HomeViewController.mySession.maxTime
         Dist1.text = SolveTime.makeMyString(num: min)
         Dist7.text = SolveTime.makeMyString(num: max)
         let std: Float = Float(max - min) / 6.0
@@ -332,7 +332,7 @@ class TargetViewController: UIViewController {
     func makeDarkMode()
     {
 
-        BigView.backgroundColor = ViewController.darkModeColor()
+        BigView.backgroundColor = HomeViewController.darkModeColor()
         for button in [MinTimeLabel, MaxTimeLabel, SingleTimeLabel, DistributionLabel]
         {
             button?.backgroundColor = .darkGray
@@ -341,8 +341,8 @@ class TargetViewController: UIViewController {
         BlackWhiteLabels.forEach { (label) in
             label.textColor? = UIColor.white
         }
-        WinningTimeSetting.tintColor = ViewController.orangeColor()
-        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: WinningTimeSetting, multiplier: 0.6, name: "Futura")], for: .normal)
+        WinningTimeSetting.tintColor = HomeViewController.orangeColor()
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: WinningTimeSetting, multiplier: 0.6, name: "Futura")], for: .normal)
     }
     
     func turnOffDarkMode()
@@ -350,19 +350,19 @@ class TargetViewController: UIViewController {
         BigView.backgroundColor = .white
         for button in [MinTimeLabel, MaxTimeLabel, SingleTimeLabel, DistributionLabel]
         {
-            button?.backgroundColor = ViewController.darkBlueColor()
+            button?.backgroundColor = HomeViewController.darkBlueColor()
         }
         BlackWhiteLabels.forEach { (label) in
             label.textColor? = UIColor.black
         }
         DistributionImage.image = UIImage(named: "GaussianCurve")
         WinningTimeSetting.tintColor = .white
-        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: ViewController.fontToFitHeight(view: WinningTimeSetting, multiplier: 0.6, name: "Futura")], for: .normal)
+        WinningTimeSetting.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: WinningTimeSetting, multiplier: 0.6, name: "Futura")], for: .normal)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
-        if ViewController.darkMode
+        if HomeViewController.darkMode
         {
             return .lightContent
         }

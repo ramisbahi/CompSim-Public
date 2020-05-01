@@ -4,7 +4,7 @@ var str = "Hello, playground"
 
 let timeFormatter = DateComponentsFormatter()
 
-let timerTime: TimeInterval =  6000.892
+let timerTime: TimeInterval =  1.997
 
 print(timeFormatter.string(from: timerTime)!)
 

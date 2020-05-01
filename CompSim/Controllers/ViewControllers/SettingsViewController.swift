@@ -57,31 +57,31 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     let realm = try! Realm()
     
     @IBAction func DarkModeChanged(_ sender: Any) {
-        ViewController.changedDarkMode = true
-        if(!ViewController.darkMode) // not dark, set to dark
+        HomeViewController.changedDarkMode = true
+        if(!HomeViewController.darkMode) // not dark, set to dark
         {
-            ViewController.darkMode = true
+            HomeViewController.darkMode = true
             makeDarkMode()
         }
         else // dark, turn off
         {
-            ViewController.darkMode = false
+            HomeViewController.darkMode = false
             turnOffDarkMode()
         }
     }
     
     @IBAction func TimingChanged(_ sender: Any) {
-        if(ViewController.timing)
+        if(HomeViewController.timing)
         {
-            ViewController.timing = false
+            HomeViewController.timing = false
             InspectionControl.isEnabled = false
             InspectionVoiceAlertsControl.isEnabled = false
         }
         else
         {
-            ViewController.timing = true
+            HomeViewController.timing = true
             InspectionControl.isEnabled = true
-            if(ViewController.inspection)
+            if(HomeViewController.inspection)
             {
                 InspectionVoiceAlertsControl.isEnabled = true
             }
@@ -119,27 +119,27 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     }
     
     @IBAction func InspectionChanged(_ sender: Any) {
-        if(ViewController.inspection)
+        if(HomeViewController.inspection)
         {
-            ViewController.inspection = false
+            HomeViewController.inspection = false
             InspectionVoiceAlertsControl.isEnabled = false
         }
         else
         {
-            ViewController.inspection = true
+            HomeViewController.inspection = true
             InspectionVoiceAlertsControl.isEnabled = true
         }
     }
     
     @IBAction func InspectionVoiceAlertsChanged(_ sender: Any) {
-        ViewController.inspectionSound = !ViewController.inspectionSound
+        HomeViewController.inspectionSound = !HomeViewController.inspectionSound
     }
     
     func makeDarkMode()
     {
-        BigView.backgroundColor = ViewController.darkModeColor()
-        LittleView.backgroundColor = ViewController.darkModeColor()
-        ScrollView.backgroundColor = ViewController.darkModeColor()
+        BigView.backgroundColor = HomeViewController.darkModeColor()
+        LittleView.backgroundColor = HomeViewController.darkModeColor()
+        ScrollView.backgroundColor = HomeViewController.darkModeColor()
         TopButtons.forEach{ (button) in
         
             button.backgroundColor = UIColor.darkGray
@@ -171,7 +171,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     {
         if #available(iOS 13.0, *) {
             let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-            statusBar.backgroundColor = ViewController.darkMode ?  ViewController.darkModeColor() : .white
+            statusBar.backgroundColor = HomeViewController.darkMode ?  HomeViewController.darkModeColor() : .white
              view.addSubview(statusBar)
         }
     }
@@ -183,10 +183,10 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         ScrollView.backgroundColor = .white
         TopButtons.forEach{ (button) in
         
-            button.backgroundColor = ViewController.darkBlueColor()
+            button.backgroundColor = HomeViewController.darkBlueColor()
         }
         TopLabels.forEach{ (label) in
-            label.backgroundColor = ViewController.darkBlueColor()
+            label.backgroundColor = HomeViewController.darkBlueColor()
         }
         
         for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
@@ -231,7 +231,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         {
             cuberDictionary[NSLocalizedString("Random", comment: "")] = NSLocalizedString("Random", comment: "")
         }
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             DarkModeControl.selectedSegmentIndex = 0
             makeDarkMode()
@@ -242,7 +242,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         
         
-        if(ViewController.timing)
+        if(HomeViewController.timing)
         {
             TimingControl.selectedSegmentIndex = 0
         }
@@ -252,12 +252,12 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             InspectionControl.isEnabled = false
         }
         
-        if(!(ViewController.timing && ViewController.inspection))
+        if(!(HomeViewController.timing && HomeViewController.inspection))
         {
             InspectionVoiceAlertsControl.isEnabled = false
         }
         
-        if(ViewController.inspection)
+        if(HomeViewController.inspection)
         {
             InspectionControl.selectedSegmentIndex = 0
         }
@@ -266,7 +266,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             InspectionControl.selectedSegmentIndex = 1
         }
         
-        if(ViewController.inspectionSound)
+        if(HomeViewController.inspectionSound)
         {
             InspectionVoiceAlertsControl.selectedSegmentIndex = 0
         }
@@ -276,13 +276,13 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         
         let cuber = NSLocalizedString("Cuber", comment: "")
-        CuberButton.setTitle("\(cuber): \(cuberDictionary[ViewController.cuber]!)", for: .normal)
+        CuberButton.setTitle("\(cuber): \(cuberDictionary[HomeViewController.cuber]!)", for: .normal)
         
-        HoldingTimeSlider.value = ViewController.holdingTime
+        HoldingTimeSlider.value = HomeViewController.holdingTime
         let holdingTime = NSLocalizedString("Holding Time", comment: "")
-        HoldingTimeLabel.text = String(format: "\(holdingTime): %.2f", ViewController.holdingTime)
+        HoldingTimeLabel.text = String(format: "\(holdingTime): %.2f", HomeViewController.holdingTime)
         
-        TimerUpdateControl.selectedSegmentIndex = ViewController.timerUpdate
+        TimerUpdateControl.selectedSegmentIndex = HomeViewController.timerUpdate
         
         WebsiteButton.setTitle(NSLocalizedString("Website", comment: ""), for: .normal)
         EmailButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)
@@ -297,7 +297,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     override func viewWillAppear(_ animated: Bool) {
         let eventNames = ["2x2x2", "3x3x3", "4x4x4", "5x5x5", "6x6x6", "7x7x7", "Pyraminx", "Megaminx", "Square-1", "Skewb", "Clock", "3x3x3 BLD"]
-        let title = eventNames[ViewController.mySession.scrambler.myEvent]
+        let title = eventNames[HomeViewController.mySession.scrambler.myEvent]
         let scrType = NSLocalizedString("Scramble Type", comment: "")
         ScrambleTypeButton.setTitle("\(scrType): \(title)", for: .normal)
         
@@ -309,8 +309,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         
         
-        solveTypeControl.isEnabled = ViewController.mySession.currentIndex < 1
-        solveTypeControl.selectedSegmentIndex = ViewController.mySession.solveType
+        solveTypeControl.isEnabled = HomeViewController.mySession.currentIndex < 1
+        solveTypeControl.selectedSegmentIndex = HomeViewController.mySession.solveType
     }
     
     @IBAction func HoldingTimeChanged(_ sender: Any) {
@@ -318,7 +318,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         let roundedTime = round(HoldingTimeSlider.value * 20) / 20 // 0.29 --> 0.3, 0.27 --> 0.25
         let holdingTime = NSLocalizedString("Holding Time", comment: "")
         HoldingTimeLabel.text = String(format: "\(holdingTime): %.2f", roundedTime)
-        ViewController.holdingTime = roundedTime
+        HomeViewController.holdingTime = roundedTime
         
         
     }
@@ -328,10 +328,10 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         super.viewWillDisappear(false)
         
         try! realm.write {
-            ViewController.mySession.solveType = solveTypeControl.selectedSegmentIndex
+            HomeViewController.mySession.solveType = solveTypeControl.selectedSegmentIndex
         }
         
-        ViewController.timerUpdate = TimerUpdateControl.selectedSegmentIndex
+        HomeViewController.timerUpdate = TimerUpdateControl.selectedSegmentIndex
     }
     
     enum Events: String
@@ -369,7 +369,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         CuberButton.setTitle("\(cuber): \(title)", for: .normal)
         
         let nameArr = title.components(separatedBy: " ")
-        ViewController.cuber = nameArr[0]
+        HomeViewController.cuber = nameArr[0]
     }
     
     
@@ -395,29 +395,29 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             switch event
             {
                 case .twoCube:
-                    ViewController.mySession.doEvent(enteredEvent: 0)
+                    HomeViewController.mySession.doEvent(enteredEvent: 0)
                 case .threeCube:
-                    ViewController.mySession.doEvent(enteredEvent: 1)
+                    HomeViewController.mySession.doEvent(enteredEvent: 1)
                 case .fourCube:
-                    ViewController.mySession.doEvent(enteredEvent: 2)
+                    HomeViewController.mySession.doEvent(enteredEvent: 2)
                 case .fiveCube:
-                    ViewController.mySession.doEvent(enteredEvent: 3)
+                    HomeViewController.mySession.doEvent(enteredEvent: 3)
                 case .sixCube:
-                    ViewController.mySession.doEvent(enteredEvent: 4)
+                    HomeViewController.mySession.doEvent(enteredEvent: 4)
                 case .sevenCube:
-                    ViewController.mySession.doEvent(enteredEvent: 5)
+                    HomeViewController.mySession.doEvent(enteredEvent: 5)
                 case .pyra:
-                    ViewController.mySession.doEvent(enteredEvent: 6)
+                    HomeViewController.mySession.doEvent(enteredEvent: 6)
                 case .mega:
-                    ViewController.mySession.doEvent(enteredEvent: 7)
+                    HomeViewController.mySession.doEvent(enteredEvent: 7)
                 case .sq1:
-                    ViewController.mySession.doEvent(enteredEvent: 8)
+                    HomeViewController.mySession.doEvent(enteredEvent: 8)
                 case .skewb:
-                    ViewController.mySession.doEvent(enteredEvent: 9)
+                    HomeViewController.mySession.doEvent(enteredEvent: 9)
                 case .clock:
-                    ViewController.mySession.doEvent(enteredEvent: 10)
+                    HomeViewController.mySession.doEvent(enteredEvent: 10)
                 case .BLD:
-                    ViewController.mySession.doEvent(enteredEvent: 11)
+                    HomeViewController.mySession.doEvent(enteredEvent: 11)
             }
         }
         
@@ -427,7 +427,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     {
         if #available(iOS 13.0, *)
         {
-            if ViewController.darkMode
+            if HomeViewController.darkMode
             {
                 return .lightContent
             }

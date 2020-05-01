@@ -13,7 +13,7 @@ class LogoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(dismissSplashController), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(dismissSplashController), userInfo: nil, repeats: false)
         // Do any additional setup after loading the view.
     }
     

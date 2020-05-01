@@ -23,7 +23,7 @@ class SimpleAlertViewController: UIViewController {
         SimpleTitle.text = myTitle
         SimpleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             SimpleView.backgroundColor = .darkGray
         }

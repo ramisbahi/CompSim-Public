@@ -52,14 +52,14 @@ class ResultViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         try! realm.write {
-            ViewController.mySession.finishAverage()
+            HomeViewController.mySession.finishAverage()
         }
         
-        ViewController.totalAverages += 1 // add 1 to dat
+        HomeViewController.totalAverages += 1 // add 1 to dat
         
         let ratings = [3, 10, 50, 200, 500, 1000, 1500, 2000, 2500, 3000]
         
-        if(ratings.contains(ViewController.totalAverages))
+        if(ratings.contains(HomeViewController.totalAverages))
         {
             
             if #available( iOS 10.3,*){
@@ -67,7 +67,7 @@ class ResultViewController: UIViewController {
             }
         }
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             makeDarkMode()
         }
@@ -77,37 +77,37 @@ class ResultViewController: UIViewController {
         
         
         var numTimes = 3
-        if(ViewController.mySession.solveType == 0)
+        if(HomeViewController.mySession.solveType == 0)
         {
             numTimes = 5
         }
         for i in 0..<numTimes
         {
-            labels[i].setTitle(ViewController.mySession.times[i].myString, for: .normal)
+            labels[i].setTitle(HomeViewController.mySession.times[i].myString, for: .normal)
             labels[i].isHidden = false
         }
         
-        if(ViewController.mySession.solveType == 0)
+        if(HomeViewController.mySession.solveType == 0)
         {
-            MyAverageLabel.text = "= " + ViewController.mySession.myAverage + " Average!" // update my average label
+            MyAverageLabel.text = "= " + HomeViewController.mySession.myAverage + " Average!" // update my average label
         }
         else
         {
             SecondTime4.isHidden = true
             SecondTime5.isHidden = true
-            if(ViewController.mySession.solveType == 1)
+            if(HomeViewController.mySession.solveType == 1)
             {
-                MyAverageLabel.text = "= " + ViewController.mySession.myAverage + " Mean!" // update my average label
+                MyAverageLabel.text = "= " + HomeViewController.mySession.myAverage + " Mean!" // update my average label
             }
             else // best of 3
             {
-                MyAverageLabel.text = "= " + ViewController.mySession.myAverage + " Single!" // update my average label
+                MyAverageLabel.text = "= " + HomeViewController.mySession.myAverage + " Single!" // update my average label
             }
         }
         
         MyAverageLabel.isHidden = false
         TryAgainButton.isHidden = false
-        if(ViewController.mySession.targetType == noWinning) // no winning time
+        if(HomeViewController.mySession.targetType == noWinning) // no winning time
        {
             WinningAverageLabel.text = ""
             
@@ -115,30 +115,29 @@ class ResultViewController: UIViewController {
             LogoImage.isHidden = false
             
             try! realm.write {
-                ViewController.mySession.usingWinningTime.append(false)
+                HomeViewController.mySession.usingWinningTime.append(false)
         
                 // instead of updateWinningAverage():
-                ViewController.mySession.winningAverages.append("") // blank string for average
-                ViewController.mySession.results.append(true) // win for winning (not used tho)
+                HomeViewController.mySession.winningAverages.append("") // blank string for average
+                HomeViewController.mySession.results.append(true) // win for winning (not used tho)
             }
        }
        else // winning time
        {
-            WinningAverageLabel.isHidden = false
             BackgroundImage.isHidden = false
             try! realm.write {
-                ViewController.mySession.usingWinningTime.append(true)
+                HomeViewController.mySession.usingWinningTime.append(true)
                      // update winning average label & win/lose
                 }
             
             updateWinningAverage()
         }
         
-        times = Array(ViewController.mySession.times)
+        times = Array(HomeViewController.mySession.times)
         
         // last thing done - reset
         try! realm.write {
-            ViewController.mySession.reset()
+            HomeViewController.mySession.reset()
         }
     }
     
@@ -159,25 +158,25 @@ class ResultViewController: UIViewController {
         MyAverageLabel.textColor? = UIColor.white
         TryAgainButton.backgroundColor = .darkGray
         TimesCollection.forEach { (button) in
-            button.setTitleColor(ViewController.orangeColor(), for: .normal)
+            button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
         }
     }
     
     func updateWinningAverage() // calculate average and update label
     {
-        var winningAverage: Int = ViewController.mySession.singleTime // for single time
-        if(ViewController.mySession.targetType == rangeWinning)
+        var winningAverage: Int = HomeViewController.mySession.singleTime // for single time
+        if(HomeViewController.mySession.targetType == rangeWinning)
         {
             let random = GKRandomSource()
-            let winningTimeDistribution = GKGaussianDistribution(randomSource: random, lowestValue: ViewController.mySession.minTime, highestValue: ViewController.mySession.maxTime) // now using ints pays off. Distribution created easily
+            let winningTimeDistribution = GKGaussianDistribution(randomSource: random, lowestValue: HomeViewController.mySession.minTime, highestValue: HomeViewController.mySession.maxTime) // now using ints pays off. Distribution created easily
             winningAverage = winningTimeDistribution.nextInt()
         }
         
-        if(ViewController.mySession.solveType == 0)
+        if(HomeViewController.mySession.solveType == 0)
         {
             WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Average" // update label
         }
-        else if(ViewController.mySession.solveType == 1)
+        else if(HomeViewController.mySession.solveType == 1)
         {
             WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Mean" // update label
         }
@@ -185,18 +184,20 @@ class ResultViewController: UIViewController {
         {
             WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Single" // update label
         }
+        
+        
         WinningAverageLabel.isHidden = false
         
         try! realm.write
         {
-            ViewController.mySession.winningAverages.append(SolveTime.makeMyString(num: winningAverage))
+            HomeViewController.mySession.winningAverages.append(SolveTime.makeMyString(num: winningAverage))
         }
         
-        if(ViewController.mySession.myAverageInt < winningAverage)
+        if(HomeViewController.mySession.myAverageInt < winningAverage)
         {
             self.win()
         }
-        else if(ViewController.mySession.myAverageInt == winningAverage) // 50% chance of winning in event of a tie
+        else if(HomeViewController.mySession.myAverageInt == winningAverage) // 50% chance of winning in event of a tie
         {
             let rand = Int.random(in: 0...1)
             if(rand == 0)
@@ -219,15 +220,15 @@ class ResultViewController: UIViewController {
     func lose()
     {
         try! realm.write {
-            ViewController.mySession.results.append(false)
+            HomeViewController.mySession.results.append(false)
         }
-        if ViewController.cuber == NSLocalizedString("Random", comment: "")
+        if HomeViewController.cuber == NSLocalizedString("Random", comment: "")
         {
             BackgroundImage.image = randomImage(happy: false)
         }
         else
         {
-            BackgroundImage.image = UIImage(named: "sad\(ViewController.cuber)")
+            BackgroundImage.image = UIImage(named: "sad\(HomeViewController.cuber)")
         }
         MyAverageLabel.textColor = .red
         MyAverageLabel.text = MyAverageLabel.text
@@ -236,17 +237,17 @@ class ResultViewController: UIViewController {
     func win()
     {
         try! realm.write {
-            ViewController.mySession.results.append(true) // win
+            HomeViewController.mySession.results.append(true) // win
         }
-        if(ViewController.cuber == NSLocalizedString("Random", comment: ""))
+        if(HomeViewController.cuber == NSLocalizedString("Random", comment: ""))
         {
             BackgroundImage.image = randomImage(happy: true)
         }
         else
         {
-            BackgroundImage.image = UIImage(named: "happy\(ViewController.cuber)")
+            BackgroundImage.image = UIImage(named: "happy\(HomeViewController.cuber)")
         }
-        MyAverageLabel.textColor = ViewController.greenColor()
+        MyAverageLabel.textColor = HomeViewController.greenColor()
         MyAverageLabel.text = MyAverageLabel.text
     }
     
@@ -279,6 +280,11 @@ class ResultViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+    override func viewDidLayoutSubviews() {
+        WinningAverageLabel.font = WinningAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: WinningAverageLabel.text!, view: WinningAverageLabel, multiplier: 0.9, name: "Futura").pointSize, HomeViewController.fontToFitHeight(view: WinningAverageLabel, multiplier: 0.9, name: "Futura").pointSize))
+        MyAverageLabel.font = MyAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: MyAverageLabel.text!, view: BigView, multiplier: 0.9, name: "Futura").pointSize, HomeViewController.fontToFitHeight(view: MyAverageLabel, multiplier: 0.9, name: "Futura").pointSize))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -287,55 +293,25 @@ class ResultViewController: UIViewController {
         BackgroundImage.addGestureRecognizer(tapGesture)
         BackgroundImage.isUserInteractionEnabled = true
         
-        MyAverageLabel.adjustsFontSizeToFitWidth = true
-        WinningAverageLabel.adjustsFontSizeToFitWidth = true
         
         let newDevices = ["x86_64", "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,4", "iPhone11,6", "iPhone11,8", "iPhone12,1", "iPhone12,3", "iPhone12,5"] // have weird thing at top of screen
         
-        if newDevices.contains(ViewController.deviceName)
+        if newDevices.contains(HomeViewController.deviceName)
         {
             ImageConstraint.isActive = false
             BackgroundImage.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
-            
-            let winningNewFont = ViewController.fontToFitHeight(view: BigView, multiplier: 0.06, name: "Futura")
-            
-            if(winningNewFont.pointSize < WinningAverageLabel.font.pointSize)
-            {
-                WinningAverageLabel.font = winningNewFont
-            }
-            
-            let newFont = ViewController.fontToFitHeight(view: BigView, multiplier: 0.075, name: "Futura")
-            if(newFont.pointSize < MyAverageLabel.font.pointSize)
-            {
-                MyAverageLabel.font = newFont
-            }
-        }
-        else
-        {
-            let winningNewFont = ViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
-            if(winningNewFont.pointSize < WinningAverageLabel.font.pointSize)
-            {
-                WinningAverageLabel.font = winningNewFont
-            }
-            
-            let newFont = ViewController.font
-            if(newFont!.pointSize < MyAverageLabel.font.pointSize)
-            {
-                MyAverageLabel.font = newFont
-            }
-            //MyAverageLabel.font = ViewController.font!
         }
         
         timeConstraints()
         TimesCollection.forEach{(button) in
-            button.titleLabel?.font = ViewController.font!
+            button.titleLabel?.font = HomeViewController.font!
         }
         
        
         
-        TryAgainButton.titleLabel?.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.055, name: "Futura")
+        TryAgainButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.055, name: "Futura")
         let stringSize = TryAgainButton.titleLabel?.intrinsicContentSize.width
-        TryAgainButton.widthAnchor.constraint(equalToConstant: stringSize! + 20).isActive = true
+        TryAgainButton.widthAnchor.constraint(equalToConstant: stringSize! + 30).isActive = true
     }
     
     func timeConstraints()
@@ -354,7 +330,7 @@ class ResultViewController: UIViewController {
         } catch(let error) {
             print(error.localizedDescription)
         }
-        if(ViewController.mySession.results.last!) // win
+        if(HomeViewController.mySession.results.last!) // win
         {
             winningSound()
         }
@@ -396,7 +372,7 @@ class ResultViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
-        if ViewController.darkMode
+        if HomeViewController.darkMode
         {
             return .lightContent
         }

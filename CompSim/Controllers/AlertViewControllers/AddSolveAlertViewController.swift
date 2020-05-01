@@ -38,7 +38,7 @@ class AddSolveAlertViewController: UIViewController {
         
         
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             AddSolveView.backgroundColor = .darkGray
         }
@@ -81,12 +81,12 @@ class AddSolveAlertViewController: UIViewController {
         {
             if count == 1 // do this only on second time this method is called
             {
-                TextField.font = ViewController.fontToFitHeight(view: TextField, multiplier: 0.85, name: "Futura")
+                TextField.font = HomeViewController.fontToFitHeight(view: TextField, multiplier: 0.85, name: "Futura")
                 TextField.adjustsFontSizeToFitWidth = true
-                CancelButton.titleLabel?.font = ViewController.fontToFitHeight(view: CancelButton, multiplier: 1.0, name: "Futura")
-                EnterButton.titleLabel?.font = ViewController.fontToFitHeight(view: EnterButton, multiplier: 1.0, name: "Futura")
+                CancelButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: CancelButton, multiplier: 1.0, name: "Futura")
+                EnterButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: EnterButton, multiplier: 1.0, name: "Futura")
                 
-                PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: ViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal)
+                PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal)
             }
             count += 1
         }

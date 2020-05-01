@@ -23,7 +23,7 @@ class NotificationAlertViewController: UIViewController
         NotifTitle.text = myTitle
         NotifView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             NotifView.backgroundColor = .darkGray
         }

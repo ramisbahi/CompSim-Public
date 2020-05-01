@@ -47,11 +47,11 @@ class HelpViewController: UIViewController {
         
         
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
-            BigView.backgroundColor = ViewController.darkModeColor()
-            LittleView.backgroundColor = ViewController.darkModeColor()
-            ScrollView.backgroundColor = ViewController.darkModeColor()
+            BigView.backgroundColor = HomeViewController.darkModeColor()
+            LittleView.backgroundColor = HomeViewController.darkModeColor()
+            ScrollView.backgroundColor = HomeViewController.darkModeColor()
             BackButton.backgroundColor = .darkGray
             for label in MyLabels
             {

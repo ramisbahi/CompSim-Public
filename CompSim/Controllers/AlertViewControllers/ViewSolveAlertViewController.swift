@@ -38,7 +38,7 @@ class ViewSolveAlertViewController: UIViewController {
         
         ViewSolveView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        if(ViewController.darkMode)
+        if(HomeViewController.darkMode)
         {
             ViewSolveView.backgroundColor = .darkGray
         }
@@ -63,7 +63,7 @@ class ViewSolveAlertViewController: UIViewController {
             DoneCenterConstraint.isActive = false
         }
         
-        ScrambleLabel.font = ViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "System")
+        ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "System")
         
         PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Futura", size: 14.0)!], for: .normal)
     }
