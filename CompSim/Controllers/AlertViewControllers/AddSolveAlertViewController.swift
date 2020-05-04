@@ -34,7 +34,11 @@ class AddSolveAlertViewController: UIViewController {
         TextField.becomeFirstResponder()
         
         AddSolveTitle.text = myTitle
-        AddSolveView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        if #available(iOS 11.0, *) {
+            AddSolveView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
         
         
         

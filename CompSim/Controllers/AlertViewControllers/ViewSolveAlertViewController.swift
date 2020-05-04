@@ -36,7 +36,11 @@ class ViewSolveAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ViewSolveView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        if #available(iOS 11.0, *) {
+            ViewSolveView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
         
         if(HomeViewController.darkMode)
         {

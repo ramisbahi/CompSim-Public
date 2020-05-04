@@ -21,7 +21,11 @@ class NotificationAlertViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         NotifTitle.text = myTitle
-        NotifView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        if #available(iOS 11.0, *) {
+            NotifView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
         
         if(HomeViewController.darkMode)
         {

@@ -21,7 +21,11 @@ class SimpleAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         SimpleTitle.text = myTitle
-        SimpleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        if #available(iOS 11.0, *) {
+            SimpleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
         
         if(HomeViewController.darkMode)
         {

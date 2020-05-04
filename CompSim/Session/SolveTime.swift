@@ -19,16 +19,22 @@ class SolveTime: Object
     
     @objc dynamic var myString: String = ""
     @objc dynamic var myScramble: String = ""
+
     
     
     // can be min:sec:decimal
     convenience init(enteredTime: String, scramble: String) {
         self.init()
-        
-        let decimalTime = enteredTime.replacingOccurrences(of: ",", with: ".")
+        print(enteredTime)
+        var decimalTime = enteredTime.replacingOccurrences(of: ",", with: ".")
         
         myScramble = scramble
         var floatTime: Float = 0.0
+        if decimalTime.contains(":")
+        {
+            let removeable: Set<Character> = [":", "."]
+            decimalTime.removeAll(where: {removeable.contains($0)})
+        }
         if(decimalTime.countInstances(of: ".") == 1 || decimalTime.count <= 2) // i.e. 67.01 --> 1:07.01
         {
             floatTime = Float(decimalTime)!
@@ -49,9 +55,11 @@ class SolveTime: Object
                 floatTime = Float(minSec) + restSec
             }
         }
-        
+        print("float \(floatTime)")
         intTime = SolveTime.makeIntTime(num: floatTime)
         myString = SolveTime.makeMyString(num: intTime)
+        print("int \(intTime)")
+        print("string \(myString)")
     }
     
     static func makeIntTime(num: Float) -> Int // convert to rounded int (i.e. 1.493 --> 149, 1.496 --> 150. Rounding is necessary when calculating averages)
@@ -139,7 +147,7 @@ class SolveTime: Object
     // does NOT take into account penalties
     static func makeMyString(num: Int) -> String // 149 --> 1.49
     {
-        let interval: TimeInterval = Double(num) / 100.0
+        let interval: TimeInterval = (Double(num) + 0.1) / 100.0 // bc going to round down, so make 149 --> 149.1 --> 1.491, which will always get formatted correctly
         return interval.format(allowsFractionalUnits: true)!
     }
 }
