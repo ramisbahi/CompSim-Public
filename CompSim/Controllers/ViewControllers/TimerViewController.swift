@@ -346,7 +346,7 @@ class TimerViewController: UIViewController {
         guard mach_timebase_info(&info) == KERN_SUCCESS else { return }
         let currentTime = mach_absolute_time()
         let nano = UInt64(currentTime - self.startTime) * UInt64(info.numer) / UInt64(info.denom)
-        self.timerTime =  TimeInterval(nano) / 1000000000.0 * 50.0
+        self.timerTime =  TimeInterval(nano) / 1000000000.0 
     }
     
     func stopTimer()
