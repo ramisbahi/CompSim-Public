@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import GoogleMobileAds
 
 
 // get device name
@@ -48,9 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var realm = try! Realm()
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).

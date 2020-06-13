@@ -8,8 +8,6 @@
 
 import UIKit
 import RealmSwift
-import AVFoundation
-import Speech
 
 extension String {
     /// stringToFind must be at least 1 character.
@@ -25,7 +23,7 @@ extension String {
     }
 }
 
-class HomeViewController: UIViewController, SFSpeechRecognizerDelegate {
+class HomeViewController: UIViewController {
     @IBOutlet var BigView: UIView!
     
     @IBOutlet weak var ScrambleArea: UIView!
@@ -93,14 +91,6 @@ class HomeViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     static var totalAverages: Int = 0 // for keeping track of user engagement
     
-    /*var hasTurnedOnMic = false
-    static var usingMic = false
-    static var micAuthorized = false
-    private let speechRecognizer = SFSpeechRecognizer()
-    private let audioEngine = AVAudioEngine()
-    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    private var recognitionTask: SFSpeechRecognitionTask?
-    */
     let realm = try! Realm()
     
     struct Keys
@@ -135,11 +125,6 @@ class HomeViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        /*if(HomeViewController.micAuthorized && HomeViewController.usingMic)
-        {
-            turnOnMic()
-        }*/
         
         TimerViewController.initializeFormatters() // have to do this once in a while....
         
@@ -195,125 +180,11 @@ class HomeViewController: UIViewController, SFSpeechRecognizerDelegate {
         TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
     }
     
-    /*public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
-        if available {
-            MicButton.isEnabled = true
-            print("mic available!")
-        } else {
-            MicButton.isEnabled = false
-            print("mic not available")
-        }
-    }
-    
-    */
     @available(iOS 13.0, *)
     @IBAction func MicTapped(_ sender: Any) {
        // ViewController.usingMic ? turnOffMic(changeStatus: true) : turnOnMic()
         
     }
-    /*
-    func turnOffMic(changeStatus: Bool)
-    {
-        MicButton.setImage(UIImage(systemName: "mic.slash.fill"), for: .normal)
-        self.audioEngine.stop()
-        self.audioEngine.inputNode.removeTap(onBus: 0)
-        self.recognitionRequest = nil
-        self.recognitionTask?.cancel()
-        self.recognitionTask?.finish()
-        self.recognitionTask = nil
-        if(changeStatus)
-        {
-            ViewController.usingMic = false
-        }
-    }
-    
-    func turnOnMic()
-    {
-        hasTurnedOnMic = true
-        if(!ViewController.micAuthorized)
-        {
-            requestAuthorization()
-        }
-        else
-        {
-            MicButton.setImage(UIImage(systemName: "mic.fill"), for: .normal)
-            ViewController.usingMic = true
-        }
-        configureAudioSession()
-    }
-    
-    @available(iOS 13.0, *)
-    func requestAuthorization()
-    {
-        SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
-            OperationQueue.main.addOperation
-            {
-                if authStatus == .authorized
-                {
-                    print("Good to go!")
-                    ViewController.micAuthorized = true
-                    ViewController.usingMic = true
-                    self.MicButton.setImage(UIImage(systemName: "mic.fill"), for: .normal)
-                }
-                else
-                {
-                    print("Transcription permission was declined.")
-                    ViewController.micAuthorized = false
-                    ViewController.usingMic = false
-                }
-            }
-        }
-    }
-    
-    func configureAudioSession()
-    {
-        // Configure the audio session for the app.
-        let audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setCategory(.record, mode: .spokenAudio, options: .mixWithOthers)
-        try! audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-        let inputNode = audioEngine.inputNode
-        
-        audioEngine.prepare()
-        try! audioEngine.start()
-        
-        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        guard let recognitionRequest = recognitionRequest
-            else {
-                fatalError("Unable to create a SFSpeechAudioBufferRecognitionRequest object")
-            }
-        recognitionRequest.shouldReportPartialResults = true
-        
-        // Configure the microphone input.
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
-            self.recognitionRequest?.append(buffer)
-        }
-            
-        // Create a recognition task for the speech recognition session.
-        // Keep a reference to the task so that it can be canceled.
-        recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest) { result, error in
-            var isFinal = false
-            
-            if result != nil
-            {
-                // Update the text view with the results.
-                isFinal = result!.isFinal
-                print(result!.bestTranscription.formattedString)
-            }
-            
-            if error != nil || isFinal
-            {
-                self.turnOffMic(changeStatus: true)
-            }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(hasTurnedOnMic)
-        {
-            turnOffMic(changeStatus: false)
-        }
-    }*/
     
     static func fontToFitWidth(text: String, view: UIView, multiplier: Float, name: String) -> UIFont
     {

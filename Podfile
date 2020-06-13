@@ -7,6 +7,5 @@ target 'CompSim' do
 
   # Pods for CompSim
   pod 'RealmSwift'
-  pod 'Google-Mobile-Ads-SDK'
 
 end
