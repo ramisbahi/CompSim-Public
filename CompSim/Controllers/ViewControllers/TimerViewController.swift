@@ -26,7 +26,6 @@ class TimerViewController: UIViewController {
     
     var startTime: UInt64 = 0
     
-    
     static var longPress = UILongPressGestureRecognizer()
     
     @IBOutlet weak var DarkBackground: UIImageView!

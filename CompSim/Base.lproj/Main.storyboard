@@ -928,13 +928,14 @@
                                                 </connections>
                                             </segmentedControl>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="254" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ljr-tg-h7i">
-                                                <rect key="frame" x="137" y="221" width="140" height="32"/>
+                                                <rect key="frame" x="90.666666666666686" y="221" width="233" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="5wU-oY-Rqe"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="On"/>
                                                     <segment title="Off"/>
+                                                    <segment title="Timer"/>
+                                                    <segment title="Stackmat"/>
                                                 </segments>
                                                 <color key="selectedSegmentTintColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <connections>
@@ -1467,11 +1468,11 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jgk-eF-5k8">
-                                <rect key="frame" x="0.0" y="266" width="414" height="421"/>
+                                <rect key="frame" x="0.0" y="266" width="414" height="470"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edN-gV-HS0">
-                                <rect key="frame" x="10" y="642" width="35" height="35"/>
+                                <rect key="frame" x="10" y="691" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="B0o-f4-4Zs"/>
                                     <constraint firstAttribute="width" secondItem="edN-gV-HS0" secondAttribute="height" id="Qib-A0-2wa"/>
@@ -2859,8 +2860,9 @@ Cg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="FSf-yN-Opi"/>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="z5C-xH-DX3"/>
+        <segue reference="TfV-nY-2Oj"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="GaussianCurve" width="1116" height="462"/>

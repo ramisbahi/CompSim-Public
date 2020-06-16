@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
     static var darkMode = false
     static var changedDarkMode = false
     
-    static var timing = true
+    static var timing = 1
     static var inspection = true
     
     static var cuber = NSLocalizedString("Random", comment: "")
@@ -470,7 +470,7 @@ class HomeViewController: UIViewController {
     
     func usingLongPress() -> Bool
     {
-        return !HomeViewController.inspection && HomeViewController.holdingTime > 0.01 && HomeViewController.timing
+        return !HomeViewController.inspection && HomeViewController.holdingTime > 0.01 && HomeViewController.timing == 1
     }
     
     func reset()
@@ -514,12 +514,12 @@ class HomeViewController: UIViewController {
                     break
             }
         }
-        else if HomeViewController.timing && (HomeViewController.inspection || HomeViewController.holdingTime < 0.01) // tap gesture, timing
+        else if HomeViewController.timing == 1 && (HomeViewController.inspection || HomeViewController.holdingTime < 0.01) // tap gesture, timing
         {
             //print("tapped")
             self.performSegue(withIdentifier: "timerSegue", sender: self)
         }
-        else if !HomeViewController.timing // not timing... addsolve
+        else if HomeViewController.timing == 0 // not timing... addsolve
         {
             addSolve()
         }
@@ -751,7 +751,7 @@ class HomeViewController: UIViewController {
     {
         HomeViewController.darkMode = UserDefaults.standard.bool(forKey: AppDelegate.darkMode)
         HomeViewController.cuber = UserDefaults.standard.string(forKey: AppDelegate.cuber) ?? "Random"
-        HomeViewController.timing = UserDefaults.standard.bool(forKey: AppDelegate.timing)
+        HomeViewController.timing = UserDefaults.standard.integer(forKey: AppDelegate.timing)
         HomeViewController.inspection = UserDefaults.standard.bool(forKey: AppDelegate.inspection)
         HomeViewController.holdingTime = UserDefaults.standard.float(forKey: AppDelegate.holdingTime)
         HomeViewController.timerUpdate = UserDefaults.standard.integer(forKey: AppDelegate.timerUpdate)

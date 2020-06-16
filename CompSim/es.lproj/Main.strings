@@ -327,10 +327,10 @@
 "kcn-Vc-vLi.text" = "1.59";
 
 /* Class = "UISegmentedControl"; ljr-tg-h7i.segmentTitles[0] = "On"; ObjectID = "ljr-tg-h7i"; */
-"ljr-tg-h7i.segmentTitles[0]" = "Activo";
+"ljr-tg-h7i.segmentTitles[0]" = "Inactivo";
 
 /* Class = "UISegmentedControl"; ljr-tg-h7i.segmentTitles[1] = "Off"; ObjectID = "ljr-tg-h7i"; */
-"ljr-tg-h7i.segmentTitles[1]" = "Inactivo";
+"ljr-tg-h7i.segmentTitles[1]" = "Cronometrar";
 
 /* Class = "UISegmentedControl"; mUr-Jm-UAb.segmentTitles[0] = "None"; ObjectID = "mUr-Jm-UAb"; */
 "mUr-Jm-UAb.segmentTitles[0]" = "Nada";

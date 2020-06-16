@@ -9,8 +9,37 @@
 import UIKit
 import MessageUI
 import RealmSwift
+import CoreBluetooth
 
-class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate, CBCentralManagerDelegate, CBPeripheralDelegate
+{
+    /*
+    Invoked when the central manager’s state is updated.
+    This is where we start the scan if Bluetooth is turned on and on stackmat mode.
+    */
+    func centralManagerDidUpdateState(_ central: CBCentralManager)
+    {
+        if central.state == CBManagerState.poweredOn
+        {
+            // We will just handle it the easy way here: if Bluetooth is on, proceed...start scan!
+            print("Bluetooth Enabled")
+            if HomeViewController.timing == 2
+            {
+                //startScan()
+            }
+        }
+    }
+    
+    //Data
+    var centralManager : CBCentralManager!
+    var RSSIs = [NSNumber]()
+    var data = NSMutableData()
+    var writeData: String = ""
+    var peripherals: [CBPeripheral] = []
+    var characteristicValue = [CBUUID: NSData]()
+    var timer = Timer()
+    var characteristics = [String : CBCharacteristic]()
+    
     
     @IBOutlet weak var DarkModeLabel: UILabel!
     @IBOutlet weak var DarkModeControl: UISegmentedControl!
@@ -71,15 +100,18 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     }
     
     @IBAction func TimingChanged(_ sender: Any) {
-        if(HomeViewController.timing)
+        HomeViewController.timing = TimingControl.selectedSegmentIndex
+        if(HomeViewController.timing != 1)
         {
-            HomeViewController.timing = false
             InspectionControl.isEnabled = false
             InspectionVoiceAlertsControl.isEnabled = false
+            if(HomeViewController.timing == 2)
+            {
+                //`startScan()
+            }
         }
         else
         {
-            HomeViewController.timing = true
             InspectionControl.isEnabled = true
             if(HomeViewController.inspection)
             {
@@ -223,8 +255,9 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
     {
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        centralManager = CBCentralManager(delegate: self, queue: nil)
         
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
         cuberDictionary["Aleatorio"] = NSLocalizedString("Random", comment: "") // need to go through each
         if(cuberDictionary[NSLocalizedString("Random", comment: "")] == nil)
@@ -241,18 +274,13 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             turnOffDarkMode()
         }
         
-        
-        if(HomeViewController.timing)
+        TimingControl.selectedSegmentIndex = HomeViewController.timing
+        if(HomeViewController.timing != 1)
         {
-            TimingControl.selectedSegmentIndex = 0
-        }
-        else // not timing
-        {
-            TimingControl.selectedSegmentIndex = 1
             InspectionControl.isEnabled = false
         }
         
-        if(!(HomeViewController.timing && HomeViewController.inspection))
+        if(HomeViewController.timing != 1 || !HomeViewController.inspection)
         {
             InspectionVoiceAlertsControl.isEnabled = false
         }
