@@ -128,12 +128,9 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        if HomeViewController.timing == 2
-        {
-            peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
             //-Notification for updating the text view with incoming text
-            updateIncomingData()
-        }
+        updateIncomingData()
         
         TimerViewController.initializeFormatters() // have to do this once in a while....
         
