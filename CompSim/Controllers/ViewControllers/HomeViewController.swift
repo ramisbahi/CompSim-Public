@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import CoreBluetooth
 
 extension String {
     /// stringToFind must be at least 1 character.
@@ -23,7 +24,7 @@ extension String {
     }
 }
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     @IBOutlet var BigView: UIView!
     
     @IBOutlet weak var ScrambleArea: UIView!
@@ -55,6 +56,7 @@ class HomeViewController: UIViewController {
     static var scrambleChanged = false
     
     var labels = [UIButton]()
+    var peripheralManager: CBPeripheralManager?
     
     // settings stuff
     
@@ -126,6 +128,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        if HomeViewController.timing == 2
+        {
+            peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+            //-Notification for updating the text view with incoming text
+            updateIncomingData()
+        }
+        
         TimerViewController.initializeFormatters() // have to do this once in a while....
         
         tabBarController?.tabBar.isHidden = false
@@ -178,6 +187,33 @@ class HomeViewController: UIViewController {
         }
         ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
         TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
+    }
+    
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+           if peripheral.state == .poweredOn {
+               return
+           }
+           print("Peripheral manager is running")
+       }
+       
+    //Check when someone subscribe to our characteristic, start sending the data
+    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
+        print("Device subscribe to characteristic")
+    }
+    
+    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+        if let error = error {
+            print("\(error)")
+            return
+        }
+    }
+    
+    func updateIncomingData () {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil){
+            notification in
+            print("[Incoming]: " + (characteristicASCIIValue as String))
+            
+        }
     }
     
     @available(iOS 13.0, *)
@@ -799,4 +835,13 @@ class HomeViewController: UIViewController {
     
 }
 
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+    return input.rawValue
+}
 
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+    guard let input = input else { return nil }
+    return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}

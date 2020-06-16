@@ -281,11 +281,13 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     }
     
     //Table View Functions
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return self.peripherals.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         //Connect to device where the peripheral is connected
         let cell = tableView.dequeueReusableCell(withIdentifier: "BlueCell") as! PeripheralTableViewCell
         let peripheral = self.peripherals[indexPath.row]
@@ -532,6 +534,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
     {
+        
+        
         self.baseTableView.delegate = self
         self.baseTableView.dataSource = self
         if HomeViewController.timing == 2
