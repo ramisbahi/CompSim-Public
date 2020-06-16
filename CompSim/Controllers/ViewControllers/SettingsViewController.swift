@@ -102,6 +102,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     //-Connection
     func connectToDevice () {
         centralManager?.connect(blePeripheral!, options: nil)
+        print("connected to " + (blePeripheral?.name)!)
     }
     
     /*

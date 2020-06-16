@@ -127,7 +127,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        print("loaded, going to set peripheral manager")
+        print("peripheral is" + (blePeripheral?.name)!)
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
             //-Notification for updating the text view with incoming text
         updateIncomingData()
@@ -206,6 +207,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     }
     
     func updateIncomingData () {
+        print("NIGGA WE ADDING OBSERVER")
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil){
             notification in
             print("[Incoming]: " + (characteristicASCIIValue as String))
