@@ -1125,6 +1125,7 @@
                         <outlet property="TimingControl" destination="ljr-tg-h7i" id="96s-IP-aq7"/>
                         <outlet property="VersionLabel" destination="XRJ-Gy-2ml" id="wAV-4Q-qPO"/>
                         <outlet property="WebsiteButton" destination="BTZ-LD-Niw" id="UlZ-U1-edS"/>
+                        <outlet property="baseTableView" destination="ud8-Kf-kdv" id="68Q-e9-Zgf"/>
                         <outlet property="solveTypeControl" destination="42Y-ms-qTs" id="VZh-4e-UpW"/>
                         <outlet property="solveTypeLabel" destination="0mn-7A-bip" id="a4W-ic-mHZ"/>
                         <outletCollection property="eventCollection" destination="nMK-mq-VW3" collectionClass="NSMutableArray" id="l0D-kd-G6L"/>
