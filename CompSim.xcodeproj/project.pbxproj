@@ -31,6 +31,8 @@
 		3663DF4222DD699E006657CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4122DD699E006657CF /* Assets.xcassets */; };
 		3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4322DD699E006657CF /* LaunchScreen.storyboard */; };
 		3669CEC2238B13A900F1D002 /* scrambles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3669CEC1238B13A900F1D002 /* scrambles.txt */; };
+		3683FB982498534D000CAD0E /* PeripheralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3683FB972498534D000CAD0E /* PeripheralTableViewCell.swift */; };
+		3683FB9A249853C2000CAD0E /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3683FB99249853C2000CAD0E /* UUIDKey.swift */; };
 		368859EF2436456A00635856 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 368859F12436456A00635856 /* Localizable.strings */; };
 		3690EAE52316293200CB0B78 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360F108E22E551E500EEBB75 /* TabBarController.swift */; };
 		3690EAE62316293200CB0B78 /* ScrambleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF5022DEE4E5006657CF /* ScrambleReader.swift */; };
@@ -148,6 +150,8 @@
 		3663DF4C22DEBB5C006657CF /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		3663DF5022DEE4E5006657CF /* ScrambleReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrambleReader.swift; sourceTree = "<group>"; };
 		3669CEC1238B13A900F1D002 /* scrambles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scrambles.txt; sourceTree = "<group>"; };
+		3683FB972498534D000CAD0E /* PeripheralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PeripheralTableViewCell.swift; path = ViewControllers/PeripheralTableViewCell.swift; sourceTree = "<group>"; };
+		3683FB99249853C2000CAD0E /* UUIDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
 		368859EB24362ED000635856 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		368859EC24362ED100635856 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		368859F02436456A00635856 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -289,6 +293,8 @@
 				3696538423BA9AD6000784D9 /* AlertViewControllers */,
 				360F108E22E551E500EEBB75 /* TabBarController.swift */,
 				3690EABC2316202100CB0B78 /* ViewControllers */,
+				3683FB972498534D000CAD0E /* PeripheralTableViewCell.swift */,
+				3683FB99249853C2000CAD0E /* UUIDKey.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -523,6 +529,7 @@
 				3696537D23BA5557000784D9 /* AlertService.swift in Sources */,
 				3690EAF12316293200CB0B78 /* Megaminx.h in Sources */,
 				3690EAF22316293200CB0B78 /* Megaminx.m in Sources */,
+				3683FB982498534D000CAD0E /* PeripheralTableViewCell.swift in Sources */,
 				3690EAF32316293200CB0B78 /* Sq1.m in Sources */,
 				3690EAF42316293200CB0B78 /* Sq1.h in Sources */,
 				3690EAF52316293200CB0B78 /* Skewb.h in Sources */,
@@ -538,6 +545,7 @@
 				3602BC3424379DD60050406C /* State.swift in Sources */,
 				3690EAFC2316293200CB0B78 /* Util.m in Sources */,
 				3602BC3C2437CF5E0050406C /* Square1.swift in Sources */,
+				3683FB9A249853C2000CAD0E /* UUIDKey.swift in Sources */,
 				3690EAFD2316293200CB0B78 /* Im.m in Sources */,
 				3690EAFE2316293200CB0B78 /* Im.h in Sources */,
 				3696538A23BA9F55000784D9 /* ViewSolveAlertViewController.swift in Sources */,
