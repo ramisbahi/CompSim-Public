@@ -42,8 +42,9 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         peripherals = []
         print("Now Scanning...")
         self.timer.invalidate()
+        
         centralManager?.scanForPeripherals(withServices: [BLEService_UUID] , options: [CBCentralManagerScanOptionAllowDuplicatesKey:false])
-        Timer.scheduledTimer(withTimeInterval: 17, repeats: false) {_ in
+        Timer.scheduledTimer(withTimeInterval: 30, repeats: false) {_ in
             self.cancelScan()
         }
     }
@@ -55,9 +56,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         print("Number of Peripherals Found: \(peripherals.count)")
     }
     
-    func refreshScanView() {
-        baseTableView.reloadData()
-    }
     
     //-Terminate all Peripheral Connection
     /*
@@ -361,6 +359,10 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     @IBOutlet weak var EmailButton: UIButton!
     
+    
+    @IBOutlet weak var TableTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var TableBottomConstraint: NSLayoutConstraint!
+    
     var cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Random" : NSLocalizedString("Random", comment: ""), "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park", "Kevin" : "Kevin Hays"]
     
     let realm = try! Realm()
@@ -380,14 +382,23 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     }
     
     @IBAction func TimingChanged(_ sender: Any) {
+        if(HomeViewController.timing == 2) // changing from stackmat
+        {
+            //hideTable()
+            disconnectFromDevice()
+        }
+        
         HomeViewController.timing = TimingControl.selectedSegmentIndex
+        
         if(HomeViewController.timing != 1)
         {
             InspectionControl.isEnabled = false
             InspectionVoiceAlertsControl.isEnabled = false
             if(HomeViewController.timing == 2)
             {
-                //`startScan()
+                //showTable()
+                // need to check if bluetooth is on here, though
+                startScan()
             }
         }
         else
@@ -399,6 +410,21 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             }
         }
     }
+    
+    /*
+    func hideTable()
+    {
+        baseTableView.isHidden = true
+        TableTopConstraint.isActive = false
+        TableBottomConstraint.isActive = false
+    }
+    
+    func showTable()
+    {
+        TableTopConstraint.isActive = true
+        TableBottomConstraint.isActive = true
+        baseTableView.isHidden = false
+    }*/
     
     @IBAction func WebsiteButtonTouched(_ sender: Any) {
         guard let url = URL(string: "http://www.compsim.net") else {

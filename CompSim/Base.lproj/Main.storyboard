@@ -1071,6 +1071,7 @@
                                             <constraint firstItem="TWC-NK-pgV" firstAttribute="top" secondItem="MgX-Jd-ubN" secondAttribute="top" id="mIq-iu-Vlu"/>
                                             <constraint firstAttribute="trailing" secondItem="wXm-KH-6ct" secondAttribute="trailing" id="mLI-zS-fx2"/>
                                             <constraint firstItem="LrE-n2-Lfh" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="nZA-J2-Rhe"/>
+                                            <constraint firstItem="6uq-uX-5mP" firstAttribute="top" secondItem="ljr-tg-h7i" secondAttribute="bottom" priority="750" constant="10" id="orE-gg-S0A"/>
                                             <constraint firstItem="ud8-Kf-kdv" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="s7r-K0-2a0"/>
                                             <constraint firstItem="42Y-ms-qTs" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="sbp-4y-D7L"/>
                                             <constraint firstItem="TWC-NK-pgV" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" id="u2a-36-7yl"/>
@@ -1121,6 +1122,8 @@
                         <outlet property="LittleView" destination="MgX-Jd-ubN" id="xmh-jW-KuP"/>
                         <outlet property="ScrambleTypeButton" destination="dY5-wq-uM6" id="i2D-fO-LMC"/>
                         <outlet property="ScrollView" destination="CUF-Dg-Qhg" id="6xj-pk-yzS"/>
+                        <outlet property="TableBottomConstraint" destination="uUl-5t-4b3" id="RfE-I8-8ru"/>
+                        <outlet property="TableTopConstraint" destination="1Iu-wO-1ii" id="8eA-Te-dkI"/>
                         <outlet property="TimerUpdateControl" destination="xBE-BR-iFx" id="FO0-Dw-IeD"/>
                         <outlet property="TimingControl" destination="ljr-tg-h7i" id="96s-IP-aq7"/>
                         <outlet property="VersionLabel" destination="XRJ-Gy-2ml" id="wAV-4Q-qPO"/>

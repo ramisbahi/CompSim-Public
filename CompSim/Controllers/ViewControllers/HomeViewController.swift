@@ -56,6 +56,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     static var scrambleChanged = false
     
     var labels = [UIButton]()
+    
     var peripheralManager: CBPeripheralManager?
     
     // settings stuff
@@ -95,6 +96,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     let realm = try! Realm()
     
+    var holdStartTime: UInt64 = 0
+    
     struct Keys
     {
         static let darkMode = "darkMode"
@@ -128,10 +131,9 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("loaded, going to set peripheral manager")
-        print("peripheral is" + (blePeripheral?.name)!)
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
             //-Notification for updating the text view with incoming text
-        updateIncomingData()
+        
         
         TimerViewController.initializeFormatters() // have to do this once in a while....
         
@@ -207,11 +209,65 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     }
     
     func updateIncomingData () {
-        print("NIGGA WE ADDING OBSERVER")
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil){
+        print("WE ADDING OBSERVER")
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
+        {
             notification in
-            print("[Incoming]: " + (characteristicASCIIValue as String))
             
+            let message = characteristicASCIIValue as String
+            print("[Incoming]: " + message)
+            
+            if message == "Bravo"
+            {
+                self.stackmatTouched()
+            }
+            else if message == "Six"
+            {
+                self.stackmatReleased()
+            }
+        }
+    }
+    
+    func stackmatTouched()
+    {
+        if HomeViewController.timerPhase == self.IDLE
+        {
+            TimerLabel.isHidden = false
+            HomeViewController.timerPhase = self.FROZEN
+            
+            // make green after holding time
+            Timer.scheduledTimer(withTimeInterval:  TimeInterval(HomeViewController.holdingTime), repeats: false) {_ in
+                if HomeViewController.timerPhase == self.FROZEN
+                {
+                    self.TimerLabel.textColor = .green
+                    HomeViewController.timerPhase = self.READY
+                }
+            }
+        }
+        
+    }
+    
+    /*
+    func pastHoldingTime() -> Bool
+    {
+        var info = mach_timebase_info()
+        guard mach_timebase_info(&info) == KERN_SUCCESS else { return false  }
+        let currentTime = mach_absolute_time()
+        let nano = UInt64(currentTime - self.holdStartTime) * UInt64(info.numer) / UInt64(info.denom)
+        let timePassed =  Float(nano) / 1000000000.0
+        
+        return timePassed >= HomeViewController.holdingTime
+    }*/
+    
+    func stackmatReleased()
+    {
+        if HomeViewController.timerPhase == self.FROZEN
+        {
+            self.cancelTimer()
+        }
+        else // if(HomeViewController.timerPhase == self.READY) // did holding time, released
+        {
+            self.performSegue(withIdentifier: "timerSegue", sender: self)
         }
     }
     
@@ -521,7 +577,10 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
-        
+        if(HomeViewController.timing == 2)
+        {
+            updateIncomingData() // moved here
+        }
     }
     
     func alertValidTime(alertMessage: String)

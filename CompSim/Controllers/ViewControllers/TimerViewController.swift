@@ -10,8 +10,9 @@ import UIKit
 import GameKit
 import RealmSwift
 import Foundation
+import CoreBluetooth
 
-class TimerViewController: UIViewController {
+class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     
     let IDLE = 0
     let INSPECTION = 1
@@ -45,10 +46,12 @@ class TimerViewController: UIViewController {
     static let fractionFormatter = NumberFormatter()
     static let timeFormatter = DateComponentsFormatter()
     
+    var peripheralManager: CBPeripheralManager?
+    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(false)
-        if(HomeViewController.inspection)
+        if(HomeViewController.inspection && HomeViewController.timing != 2) // for now, not doing inspection with stackmat
         {
             startInspection()
         }
@@ -77,6 +80,56 @@ class TimerViewController: UIViewController {
         CancelButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: CancelButton, multiplier: 0.9, name: "Futura")
         let stringSize = CancelButton.titleLabel?.intrinsicContentSize.width
         CancelButton.widthAnchor.constraint(equalToConstant: stringSize! + 45).isActive = true
+        
+        if(HomeViewController.timing == 2)
+        {
+            peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+                //-Notification for updating the text view with incoming text
+            updateIncomingData()
+        }
+    }
+    
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+           if peripheral.state == .poweredOn {
+               return
+           }
+           print("Peripheral manager is running")
+       }
+       
+    //Check when someone subscribe to our characteristic, start sending the data
+    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
+        print("Device subscribe to characteristic")
+    }
+    
+    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+        if let error = error {
+            print("\(error)")
+            return
+        }
+    }
+    
+    func updateIncomingData () {
+        print("TIMER ADDING OBSERVER")
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
+        {
+            notification in
+            
+            let message = characteristicASCIIValue as String
+            print("[Incoming]: " + message)
+            
+            if message == "Bravo"
+            {
+                self.stackmatTouched()
+            }
+        }
+    }
+    
+    func stackmatTouched()
+    {
+        if timerPhase == TIMING
+        {
+            stopTimer()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -297,14 +350,7 @@ class TimerViewController: UIViewController {
         inspectionTimer.invalidate()
         timerPhase = TIMING
         
-        if(HomeViewController.darkMode)
-        {
-            TimerLabel.textColor = UIColor.white
-        }
-        else
-        {
-            TimerLabel.textColor = UIColor.black
-        }
+        TimerLabel.textColor = HomeViewController.darkMode ? .white : .black
         
         self.startTime = mach_absolute_time()
         
@@ -351,7 +397,6 @@ class TimerViewController: UIViewController {
     func stopTimer()
     {
         setTimerTime()
-        print("1 \(self.timerTime)")
         self.TimerLabel.text = self.timerTime.format(allowsFractionalUnits: true)
         TimerViewController.resultTime = self.timerTime
         timer.invalidate()
