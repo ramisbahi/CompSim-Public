@@ -33,6 +33,7 @@
 		3669CEC2238B13A900F1D002 /* scrambles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3669CEC1238B13A900F1D002 /* scrambles.txt */; };
 		3683FB982498534D000CAD0E /* PeripheralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3683FB972498534D000CAD0E /* PeripheralTableViewCell.swift */; };
 		3683FB9A249853C2000CAD0E /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3683FB99249853C2000CAD0E /* UUIDKey.swift */; };
+		3683FB9B24985FDC000CAD0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3663DF4622DD699E006657CF /* Info.plist */; };
 		368859EF2436456A00635856 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 368859F12436456A00635856 /* Localizable.strings */; };
 		3690EAE52316293200CB0B78 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360F108E22E551E500EEBB75 /* TabBarController.swift */; };
 		3690EAE62316293200CB0B78 /* ScrambleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF5022DEE4E5006657CF /* ScrambleReader.swift */; };
@@ -447,6 +448,7 @@
 				3602BC4424390BFA0050406C /* AddSolveAlert.storyboard in Resources */,
 				3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */,
 				3602BC4B24390C2D0050406C /* SimpleAlertViewController.storyboard in Resources */,
+				3683FB9B24985FDC000CAD0E /* Info.plist in Resources */,
 				3663DF4222DD699E006657CF /* Assets.xcassets in Resources */,
 				3602BC3D24390BCA0050406C /* ViewSolveAlert.storyboard in Resources */,
 				3663DF4022DD699D006657CF /* Main.storyboard in Resources */,
