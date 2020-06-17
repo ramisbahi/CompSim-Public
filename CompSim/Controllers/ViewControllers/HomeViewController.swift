@@ -230,14 +230,17 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     func stackmatTouched()
     {
+        print("NIGGA stackmat touched")
         if HomeViewController.timerPhase == self.IDLE
         {
             TimerLabel.isHidden = false
             HomeViewController.timerPhase = self.FROZEN
+            print("NIGGA going to hide all")
             hideAll()
             
             // make green after holding time
             Timer.scheduledTimer(withTimeInterval:  TimeInterval(HomeViewController.holdingTime), repeats: false) {_ in
+                print("NIGGA scheduled timer called")
                 if HomeViewController.timerPhase == self.FROZEN
                 {
                     self.TimerLabel.textColor = .green
