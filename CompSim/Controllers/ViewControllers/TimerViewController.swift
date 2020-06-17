@@ -458,7 +458,6 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
 extension TimeInterval {
     func format(allowsFractionalUnits: Bool) -> String?
     {
-        print(self)
         var fractionString = ""
         if allowsFractionalUnits
         {

@@ -131,6 +131,9 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("loaded, going to set peripheral manager")
+        
+        
+        
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
             //-Notification for updating the text view with incoming text
         
@@ -150,6 +153,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
                 doSettings()
                 HomeViewController.justOpened = false
             }
+            updateIncomingData() // moved here
         }
         
         if(TimerViewController.resultTime != 0) // returned from timer
@@ -580,11 +584,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        
-        if(HomeViewController.timing == 2)
-        {
-            updateIncomingData() // moved here
-        }
     }
     
     func alertValidTime(alertMessage: String)
