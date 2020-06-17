@@ -234,6 +234,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         {
             TimerLabel.isHidden = false
             HomeViewController.timerPhase = self.FROZEN
+            hideAll()
             
             // make green after holding time
             Timer.scheduledTimer(withTimeInterval:  TimeInterval(HomeViewController.holdingTime), repeats: false) {_ in
