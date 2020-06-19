@@ -133,7 +133,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         print("loaded, going to set peripheral manager")
         
         
-        
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
             //-Notification for updating the text view with incoming text
         
@@ -153,7 +152,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
                 doSettings()
                 HomeViewController.justOpened = false
             }
-            updateIncomingData() // moved here
         }
         
         if(TimerViewController.resultTime != 0) // returned from timer
@@ -212,7 +210,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         }
     }
     
-    func updateIncomingData () {
+    func updateIncomingData() {
         print("WE ADDING OBSERVER")
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
         {
@@ -230,6 +228,11 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
                 self.stackmatReleased()
             }
         }
+    }
+    
+    func removeIncomingData()
+    {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "Notify"), object: nil)
     }
     
     func stackmatTouched()
@@ -420,7 +423,22 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
             GestureArea.removeGestureRecognizer(HomeViewController.longPress)
         }
         
+        if HomeViewController.timing == 2
+        {
+            updateIncomingData() // moved here
+        }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if(HomeViewController.timing == 2)
+        {
+            removeIncomingData()
+        }
+        
+    }
+    
     
     
     func gestureSetup()
