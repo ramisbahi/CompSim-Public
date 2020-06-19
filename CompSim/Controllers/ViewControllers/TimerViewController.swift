@@ -58,7 +58,12 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
         else
         {
             startTimer()
+            if HomeViewController.timing == 2
+            {
+                updateIncomingData()
+            }
         }
+        
     }
 
     override func viewDidLoad() {
@@ -85,8 +90,19 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
         {
             peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
                 //-Notification for updating the text view with incoming text
-            updateIncomingData()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if HomeViewController.timing == 2
+        {
+            removeIncomingData()
+        }
+    }
+    
+    func removeIncomingData()
+    {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "Notify"), object: nil)
     }
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
