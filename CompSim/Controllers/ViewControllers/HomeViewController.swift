@@ -211,13 +211,13 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     }
     
     func updateIncomingData() {
-        print("WE ADDING OBSERVER")
+        print("WE ADDING OBSERVER from home")
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
         {
             notification in
             
             let message = characteristicASCIIValue as String
-            print("[Incoming]: " + message)
+            print("[Incoming from home]: " + message)
             
             if message == "Bravo"
             {
@@ -232,6 +232,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     func removeIncomingData()
     {
+        print("removing from home")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "Notify"), object: nil)
     }
     

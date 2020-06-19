@@ -102,6 +102,7 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     
     func removeIncomingData()
     {
+        print("removing from timer")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "Notify"), object: nil)
     }
     
@@ -125,13 +126,13 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     }
     
     func updateIncomingData () {
-        print("TIMER ADDING OBSERVER")
+        print("WE ADDING OBSERVER from timer")
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
         {
             notification in
             
             let message = characteristicASCIIValue as String
-            print("[Incoming]: " + message)
+            print("[Incoming from timer]: " + message)
             
             if message == "Bravo"
             {
