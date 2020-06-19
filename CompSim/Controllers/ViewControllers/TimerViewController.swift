@@ -48,6 +48,8 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     
     var peripheralManager: CBPeripheralManager?
     
+    var observer: NSObjectProtocol?
+    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(false)
@@ -103,7 +105,8 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     func removeIncomingData()
     {
         print("removing from timer")
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "Notify"), object: nil)
+        NotificationCenter.default.removeObserver(observer!)
+        observer = nil
     }
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
@@ -127,7 +130,7 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     
     func updateIncomingData () {
         print("WE ADDING OBSERVER from timer")
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
+        observer = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
         {
             notification in
             

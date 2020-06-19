@@ -98,6 +98,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     var holdStartTime: UInt64 = 0
     
+    var observer: NSObjectProtocol?
+    
     struct Keys
     {
         static let darkMode = "darkMode"
@@ -212,7 +214,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     func updateIncomingData() {
         print("WE ADDING OBSERVER from home")
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
+        observer = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
         {
             notification in
             
@@ -233,7 +235,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     func removeIncomingData()
     {
         print("removing from home")
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "Notify"), object: nil)
+        NotificationCenter.default.removeObserver(observer!)
+        observer = nil
     }
     
     func stackmatTouched()
