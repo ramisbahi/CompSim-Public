@@ -620,6 +620,10 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         
         let cuber = NSLocalizedString("Cuber", comment: "")
+        if(HomeViewController.cuber == "Malik")
+        {
+            HomeViewController.cuber = "Rami"
+        }
         CuberButton.setTitle("\(cuber): \(cuberDictionary[HomeViewController.cuber]!)", for: .normal)
         
         HoldingTimeSlider.value = HomeViewController.holdingTime

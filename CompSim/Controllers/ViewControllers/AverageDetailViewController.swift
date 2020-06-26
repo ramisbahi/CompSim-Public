@@ -55,7 +55,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         let myCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "myCell")
         
-        let currentTime = HomeViewController.mySession.allTimes[StatsViewController.myIndex].list[indexPath.row]
+        let currentTime = HomeViewController.mySession.allTimes[SessionViewController.myIndex].list[indexPath.row]
         
         myCell.textLabel?.text = currentTime.myString // each time
         myCell.textLabel?.font = UIFont.init(name: "Futura", size: 17.0)
@@ -107,21 +107,21 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         let stringSize = BackButton.titleLabel?.intrinsicContentSize.width
         BackButton.widthAnchor.constraint(equalToConstant: stringSize! + 40).isActive = true
         
-        averageType = HomeViewController.mySession.averageTypes[StatsViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
+        averageType = HomeViewController.mySession.averageTypes[SessionViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
         if(averageType == 0)
         {
-            AverageLabel.text = HomeViewController.mySession.allAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
-            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  HomeViewController.mySession.winningAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
+            AverageLabel.text = HomeViewController.mySession.allAverages[SessionViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
+            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  HomeViewController.mySession.winningAverages[SessionViewController.myIndex] + " " + NSLocalizedString("Average", comment: "")
         }
         else if(averageType == 1)
         {
-            AverageLabel.text = HomeViewController.mySession.allAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
-            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  HomeViewController.mySession.winningAverages[StatsViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
+            AverageLabel.text = HomeViewController.mySession.allAverages[SessionViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
+            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  HomeViewController.mySession.winningAverages[SessionViewController.myIndex] + " " + NSLocalizedString("Mean", comment: "")
         }
         else
         {
-            AverageLabel.text = HomeViewController.mySession.allAverages[StatsViewController.myIndex] + " Single"
-            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  HomeViewController.mySession.winningAverages[StatsViewController.myIndex] + " Single"
+            AverageLabel.text = HomeViewController.mySession.allAverages[SessionViewController.myIndex] + " Single"
+            WinningAverageLabel.text = NSLocalizedString("Target: ", comment: "") +  HomeViewController.mySession.winningAverages[SessionViewController.myIndex] + " Single"
         }
         
         if(HomeViewController.darkMode)
@@ -133,9 +133,9 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
             turnOffDarkMode()
         }
         
-        if(HomeViewController.mySession.usingWinningTime[StatsViewController.myIndex]) // was going against a winning time
+        if(HomeViewController.mySession.usingWinningTime[SessionViewController.myIndex]) // was going against a winning time
         {
-            if(HomeViewController.mySession.results[StatsViewController.myIndex]) // won
+            if(HomeViewController.mySession.results[SessionViewController.myIndex]) // won
             {
                 AverageLabel.textColor = HomeViewController.greenColor()
             }

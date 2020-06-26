@@ -9,6 +9,36 @@
 import Foundation
 import RealmSwift
 
+extension String
+{
+    // time string (i.e. 2:45.89) to float (165.89)
+    func toFloatTime() -> Float
+    {
+        var decimalTime = self.replacingOccurrences(of: ",", with: ".")
+        if decimalTime.contains(":")
+        {
+            let removeable: Set<Character> = [":", "."]
+            decimalTime.removeAll(where: {removeable.contains($0)})
+        }
+        
+        if(decimalTime.countInstances(of: ".") == 1 || decimalTime.count <= 2) // i.e. 67.01 --> 1:07.01
+        {
+            return Float(decimalTime)!
+        }
+        // else - no decimal, more than 2 characters
+        if(decimalTime.count <= 4)
+        {
+            return Float(decimalTime)! / 100
+        }
+        // else - 5+ characters, no decimal // example: 21965 (2:19.65)
+        let min = Int(String(decimalTime.prefix(decimalTime.count - 4)))! // 2
+        let rest = Int(String(decimalTime.suffix(4)))! // 1965
+        let minSec = min * 60
+        let restSec: Float = Float(rest) / 100
+        return Float(minSec) + restSec
+    }
+}
+
 class SolveTime: Object
 {
     // new 
@@ -26,35 +56,10 @@ class SolveTime: Object
     convenience init(enteredTime: String, scramble: String) {
         self.init()
         print(enteredTime)
-        var decimalTime = enteredTime.replacingOccurrences(of: ",", with: ".")
-        
         myScramble = scramble
-        var floatTime: Float = 0.0
-        if decimalTime.contains(":")
-        {
-            let removeable: Set<Character> = [":", "."]
-            decimalTime.removeAll(where: {removeable.contains($0)})
-        }
-        if(decimalTime.countInstances(of: ".") == 1 || decimalTime.count <= 2) // i.e. 67.01 --> 1:07.01
-        {
-            floatTime = Float(decimalTime)!
-        }
-    
-        else // no decimal, more than 2 characters
-        {
-            if(decimalTime.count <= 4)
-            {
-                floatTime = Float(decimalTime)! / 100
-            }
-            else // 5+ characters, no decimal // example: 21965 (2:19.65)
-            {
-                let min = Int(String(decimalTime.prefix(decimalTime.count - 4)))! // 2
-                let rest = Int(String(decimalTime.suffix(4)))! // 1965
-                let minSec = min * 60
-                let restSec: Float = Float(rest) / 100
-                floatTime = Float(minSec) + restSec
-            }
-        }
+        
+        let floatTime = enteredTime.toFloatTime()
+        
         print("float \(floatTime)")
         intTime = SolveTime.makeIntTime(num: floatTime)
         myString = SolveTime.makeMyString(num: intTime)

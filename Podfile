@@ -7,5 +7,6 @@ target 'CompSim' do
 
   # Pods for CompSim
   pod 'RealmSwift'
+  pod 'Charts'
 
 end

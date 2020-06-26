@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.5.0):
+    - Charts/Core (= 3.5.0)
+  - Charts/Core (3.5.0)
   - Realm (4.3.0):
     - Realm/Headers (= 4.3.0)
   - Realm/Headers (4.3.0)
@@ -6,17 +9,20 @@ PODS:
     - Realm (= 4.3.0)
 
 DEPENDENCIES:
+  - Charts
   - RealmSwift
 
 SPEC REPOS:
   trunk:
+    - Charts
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
+  Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
   Realm: 9357c3589555793e1860a7104a7412bca4a48d99
   RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
 
-PODFILE CHECKSUM: fe9b4b2980a300d72ac61eaf1d20e106f5d1d236
+PODFILE CHECKSUM: d79a5b6c550c80e25b8a48301fa130fec6eac785
 
 COCOAPODS: 1.9.0.beta.2

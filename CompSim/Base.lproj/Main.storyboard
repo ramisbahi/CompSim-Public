@@ -877,7 +877,7 @@
                                                     <constraint firstAttribute="height" constant="300" id="ZEw-4D-Axo"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BlueCell" rowHeight="98" id="jDa-sB-Kur" customClass="PeripheralTableViewCell" customModule="Basic_Chat" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BlueCell" rowHeight="98" id="jDa-sB-Kur" customClass="PeripheralTableViewCell" customModule="CompSim" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="414" height="98"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jDa-sB-Kur" id="uhj-6V-m3I">
@@ -1297,10 +1297,10 @@
             </objects>
             <point key="canvasLocation" x="-1848" y="-196"/>
         </scene>
-        <!--Stats View Controller-->
+        <!--Session View Controller-->
         <scene sceneID="cQX-Ox-96D">
             <objects>
-                <viewController storyboardIdentifier="StatsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kqA-DF-Yjh" customClass="StatsViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StatsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kqA-DF-Yjh" customClass="SessionViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M4I-BC-dr8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1493,6 +1493,7 @@
                         <segue destination="1fs-7q-vwl" kind="relationship" relationship="viewControllers" id="Xe7-UV-mtu"/>
                         <segue destination="0Bl-oR-f5Z" kind="relationship" relationship="viewControllers" id="Wdc-bY-ZFf"/>
                         <segue destination="AbV-MZ-eM0" kind="relationship" relationship="viewControllers" id="Ac6-eL-MxM"/>
+                        <segue destination="lUl-29-EXG" kind="relationship" relationship="viewControllers" id="Wjr-WJ-peH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v5X-kv-VtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2725,7 +2726,7 @@ Cg
         <scene sceneID="uIE-o1-Nlv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AbV-MZ-eM0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Session" image="stats" id="Y3a-EX-OVv"/>
+                    <tabBarItem key="tabBarItem" title="Session" image="table.fill" catalog="system" id="Y3a-EX-OVv"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="oi5-pp-2i0"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3nx-3l-nJS">
@@ -2740,6 +2741,37 @@ Cg
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V2S-lb-uws" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2749.275362318841" y="593.47826086956525"/>
+        </scene>
+        <!--Stats-->
+        <scene sceneID="4gq-bx-eiW">
+            <objects>
+                <viewController id="lUl-29-EXG" customClass="StatsViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mqF-Hu-6Dm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgX-vz-uG4" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="20" width="414" height="368"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2qe-iy-8FB" firstAttribute="trailing" secondItem="rgX-vz-uG4" secondAttribute="trailing" id="4pa-VI-V02"/>
+                            <constraint firstItem="rgX-vz-uG4" firstAttribute="leading" secondItem="2qe-iy-8FB" secondAttribute="leading" id="cmg-eo-oll"/>
+                            <constraint firstItem="rgX-vz-uG4" firstAttribute="height" secondItem="mqF-Hu-6Dm" secondAttribute="height" multiplier="0.5" id="nYR-e3-Tmf"/>
+                            <constraint firstItem="rgX-vz-uG4" firstAttribute="top" secondItem="2qe-iy-8FB" secondAttribute="top" constant="20" id="pof-yd-adU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2qe-iy-8FB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Stats" image="stats" id="UBO-DJ-QNO"/>
+                    <connections>
+                        <outlet property="lineChart" destination="rgX-vz-uG4" id="vcK-rZ-Ylh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qqq-6N-34x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3077" y="1292"/>
         </scene>
         <!--CompSim-->
         <scene sceneID="xdf-II-jW1">
@@ -2904,9 +2936,8 @@ Cg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Xe7-UV-mtu"/>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="TfV-nY-2Oj"/>
+        <segue reference="z5C-xH-DX3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="GaussianCurve" width="1116" height="462"/>
@@ -2919,6 +2950,7 @@ Cg
         <image name="settings" width="29" height="29"/>
         <image name="sizedTarget" width="48.666667938232422" height="52.666667938232422"/>
         <image name="stats" width="33.666667938232422" height="33.666667938232422"/>
+        <image name="table.fill" catalog="system" width="128" height="93"/>
         <image name="timer" width="49.666667938232422" height="28.666666030883789"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
     </resources>
