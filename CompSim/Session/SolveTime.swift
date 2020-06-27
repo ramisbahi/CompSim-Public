@@ -14,6 +14,10 @@ extension String
     // time string (i.e. 2:45.89) to float (165.89)
     func toFloatTime() -> Float
     {
+        if self == "DNF"
+        {
+            return 99999.0
+        }
         var decimalTime = self.replacingOccurrences(of: ",", with: ".")
         if decimalTime.contains(":")
         {
@@ -119,7 +123,7 @@ class SolveTime: Object
             intTime -= 200
         }
         originalIntTime = intTime
-        intTime = 999999
+        intTime = 9999999
         penalty = 2
     }
     
