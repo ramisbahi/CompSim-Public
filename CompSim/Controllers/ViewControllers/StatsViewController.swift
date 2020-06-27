@@ -9,6 +9,10 @@
 import UIKit
 import Charts
 
+var bestSingleAverageIndex: Int?
+var bestSingleSolveIndex: Int? // index in average
+var bestSingleTransition = false
+
 class StatsViewController: UIViewController {
 
     @IBOutlet weak var lineChart: LineChartView!
@@ -28,6 +32,8 @@ class StatsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("STATS VIEW WILL APPEAR")
+        
         updateGraph()
         
         updateLabels()
@@ -69,23 +75,35 @@ class StatsViewController: UIViewController {
     
     func updateBestSingle()
     {
-        var minSolve: SolveTime? = nil
-        for currList in HomeViewController.mySession.allTimes
+        bestSingleAverageIndex = nil
+        bestSingleSolveIndex = nil // index in average
+        bestSingleTransition = false
+        let allTimes = HomeViewController.mySession.allTimes
+        for averageIndex in 0..<allTimes.count
         {
-            let currMin: SolveTime = currList.list.min(by: {a, b in a.intTime < b.intTime})! // minimum solve of current average
-            if minSolve == nil || currMin.intTime < minSolve!.intTime
+            let currList = allTimes[averageIndex].list
+            for solveIndex in 0..<currList.count
             {
-                minSolve = currMin
+                if bestSingleSolveIndex == nil || currList[solveIndex].intTime < allTimes[bestSingleAverageIndex!].list[bestSingleSolveIndex!].intTime
+                {
+                    bestSingleSolveIndex = solveIndex
+                    bestSingleAverageIndex = averageIndex
+                }
             }
         }
         
-        if minSolve != nil
+        
+        if bestSingleSolveIndex != nil
         {
-            let minString = minSolve!.getMyString()
+            let minSolve = allTimes[bestSingleAverageIndex!].list[bestSingleSolveIndex!]
+            var minString = minSolve.getMyString()
             let start = minString.index(minString.startIndex, offsetBy: 1)
             let end = minString.index(minString.endIndex, offsetBy: -1)
-            let minSub = minString[start..<end]
-            BestSingleButton.setTitle(String(minSub), for: .normal)
+            if minString.contains("(")
+            {
+                minString = String(minString[start..<end])
+            }
+            BestSingleButton.setTitle(minString, for: .normal)
         }
     }
     
@@ -187,6 +205,10 @@ class StatsViewController: UIViewController {
         
     }
 
+    @IBAction func BestSingleClicked(_ sender: Any) {
+        bestSingleTransition = true
+        self.performSegue(withIdentifier: "SegueToSession", sender: self)
+    }
     /*
     // MARK: - Navigation
 

@@ -11,8 +11,14 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.selectedIndex = 1
+        if bestSingleTransition
+        {
+            self.selectedIndex = 3
+        }
+        else
+        {
+            self.selectedIndex = 1
+        }
 
         // Do any additional setup after loading the view.
     }

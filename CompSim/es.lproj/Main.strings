@@ -273,7 +273,7 @@
 "dA4-04-9zH.segmentTitles[2]" = "Mejor de 3";
 
 /* Class = "UIButton"; normalTitle = " Stats"; ObjectID = "dE5-MO-YyE"; */
-"dE5-MO-YyE.normalTitle" = " Estadística";
+"dE5-MO-YyE.normalTitle" = " Sesión";
 
 /* Class = "UILabel"; text = "Player"; ObjectID = "dGH-rV-lmj"; */
 "dGH-rV-lmj.text" = "Jugador";

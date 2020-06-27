@@ -547,8 +547,26 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         
         setUpStackView()
+    
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        if(bestSingleTransition)
+        {
+            bestSingleTransition = false
+            let path: IndexPath = IndexPath(row: HomeViewController.mySession.currentAverage - bestSingleAverageIndex!, section: 0)
+            //StatsTableView.scrollToRow(at: path, at: UITableView.ScrollPosition.top, animated: true)
+            StatsTableView.selectRow(at: path, animated: true, scrollPosition: UITableView.ScrollPosition.top)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.tableView(self.StatsTableView, didSelectRowAt: path)
+            }
+            
+        }
     }
     
 

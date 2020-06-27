@@ -26,7 +26,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2pc-dx-UvZ">
-                                <rect key="frame" x="55.333333333333343" y="268.33333333333331" width="119.33333333333331" height="51.333333333333314"/>
+                                <rect key="frame" x="55.333333333333336" y="268.33333333333331" width="119.33333333333331" height="51.333333333333314"/>
                                 <color key="backgroundColor" red="0.029578437289999999" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2pc-dx-UvZ" secondAttribute="height" multiplier="125:54" id="o3t-oH-9fu"/>
@@ -1219,9 +1219,9 @@
                                     <constraint firstAttribute="width" priority="750" constant="80" id="QZM-74-Z8U"/>
                                     <constraint firstAttribute="height" constant="38" id="WVV-Xr-UU5"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title=" Stats" image="arrow.turn.down.left" catalog="system">
+                                <state key="normal" title="Session" image="arrow.turn.down.left" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1300,7 +1300,7 @@
         <!--Session View Controller-->
         <scene sceneID="cQX-Ox-96D">
             <objects>
-                <viewController storyboardIdentifier="StatsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kqA-DF-Yjh" customClass="SessionViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SessionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kqA-DF-Yjh" customClass="SessionViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M4I-BC-dr8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1396,7 +1396,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SYS-AT-ZdR">
-                                <rect key="frame" x="105.33333333333331" y="54" width="203.33333333333337" height="36"/>
+                                <rect key="frame" x="105.33333333333333" y="54" width="203.33333333333337" height="36"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SA7-1e-6BY">
                                         <rect key="frame" x="0.0" y="0.0" width="203.33333333333334" height="36"/>
@@ -1594,7 +1594,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fQe-f8-jUV">
-                                <rect key="frame" x="96.666666666666686" y="36.666666666666657" width="220.66666666666663" height="220.99999999999997"/>
+                                <rect key="frame" x="96.666666666666671" y="36.666666666666657" width="220.66666666666663" height="220.99999999999997"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fQe-f8-jUV" secondAttribute="height" multiplier="1:1" id="mFi-VM-Ym7"/>
                                 </constraints>
@@ -2835,6 +2835,9 @@ Cg
                                 <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="BestSingleClicked:" destination="lUl-29-EXG" eventType="touchUpInside" id="2bC-H9-24Z"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2O-qs-ugN">
                                 <rect key="frame" x="294" y="560" width="100" height="30"/>
@@ -2893,6 +2896,7 @@ Cg
                         <outlet property="CurrentMoButton" destination="YUF-yu-Ee2" id="Mh0-VA-nDU"/>
                         <outlet property="MedianAverageButton" destination="mhD-pj-uhA" id="53S-YY-hVD"/>
                         <outlet property="lineChart" destination="rgX-vz-uG4" id="vcK-rZ-Ylh"/>
+                        <segue destination="Icw-Z7-67k" kind="presentation" identifier="SegueToSession" animates="NO" modalPresentationStyle="fullScreen" id="PT0-Cd-KDT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qqq-6N-34x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3063,7 +3067,7 @@ Cg
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="z5C-xH-DX3"/>
+        <segue reference="PT0-Cd-KDT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="GaussianCurve" width="1116" height="462"/>
