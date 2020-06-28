@@ -564,6 +564,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             StatsTableView.selectRow(at: path, animated: true, scrollPosition: UITableView.ScrollPosition.top)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.tableView(self.StatsTableView, didSelectRowAt: path)
+                bestSingleTransition = true
             }
             
         }

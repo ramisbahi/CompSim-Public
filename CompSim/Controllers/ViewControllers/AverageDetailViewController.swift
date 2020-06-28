@@ -27,6 +27,21 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         slideLeftSegue()
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        if(bestSingleTransition)
+        {
+            bestSingleTransition = false
+            let path: IndexPath = IndexPath(row: bestSingleSolveIndex!, section: 0)
+            //StatsTableView.scrollToRow(at: path, at: UITableView.ScrollPosition.top, animated: true)
+            AverageTableView.selectRow(at: path, animated: true, scrollPosition: UITableView.ScrollPosition.none)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.tableView(self.AverageTableView, didSelectRowAt: path)
+            }
+        }
+    }
+    
     func slideLeftSegue()
     {
         let transition:CATransition = CATransition()
