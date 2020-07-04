@@ -83,16 +83,13 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         {
             for index in 0..<numAverages
             {
-                if(HomeViewController.mySession.usingWinningTime[index]) // if was competing against winning time
+                if SolveTime.makeIntTime(num: HomeViewController.mySession.allAverages[index].toFloatTime()) < HomeViewController.mySession.singleTime // win
                 {
-                    if HomeViewController.mySession.results[index] // win
-                    {
-                        winningCount += 1
-                    }
-                    else // lose
-                    {
-                        losingCount += 1
-                    }
+                    winningCount += 1
+                }
+                else // lose
+                {
+                    losingCount += 1
                 }
             }
             
@@ -313,6 +310,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
+        updateBarWidth()
+        
         DeleteButton.isEnabled = HomeViewController.allSessions.count > 1
         
         if(HomeViewController.darkMode)
@@ -448,7 +447,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.accessoryType = .disclosureIndicator // show little arrow thing on right side of each cell
         if(HomeViewController.mySession.usingWinningTime[currentIndex]) // if was competing against winning time
         {
-            cell.textLabel?.textColor = HomeViewController.mySession.results[currentIndex] ? HomeViewController.greenColor() : UIColor.red
+            cell.textLabel?.textColor = SolveTime.makeIntTime(num: HomeViewController.mySession.allAverages[currentIndex].toFloatTime())  < HomeViewController.mySession.singleTime ? HomeViewController.greenColor() : UIColor.red // get int time
             
         }
         
@@ -543,8 +542,6 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         doubleTapGesture.numberOfTapsRequired = 2
         SessionButton.addGestureRecognizer(doubleTapGesture)
         
-        updateBarWidth()
-        
         
         setUpStackView()
     
@@ -556,7 +553,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         super.viewDidAppear(animated)
         
-        if(bestSingleTransition)
+        if bestSingleTransition
         {
             bestSingleTransition = false
             let path: IndexPath = IndexPath(row: HomeViewController.mySession.currentAverage - bestSingleAverageIndex!, section: 0)
@@ -566,7 +563,15 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.tableView(self.StatsTableView, didSelectRowAt: path)
                 bestSingleTransition = true
             }
-            
+        }
+        else if bestAverageTransition
+        {
+            bestAverageTransition = false
+            let path: IndexPath = IndexPath(row: HomeViewController.mySession.currentAverage - bestAverageIndex!, section: 0)
+            StatsTableView.selectRow(at: path, animated: true, scrollPosition: UITableView.ScrollPosition.top)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.tableView(self.StatsTableView, didSelectRowAt: path)
+            }
         }
     }
     

@@ -13,6 +13,9 @@ var bestSingleAverageIndex: Int?
 var bestSingleSolveIndex: Int? // index in average
 var bestSingleTransition = false
 
+var bestAverageIndex: Int?
+var bestAverageTransition = false
+
 class StatsViewController: UIViewController {
 
     @IBOutlet weak var lineChart: LineChartView!
@@ -109,15 +112,20 @@ class StatsViewController: UIViewController {
     
     func updateBestAverage()
     {
-        let minAverage: String? =
-        HomeViewController.mySession.allAverages.min(by: {
-            a, b in
-            a.toFloatTime() < b.toFloatTime()
-        })
-        
-        if minAverage != nil
+        bestAverageIndex = nil
+        bestAverageTransition = false
+        let allAverages = HomeViewController.mySession.allAverages
+        for currIndex in 0..<allAverages.count
         {
-            BestAverageButton.setTitle(minAverage!, for: .normal)
+            if bestAverageIndex == nil || allAverages[currIndex].toFloatTime() < allAverages[bestAverageIndex!].toFloatTime()
+            {
+                bestAverageIndex = currIndex
+            }
+        }
+        
+        if(bestAverageIndex != nil)
+        {
+            BestAverageButton.setTitle(allAverages[bestAverageIndex!], for: .normal)
         }
     }
     
@@ -206,8 +214,19 @@ class StatsViewController: UIViewController {
     }
 
     @IBAction func BestSingleClicked(_ sender: Any) {
-        bestSingleTransition = true
-        self.performSegue(withIdentifier: "SegueToSession", sender: self)
+        if bestSingleAverageIndex != nil
+        {
+            bestSingleTransition = true
+            self.performSegue(withIdentifier: "SegueToSession", sender: self)
+        }
+    }
+    
+    @IBAction func BestAverageClicked(_ sender: Any) {
+        if bestAverageIndex != nil
+        {
+            bestAverageTransition = true
+            self.performSegue(withIdentifier: "SegueToSession", sender: self)
+        }
     }
     /*
     // MARK: - Navigation

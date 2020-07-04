@@ -488,10 +488,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         
         
-        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
-        {
-            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Futura", size: 13)!], for: .normal)
-        }
+        
         
         VersionLabel.textColor = .white
         
@@ -527,11 +524,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             label.backgroundColor = HomeViewController.darkBlueColor()
         }
         
-        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
-        {
-            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "Futura", size: 13)!], for: .normal)
-        }
-        
         VersionLabel.textColor = .black
         setNeedsStatusBarAppearanceUpdate()
         updateStatusBarBackground()
@@ -561,8 +553,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
     {
-        
-        
         self.baseTableView.delegate = self
         self.baseTableView.dataSource = self
         if HomeViewController.timing == 2
@@ -588,6 +578,11 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         else
         {
             turnOffDarkMode()
+        }
+        
+        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
+        {
+            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Futura", size: 13)!], for: .normal)
         }
         
         TimingControl.selectedSegmentIndex = HomeViewController.timing

@@ -134,11 +134,11 @@
 /* Class = "UIButton"; normalTitle = "4x4x4"; ObjectID = "Kp9-F7-yXV"; */
 "Kp9-F7-yXV.normalTitle" = "4x4x4";
 
-/* Class = "UISegmentedControl"; LA3-i5-aRu.segmentTitles[0] = "On"; ObjectID = "LA3-i5-aRu"; */
-"LA3-i5-aRu.segmentTitles[0]" = "On";
+/* Class = "UISegmentedControl"; LA3-i5-aRu.segmentTitles[0] = "ON"; ObjectID = "LA3-i5-aRu"; */
+"LA3-i5-aRu.segmentTitles[0]" = "ON";
 
-/* Class = "UISegmentedControl"; LA3-i5-aRu.segmentTitles[1] = "Off"; ObjectID = "LA3-i5-aRu"; */
-"LA3-i5-aRu.segmentTitles[1]" = "Off";
+/* Class = "UISegmentedControl"; LA3-i5-aRu.segmentTitles[1] = "OFF"; ObjectID = "LA3-i5-aRu"; */
+"LA3-i5-aRu.segmentTitles[1]" = "OFF";
 
 /* Class = "UIButton"; normalTitle = "5x5x5"; ObjectID = "LBm-Uj-Srh"; */
 "LBm-Uj-Srh.normalTitle" = "5x5x5";
@@ -152,20 +152,20 @@
 /* Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "LpS-K1-oBx"; */
 "LpS-K1-oBx.normalTitle" = "Create Account";
 
-/* Class = "UISegmentedControl"; LrE-n2-Lfh.segmentTitles[0] = "On"; ObjectID = "LrE-n2-Lfh"; */
-"LrE-n2-Lfh.segmentTitles[0]" = "On";
+/* Class = "UISegmentedControl"; LrE-n2-Lfh.segmentTitles[0] = "ON"; ObjectID = "LrE-n2-Lfh"; */
+"LrE-n2-Lfh.segmentTitles[0]" = "ON";
 
-/* Class = "UISegmentedControl"; LrE-n2-Lfh.segmentTitles[1] = "Off"; ObjectID = "LrE-n2-Lfh"; */
-"LrE-n2-Lfh.segmentTitles[1]" = "Off";
+/* Class = "UISegmentedControl"; LrE-n2-Lfh.segmentTitles[1] = "OFF"; ObjectID = "LrE-n2-Lfh"; */
+"LrE-n2-Lfh.segmentTitles[1]" = "OFF";
 
 /* Class = "UIButton"; normalTitle = "2x2x2"; ObjectID = "MZa-Tm-aNf"; */
 "MZa-Tm-aNf.normalTitle" = "2x2x2";
 
-/* Class = "UISegmentedControl"; Ms5-6S-Cbn.segmentTitles[0] = "On"; ObjectID = "Ms5-6S-Cbn"; */
-"Ms5-6S-Cbn.segmentTitles[0]" = "On";
+/* Class = "UISegmentedControl"; Ms5-6S-Cbn.segmentTitles[0] = "ON"; ObjectID = "Ms5-6S-Cbn"; */
+"Ms5-6S-Cbn.segmentTitles[0]" = "ON";
 
-/* Class = "UISegmentedControl"; Ms5-6S-Cbn.segmentTitles[1] = "Off"; ObjectID = "Ms5-6S-Cbn"; */
-"Ms5-6S-Cbn.segmentTitles[1]" = "Off";
+/* Class = "UISegmentedControl"; Ms5-6S-Cbn.segmentTitles[1] = "OFF"; ObjectID = "Ms5-6S-Cbn"; */
+"Ms5-6S-Cbn.segmentTitles[1]" = "OFF";
 
 /* Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "NC7-PY-x1f"; */
 "NC7-PY-x1f.normalTitle" = "Create Account";
@@ -327,10 +327,10 @@
 "kcn-Vc-vLi.text" = "1.59";
 
 /* Class = "UISegmentedControl"; ljr-tg-h7i.segmentTitles[0] = "On"; ObjectID = "ljr-tg-h7i"; */
-"ljr-tg-h7i.segmentTitles[0]" = "Off";
+"ljr-tg-h7i.segmentTitles[0]" = "OFF";
 
-/* Class = "UISegmentedControl"; ljr-tg-h7i.segmentTitles[1] = "Off"; ObjectID = "ljr-tg-h7i"; */
-"ljr-tg-h7i.segmentTitles[1]" = "Timer";
+/* Class = "UISegmentedControl"; ljr-tg-h7i.segmentTitles[1] = "OFF"; ObjectID = "ljr-tg-h7i"; */
+"ljr-tg-h7i.segmentTitles[1]" = "TIMER";
 
 /* Class = "UISegmentedControl"; mUr-Jm-UAb.segmentTitles[0] = "None"; ObjectID = "mUr-Jm-UAb"; */
 "mUr-Jm-UAb.segmentTitles[0]" = "None";
@@ -369,7 +369,7 @@
 "u52-Im-qhw.normalTitle" = "Skewb";
 
 /* Class = "UILabel"; text = "Timer Update"; ObjectID = "uwH-WR-wfc"; */
-"uwH-WR-wfc.text" = "Timer Update";
+"uwH-WR-wfc.text" = "TIMER UPDATE";
 
 /* Class = "UISegmentedControl"; vag-Sx-mn2.segmentTitles[0] = "DNF"; ObjectID = "vag-Sx-mn2"; */
 "vag-Sx-mn2.segmentTitles[0]" = "DNF";
@@ -387,19 +387,19 @@
 "vf3-Zc-agO.text" = "5.00";
 
 /* Class = "UITabBarItem"; title = "Target"; ObjectID = "wZc-Zi-Ru6"; */
-"wZc-Zi-Ru6.title" = "Target";
+"wZc-Zi-Ru6.title" = "TARGET";
 
 /* Class = "UILabel"; text = "Confirm Password"; ObjectID = "wcj-D7-V5C"; */
 "wcj-D7-V5C.text" = "Confirm Password";
 
 /* Class = "UISegmentedControl"; xBE-BR-iFx.segmentTitles[0] = "Update"; ObjectID = "xBE-BR-iFx"; */
-"xBE-BR-iFx.segmentTitles[0]" = "Update";
+"xBE-BR-iFx.segmentTitles[0]" = "UPDATE";
 
 /* Class = "UISegmentedControl"; xBE-BR-iFx.segmentTitles[1] = "Seconds"; ObjectID = "xBE-BR-iFx"; */
-"xBE-BR-iFx.segmentTitles[1]" = "Seconds";
+"xBE-BR-iFx.segmentTitles[1]" = "SECONDS";
 
 /* Class = "UISegmentedControl"; xBE-BR-iFx.segmentTitles[2] = "None"; ObjectID = "xBE-BR-iFx"; */
-"xBE-BR-iFx.segmentTitles[2]" = "None";
+"xBE-BR-iFx.segmentTitles[2]" = "NONE";
 
 /* Class = "UIButton"; normalTitle = "Bill Wang"; ObjectID = "xOL-wK-cxq"; */
 "xOL-wK-cxq.normalTitle" = "Bill Wang";

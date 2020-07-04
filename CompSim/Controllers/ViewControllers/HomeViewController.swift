@@ -892,7 +892,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     static func orangeColor() -> UIColor
     {
-        return UIColor(displayP3Red: 255/255, green: 165/255, blue: 61/255, alpha: 1.0)
+        return UIColor(displayP3Red: 242/255, green: 193/255, blue: 78/255, alpha: 1.0)
     }
     
     static func blueColor() ->  UIColor

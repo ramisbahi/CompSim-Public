@@ -137,7 +137,7 @@
                                     <segment title="None"/>
                                     <segment title="Target"/>
                                 </segments>
-                                <color key="selectedSegmentTintColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="selectedSegmentTintColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <action selector="ValueChanged:" destination="mCZ-mM-XSp" eventType="valueChanged" id="fpI-lh-f43"/>
                                 </connections>
@@ -789,14 +789,16 @@
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="255" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="LA3-i5-aRu">
                                                 <rect key="frame" x="137" y="135" width="140" height="32"/>
+                                                <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="v7G-g3-1nr"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="On"/>
-                                                    <segment title="Off"/>
+                                                    <segment title="ON"/>
+                                                    <segment title="OFF"/>
                                                 </segments>
-                                                <color key="selectedSegmentTintColor" red="1" green="0.6470588235294118" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="selectedSegmentTintColor" red="0.94901960784313721" green="0.75686274509803919" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <connections>
                                                     <action selector="DarkModeChanged:" destination="0Bl-oR-f5Z" eventType="valueChanged" id="uJS-hF-8Bk"/>
                                                 </connections>
@@ -816,7 +818,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="300" id="fcH-Bc-TBc"/>
                                                 </constraints>
-                                                <color key="minimumTrackTintColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="minimumTrackTintColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <color key="thumbTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <action selector="HoldingTimeChanged:" destination="0Bl-oR-f5Z" eventType="valueChanged" id="9xV-Q9-4NH"/>
@@ -824,15 +826,16 @@
                                             </slider>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LrE-n2-Lfh">
                                                 <rect key="frame" x="137" y="617" width="140" height="32"/>
+                                                <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="CUV-N1-Pcn"/>
                                                     <constraint firstAttribute="height" constant="31" id="skr-4i-GgQ"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="On"/>
-                                                    <segment title="Off"/>
+                                                    <segment title="ON"/>
+                                                    <segment title="OFF"/>
                                                 </segments>
-                                                <color key="selectedSegmentTintColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="selectedSegmentTintColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <connections>
                                                     <action selector="InspectionChanged:" destination="0Bl-oR-f5Z" eventType="valueChanged" id="1ll-bl-IyD"/>
                                                 </connections>
@@ -849,16 +852,17 @@
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xBE-BR-iFx">
                                                 <rect key="frame" x="57" y="872" width="300" height="32"/>
+                                                <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="3YU-NF-rA5"/>
                                                     <constraint firstAttribute="height" constant="31" id="FNJ-fm-RXq"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="Update"/>
-                                                    <segment title="Seconds"/>
-                                                    <segment title="None"/>
+                                                    <segment title="UPDATE"/>
+                                                    <segment title="SECONDS"/>
+                                                    <segment title="NONE"/>
                                                 </segments>
-                                                <color key="selectedSegmentTintColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="selectedSegmentTintColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer Update" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwH-WR-wfc">
                                                 <rect key="frame" x="0.0" y="829" width="414" height="35"/>
@@ -909,15 +913,16 @@
                                             </tableView>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="255" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="42Y-ms-qTs">
                                                 <rect key="frame" x="57" y="958" width="300" height="32"/>
+                                                <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="Mvc-3O-gsm"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="Average of 5"/>
-                                                    <segment title="Mean of 3"/>
-                                                    <segment title="Best of 3"/>
+                                                    <segment title="AVG OF 5"/>
+                                                    <segment title="MEAN OF 3"/>
+                                                    <segment title="BEST OF 3"/>
                                                 </segments>
-                                                <color key="selectedSegmentTintColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="selectedSegmentTintColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspection Voice" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Lm-QJ-n9i">
                                                 <rect key="frame" x="0.0" y="658" width="414" height="35"/>
@@ -941,30 +946,32 @@
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ms5-6S-Cbn">
                                                 <rect key="frame" x="137" y="703" width="140" height="32"/>
+                                                <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="IGs-bY-d4P"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="apL-xy-O6d"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="On"/>
-                                                    <segment title="Off"/>
+                                                    <segment title="ON"/>
+                                                    <segment title="OFF"/>
                                                 </segments>
-                                                <color key="selectedSegmentTintColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="selectedSegmentTintColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <connections>
                                                     <action selector="InspectionVoiceAlertsChanged:" destination="0Bl-oR-f5Z" eventType="valueChanged" id="ndX-rH-eKv"/>
                                                 </connections>
                                             </segmentedControl>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="254" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ljr-tg-h7i">
-                                                <rect key="frame" x="90.666666666666686" y="221" width="233" height="32"/>
+                                                <rect key="frame" x="74" y="221" width="266" height="32"/>
+                                                <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="5wU-oY-Rqe"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="Off"/>
-                                                    <segment title="Timer"/>
-                                                    <segment title="Stackmat"/>
+                                                    <segment title="OFF"/>
+                                                    <segment title="TIMER"/>
+                                                    <segment title="STACKMAT"/>
                                                 </segments>
-                                                <color key="selectedSegmentTintColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="selectedSegmentTintColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <connections>
                                                     <action selector="TimingChanged:" destination="0Bl-oR-f5Z" eventType="valueChanged" id="7Dd-EY-4GM"/>
                                                 </connections>
@@ -1179,14 +1186,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target Average: 1.49" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DjD-aj-bOl">
-                                <rect key="frame" x="0.0" y="122" width="414" height="34"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4HU-Wj-DfA">
-                                <rect key="frame" x="0.0" y="181" width="414" height="555"/>
+                                <rect key="frame" x="0.0" y="128" width="414" height="608"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="myCell" id="J22-p1-P43">
@@ -1233,25 +1234,34 @@
                                     <action selector="StatsButtonPressed:" destination="AvC-tB-OuD" eventType="touchUpInside" id="kEB-fZ-eS0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7x-do-eup">
+                                <rect key="frame" x="362" y="10" width="42" height="33"/>
+                                <color key="tintColor" red="0.029578437289999999" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" image="rectangle.on.rectangle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="CopyButtonPressed:" destination="AvC-tB-OuD" eventType="touchUpInside" id="3UB-DC-Hha"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="c4t-Dd-fsp" firstAttribute="leading" secondItem="wL3-xv-aHE" secondAttribute="leading" id="3om-Ra-BhR"/>
+                            <constraint firstItem="4HU-Wj-DfA" firstAttribute="top" secondItem="B4M-qY-OQc" secondAttribute="bottom" constant="18" id="6Kb-Mo-aTi"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="trailing" secondItem="B4M-qY-OQc" secondAttribute="trailing" id="ATV-CI-0gl"/>
                             <constraint firstItem="c4t-Dd-fsp" firstAttribute="top" secondItem="R3d-AM-Pfb" secondAttribute="top" id="CqW-ku-kej"/>
                             <constraint firstItem="dE5-MO-YyE" firstAttribute="leading" secondItem="wL3-xv-aHE" secondAttribute="leading" constant="10" id="Fqz-As-kCx"/>
-                            <constraint firstItem="DjD-aj-bOl" firstAttribute="leading" secondItem="wL3-xv-aHE" secondAttribute="leading" id="LYc-oG-GCg"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="trailing" secondItem="c4t-Dd-fsp" secondAttribute="trailing" id="NNl-mD-4uu"/>
                             <constraint firstItem="B4M-qY-OQc" firstAttribute="top" secondItem="wL3-xv-aHE" secondAttribute="top" constant="50" id="NsU-OG-JC9"/>
-                            <constraint firstItem="DjD-aj-bOl" firstAttribute="trailing" secondItem="wL3-xv-aHE" secondAttribute="trailing" id="OIG-JH-w5r"/>
                             <constraint firstItem="dE5-MO-YyE" firstAttribute="top" secondItem="wL3-xv-aHE" secondAttribute="top" constant="10" id="Rzj-9B-AKH"/>
+                            <constraint firstItem="F7x-do-eup" firstAttribute="top" secondItem="wL3-xv-aHE" secondAttribute="top" constant="10" id="VMl-Vq-lef"/>
+                            <constraint firstItem="wL3-xv-aHE" firstAttribute="trailing" secondItem="F7x-do-eup" secondAttribute="trailing" constant="10" id="aFR-Fs-3LH"/>
                             <constraint firstItem="B4M-qY-OQc" firstAttribute="leading" secondItem="wL3-xv-aHE" secondAttribute="leading" id="gGY-cn-tdw"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="trailing" secondItem="4HU-Wj-DfA" secondAttribute="trailing" id="gkn-3d-uiV"/>
-                            <constraint firstItem="DjD-aj-bOl" firstAttribute="top" secondItem="B4M-qY-OQc" secondAttribute="bottom" constant="12" id="q8N-25-utY"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="bottom" secondItem="c4t-Dd-fsp" secondAttribute="bottom" id="svw-uB-wUJ"/>
                             <constraint firstItem="4HU-Wj-DfA" firstAttribute="leading" secondItem="wL3-xv-aHE" secondAttribute="leading" id="tqL-Py-Q8m"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="bottom" secondItem="4HU-Wj-DfA" secondAttribute="bottom" id="w9H-rr-gDY"/>
-                            <constraint firstItem="4HU-Wj-DfA" firstAttribute="top" secondItem="DjD-aj-bOl" secondAttribute="bottom" constant="25" id="wqB-6m-kK6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wL3-xv-aHE"/>
                     </view>
@@ -1260,8 +1270,8 @@
                         <outlet property="AverageLabel" destination="B4M-qY-OQc" id="bBK-K5-KHY"/>
                         <outlet property="AverageTableView" destination="4HU-Wj-DfA" id="9tY-yh-lUT"/>
                         <outlet property="BackButton" destination="dE5-MO-YyE" id="46V-rx-z0j"/>
+                        <outlet property="CopyButton" destination="F7x-do-eup" id="Lr1-lf-lri"/>
                         <outlet property="DarkBackground" destination="c4t-Dd-fsp" id="baZ-Wh-kLC"/>
-                        <outlet property="WinningAverageLabel" destination="DjD-aj-bOl" id="ace-kt-TD1"/>
                         <segue destination="Icw-Z7-67k" kind="presentation" identifier="returnToStats" animates="NO" modalPresentationStyle="fullScreen" id="AZA-lg-qSK"/>
                     </connections>
                 </viewController>
@@ -2778,6 +2788,9 @@ Cg
                                 <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="BestAverageClicked:" destination="lUl-29-EXG" eventType="touchUpInside" id="SKx-Qd-eUq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhD-pj-uhA">
                                 <rect key="frame" x="294" y="484" width="100" height="30"/>
@@ -3067,7 +3080,7 @@ Cg
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="PT0-Cd-KDT"/>
+        <segue reference="AZA-lg-qSK"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="GaussianCurve" width="1116" height="462"/>
@@ -3077,6 +3090,7 @@ Cg
         <image name="logo" width="1000" height="1000"/>
         <image name="mic.slash.fill" catalog="system" width="112" height="128"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>
+        <image name="rectangle.on.rectangle" catalog="system" width="128" height="98"/>
         <image name="settings" width="29" height="29"/>
         <image name="sizedTarget" width="48.666667938232422" height="52.666667938232422"/>
         <image name="stats" width="33.666667938232422" height="33.666667938232422"/>
