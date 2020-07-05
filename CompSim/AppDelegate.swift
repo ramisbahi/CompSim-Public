@@ -24,6 +24,7 @@ extension UIDevice {
     }
 }
 
+
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -49,6 +50,18 @@ extension UIDevice {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
+        
+        UITabBarItem.appearance()
+        .setTitleTextAttributes(
+            [NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: 10)!],
+        for: .normal)
+        
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.init(displayP3Red: 0/255, green: 51/255, blue: 89/255, alpha: 0.7)
+        UIPageControl.appearance().pageIndicatorTintColor =
+            UIColor.init(displayP3Red: 196/255, green: 196/255, blue: 196/255, alpha: 1.0)
+        
+
+        
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).

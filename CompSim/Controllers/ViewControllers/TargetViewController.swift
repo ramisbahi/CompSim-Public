@@ -302,33 +302,6 @@ class TargetViewController: UIViewController {
         updateHeights()
     }
     
-    // time is hundredths (i.e. 249 for 2.49)
-    // returns string for thousdandth (2.490)
-    func timeToThous(time: Double) -> String
-    {
-        let num = Int(time * 1000 + 0.5)
-        let stringNum: String = String(num)
-
-        var beforeDecimal = ""
-        var afterDecimal = ""
-        
-        if(num < 1000)
-        {
-            beforeDecimal = "0"
-        }
-        
-        if(stringNum.count >= 3)
-        {
-            beforeDecimal = String(stringNum.prefix(max(stringNum.count - 3, 0)))
-        }
-        else
-        {
-            afterDecimal = "0"
-        }
-        afterDecimal += String(stringNum.suffix(3))
-        return beforeDecimal + "." + afterDecimal
-    }
-    
     func makeDarkMode()
     {
 

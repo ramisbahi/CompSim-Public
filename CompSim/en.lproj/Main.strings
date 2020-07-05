@@ -6,7 +6,7 @@
 "0ae-Fd-NOJ.segmentTitles[1]" = "Public";
 
 /* Class = "UILabel"; text = "Solve Type"; ObjectID = "0mn-7A-bip"; */
-"0mn-7A-bip.text" = "Solve Type";
+"0mn-7A-bip.text" = "SOLVE TYPE:";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "128-wP-cbk"; */
 "128-wP-cbk.normalTitle" = "Submit";
@@ -24,19 +24,19 @@
 "3wn-p8-k6S.normalTitle" = "5x5x5";
 
 /* Class = "UISegmentedControl"; 42Y-ms-qTs.segmentTitles[0] = "Average of 5"; ObjectID = "42Y-ms-qTs"; */
-"42Y-ms-qTs.segmentTitles[0]" = "Average of 5";
+"42Y-ms-qTs.segmentTitles[0]" = "AVG OF 5";
 
 /* Class = "UISegmentedControl"; 42Y-ms-qTs.segmentTitles[1] = "Mean of 3"; ObjectID = "42Y-ms-qTs"; */
-"42Y-ms-qTs.segmentTitles[1]" = "Mean of 3";
+"42Y-ms-qTs.segmentTitles[1]" = "MEAN OF 3";
 
 /* Class = "UISegmentedControl"; 42Y-ms-qTs.segmentTitles[2] = "Best of 3"; ObjectID = "42Y-ms-qTs"; */
-"42Y-ms-qTs.segmentTitles[2]" = "Best of 3";
+"42Y-ms-qTs.segmentTitles[2]" = "BEST OF 3";
 
 /* Class = "UIButton"; normalTitle = "Force Next Scramble"; ObjectID = "471-OX-PH8"; */
 "471-OX-PH8.normalTitle" = "Force Next Scramble";
 
 /* Class = "UILabel"; text = "Solve Type"; ObjectID = "4Qi-vq-Ya9"; */
-"4Qi-vq-Ya9.text" = "Solve Type";
+"4Qi-vq-Ya9.text" = "SOLVE TYPE";
 
 /* Class = "UIButton"; normalTitle = "Event: 3x3x3"; ObjectID = "55d-02-MIz"; */
 "55d-02-MIz.normalTitle" = "Event: 3x3x3";
@@ -48,13 +48,13 @@
 "6Qz-xP-iB7.text" = "1.59";
 
 /* Class = "UILabel"; text = "WCA Inspection"; ObjectID = "6uq-uX-5mP"; */
-"6uq-uX-5mP.text" = "WCA Inspection";
+"6uq-uX-5mP.text" = "WCA INSPECTION:";
 
 /* Class = "UILabel"; text = "Wins"; ObjectID = "7Fz-UQ-Nfy"; */
 "7Fz-UQ-Nfy.text" = "Wins";
 
 /* Class = "UILabel"; text = "Inspection Voice"; ObjectID = "7Lm-QJ-n9i"; */
-"7Lm-QJ-n9i.text" = "Inspection Voice";
+"7Lm-QJ-n9i.text" = "INSPECTION VOICE:";
 
 /* Class = "UIButton"; normalTitle = "Lucas Etter"; ObjectID = "84q-54-Z7O"; */
 "84q-54-Z7O.normalTitle" = "Lucas Etter";
@@ -195,7 +195,7 @@
 "QyJ-aL-dKn.normalTitle" = "Submit";
 
 /* Class = "UILabel"; text = "Dark Mode"; ObjectID = "R04-Tx-5Ya"; */
-"R04-Tx-5Ya.text" = "Dark Mode";
+"R04-Tx-5Ya.text" = "DARK MODE:";
 
 /* Class = "UILabel"; text = "1.59"; ObjectID = "R8R-vt-M3N"; */
 "R8R-vt-M3N.text" = "1.59";
@@ -264,13 +264,13 @@
 "cfa-yl-JQD.text" = "1.59";
 
 /* Class = "UISegmentedControl"; dA4-04-9zH.segmentTitles[0] = "Average of 5"; ObjectID = "dA4-04-9zH"; */
-"dA4-04-9zH.segmentTitles[0]" = "Average of 5";
+"dA4-04-9zH.segmentTitles[0]" = "AVG OF 5";
 
 /* Class = "UISegmentedControl"; dA4-04-9zH.segmentTitles[1] = "Mean of 3"; ObjectID = "dA4-04-9zH"; */
-"dA4-04-9zH.segmentTitles[1]" = "Mean of 3";
+"dA4-04-9zH.segmentTitles[1]" = "MEAN OF 3";
 
 /* Class = "UISegmentedControl"; dA4-04-9zH.segmentTitles[2] = "Best of 3"; ObjectID = "dA4-04-9zH"; */
-"dA4-04-9zH.segmentTitles[2]" = "Best of 3";
+"dA4-04-9zH.segmentTitles[2]" = "BEST OF 3";
 
 /* Class = "UIButton"; normalTitle = " Stats"; ObjectID = "dE5-MO-YyE"; */
 "dE5-MO-YyE.normalTitle" = " Stats";
@@ -279,10 +279,10 @@
 "dGH-rV-lmj.text" = "Player";
 
 /* Class = "UILabel"; text = "Timing"; ObjectID = "dIR-c7-qh2"; */
-"dIR-c7-qh2.text" = "Timing";
+"dIR-c7-qh2.text" = "TIMING:";
 
 /* Class = "UIButton"; normalTitle = " Reset"; ObjectID = "dT7-pR-N0g"; */
-"dT7-pR-N0g.normalTitle" = " Reset";
+"dT7-pR-N0g.normalTitle" = " RESET";
 
 /* Class = "UIButton"; normalTitle = "Scramble Type: 3x3x3"; ObjectID = "dY5-wq-uM6"; */
 "dY5-wq-uM6.normalTitle" = "Scramble Type: 3x3x3";
@@ -294,7 +294,7 @@
 "eLU-vY-iiZ.normalTitle" = "6x6x6";
 
 /* Class = "UILabel"; text = "Holding Time: 0.3 "; ObjectID = "ePi-pz-Za3"; */
-"ePi-pz-Za3.text" = "Holding Time: 0.3 ";
+"ePi-pz-Za3.text" = "HOLDING TIME: 0.3 ";
 
 /* Class = "UIButton"; normalTitle = "Random"; ObjectID = "gh6-AO-aXv"; */
 "gh6-AO-aXv.normalTitle" = "Random";
@@ -321,7 +321,7 @@
 "jT1-YK-Ex7.normalTitle" = "CompSim";
 
 /* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "kLt-ZZ-r74"; */
-"kLt-ZZ-r74.normalTitle" = "Reset";
+"kLt-ZZ-r74.normalTitle" = "RESET";
 
 /* Class = "UILabel"; text = "1.59"; ObjectID = "kcn-Vc-vLi"; */
 "kcn-Vc-vLi.text" = "1.59";
@@ -369,7 +369,7 @@
 "u52-Im-qhw.normalTitle" = "Skewb";
 
 /* Class = "UILabel"; text = "Timer Update"; ObjectID = "uwH-WR-wfc"; */
-"uwH-WR-wfc.text" = "TIMER UPDATE";
+"uwH-WR-wfc.text" = "TIMER UPDATE:";
 
 /* Class = "UISegmentedControl"; vag-Sx-mn2.segmentTitles[0] = "DNF"; ObjectID = "vag-Sx-mn2"; */
 "vag-Sx-mn2.segmentTitles[0]" = "DNF";

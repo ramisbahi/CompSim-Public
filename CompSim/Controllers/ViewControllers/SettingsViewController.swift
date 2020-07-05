@@ -319,6 +319,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     var timer = Timer()
     var characteristics = [String : CBCharacteristic]()
     
+    @IBOutlet weak var WhiteLine: UIView!
     @IBOutlet weak var baseTableView: UITableView!
     
     @IBOutlet weak var DarkModeLabel: UILabel!
@@ -480,11 +481,11 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         ScrollView.backgroundColor = HomeViewController.darkModeColor()
         TopButtons.forEach{ (button) in
         
-            button.backgroundColor = UIColor.darkGray
+            //button.backgroundColor = UIColor.darkGray
         }
         TopLabels.forEach{ (label) in
         
-            label.backgroundColor = UIColor.darkGray
+            //label.backgroundColor = UIColor.darkGray
         }
         
         
@@ -518,10 +519,10 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         ScrollView.backgroundColor = .white
         TopButtons.forEach{ (button) in
         
-            button.backgroundColor = HomeViewController.darkBlueColor()
+            //button.backgroundColor = HomeViewController.darkBlueColor()
         }
         TopLabels.forEach{ (label) in
-            label.backgroundColor = HomeViewController.darkBlueColor()
+            //label.backgroundColor = HomeViewController.darkBlueColor()
         }
         
         VersionLabel.textColor = .black
@@ -531,8 +532,12 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     
     
-    @IBAction func handleSelection(_ sender: UIButton) // clicked select
+    @IBAction func handleSelection(_ sender: UIButton) // select
     {
+        if #available(iOS 13.0, *) {
+            ScrambleTypeButton.setImage(UIImage(systemName: eventCollection[0].isHidden ? "chevron.down" : "chevron.right"), for: .normal)
+        }
+        
         eventCollection.forEach { (button) in
             UIView.animate(withDuration: 0.3, animations: {
                 button.isHidden = !button.isHidden
@@ -542,7 +547,9 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     }
     
     @IBAction func handleCuberSelection(_ sender: Any) {
-        
+        if #available(iOS 13.0, *) {
+            CuberButton.setImage(UIImage(systemName: cuberCollection[0].isHidden ? "chevron.down" : "chevron.right"), for: .normal)
+        }
         cuberCollection.forEach { (button) in
             UIView.animate(withDuration: 0.3, animations: {
                 button.isHidden = !button.isHidden
@@ -551,8 +558,15 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        ScrambleTypeButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: LittleView.frame.size.width - 53, bottom: 0, right: 0)
+        CuberButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: LittleView.frame.size.width - 53, bottom: 0, right: 0)
+    }
+    
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
     {
+        
+        
         self.baseTableView.delegate = self
         self.baseTableView.dataSource = self
         if HomeViewController.timing == 2
@@ -582,7 +596,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         
         for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
         {
-            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Futura", size: 13)!], for: .normal)
+            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: 14)!], for: .normal)
         }
         
         TimingControl.selectedSegmentIndex = HomeViewController.timing
@@ -620,6 +634,17 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             HomeViewController.cuber = "Rami"
         }
         CuberButton.setTitle("\(cuber): \(cuberDictionary[HomeViewController.cuber]!)", for: .normal)
+        cuberCollection.forEach({ button in
+                if button.titleLabel?.text == HomeViewController.cuber
+                {
+                    button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
+                }
+                /*else
+                {
+                    button.setTitleColor(.white, for: .normal)
+                }*/
+            }
+        )
         
         HoldingTimeSlider.value = HomeViewController.holdingTime
         let holdingTime = NSLocalizedString("Holding Time", comment: "")
@@ -630,7 +655,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         WebsiteButton.setTitle(NSLocalizedString("Website", comment: ""), for: .normal)
         EmailButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)
         VersionLabel.text = NSLocalizedString("Version", comment: "") + ": \(appVersion)"
-        
+        VersionLabel.textColor = HomeViewController.darkBlueColor()
         super.viewDidLoad()
         
         
@@ -644,11 +669,18 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         let scrType = NSLocalizedString("Scramble Type", comment: "")
         ScrambleTypeButton.setTitle("\(scrType): \(title)", for: .normal)
         
-        
-        
         super.viewWillAppear(false)
         eventCollection.forEach { (button) in
             button.isHidden = true
+            if button.titleLabel?.text == title
+            {
+                button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
+            }
+                /*
+            else
+            {
+                button.setTitleColor(.white, for: .normal)
+            }*/
         }
         
         
@@ -699,6 +731,17 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     @IBAction func cuberTapped(_ sender: UIButton) {
         
+        if #available(iOS 13.0, *) {
+            CuberButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        }
+        
+        
+        cuberCollection.forEach { (button) in
+            button.setTitleColor(.white, for: .normal)
+        }
+        
+        sender.setTitleColor(HomeViewController.orangeColor(), for: .normal)
+        
         cuberCollection.forEach { (button) in
             UIView.animate(withDuration: 0.3, animations: {
                 button.isHidden = !button.isHidden
@@ -720,6 +763,17 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     
     @IBAction func eventTapped(_ sender: UIButton) {
+        
+        if #available(iOS 13.0, *) {
+            ScrambleTypeButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        }
+        
+        
+        eventCollection.forEach { (button) in
+            button.setTitleColor(.white, for: .normal)
+        }
+        
+        sender.setTitleColor(HomeViewController.orangeColor(), for: .normal)
         
         eventCollection.forEach { (button) in
             UIView.animate(withDuration: 0.3, animations: {

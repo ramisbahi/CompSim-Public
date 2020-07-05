@@ -24,13 +24,53 @@ extension String {
     }
 }
 
-class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
+extension HomeViewController: UIPageViewControllerDelegate
+{
+   
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        print("current page index \(currentPageIndex)")
+        return currentPageIndex
+    }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return 2
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        if #available(iOS 13.0, *), viewController is DrawScrambleViewController
+        {
+            let scrambleViewController =  storyboard?.instantiateViewController(identifier: String(describing: ScrambleViewController.self)) as? ScrambleViewController
+            scrambleViewController?.scrambleText = HomeViewController.mySession.getCurrentScramble()
+            return scrambleViewController
+        }
+        else
+        {
+            return nil
+        }
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
+    {
+        if #available(iOS 13.0, *), viewController is ScrambleViewController
+        {
+            return storyboard?.instantiateViewController(identifier: String(describing: DrawScrambleViewController.self)) as? DrawScrambleViewController
+        }
+        else
+        {
+            return nil
+        }
+    }
+    
+}
+
+class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageViewControllerDataSource {
     @IBOutlet var BigView: UIView!
     
     @IBOutlet weak var ScrambleArea: UIView!
     @IBOutlet weak var GestureArea: UIView!
     
-    @IBOutlet weak var DrawScrambleView: UIView!
+
     
     @IBOutlet weak var Time1: UIButton!
     @IBOutlet weak var Time2: UIButton!
@@ -44,10 +84,10 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     @IBOutlet var TimesCollection: [UIButton]!
     
-    @IBOutlet weak var ScrambleLabel: UILabel!
-    
     @IBOutlet weak var TimerLabel: UILabel!
     // (roundNumber - 1) * 5 + currentIndex = total solve index (starts at 0)
+    
+    @IBOutlet weak var ScrambleContentView: UIView!
     
     @IBOutlet weak var MicButton: UIButton!
     
@@ -55,11 +95,15 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     static var scrambleChanged = false
     
+    var currentPageIndex = 0
+    
     var labels = [UIButton]()
     
     var peripheralManager: CBPeripheralManager?
     
     // settings stuff
+    
+    @IBOutlet weak var TargetLabel: UIButton!
     
     static var darkMode = false
     static var changedDarkMode = false
@@ -116,7 +160,11 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     }
     
     override func viewDidLayoutSubviews() {
-        HelpButton.layer.cornerRadius = HelpButton.frame.size.height / 2.0
+        super.viewDidLayoutSubviews()
+        
+
+        
+        HelpButton.layer.cornerRadius = HelpButton.frame.size.height / 3.5
         
         var stringSize = NewScrambleButton.titleLabel?.intrinsicContentSize.width
         NewScrambleButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
@@ -126,11 +174,22 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
             stringSize = NewScrambleButton.titleLabel?.intrinsicContentSize.width
             NewScrambleButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
         }
+        
+        ScrambleContentView.layer.cornerRadius = 6.0
+        
+        ScrambleContentView.layer.borderWidth = 1
+        ScrambleContentView.layer.borderColor = HomeViewController.darkBlueColor().cgColor
+        
+        
+ 
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        configurePageViewController()
+        
         // Do any additional setup after loading the view.
         print("loaded, going to set peripheral manager")
         
@@ -189,8 +248,56 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         TimesCollection.forEach{(button) in
             button.titleLabel?.font = HomeViewController.font
         }
-        ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
+        //ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
         TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
+    }
+    
+    func configurePageViewController()
+    {
+        guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: String(describing: ScramblePageViewController.self)) as? ScramblePageViewController else
+        {
+            return
+        }
+    
+        
+        pageViewController.delegate = self
+        pageViewController.dataSource = self
+        
+        addChild(pageViewController)
+        pageViewController.didMove(toParent: self)
+        
+        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        ScrambleContentView.addSubview(pageViewController.view)
+        
+        let views: [String : Any] = ["pageView" : pageViewController.view as Any]
+
+        ScrambleContentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[pageView]-10-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
+    
+        
+        ScrambleContentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[pageView]-(-10)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
+ 
+
+        
+        if #available(iOS 13.0, *)
+        {
+            guard let scrambleViewController =
+                storyboard?.instantiateViewController(identifier: String(describing: ScrambleViewController.self)) as? ScrambleViewController
+            else
+            {
+                return
+            }
+            
+            scrambleViewController.scrambleText = HomeViewController.mySession.getCurrentScramble()
+            pageViewController.setViewControllers([scrambleViewController], direction: .forward, animated: true)
+        }
+        else
+        {
+            return
+        }
+        
+        
     }
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
@@ -386,6 +493,44 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
        self.navigationController?.pushViewController(obj, animated: true)
     }
     
+    @IBAction func TargetPressed(_ sender: Any) {
+     
+        let alertService = AlertService()
+        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""), usingPenalty: false, keyboardType: 0, myTitle: NSLocalizedString("Target Time", comment: ""),
+                                       completion: {
+            
+            let inputTime = alertService.myVC.TextField.text!
+            
+            if HomeViewController.validEntryTime(time: inputTime)
+            {
+               let temp = SolveTime(enteredTime: inputTime, scramble: "")
+               let str = temp.myString
+               let intTime = temp.intTime
+               
+                self.TargetLabel.setTitle("  " + str, for: .normal) // set title to string version
+               try! self.realm.write
+               {
+                   HomeViewController.mySession.singleTime = intTime
+               }
+            }
+            else
+            {
+                self.alertValidTime()
+            }
+        })
+        
+        self.present(alert, animated: true)
+    }
+    
+    func alertValidTime()
+    {
+        let alertService = NotificationAlertService()
+        let alert = alertService.alert(myTitle: NSLocalizedString("Invalid Time", comment: ""))
+        self.present(alert, animated: true, completion: nil)
+        // ask again - no input
+    }
+    
+    
     override func viewWillLayoutSubviews() {
         let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
         ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
@@ -394,6 +539,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(false)
+        TargetLabel.setTitle("  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))", for: .normal)
+        
         if(HomeViewController.changedDarkMode) // changed it - only have to do this once when changed
         {
             HomeViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
@@ -404,12 +551,13 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         {
             updateLabels()
             HomeViewController.mySession.scrambler.genScramble()
-            ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+            
+            //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
             HomeViewController.sessionChanged = false
         }
         else
         {
-            ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+            //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
         }
         HomeViewController.timerPhase = self.IDLE
         
@@ -458,22 +606,12 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
         GestureArea.addGestureRecognizer(tap)
         
+        /*
         let tapScramble = UITapGestureRecognizer(target: self, action: #selector(scrambleTapped(gesture:)))
         ScrambleArea.addGestureRecognizer(tapScramble)
+ */
     }
     
-    @objc func scrambleTapped(gesture: UIGestureRecognizer)
-    {
-        if(HomeViewController.mySession.scrambler.myEvent == 1)
-        {
-            DrawScrambleView.isHidden = !DrawScrambleView.isHidden
-        }
-        else
-        {
-            DrawScrambleView.isHidden = true
-            self.respondToGesture(gesture: gesture)
-        }
-    }
     
     @objc func handleLongPress(sender: UIGestureRecognizer)
     {
@@ -541,7 +679,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         TimesCollection.forEach{ (button) in
             button.isHidden = true
         }
-        ScrambleLabel.isHidden = true
+        //ScrambleLabel.isHidden = true
         
     }
     
@@ -549,7 +687,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     {
         //print("showing all")
         updateLabels()
-        ScrambleLabel.isHidden = false
+        //ScrambleLabel.isHidden = false
         //TODO: show everything that should show
     }
     
@@ -586,7 +724,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     @IBAction func newScramblePressed(_ sender: Any) {
         HomeViewController.mySession.scrambler.genScramble()
-        ScrambleLabel.text = HomeViewController.mySession.scrambler.currentScramble
+        //ScrambleLabel.text = HomeViewController.mySession.scrambler.currentScramble
     }
     
     func usingLongPress() -> Bool
@@ -600,7 +738,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         {
             HomeViewController.mySession.reset()
         }
-        ScrambleLabel.text = String(HomeViewController.mySession.getCurrentScramble()) // next scramble
+        //ScrambleLabel.text = String(HomeViewController.mySession.getCurrentScramble()) // next scramble
         updateLabels()
     }
     
@@ -654,7 +792,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
             {
                 HomeViewController.mySession.deleteSolve()
             }
-            self.ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+            //self.ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
             self.updateLabels()
         })
         
@@ -702,7 +840,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         {
             HomeViewController.mySession.addSolve(time: enteredTime, penalty: penalty)
         }
-        ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble() // change scramble
+        //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble() // change scramble
         
         updateLabels()
     }
@@ -715,7 +853,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         }
         
         
-        ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble() // change scramble
+        //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble() // change scramble
         
         updateLabels()
         
@@ -748,7 +886,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         }
         else
         {
-            ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble() // change scramble
+            //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble() // change scramble
             Logo.isHidden = true
         }
         
@@ -805,7 +943,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         BigView.backgroundColor = HomeViewController.darkModeColor()
         ScrambleArea.backgroundColor = HomeViewController.darkModeColor()
         GestureArea.backgroundColor = HomeViewController.darkModeColor()
-        ScrambleLabel.textColor? = UIColor.white
+        //ScrambleLabel.textColor? = UIColor.white
         TimesCollection.forEach { (button) in
             button.setTitleColor(.white, for: .disabled)
             button.setTitleColor(HomeViewController.orangeColor(), for: .normal) // orange
@@ -839,7 +977,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
         ScrambleArea.backgroundColor = .white
         GestureArea.backgroundColor = .white
         BigView.backgroundColor = .white
-        ScrambleLabel.textColor = UIColor.black
+        //ScrambleLabel.textColor = UIColor.black
         TimesCollection.forEach { (button) in
             button.setTitleColor(.black, for: .disabled)
             if #available(iOS 13.0, *) {
@@ -902,7 +1040,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate {
     
     static func darkBlueColor() -> UIColor
     {
-        return UIColor.init(displayP3Red: 8/255, green: 4/255, blue: 68/255, alpha: 1)
+        return UIColor.init(displayP3Red: 0/255, green: 51/255, blue: 89/255, alpha: 1)
     }
     
     static func greenColor() -> UIColor
