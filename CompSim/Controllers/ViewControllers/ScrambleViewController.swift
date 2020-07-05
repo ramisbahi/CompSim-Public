@@ -15,10 +15,14 @@ class ScrambleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         scrambleLabel.text = scrambleText
 
         // Do any additional setup after loading the view.
+    }
+    
+    func updateScrambleLabel(scramble: String)
+    {
+        scrambleLabel.text = scramble
     }
     
 

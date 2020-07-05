@@ -67,7 +67,6 @@ extension HomeViewController: UIPageViewControllerDelegate
 class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageViewControllerDataSource {
     @IBOutlet var BigView: UIView!
     
-    @IBOutlet weak var ScrambleArea: UIView!
     @IBOutlet weak var GestureArea: UIView!
     
 
@@ -143,6 +142,9 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     var holdStartTime: UInt64 = 0
     
     var observer: NSObjectProtocol?
+    
+    var myPageViewController: ScramblePageViewController?
+    var myScrambleViewController: ScrambleViewController?
     
     struct Keys
     {
@@ -263,22 +265,28 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         pageViewController.delegate = self
         pageViewController.dataSource = self
         
-        addChild(pageViewController)
+        self.addChild(pageViewController)
         pageViewController.didMove(toParent: self)
         
         pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
+        pageViewController.view.layer.position.y = -10.0
         
         ScrambleContentView.addSubview(pageViewController.view)
         
         let views: [String : Any] = ["pageView" : pageViewController.view as Any]
 
-        ScrambleContentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[pageView]-10-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
+        ScrambleContentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[pageView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
     
+        let topShift = BigView.frame.size.height * 3.0 / 65.0
+        let bottomShift = -1 * BigView.frame.size.height / 65.0
         
-        ScrambleContentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[pageView]-(-10)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
+        let verticalConstraint = "V:|-\(topShift)-[pageView]-(\(bottomShift))-|"
+        
+        print("vertical constraint " + verticalConstraint)
+        
+        ScrambleContentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: verticalConstraint, options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
  
-
+        
         
         if #available(iOS 13.0, *)
         {
@@ -291,6 +299,9 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
             
             scrambleViewController.scrambleText = HomeViewController.mySession.getCurrentScramble()
             pageViewController.setViewControllers([scrambleViewController], direction: .forward, animated: true)
+            
+            self.myPageViewController = pageViewController
+            self.myScrambleViewController = scrambleViewController
         }
         else
         {
@@ -551,14 +562,11 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         {
             updateLabels()
             HomeViewController.mySession.scrambler.genScramble()
-            
-            //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
             HomeViewController.sessionChanged = false
         }
-        else
-        {
-            //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
-        }
+        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
+        
+        
         HomeViewController.timerPhase = self.IDLE
         
         if(usingLongPress())
@@ -606,10 +614,10 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
         GestureArea.addGestureRecognizer(tap)
         
-        /*
+        
         let tapScramble = UITapGestureRecognizer(target: self, action: #selector(scrambleTapped(gesture:)))
-        ScrambleArea.addGestureRecognizer(tapScramble)
- */
+        ScrambleContentView.addGestureRecognizer(tapScramble)
+ 
     }
     
     
@@ -679,7 +687,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         TimesCollection.forEach{ (button) in
             button.isHidden = true
         }
-        //ScrambleLabel.isHidden = true
+        ScrambleContentView.isHidden = true
         
     }
     
@@ -687,7 +695,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     {
         //print("showing all")
         updateLabels()
-        //ScrambleLabel.isHidden = false
+        ScrambleContentView.isHidden = false
         //TODO: show everything that should show
     }
     
@@ -724,7 +732,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     
     @IBAction func newScramblePressed(_ sender: Any) {
         HomeViewController.mySession.scrambler.genScramble()
-        //ScrambleLabel.text = HomeViewController.mySession.scrambler.currentScramble
+        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
     }
     
     func usingLongPress() -> Bool
@@ -738,7 +746,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         {
             HomeViewController.mySession.reset()
         }
-        //ScrambleLabel.text = String(HomeViewController.mySession.getCurrentScramble()) // next scramble
         updateLabels()
     }
     
@@ -792,7 +799,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
             {
                 HomeViewController.mySession.deleteSolve()
             }
-            //self.ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+            self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
             self.updateLabels()
         })
         
@@ -840,7 +847,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         {
             HomeViewController.mySession.addSolve(time: enteredTime, penalty: penalty)
         }
-        //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble() // change scramble
+        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
         
         updateLabels()
     }
@@ -853,7 +860,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         }
         
         
-        //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble() // change scramble
+        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
         
         updateLabels()
         
@@ -886,7 +893,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         }
         else
         {
-            //ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble() // change scramble
+            self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
             Logo.isHidden = true
         }
         
@@ -941,7 +948,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     func makeDarkMode()
     {
         BigView.backgroundColor = HomeViewController.darkModeColor()
-        ScrambleArea.backgroundColor = HomeViewController.darkModeColor()
         GestureArea.backgroundColor = HomeViewController.darkModeColor()
         //ScrambleLabel.textColor? = UIColor.white
         TimesCollection.forEach { (button) in
@@ -974,7 +980,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     
     func turnOffDarkMode()
     {
-        ScrambleArea.backgroundColor = .white
         GestureArea.backgroundColor = .white
         BigView.backgroundColor = .white
         //ScrambleLabel.textColor = UIColor.black
