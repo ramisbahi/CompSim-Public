@@ -630,24 +630,25 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             InspectionVoiceAlertsControl.selectedSegmentIndex = 1
         }
         
-        let cuber = NSLocalizedString("Cuber", comment: "")
+        
         if(HomeViewController.cuber == "Malik")
         {
             HomeViewController.cuber = "Rami"
         }
-        CuberButton.setTitle("\(cuber): \(cuberDictionary[HomeViewController.cuber]!)", for: .normal)
-        cuberCollection.forEach({ button in
-                if button.titleLabel?.text == HomeViewController.cuber
-                {
-                    button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
-                }
-                /*else
-                {
-                    button.setTitleColor(.white, for: .normal)
-                }*/
-            }
-        )
         
+        let title = HomeViewController.cuber
+        let cuber = NSLocalizedString("Cuber", comment: "")
+        let cuberString = NSMutableAttributedString(string: "\(cuber):  \(title)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        cuberString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: cuber.count + 1, length: cuberString.length - cuber.count - 1))
+        CuberButton.setAttributedTitle(cuberString, for: .normal)
+        
+        cuberCollection.forEach({ button in
+            if button.titleLabel?.text == HomeViewController.cuber
+            {
+                button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
+            }
+        })
+    
         HoldingTimeSlider.value = HomeViewController.holdingTime
         let holdingTime = NSLocalizedString("Holding Time", comment: "")
         HoldingTimeLabel.text = String(format: "\(holdingTime): %.2f", HomeViewController.holdingTime)
@@ -669,7 +670,9 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         let eventNames = ["2x2x2", "3x3x3", "4x4x4", "5x5x5", "6x6x6", "7x7x7", "Pyraminx", "Megaminx", "Square-1", "Skewb", "Clock", "3x3x3 BLD"]
         let title = eventNames[HomeViewController.mySession.scrambler.myEvent]
         let scrType = NSLocalizedString("Scramble Type", comment: "")
-        ScrambleTypeButton.setTitle("\(scrType): \(title)", for: .normal)
+        let scrString = NSMutableAttributedString(string: "\(scrType):  \(title)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        scrString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: scrType.count + 1, length: scrString.length - scrType.count - 1))
+        ScrambleTypeButton.setAttributedTitle(scrString, for: .normal)
         
         super.viewWillAppear(false)
         
@@ -680,11 +683,10 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             {
                 button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
             }
-                /*
             else
             {
                 button.setTitleColor(.white, for: .normal)
-            }*/
+            }
         }
         
         
@@ -764,7 +766,9 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         
         let cuber = NSLocalizedString("Cuber", comment: "")
-        CuberButton.setTitle("\(cuber): \(title)", for: .normal)
+        let cuberString = NSMutableAttributedString(string: "\(cuber):  \(title)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        cuberString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: cuber.count + 1, length: cuberString.length - cuber.count - 1))
+        CuberButton.setAttributedTitle(cuberString, for: .normal)
         
         let nameArr = title.components(separatedBy: " ")
         HomeViewController.cuber = nameArr[0]
@@ -797,7 +801,9 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         
         let scrType = NSLocalizedString("Scramble Type", comment: "")
-        ScrambleTypeButton.setTitle("\(scrType): \(title)", for: .normal)
+        let scrString = NSMutableAttributedString(string: "\(scrType):  \(title)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        scrString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: scrType.count + 1, length: scrString.length - scrType.count - 1))
+        ScrambleTypeButton.setAttributedTitle(scrString, for: .normal)
         
         try! realm.write
         {

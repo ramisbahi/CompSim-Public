@@ -1036,13 +1036,13 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLh-LP-07j">
-                                <rect key="frame" x="10" y="54" width="70.333333333333329" height="35"/>
+                                <rect key="frame" x="282.33333333333331" y="44" width="41.333333333333314" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="9qy-dm-nBl"/>
+                                    <constraint firstAttribute="height" constant="30" id="9qy-dm-nBl"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="titleEdgeInsets" minX="1" minY="0.0" maxX="1" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="plus.circle" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19"/>
@@ -1065,7 +1065,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bzo-ww-sW1"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                         <state key="normal" title="3x3x3">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1105,19 +1105,19 @@
                             <constraint firstItem="VYU-3Y-Wca" firstAttribute="bottom" secondItem="xr8-T2-eEg" secondAttribute="bottom" id="CoJ-Yh-wqF"/>
                             <constraint firstItem="VYU-3Y-Wca" firstAttribute="trailing" secondItem="kLt-ZZ-r74" secondAttribute="trailing" constant="10" id="Lrb-hQ-YyH"/>
                             <constraint firstItem="VYU-3Y-Wca" firstAttribute="trailing" secondItem="wIu-c4-TJb" secondAttribute="trailing" id="OwA-B6-eRj"/>
-                            <constraint firstItem="SLh-LP-07j" firstAttribute="leading" secondItem="VYU-3Y-Wca" secondAttribute="leading" constant="10" id="PUq-Ch-jSc"/>
                             <constraint firstItem="SYS-AT-ZdR" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" id="Qsq-Yh-xCh"/>
                             <constraint firstItem="SYS-AT-ZdR" firstAttribute="width" secondItem="M4I-BC-dr8" secondAttribute="width" multiplier="0.5" id="Quv-Yq-qKa"/>
                             <constraint firstItem="wIu-c4-TJb" firstAttribute="top" secondItem="M4I-BC-dr8" secondAttribute="top" id="Si6-YT-DzM"/>
-                            <constraint firstItem="SLh-LP-07j" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" constant="10" id="XMl-Kd-9HI"/>
+                            <constraint firstItem="SLh-LP-07j" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" id="XMl-Kd-9HI"/>
                             <constraint firstItem="xr8-T2-eEg" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" constant="60" id="bLq-f3-XQ3"/>
-                            <constraint firstItem="SLh-LP-07j" firstAttribute="width" secondItem="M4I-BC-dr8" secondAttribute="width" multiplier="0.17" id="hjy-bP-PiI"/>
+                            <constraint firstItem="SLh-LP-07j" firstAttribute="width" secondItem="M4I-BC-dr8" secondAttribute="width" multiplier="0.1" id="hjy-bP-PiI"/>
                             <constraint firstItem="kLt-ZZ-r74" firstAttribute="width" secondItem="M4I-BC-dr8" secondAttribute="width" multiplier="0.17" id="jWA-WU-VHk"/>
                             <constraint firstItem="VYU-3Y-Wca" firstAttribute="bottom" secondItem="wIu-c4-TJb" secondAttribute="bottom" id="m7a-ND-6Ko"/>
                             <constraint firstItem="Pdr-QI-A1P" firstAttribute="trailing" secondItem="SYS-AT-ZdR" secondAttribute="trailing" constant="-10" id="mQW-zu-JyK"/>
                             <constraint firstItem="kLt-ZZ-r74" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" id="ni6-4L-18t"/>
                             <constraint firstItem="wIu-c4-TJb" firstAttribute="leading" secondItem="VYU-3Y-Wca" secondAttribute="leading" id="q39-58-2Dm"/>
                             <constraint firstItem="Pdr-QI-A1P" firstAttribute="top" secondItem="VYU-3Y-Wca" secondAttribute="top" constant="6" id="wsP-ud-DtF"/>
+                            <constraint firstItem="kLt-ZZ-r74" firstAttribute="leading" secondItem="SLh-LP-07j" secondAttribute="trailing" constant="10" id="wzI-Tg-Koz"/>
                             <constraint firstAttribute="trailing" secondItem="xr8-T2-eEg" secondAttribute="trailing" id="zKJ-Yc-ABS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VYU-3Y-Wca"/>
@@ -1195,6 +1195,11 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="TargetPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0NR-un-db8"/>
                                         </connections>
@@ -1224,7 +1229,7 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3P-c9-dr7">
                                 <rect key="frame" x="192" y="260.66666666666669" width="30" height="62"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="100"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="100"/>
                                 <state key="disabled">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -1234,7 +1239,7 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7F-jU-2b1">
                                 <rect key="frame" x="192" y="322.66666666666669" width="30" height="61.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="100"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="100"/>
                                 <state key="disabled">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -1244,7 +1249,7 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUu-Ml-8x3">
                                 <rect key="frame" x="192" y="384.33333333333331" width="30" height="62"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="100"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="100"/>
                                 <state key="disabled">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -1254,7 +1259,7 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMw-Mu-qR6">
                                 <rect key="frame" x="192" y="446.33333333333331" width="30" height="61.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="100"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="100"/>
                                 <state key="disabled">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -1264,7 +1269,7 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0e-a9-1ER">
                                 <rect key="frame" x="192" y="508" width="30" height="62"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="100"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="100"/>
                                 <state key="disabled">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -1274,7 +1279,7 @@
                             </button>
                             <label hidden="YES" autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="wordWrap" minimumFontSize="79" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="94l-PH-qUv">
                                 <rect key="frame" x="0.0" y="274.66666666666669" width="414" height="137.66666666666669"/>
-                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="152"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="152"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -2270,10 +2275,6 @@ Cg
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Ff-PU-ZUX">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <color key="backgroundColor" red="0.1131800518" green="0.1131800518" blue="0.1131800518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target Average: 1.49" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhq-FN-tIS">
                                 <rect key="frame" x="0.0" y="220.66666666666666" width="414" height="41.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="32"/>
@@ -2282,7 +2283,10 @@ Cg
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2em-RB-Jye">
                                 <rect key="frame" x="192" y="267.33333333333331" width="30" height="66.333333333333314"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="47"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="Time1Touched:" destination="aUe-TH-pA1" eventType="touchUpInside" id="nqd-eY-dRo"/>
                                     <action selector="Time4Touched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="140-T8-npq"/>
@@ -2290,7 +2294,10 @@ Cg
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsx-oU-StS">
                                 <rect key="frame" x="192" y="401" width="30" height="93.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="47"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="Time2Touched:" destination="aUe-TH-pA1" eventType="touchUpInside" id="f6M-9N-J64"/>
                                     <action selector="Time2Touched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iL2-o1-vY3"/>
@@ -2298,7 +2305,10 @@ Cg
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZI-JG-3AW">
                                 <rect key="frame" x="192" y="401" width="30" height="93.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="47"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="Time3Touched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nus-GH-Vee"/>
                                     <action selector="Time3Touched:" destination="aUe-TH-pA1" eventType="touchUpInside" id="hAN-xa-imD"/>
@@ -2306,7 +2316,10 @@ Cg
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Off-7F-HIE">
                                 <rect key="frame" x="192" y="401" width="30" height="93.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="47"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="Time4Touched:" destination="aUe-TH-pA1" eventType="touchUpInside" id="Lw3-Zd-45k"/>
                                     <action selector="Time5Touched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UtC-Yo-wUp"/>
@@ -2314,7 +2327,10 @@ Cg
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzy-G9-9Q3">
                                 <rect key="frame" x="192" y="536" width="30" height="66"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="47"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="Time1Touched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hbj-TP-YGk"/>
                                     <action selector="Time5Touched:" destination="aUe-TH-pA1" eventType="touchUpInside" id="aAm-Pb-Nci"/>
@@ -2322,7 +2338,7 @@ Cg
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhR-M0-HcP">
                                 <rect key="frame" x="115.33333333333333" y="669.33333333333337" width="183.33333333333337" height="51.666666666666629"/>
-                                <color key="backgroundColor" red="0.031372549019607843" green="0.015686274509803921" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xhR-M0-HcP" secondAttribute="height" multiplier="32:9" priority="750" id="57Z-pn-BRu"/>
                                 </constraints>
@@ -2361,6 +2377,10 @@ Cg
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Ff-PU-ZUX">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.1131800518" green="0.1131800518" blue="0.1131800518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

@@ -243,14 +243,14 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         
         if(HomeViewController.font == nil) // not set yet
         {
-            HomeViewController.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.09, name: "Futura")
+            HomeViewController.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.09, name: "Lato-Black")
         }
         
         TimesCollection.forEach{(button) in
             button.titleLabel?.font = HomeViewController.font
         }
         //ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
-        TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
+        TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Lato-Regular")
     }
     
     func configurePageViewController()
@@ -1091,12 +1091,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         //ScrambleLabel.textColor = UIColor.black
         TimesCollection.forEach { (button) in
             button.setTitleColor(.black, for: .disabled)
-            if #available(iOS 13.0, *) {
-                button.setTitleColor(UIColor.link, for: .normal)
-            } else {
-                button.setTitleColor(UIColor(displayP3Red: 0, green: 122.0/255, blue: 1, alpha: 1.0), for: .normal)
-                // Fallback on earlier versions
-            } // link
+            button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
         }
         
         HelpButton.backgroundColor = HomeViewController.darkBlueColor()

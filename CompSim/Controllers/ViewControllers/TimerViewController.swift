@@ -71,7 +71,7 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Geeza Pro")
+        TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Lato-Regular")
         SubmitButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
         
         
