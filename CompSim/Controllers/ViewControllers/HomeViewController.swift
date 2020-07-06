@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import WebKit
 import RealmSwift
 import CoreBluetooth
+
+let jsURL = Bundle.main.url(forResource: "scramble-display.browser", withExtension: "js")
+let draw_events = ["222", "333", "444", "555", "666", "777", "pyram", "minx", "sq1", "skewb", "clock", "333bf"]
 
 extension String {
     /// stringToFind must be at least 1 character.
@@ -24,56 +28,14 @@ extension String {
     }
 }
 
-extension HomeViewController: UIPageViewControllerDelegate
+class HomeViewController: UIViewController, CBPeripheralManagerDelegate
 {
-   
-    
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        print("current page index \(currentPageIndex)")
-        return currentPageIndex
-    }
-    
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 2
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if #available(iOS 13.0, *), viewController is DrawScrambleViewController
-        {
-            let scrambleViewController =  storyboard?.instantiateViewController(identifier: String(describing: ScrambleViewController.self)) as? ScrambleViewController
-            scrambleViewController?.scrambleText = HomeViewController.mySession.getCurrentScramble()
-            return scrambleViewController
-        }
-        else
-        {
-            return nil
-        }
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
-    {
-        if #available(iOS 13.0, *), viewController is ScrambleViewController
-        {
-            let newVC =  storyboard?.instantiateViewController(identifier: String(describing: DrawScrambleViewController.self)) as? DrawScrambleViewController
-            
-            myDrawScrambleViewController = newVC
-            
-            return newVC
-        }
-        else
-        {
-            return nil
-        }
-    }
-    
-}
-
-class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageViewControllerDataSource {
     @IBOutlet var BigView: UIView!
     
     @IBOutlet weak var GestureArea: UIView!
     
-
+    @IBOutlet weak var webView: WKWebView!
+    
     @IBOutlet weak var SessionStackView: UIStackView!
     @IBOutlet weak var SessionButton: UIButton!
     var SessionCollection: [UIButton] = []
@@ -83,6 +45,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     @IBOutlet weak var Time3: UIButton!
     @IBOutlet weak var Time4: UIButton!
     @IBOutlet weak var Time5: UIButton!
+    
+    @IBOutlet weak var ScrambleLabel: UILabel!
     
     @IBOutlet weak var ResetButton: UIButton!
     @IBOutlet weak var HelpButton: UIButton!
@@ -116,7 +80,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     static var timing = 1
     static var inspection = true
     
-    static var cuber = NSLocalizedString("Random", comment: "")
+    static var cuber = NSLocalizedString("Random", comment: "") // holds first name of cuber
     
     static var holdingTime: Float = 0.55 
     
@@ -149,8 +113,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     
     var observer: NSObjectProtocol?
     
-    var myPageViewController: ScramblePageViewController?
-    var myScrambleViewController: ScrambleViewController?
     var myDrawScrambleViewController: DrawScrambleViewController?
     
     struct Keys
@@ -185,11 +147,29 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
  
     }
     
+    func disableWebZoom()
+    {
+        let source: String = """
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no';
+        var head = document.getElementsByTagName('head')[0];
+        head.appendChild(meta);
+        """
+        let zoomDisableScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+            
+        webView.configuration.userContentController.addUserScript(zoomDisableScript)
+        webView.scrollView.isScrollEnabled = false
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        configurePageViewController()
+        disableWebZoom()
+        updateDrawScramble()
+        
+        ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
         
         // Do any additional setup after loading the view.
         print("loaded, going to set peripheral manager")
@@ -251,63 +231,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         }
         //ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
         TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Lato-Regular")
-    }
-    
-    func configurePageViewController()
-    {
-        guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: String(describing: ScramblePageViewController.self)) as? ScramblePageViewController else
-        {
-            return
-        }
-    
-        
-        pageViewController.delegate = self
-        pageViewController.dataSource = self
-        
-        self.addChild(pageViewController)
-        pageViewController.didMove(toParent: self)
-        
-        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        pageViewController.view.layer.position.y = -10.0
-        
-        ScrambleContentView.addSubview(pageViewController.view)
-        
-        let views: [String : Any] = ["pageView" : pageViewController.view as Any]
-
-        ScrambleContentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[pageView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
-    
-        let topShift = BigView.frame.size.height * 3.0 / 65.0
-        let bottomShift = -1 * BigView.frame.size.height / 65.0
-        
-        let verticalConstraint = "V:|-\(topShift)-[pageView]-(\(bottomShift))-|"
-        
-        print("vertical constraint " + verticalConstraint)
-        
-        ScrambleContentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: verticalConstraint, options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
- 
-        
-        
-        if #available(iOS 13.0, *)
-        {
-            guard let scrambleViewController =
-                storyboard?.instantiateViewController(identifier: String(describing: ScrambleViewController.self)) as? ScrambleViewController
-            else
-            {
-                return
-            }
-            
-            scrambleViewController.scrambleText = HomeViewController.mySession.getCurrentScramble()
-            pageViewController.setViewControllers([scrambleViewController], direction: .forward, animated: true)
-            
-            self.myPageViewController = pageViewController
-            self.myScrambleViewController = scrambleViewController
-        }
-        else
-        {
-            return
-        }
-        
-        
     }
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
@@ -664,8 +587,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
             HomeViewController.mySession.scrambler.genScramble()
             HomeViewController.sessionChanged = false
         }
-        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
-        self.myDrawScrambleViewController?.updateDrawScramble()
+        ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+        updateDrawScramble()
         
         
         HomeViewController.timerPhase = self.IDLE
@@ -715,7 +638,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
         GestureArea.addGestureRecognizer(tap)
         
-        
         let tapScramble = UITapGestureRecognizer(target: self, action: #selector(scrambleTapped(gesture:)))
         ScrambleContentView.addGestureRecognizer(tapScramble)
  
@@ -724,8 +646,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     @objc func scrambleTapped(gesture: UIGestureRecognizer)
     {
         HomeViewController.mySession.scrambler.genScramble()
-        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
-        self.myDrawScrambleViewController?.updateDrawScramble()
+        ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+        updateDrawScramble()
     }
     
     @objc func handleLongPress(sender: UIGestureRecognizer)
@@ -901,8 +823,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
             {
                 HomeViewController.mySession.deleteSolve()
             }
-            self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
-            self.myDrawScrambleViewController?.updateDrawScramble()
+            self.ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+            self.updateDrawScramble()
             self.updateLabels()
         })
         
@@ -950,8 +872,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         {
             HomeViewController.mySession.addSolve(time: enteredTime, penalty: penalty)
         }
-        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
-        self.myDrawScrambleViewController?.updateDrawScramble()
+        ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+        updateDrawScramble()
         
         updateLabels()
     }
@@ -964,8 +886,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         }
         
         
-        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
-        self.myDrawScrambleViewController?.updateDrawScramble()
+        ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+        updateDrawScramble()
         
         updateLabels()
         
@@ -1000,11 +922,39 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         }
         else
         {
-            self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
-            self.myDrawScrambleViewController?.updateDrawScramble()
+            ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+            updateDrawScramble()
             Logo.isHidden = true
         }
         
+    }
+    
+    func updateDrawScramble()
+    {
+        let HTMLString = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="scramble-display.browser.js"></script>
+    <style type="text/css">
+    <!--
+    scramble-display
+    {
+        display: block;
+        margin-left: 0px;
+    }
+    -->
+    </style>
+</head>
+<body>
+    <scramble-display
+        event="\(draw_events[HomeViewController.mySession.scrambler.myEvent])"
+    scramble="\(HomeViewController.mySession.getCurrentScramble())"
+    ></scramble-display>
+</body>
+</html>
+"""
+        webView!.loadHTMLString(HTMLString, baseURL: jsURL?.deletingLastPathComponent())
     }
     
     @IBAction func Time1Touched(_ sender: Any) {
@@ -1144,17 +1094,22 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     
     static func darkBlueColor() -> UIColor
     {
-        return UIColor.init(displayP3Red: 0/255, green: 51/255, blue: 89/255, alpha: 1)
+        return UIColor.init(displayP3Red: 0/255, green: 51/255, blue: 89/255, alpha: 1.0)
     }
     
     static func greenColor() -> UIColor
     {
-        return UIColor.init(displayP3Red: 0/255, green: 175/255, blue: 0/255, alpha: 1)
+        return UIColor.init(displayP3Red: 50/255, green: 142/255, blue: 84/255, alpha: 1.0)
+    }
+    
+    static func redColor() -> UIColor
+    {
+        return UIColor.init(displayP3Red: 164/255, green: 3/255, blue: 31/255, alpha: 1.0)
     }
     
     static func darkModeColor() -> UIColor
     {
-        return UIColor.init(red: 29/250, green: 29/250, blue: 29/250, alpha: 1)
+        return UIColor.init(red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
     }
     
     

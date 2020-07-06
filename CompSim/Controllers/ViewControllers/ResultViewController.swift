@@ -83,13 +83,14 @@ class ResultViewController: UIViewController {
         }
         for i in 0..<numTimes
         {
+            labels[i].isEnabled = false
             labels[i].setTitle(HomeViewController.mySession.times[i].myString, for: .normal)
             labels[i].isHidden = false
         }
         
         if(HomeViewController.mySession.solveType == 0)
         {
-            MyAverageLabel.text = "= " + HomeViewController.mySession.myAverage + " Average!" // update my average label
+            MyAverageLabel.text = "AVERAGE: \(HomeViewController.mySession.myAverage)" // update my average label
         }
         else
         {
@@ -97,11 +98,11 @@ class ResultViewController: UIViewController {
             SecondTime5.isHidden = true
             if(HomeViewController.mySession.solveType == 1)
             {
-                MyAverageLabel.text = "= " + HomeViewController.mySession.myAverage + " Mean!" // update my average label
+                MyAverageLabel.text = "MEAN: \(HomeViewController.mySession.myAverage)" // update my average label
             }
             else // best of 3
             {
-                MyAverageLabel.text = "= " + HomeViewController.mySession.myAverage + " Single!" // update my average label
+                MyAverageLabel.text = "BEST: \(HomeViewController.mySession.myAverage)" // update my average label
             }
         }
         
@@ -158,7 +159,7 @@ class ResultViewController: UIViewController {
         MyAverageLabel.textColor? = UIColor.white
         TryAgainButton.backgroundColor = .darkGray
         TimesCollection.forEach { (button) in
-            button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
+            button.setTitleColor(.white, for: .normal)
         }
     }
     
@@ -172,20 +173,10 @@ class ResultViewController: UIViewController {
             winningAverage = winningTimeDistribution.nextInt()
         }
         
-        if(HomeViewController.mySession.solveType == 0)
-        {
-            WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Average" // update label
-        }
-        else if(HomeViewController.mySession.solveType == 1)
-        {
-            WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Mean" // update label
-        }
-        else
-        {
-            WinningAverageLabel.text = "Target: " + SolveTime.makeMyString(num: winningAverage) + " Single" // update label
-        }
-        
-        
+        let target = NSLocalizedString("TARGET:  ", comment: "")
+        let targetString = NSMutableAttributedString(string: "\(target)\(SolveTime.makeMyString(num: winningAverage))")
+       targetString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: target.count, length: targetString.length - target.count))
+        WinningAverageLabel.attributedText = targetString
         WinningAverageLabel.isHidden = false
         
         try! realm.write
@@ -281,8 +272,8 @@ class ResultViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        WinningAverageLabel.font = WinningAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: WinningAverageLabel.text!, view: WinningAverageLabel, multiplier: 0.9, name: "Futura").pointSize, HomeViewController.fontToFitHeight(view: WinningAverageLabel, multiplier: 0.9, name: "Futura").pointSize))
-        MyAverageLabel.font = MyAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: MyAverageLabel.text!, view: BigView, multiplier: 0.9, name: "Futura").pointSize, HomeViewController.fontToFitHeight(view: MyAverageLabel, multiplier: 0.9, name: "Futura").pointSize))
+        WinningAverageLabel.font = WinningAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: WinningAverageLabel.text!, view: WinningAverageLabel, multiplier: 0.9, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: WinningAverageLabel, multiplier: 0.9, name: "Lato-Black").pointSize))
+        MyAverageLabel.font = MyAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: MyAverageLabel.text!, view: BigView, multiplier: 0.9, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: MyAverageLabel, multiplier: 0.9, name: "Lato-Black").pointSize))
     }
     
     override func viewDidLoad() {
@@ -309,7 +300,7 @@ class ResultViewController: UIViewController {
         
        
         
-        TryAgainButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.055, name: "Futura")
+        TryAgainButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "Lato-Black")
         let stringSize = TryAgainButton.titleLabel?.intrinsicContentSize.width
         TryAgainButton.widthAnchor.constraint(equalToConstant: stringSize! + 30).isActive = true
     }

@@ -636,14 +636,14 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             HomeViewController.cuber = "Rami"
         }
         
-        let title = HomeViewController.cuber
+        let title = cuberDictionary[HomeViewController.cuber]!
         let cuber = NSLocalizedString("Cuber", comment: "")
         let cuberString = NSMutableAttributedString(string: "\(cuber):  \(title)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         cuberString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: cuber.count + 1, length: cuberString.length - cuber.count - 1))
         CuberButton.setAttributedTitle(cuberString, for: .normal)
         
         cuberCollection.forEach({ button in
-            if button.titleLabel?.text == HomeViewController.cuber
+            if button.titleLabel?.text == cuberDictionary[HomeViewController.cuber]
             {
                 button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
             }
