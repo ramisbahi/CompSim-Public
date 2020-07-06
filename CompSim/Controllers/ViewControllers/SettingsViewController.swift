@@ -561,6 +561,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     override func viewDidLayoutSubviews() {
         ScrambleTypeButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: LittleView.frame.size.width - 53, bottom: 0, right: 0)
         CuberButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: LittleView.frame.size.width - 53, bottom: 0, right: 0)
+        
+        
     }
     
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
@@ -670,6 +672,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         ScrambleTypeButton.setTitle("\(scrType): \(title)", for: .normal)
         
         super.viewWillAppear(false)
+        
+        
         eventCollection.forEach { (button) in
             button.isHidden = true
             if button.titleLabel?.text == title
@@ -686,6 +690,11 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         
         solveTypeControl.isEnabled = HomeViewController.mySession.currentIndex < 1
         solveTypeControl.selectedSegmentIndex = HomeViewController.mySession.solveType
+        
+        if #available(iOS 13.0, *) {
+            CuberButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+            ScrambleTypeButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        }
     }
     
     @IBAction func HoldingTimeChanged(_ sender: Any) {

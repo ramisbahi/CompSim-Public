@@ -74,6 +74,9 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     @IBOutlet weak var GestureArea: UIView!
     
 
+    @IBOutlet weak var SessionStackView: UIStackView!
+    @IBOutlet weak var SessionButton: UIButton!
+    var SessionCollection: [UIButton] = []
     
     @IBOutlet weak var Time1: UIButton!
     @IBOutlet weak var Time2: UIButton!
@@ -82,7 +85,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     @IBOutlet weak var Time5: UIButton!
     
     @IBOutlet weak var ResetButton: UIButton!
-    @IBOutlet weak var NewScrambleButton: UIButton!
     @IBOutlet weak var HelpButton: UIButton!
     
     @IBOutlet var TimesCollection: [UIButton]!
@@ -173,14 +175,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         
         HelpButton.layer.cornerRadius = HelpButton.frame.size.height / 3.5
         
-        var stringSize = NewScrambleButton.titleLabel?.intrinsicContentSize.width
-        NewScrambleButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
-        if(NewScrambleButton.frame.size.width > 150)
-        {
-            NewScrambleButton.setTitle(NSLocalizedString("New Scr.", comment: ""), for: .normal)
-            stringSize = NewScrambleButton.titleLabel?.intrinsicContentSize.width
-            NewScrambleButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
-        }
         
         ScrambleContentView.layer.cornerRadius = 6.0
         
@@ -552,9 +546,110 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
     }
     
+    
+    @IBAction func SessionButtonClicked(_ sender: Any) {
+        if SessionCollection.count > 0
+        {
+            if SessionCollection[0].isHidden
+            {
+                SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+            }
+            else
+            {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
+                {
+                    self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+                }
+            }
+        }
+        
+        SessionCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    func sessionNamed(title: String) -> Session?
+    {
+        for session in HomeViewController.allSessions
+        {
+            if session.name == title
+            {
+                return session
+            }
+        }
+        return nil
+    }
+    
+    @objc func SessionSelected(_ sender: UIButton) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
+        {
+            self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        }
+        SessionCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+        
+        guard let title = sender.currentTitle else
+        {
+            return // doesn't have title
+        }
+        
+        SessionButton.setTitle(title, for: .normal)
+        if title != HomeViewController.mySession.name // exists,// not same - so switch session
+        {
+            HomeViewController.mySession = sessionNamed(title: title)!
+            HomeViewController.mySession.updateScrambler()
+            updateLabels()
+            HomeViewController.mySession.scrambler.genScramble()
+            HomeViewController.sessionChanged = false
+        }
+    }
+    
+    func createButton(name: String) -> UIButton
+    {
+        SessionCollection.forEach({button in
+            button.layer.cornerRadius = 0.0
+        })
+        
+        let retButton = UIButton(type: .system)
+        retButton.setTitle(name, for: .normal)
+        retButton.isHidden = true
+        retButton.setTitleColor(.white, for: .normal)
+        retButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 17)
+        retButton.backgroundColor = HomeViewController.darkBlueColor()
+        retButton.isUserInteractionEnabled = true
+        retButton.addTarget(self, action: #selector(SessionSelected(_:)), for: UIControl.Event.touchUpInside)
+        retButton.layer.cornerRadius = 6.0
+        retButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        return retButton
+    }
+    
+    // called whenever something changed with sessions
+    func setUpStackView()
+    {
+        SessionButton.setTitle(HomeViewController.mySession.name, for: .normal)
+        SessionCollection = []
+        for session in HomeViewController.allSessions
+        {
+            let newButton = createButton(name: session.name)
+            SessionCollection.append(newButton)
+            SessionStackView.addArrangedSubview(newButton)
+        }
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(false)
+        
+        setUpStackView()
+        
         TargetLabel.setTitle("  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))", for: .normal)
         
         if(HomeViewController.changedDarkMode) // changed it - only have to do this once when changed
@@ -741,13 +836,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         })
         self.present(alert, animated: true)
     }
-    
-    @IBAction func newScramblePressed(_ sender: Any) {
-        HomeViewController.mySession.scrambler.genScramble()
-        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
-        self.myDrawScrambleViewController?.updateDrawScramble()
-    }
-    
+
     func usingLongPress() -> Bool
     {
         return !HomeViewController.inspection && HomeViewController.holdingTime > 0.01 && HomeViewController.timing == 1
@@ -884,6 +973,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
   
     func updateLabels()
     {
+        TargetLabel.setTitle("  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))", for: .normal)
+        
         for i in 0..<HomeViewController.mySession.currentIndex
         {
             self.labels[i].setTitle(HomeViewController.mySession.times[i].myString, for: .normal)
@@ -976,8 +1067,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         HelpButton.tintColor = .white
         ResetButton.backgroundColor = .darkGray
         ResetButton.titleLabel?.textColor = .white
-        NewScrambleButton.backgroundColor = .darkGray
-        NewScrambleButton.titleLabel?.textColor = .white
         
         setNeedsStatusBarAppearanceUpdate()
         if #available(iOS 13.0, *) {
@@ -1014,8 +1103,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         HelpButton.tintColor = .white //HomeViewController.darkBlueColor()
         ResetButton.backgroundColor = HomeViewController.darkBlueColor()
         ResetButton.titleLabel?.textColor = .white
-        NewScrambleButton.backgroundColor = HomeViewController.darkBlueColor()
-        NewScrambleButton.titleLabel?.textColor = .white
         
         setNeedsStatusBarAppearanceUpdate()
         if #available(iOS 13.0, *) {

@@ -141,11 +141,10 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         updateBarWidth()
     }
     
+    // called when creating new session
     func updateNewSessionStackView()
     {
         hideAll()
-        DeleteButton.isEnabled = HomeViewController.allSessions.count > 1
-        SessionButton.setTitle(HomeViewController.mySession.name, for: .normal)
         let newButton = createButton(name: HomeViewController.mySession.name)
         SessionCollection.append(newButton)
         SessionStackView.addArrangedSubview(newButton)
@@ -235,15 +234,20 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func createButton(name: String) -> UIButton
     {
+        SessionCollection.forEach({button in
+            button.layer.cornerRadius = 0.0
+        })
+        
         let retButton = UIButton(type: .system)
         retButton.setTitle(name, for: .normal)
         retButton.isHidden = true
         retButton.setTitleColor(.white, for: .normal)
-        retButton.titleLabel?.font = UIFont(name: "Futura", size: 17)
-        retButton.backgroundColor = HomeViewController.orangeColor()
-        retButton.layer.cornerRadius = 18
+        retButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 17)
+        retButton.backgroundColor = HomeViewController.darkBlueColor()
         retButton.isUserInteractionEnabled = true
         retButton.addTarget(self, action: #selector(SessionSelected(_:)), for: UIControl.Event.touchUpInside)
+        retButton.layer.cornerRadius = 6.0
+        retButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         return retButton
     }
     
@@ -262,6 +266,22 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func SessionButtonClicked(_ sender: Any) {
+        
+        if SessionCollection.count > 0
+        {
+            if SessionCollection[0].isHidden
+            {
+                SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+            }
+            else
+            {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
+                {
+                    self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+                }
+            }
+        }
+        
         SessionCollection.forEach { (button) in
             UIView.animate(withDuration: 0.3, animations: {
                 button.isHidden = !button.isHidden
@@ -271,6 +291,10 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc func SessionSelected(_ sender: UIButton) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
+        {
+            self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        }
         SessionCollection.forEach { (button) in
             UIView.animate(withDuration: 0.3, animations: {
                 button.isHidden = !button.isHidden
@@ -310,6 +334,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
+        setUpStackView()
         updateBarWidth()
         
         DeleteButton.isEnabled = HomeViewController.allSessions.count > 1
@@ -429,7 +454,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
         
         cell.textLabel?.text = HomeViewController.mySession.allAverages[currentIndex] // set to average
-        cell.textLabel?.font = UIFont(name: "Futura", size: 20)
+        cell.textLabel?.font = UIFont(name: "Lato-Black", size: 20)
         
         
         if(HomeViewController.darkMode)
@@ -462,7 +487,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         timeList.append(HomeViewController.mySession.allTimes[currentIndex].list[numSolves-1].myString)
         
         cell.detailTextLabel?.text = timeList
-        cell.detailTextLabel?.font = UIFont(name: "Futura", size: 14)
+        cell.detailTextLabel?.font = UIFont(name: "Lato-Regular", size: 14)
         
         if(indexPath.row % 2 == 1 && !HomeViewController.darkMode) // make gray for every other cell
         {
@@ -541,11 +566,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector (rename))
         doubleTapGesture.numberOfTapsRequired = 2
         SessionButton.addGestureRecognizer(doubleTapGesture)
-        
-        
-        setUpStackView()
     
-        
         // Do any additional setup after loading the view.
     }
     
