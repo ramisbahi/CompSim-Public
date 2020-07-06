@@ -81,6 +81,7 @@
 		36EF308824B184FC00C49293 /* ScrambleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EF308724B184FC00C49293 /* ScrambleViewController.swift */; };
 		36EF308A24B188F500C49293 /* ScramblePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EF308924B188F500C49293 /* ScramblePageViewController.swift */; };
 		36EF308C24B2315500C49293 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36EF308B24B2315500C49293 /* Lato-Regular.ttf */; };
+		36EF308F24B2696D00C49293 /* scramble-display.browser.js in Resources */ = {isa = PBXBuildFile; fileRef = 36EF308E24B2696D00C49293 /* scramble-display.browser.js */; };
 		C79702DB2D2364D767859210 /* Pods_CompSim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A701408881740019BBE202B5 /* Pods_CompSim.framework */; };
 /* End PBXBuildFile section */
 
@@ -175,6 +176,7 @@
 		36EF308724B184FC00C49293 /* ScrambleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrambleViewController.swift; sourceTree = "<group>"; };
 		36EF308924B188F500C49293 /* ScramblePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScramblePageViewController.swift; sourceTree = "<group>"; };
 		36EF308B24B2315500C49293 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../../../../Downloads/Lato/Lato-Regular.ttf"; sourceTree = "<group>"; };
+		36EF308E24B2696D00C49293 /* scramble-display.browser.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "scramble-display.browser.js"; sourceTree = "<group>"; };
 		51B11034A5437C664B7F3657 /* Pods-CompSim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompSim.debug.xcconfig"; path = "Target Support Files/Pods-CompSim/Pods-CompSim.debug.xcconfig"; sourceTree = "<group>"; };
 		A701408881740019BBE202B5 /* Pods_CompSim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompSim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2409226874AB7090A497119 /* Pods-CompSim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompSim.release.xcconfig"; path = "Target Support Files/Pods-CompSim/Pods-CompSim.release.xcconfig"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		3663DF3922DD699D006657CF /* CompSim */ = {
 			isa = PBXGroup;
 			children = (
+				368DBA8D24B26A9300D58073 /* DrawScramble */,
 				365D91C324B126AC004B752E /* Fonts */,
 				360BC94623BBE56D00EE8324 /* Sounds */,
 				363B3A9923AAA2CE00000286 /* Session */,
@@ -278,6 +281,14 @@
 				3663DF4622DD699E006657CF /* Info.plist */,
 			);
 			path = CompSim;
+			sourceTree = "<group>";
+		};
+		368DBA8D24B26A9300D58073 /* DrawScramble */ = {
+			isa = PBXGroup;
+			children = (
+				36EF308E24B2696D00C49293 /* scramble-display.browser.js */,
+			);
+			path = DrawScramble;
 			sourceTree = "<group>";
 		};
 		3690EABA23161FCC00CB0B78 /* Scramblers */ = {
@@ -465,6 +476,7 @@
 				360BC95023BBE70B00EE8324 /* Sad_Trombone.mp3 in Resources */,
 				3602BC5224390C4F0050406C /* NotificationAlert.storyboard in Resources */,
 				3602BC4424390BFA0050406C /* AddSolveAlert.storyboard in Resources */,
+				36EF308F24B2696D00C49293 /* scramble-display.browser.js in Resources */,
 				3663DF4522DD699E006657CF /* LaunchScreen.storyboard in Resources */,
 				3602BC4B24390C2D0050406C /* SimpleAlertViewController.storyboard in Resources */,
 				3663DF4222DD699E006657CF /* Assets.xcassets in Resources */,

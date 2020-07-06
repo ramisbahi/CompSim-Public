@@ -25,7 +25,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     */
     func centralManagerDidUpdateState(_ central: CBCentralManager)
     {
-        if central.state == CBManagerState.poweredOn
+        if central.state == .poweredOn
         {
             // We will just handle it the easy way here: if Bluetooth is on, proceed...start scan!
             print("Bluetooth Enabled")

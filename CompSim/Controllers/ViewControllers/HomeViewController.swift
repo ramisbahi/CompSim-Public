@@ -54,7 +54,11 @@ extension HomeViewController: UIPageViewControllerDelegate
     {
         if #available(iOS 13.0, *), viewController is ScrambleViewController
         {
-            return storyboard?.instantiateViewController(identifier: String(describing: DrawScrambleViewController.self)) as? DrawScrambleViewController
+            let newVC =  storyboard?.instantiateViewController(identifier: String(describing: DrawScrambleViewController.self)) as? DrawScrambleViewController
+            
+            myDrawScrambleViewController = newVC
+            
+            return newVC
         }
         else
         {
@@ -145,6 +149,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     
     var myPageViewController: ScramblePageViewController?
     var myScrambleViewController: ScrambleViewController?
+    var myDrawScrambleViewController: DrawScrambleViewController?
     
     struct Keys
     {
@@ -565,6 +570,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
             HomeViewController.sessionChanged = false
         }
         self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
+        self.myDrawScrambleViewController?.updateDrawScramble()
         
         
         HomeViewController.timerPhase = self.IDLE
@@ -620,6 +626,12 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
  
     }
     
+    @objc func scrambleTapped(gesture: UIGestureRecognizer)
+    {
+        HomeViewController.mySession.scrambler.genScramble()
+        self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
+        self.myDrawScrambleViewController?.updateDrawScramble()
+    }
     
     @objc func handleLongPress(sender: UIGestureRecognizer)
     {
@@ -733,6 +745,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
     @IBAction func newScramblePressed(_ sender: Any) {
         HomeViewController.mySession.scrambler.genScramble()
         self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
+        self.myDrawScrambleViewController?.updateDrawScramble()
     }
     
     func usingLongPress() -> Bool
@@ -800,6 +813,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
                 HomeViewController.mySession.deleteSolve()
             }
             self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
+            self.myDrawScrambleViewController?.updateDrawScramble()
             self.updateLabels()
         })
         
@@ -848,6 +862,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
             HomeViewController.mySession.addSolve(time: enteredTime, penalty: penalty)
         }
         self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
+        self.myDrawScrambleViewController?.updateDrawScramble()
         
         updateLabels()
     }
@@ -861,6 +876,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         
         
         self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
+        self.myDrawScrambleViewController?.updateDrawScramble()
         
         updateLabels()
         
@@ -894,6 +910,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIPageV
         else
         {
             self.myScrambleViewController!.updateScrambleLabel(scramble: HomeViewController.mySession.getCurrentScramble())
+            self.myDrawScrambleViewController?.updateDrawScramble()
             Logo.isHidden = true
         }
         

@@ -8,77 +8,77 @@
 
 
 import UIKit
+import WebKit
+
+// 0 = 2x2
+// 1 = 3x3
+// 2 = 4x4
+// 3 = 5x5
+// 4 = 6x6
+// 5 = 7x7
+// 6 = pyra
+// 7 = mega
+// 8 = sq1
+// 9 = skewb
+// 10 = clock
+// 11 = BLD
+
+let events = ["222", "333", "444", "555", "666", "777", "pyram", "minx", "sq1", "skewb", "clock", "333bf"]
 
 class DrawScrambleViewController: UIViewController {
 
+    @IBOutlet weak var webView: WKWebView!
     
-    @IBOutlet weak var Collection1: UICollectionView!
-    @IBOutlet weak var Collection2: UICollectionView!
-    @IBOutlet weak var Collection3: UICollectionView!
-    @IBOutlet weak var Collection4: UICollectionView!
-    @IBOutlet weak var Collection5: UICollectionView!
-    @IBOutlet weak var Collection6: UICollectionView!
-    
-    var timer = Timer()
+    let jsURL = Bundle.main.url(forResource: "scramble-display.browser", withExtension: "js")
     
     override func viewDidLoad()
     {
-        let currentWidth = Int(Collection1.frame.size.width)
+        let source: String = """
+var meta = document.createElement('meta');
+meta.name = 'viewport';
+meta.content = 'width=device-width, initial-scale=0.45, maximum-scale=0.45, user-scalable=no';
+var head = document.getElementsByTagName('head')[0];
+head.appendChild(meta);
+"""
+        let zoomDisableScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+            
+        webView.configuration.userContentController.addUserScript(zoomDisableScript)
+        webView.scrollView.isScrollEnabled = false
         
-        scheduledTimerWithTimeInterval()
-        Collection1.widthAnchor.constraint(equalToConstant: CGFloat(currentWidth - currentWidth % 3)).isActive = true
+        updateDrawScramble()
+    }
+    
+    func updateDrawScramble()
+    {
+        let HTMLString = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="scramble-display.browser.js"></script>
+    <style type="text/css">
+    <!--
+    scramble-display
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    -->
+    </style>
+</head>
+<body>
+    <scramble-display
+        event="\(events[HomeViewController.mySession.scrambler.myEvent])"
+    scramble="\(HomeViewController.mySession.getCurrentScramble())"
+    ></scramble-display>
+</body>
+</html>
+"""
+        webView!.loadHTMLString(HTMLString, baseURL: jsURL?.deletingLastPathComponent())
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-        
-        
-        
-        updateScramble()
-    }
-    
-    func scheduledTimerWithTimeInterval(){
-        // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
-    }
-
-    @objc func updateCounting(){
-        if(HomeViewController.scrambleChanged)
-        {
-            updateScramble()
-            HomeViewController.scrambleChanged = false
-        }
-    }
-    
-    func updateScramble()
-    {
-        drawSide(side: Collection1, colors: Array(HomeViewController.mySession.scrambler.drawScramble[0..<9]))
-        drawSide(side: Collection2, colors: Array(HomeViewController.mySession.scrambler.drawScramble[9..<18]))
-        drawSide(side: Collection3, colors: Array(HomeViewController.mySession.scrambler.drawScramble[18..<27]))
-        drawSide(side: Collection4, colors: Array(HomeViewController.mySession.scrambler.drawScramble[27..<36]))
-        drawSide(side: Collection5, colors: Array(HomeViewController.mySession.scrambler.drawScramble[36..<45]))
-        drawSide(side: Collection6, colors: Array(HomeViewController.mySession.scrambler.drawScramble[45..<54]))
-    }
-    
-    func drawSide(side: UIView, colors: [String])
-    {
-        let colorMap: [String: UIColor] = ["R" : .red, "B" : .blue, "Y" : .yellow, "G" : .green, "W" : .white, "O" : .orange]
-        
-        let squareWidth = Double(side.frame.size.width / 3.0) - 1
-        
-        for i in 0..<9
-        {
-            let color: UIColor = colorMap[colors[i]]!
-            let xPos: Double = squareWidth * Double(i % 3)
-            let yPos: Double = squareWidth * Double(i / 3) 
-            
-            
-            let newView = UIView(frame: CGRect(x: xPos, y: yPos, width: squareWidth, height: squareWidth))
-            newView.backgroundColor = color
-            newView.layer.borderWidth = 1
-            newView.layer.borderColor = UIColor.black.cgColor
-            side.addSubview(newView)
-        }
     }
     
 

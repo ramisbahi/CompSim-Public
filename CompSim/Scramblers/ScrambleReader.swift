@@ -60,6 +60,7 @@ class ScrambleReader
     // 8 = sq1
     // 9 = skewb
     // 10 = clock
+    // 11 = BLD
     func genScramble()  // generate and return scramble for current event
     {
         switch myEvent
