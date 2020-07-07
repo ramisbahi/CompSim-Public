@@ -73,7 +73,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         let currentTime = HomeViewController.mySession.allTimes[SessionViewController.myIndex].list[indexPath.row]
         
         myCell.textLabel?.text = currentTime.myString // each time
-        myCell.textLabel?.font = UIFont.init(name: "Futura", size: 17.0)
+        myCell.textLabel?.font = UIFont.init(name: "Lato-Black", size: 17.0)
         
         myCell.detailTextLabel?.text = currentTime.myScramble // each scramble
         myCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 12.0)
@@ -154,7 +154,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        BackButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: self.view, multiplier: 0.04, name: "Futura")
+        BackButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: self.view, multiplier: 0.04, name: "Lato-Black")
         let stringSize = BackButton.titleLabel?.intrinsicContentSize.width
         BackButton.widthAnchor.constraint(equalToConstant: stringSize! + 40).isActive = true
         
@@ -181,16 +181,13 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
             turnOffDarkMode()
         }
         
-        if(HomeViewController.mySession.usingWinningTime[SessionViewController.myIndex]) // was going against a winning time
+        if(SolveTime.makeIntTime(num: HomeViewController.mySession.allAverages[SessionViewController.myIndex].toFloatTime()) < HomeViewController.mySession.singleTime) // win
         {
-            if(HomeViewController.mySession.results[SessionViewController.myIndex]) // won
-            {
-                AverageLabel.textColor = HomeViewController.greenColor()
-            }
-            else // ost
-            {
-                AverageLabel.textColor = UIColor.red
-            }
+            AverageLabel.textColor = HomeViewController.greenColor()
+        }
+        else // lose
+        {
+            AverageLabel.textColor = UIColor.red
         }
         
         

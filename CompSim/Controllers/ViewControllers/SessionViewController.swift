@@ -9,6 +9,8 @@
 import UIKit
 import RealmSwift
 
+var bestPressed = false
+
 class SessionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var DarkBackground: UIImageView!
@@ -27,11 +29,17 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var ResetButton: UIButton!
     @IBOutlet weak var DeleteButton: UIButton!
     
+    @IBOutlet weak var BestSingleButton: UIButton!
+    @IBOutlet weak var BestAverageButton: UIButton!
     
-    @IBOutlet weak var BackgroundBar: UIView!
+    @IBOutlet weak var WinningView: UIView!
+    @IBOutlet weak var LosingView: UIView!
+    
     @IBOutlet weak var WinningWidth: NSLayoutConstraint!
     @IBOutlet weak var LosingWidth: NSLayoutConstraint!
     @IBOutlet var BigView: UIView!
+    
+    @IBOutlet weak var TargetButton: UIButton!
     
     let realm = try! Realm()
     
@@ -93,8 +101,20 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
             
-            WinningWidth.constant = view!.frame.size.width * CGFloat(winningCount) / CGFloat(numAverages)
-            LosingWidth.constant = view!.frame.size.width * CGFloat(losingCount) / CGFloat(numAverages)
+            WinningView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
+            LosingView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+            
+            if winningCount == 0
+            {
+                LosingView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+            }
+            else if losingCount == 0
+            {
+                WinningView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+            }
+            
+            WinningWidth.constant = (view!.frame.size.width - 30) * CGFloat(winningCount) / CGFloat(numAverages)
+            LosingWidth.constant = (view!.frame.size.width - 30) * CGFloat(losingCount) / CGFloat(numAverages)
         }
         else
         {
@@ -118,6 +138,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             session.reset()
         }
         HomeViewController.sessionChanged = true
+        updateTargetButton()
+        updateBestButtons()
         StatsTableView.reloadData()
         updateBarWidth()
     }
@@ -136,6 +158,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         self.updateNewSessionStackView()
+        updateTargetButton()
+        updateBestButtons()
         StatsTableView.reloadData()
         HomeViewController.sessionChanged = true
         updateBarWidth()
@@ -313,6 +337,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             HomeViewController.mySession = sessionNamed(title: title)!
             HomeViewController.mySession.updateScrambler()
             HomeViewController.sessionChanged = true
+            updateTargetButton()
+            updateBestButtons()
             StatsTableView.reloadData()
             updateBarWidth()
         }
@@ -331,9 +357,165 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         return nil
     }
     
+    @IBAction func TargetButtonPressed(_ sender: Any) {
+        let alertService = AlertService()
+        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""), usingPenalty: false, keyboardType: 0, myTitle: NSLocalizedString("Target Time", comment: ""),
+                                       completion: {
+            
+            let inputTime = alertService.myVC.TextField.text!
+            
+            if HomeViewController.validEntryTime(time: inputTime)
+            {
+               let temp = SolveTime(enteredTime: inputTime, scramble: "")
+               let intTime = temp.intTime
+               
+               try! self.realm.write
+               {
+                   HomeViewController.mySession.singleTime = intTime
+               }
+                
+               self.updateTargetButton()
+               self.updateBarWidth()
+               self.StatsTableView.reloadData()
+            }
+            else
+            {
+                self.alertValidTime()
+            }
+        })
+        if !bestPressed // needs fixing
+        {
+            self.present(alert, animated: true)
+        }
+        else
+        {
+            bestPressed = false
+        }
+    }
+    
+    @IBAction func BestAveragePressed(_ sender: Any) {
+        bestPressed = true
+        let path: IndexPath = IndexPath(row: HomeViewController.mySession.currentAverage - bestAverageIndex!, section: 0)
+        StatsTableView.selectRow(at: path, animated: true, scrollPosition: UITableView.ScrollPosition.top)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.tableView(self.StatsTableView, didSelectRowAt: path)
+        }
+    }
+    
+    @IBAction func BestSinglePressed(_ sender: Any) {
+        bestPressed = true
+        let path: IndexPath = IndexPath(row: HomeViewController.mySession.currentAverage - bestSingleAverageIndex!, section: 0)
+        //StatsTableView.scrollToRow(at: path, at: UITableView.ScrollPosition.top, animated: true)
+        StatsTableView.selectRow(at: path, animated: true, scrollPosition: UITableView.ScrollPosition.top)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.tableView(self.StatsTableView, didSelectRowAt: path)
+            bestSingleTransition = true
+        }
+    }
+    
+    
+    func alertValidTime()
+    {
+        let alertService = NotificationAlertService()
+        let alert = alertService.alert(myTitle: NSLocalizedString("Invalid Time", comment: ""))
+        self.present(alert, animated: true, completion: nil)
+        // ask again - no input
+    }
+    
+    func updateTargetButton()
+    {
+        let winningAverage: Int = HomeViewController.mySession.singleTime // for single time
+        
+        let target = NSLocalizedString("TARGET:  ", comment: "")
+         let targetString = NSMutableAttributedString(string: "\(target)\(SolveTime.makeMyString(num: winningAverage))", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+        targetString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: target.count, length: targetString.length - target.count))
+        TargetButton.setAttributedTitle(targetString, for: .normal)
+    }
+    
+    func updateBestButtons()
+    {
+        updateBestSingle()
+        updateBestAverage()
+    }
+    
+    func updateBestSingle()
+    {
+        bestSingleAverageIndex = nil
+        bestSingleSolveIndex = nil // index in average
+        bestSingleTransition = false
+        let allTimes = HomeViewController.mySession.allTimes
+        for averageIndex in 0..<allTimes.count
+        {
+            let currList = allTimes[averageIndex].list
+            for solveIndex in 0..<currList.count
+            {
+                if bestSingleSolveIndex == nil || currList[solveIndex].intTime < allTimes[bestSingleAverageIndex!].list[bestSingleSolveIndex!].intTime
+                {
+                    bestSingleSolveIndex = solveIndex
+                    bestSingleAverageIndex = averageIndex
+                }
+            }
+        }
+        
+        if bestSingleSolveIndex != nil
+        {
+            let minSolve = allTimes[bestSingleAverageIndex!].list[bestSingleSolveIndex!]
+            var minString = minSolve.getMyString()
+            let start = minString.index(minString.startIndex, offsetBy: 1)
+            let end = minString.index(minString.endIndex, offsetBy: -1)
+            if minString.contains("(")
+            {
+                minString = String(minString[start..<end])
+            }
+            
+            
+            let single = NSLocalizedString("Best single:  ", comment: "")
+             let singleString = NSMutableAttributedString(string: "\(single)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+            singleString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: single.count, length: singleString.length - single.count))
+            BestSingleButton.setAttributedTitle(singleString, for: .normal)
+        }
+        else
+        {
+            BestSingleButton.setTitle("Best single:  ", for: .normal)
+        }
+        
+        updateBestFonts()
+    }
+    
+    func updateBestAverage()
+    {
+        bestAverageIndex = nil
+        bestAverageTransition = false
+        let allAverages = HomeViewController.mySession.allAverages
+        for currIndex in 0..<allAverages.count
+        {
+            if bestAverageIndex == nil || allAverages[currIndex].toFloatTime() < allAverages[bestAverageIndex!].toFloatTime()
+            {
+                bestAverageIndex = currIndex
+            }
+        }
+        
+        if(bestAverageIndex != nil)
+        {
+            let minString = allAverages[bestAverageIndex!]
+            let average = NSLocalizedString("Best average:  ", comment: "")
+             let averageString = NSMutableAttributedString(string: "\(average)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+            averageString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: average.count, length: averageString.length - average.count))
+            BestAverageButton.setAttributedTitle(averageString, for: .normal)
+        }
+        else
+        {
+            BestAverageButton.setTitle("Best average:  ", for: .normal)
+        }
+        
+        updateBestFonts()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
+        updateTargetButton()
+        updateBestButtons()
         setUpStackView()
         updateBarWidth()
         
@@ -409,6 +591,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         HomeViewController.mySession = HomeViewController.allSessions[index % HomeViewController.allSessions.count]
         hideAll()
         setUpStackView()
+        updateTargetButton()
+        updateBestButtons()
         StatsTableView.reloadData()
         updateBarWidth()
     }
@@ -432,7 +616,6 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             button?.backgroundColor = .darkGray
         }
         
-        BackgroundBar.backgroundColor = .white
     }
     
     func turnOffDarkMode()
@@ -441,8 +624,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         {
             button?.backgroundColor = HomeViewController.darkBlueColor()
         }
-        
-        BackgroundBar.backgroundColor = .black
+
     }
     
     
@@ -472,7 +654,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.accessoryType = .disclosureIndicator // show little arrow thing on right side of each cell
         if(HomeViewController.mySession.usingWinningTime[currentIndex]) // if was competing against winning time
         {
-            cell.textLabel?.textColor = SolveTime.makeIntTime(num: HomeViewController.mySession.allAverages[currentIndex].toFloatTime())  < HomeViewController.mySession.singleTime ? HomeViewController.greenColor() : UIColor.red // get int time
+            cell.textLabel?.textColor = SolveTime.makeIntTime(num: HomeViewController.mySession.allAverages[currentIndex].toFloatTime())  < HomeViewController.mySession.singleTime ? HomeViewController.greenColor() : HomeViewController.redColor() // get int time
             
         }
         
@@ -487,7 +669,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         timeList.append(HomeViewController.mySession.allTimes[currentIndex].list[numSolves-1].myString)
         
         cell.detailTextLabel?.text = timeList
-        cell.detailTextLabel?.font = UIFont(name: "Lato-Regular", size: 14)
+        cell.detailTextLabel?.font = UIFont(name: "Lato-Black", size: 14)
         
         if(indexPath.row % 2 == 1 && !HomeViewController.darkMode) // make gray for every other cell
         {
@@ -557,6 +739,25 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.navigationController?.pushViewController(obj, animated: true)
     }
     
+    func updateBestFonts()
+    {
+        let minSingleFont =  BestSingleButton.titleLabel?.font.withSize(min(HomeViewController.fontToFitWidth(text: (BestSingleButton.titleLabel?.text!)!, view: BestSingleButton, multiplier: 0.9, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: BestSingleButton, multiplier: 0.9, name: "Lato-Black").pointSize))
+        
+        let minAverageFont = BestAverageButton.titleLabel?.font.withSize(min(HomeViewController.fontToFitWidth(text: (BestAverageButton.titleLabel?.text!)!, view: BestAverageButton, multiplier: 0.9, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: BestAverageButton, multiplier: 0.9, name: "Lato-Black").pointSize))
+        
+        let minFont = Float(minSingleFont!.pointSize) < Float(minAverageFont!.pointSize) ? minSingleFont : minAverageFont
+        
+        BestSingleButton.titleLabel?.font = minFont
+        BestAverageButton.titleLabel?.font = minFont
+        
+
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print("this boi got called")
+        TargetButton.titleLabel?.font = TargetButton.titleLabel?.font.withSize(min(HomeViewController.fontToFitWidth(text: (TargetButton.titleLabel?.text!)!, view: TargetButton, multiplier: 1.0, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: TargetButton, multiplier: 1.0, name: "Lato-Black").pointSize))
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -567,6 +768,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         doubleTapGesture.numberOfTapsRequired = 2
         SessionButton.addGestureRecognizer(doubleTapGesture)
     
+        
         // Do any additional setup after loading the view.
     }
     

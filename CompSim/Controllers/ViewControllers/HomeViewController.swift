@@ -11,6 +11,8 @@ import WebKit
 import RealmSwift
 import CoreBluetooth
 
+var pooped = false
+
 let jsURL = Bundle.main.url(forResource: "scramble-display.browser", withExtension: "js")
 let draw_events = ["222", "333", "444", "555", "666", "777", "pyram", "minx", "sq1", "skewb", "clock", "333bf"]
 
@@ -113,7 +115,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     
     var observer: NSObjectProtocol?
     
-    var myDrawScrambleViewController: DrawScrambleViewController?
     
     struct Keys
     {
@@ -223,7 +224,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         
         if(HomeViewController.font == nil) // not set yet
         {
-            HomeViewController.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.09, name: "Lato-Black")
+            HomeViewController.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.09, name: "Lato-Bold")
         }
         
         TimesCollection.forEach{(button) in

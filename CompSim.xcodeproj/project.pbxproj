@@ -19,7 +19,6 @@
 		360BC94C23BBE64C00EE8324 /* cheer.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94B23BBE64C00EE8324 /* cheer.m4a */; };
 		360BC95023BBE70B00EE8324 /* Sad_Trombone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 360BC94F23BBE70B00EE8324 /* Sad_Trombone.mp3 */; };
 		3617752323DE1A5A00FC6DCE /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3617752223DE1A5A00FC6DCE /* HelpViewController.swift */; };
-		361C625F240479FF0003D26F /* DrawScrambleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361C625E240479FF0003D26F /* DrawScrambleViewController.swift */; };
 		3631811824A652FF00B8F21F /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3631811724A652FF00B8F21F /* StatsViewController.swift */; };
 		36348226239C6E82009A14C7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36348225239C6E82009A14C7 /* TimerViewController.swift */; };
 		3634822823A0615F009A14C7 /* SolveTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634822723A0615F009A14C7 /* SolveTime.swift */; };
@@ -77,6 +76,7 @@
 		3696538823BA9F46000784D9 /* ViewSolveAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */; };
 		3696538A23BA9F55000784D9 /* ViewSolveAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */; };
 		36A0A4AB23AF676600D41938 /* SolveTimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0A4AA23AF676600D41938 /* SolveTimeList.swift */; };
+		36A8B56824B3E4E000ADC24E /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36A8B56724B3E4E000ADC24E /* Lato-Bold.ttf */; };
 		36B88A9123C7AD93004262CA /* NotificationAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B88A9023C7AD93004262CA /* NotificationAlertService.swift */; };
 		36EF308C24B2315500C49293 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36EF308B24B2315500C49293 /* Lato-Regular.ttf */; };
 		36EF308F24B2696D00C49293 /* scramble-display.browser.js in Resources */ = {isa = PBXBuildFile; fileRef = 36EF308E24B2696D00C49293 /* scramble-display.browser.js */; };
@@ -134,7 +134,6 @@
 		3612321823005DA00044DEF1 /* SessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
 		361232212300C48E0044DEF1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3617752223DE1A5A00FC6DCE /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
-		361C625E240479FF0003D26F /* DrawScrambleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawScrambleViewController.swift; sourceTree = "<group>"; };
 		3631811724A652FF00B8F21F /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		36348225239C6E82009A14C7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		3634822723A0615F009A14C7 /* SolveTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SolveTime.swift; path = CompSim/Session/SolveTime.swift; sourceTree = SOURCE_ROOT; };
@@ -170,6 +169,7 @@
 		3696538723BA9F46000784D9 /* ViewSolveAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSolveAlertService.swift; sourceTree = "<group>"; };
 		3696538923BA9F55000784D9 /* ViewSolveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSolveAlertViewController.swift; sourceTree = "<group>"; };
 		36A0A4AA23AF676600D41938 /* SolveTimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveTimeList.swift; sourceTree = "<group>"; };
+		36A8B56724B3E4E000ADC24E /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../../../../Downloads/Lato/Lato-Bold.ttf"; sourceTree = "<group>"; };
 		36B88A9023C7AD93004262CA /* NotificationAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertService.swift; sourceTree = "<group>"; };
 		36EF308B24B2315500C49293 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../../../../Downloads/Lato/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		36EF308E24B2696D00C49293 /* scramble-display.browser.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "scramble-display.browser.js"; sourceTree = "<group>"; };
@@ -236,6 +236,7 @@
 			children = (
 				365D91CD24B126C5004B752E /* Lato-Black.ttf */,
 				36EF308B24B2315500C49293 /* Lato-Regular.ttf */,
+				36A8B56724B3E4E000ADC24E /* Lato-Bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -336,7 +337,6 @@
 				3663DF4C22DEBB5C006657CF /* ResultViewController.swift */,
 				36348225239C6E82009A14C7 /* TimerViewController.swift */,
 				3617752223DE1A5A00FC6DCE /* HelpViewController.swift */,
-				361C625E240479FF0003D26F /* DrawScrambleViewController.swift */,
 				3631811724A652FF00B8F21F /* StatsViewController.swift */,
 			);
 			path = ViewControllers;
@@ -477,6 +477,7 @@
 				36EF308C24B2315500C49293 /* Lato-Regular.ttf in Resources */,
 				365D91D824B126C5004B752E /* Lato-Black.ttf in Resources */,
 				3602BC3D24390BCA0050406C /* ViewSolveAlert.storyboard in Resources */,
+				36A8B56824B3E4E000ADC24E /* Lato-Bold.ttf in Resources */,
 				3663DF4022DD699D006657CF /* Main.storyboard in Resources */,
 				368859EF2436456A00635856 /* Localizable.strings in Resources */,
 				3669CEC2238B13A900F1D002 /* scrambles.txt in Resources */,
@@ -567,7 +568,6 @@
 				3654A84223BC02280066A48F /* LogoViewController.swift in Sources */,
 				3690EAF92316293200CB0B78 /* BigCubeScrambler.m in Sources */,
 				3690EAFA2316293200CB0B78 /* BigCubeScrambler.h in Sources */,
-				361C625F240479FF0003D26F /* DrawScrambleViewController.swift in Sources */,
 				3690EAFB2316293200CB0B78 /* Util.h in Sources */,
 				3602BC3424379DD60050406C /* State.swift in Sources */,
 				3690EAFC2316293200CB0B78 /* Util.m in Sources */,

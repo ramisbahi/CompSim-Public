@@ -108,36 +108,21 @@ class ResultViewController: UIViewController {
         
         MyAverageLabel.isHidden = false
         TryAgainButton.isHidden = false
-        if(HomeViewController.mySession.targetType == noWinning) // no winning time
-       {
-            WinningAverageLabel.text = ""
-            
-            BackgroundImage.isHidden = true
-            LogoImage.isHidden = false
-            
-            try! realm.write {
-                HomeViewController.mySession.usingWinningTime.append(false)
         
-                // instead of updateWinningAverage():
-                HomeViewController.mySession.winningAverages.append("") // blank string for average
-                HomeViewController.mySession.results.append(true) // win for winning (not used tho)
-            }
-       }
-       else // winning time
-       {
-            BackgroundImage.isHidden = false
-            try! realm.write {
-                HomeViewController.mySession.usingWinningTime.append(true)
-                     // update winning average label & win/lose
-                }
-            
-            updateWinningAverage()
+        BackgroundImage.isHidden = false
+        try! realm.write
+        {
+            HomeViewController.mySession.usingWinningTime.append(true)
+                 // update winning average label & win/lose
         }
+        
+        updateWinningAverage()
         
         times = Array(HomeViewController.mySession.times)
         
         // last thing done - reset
-        try! realm.write {
+        try! realm.write
+        {
             HomeViewController.mySession.reset()
         }
     }
@@ -165,16 +150,10 @@ class ResultViewController: UIViewController {
     
     func updateWinningAverage() // calculate average and update label
     {
-        var winningAverage: Int = HomeViewController.mySession.singleTime // for single time
-        if(HomeViewController.mySession.targetType == rangeWinning)
-        {
-            let random = GKRandomSource()
-            let winningTimeDistribution = GKGaussianDistribution(randomSource: random, lowestValue: HomeViewController.mySession.minTime, highestValue: HomeViewController.mySession.maxTime) // now using ints pays off. Distribution created easily
-            winningAverage = winningTimeDistribution.nextInt()
-        }
+        let winningAverage: Int = HomeViewController.mySession.singleTime // for single time
         
         let target = NSLocalizedString("TARGET:  ", comment: "")
-        let targetString = NSMutableAttributedString(string: "\(target)\(SolveTime.makeMyString(num: winningAverage))")
+        let targetString = NSMutableAttributedString(string: "\(target)\(SolveTime.makeMyString(num: winningAverage))", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
        targetString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: target.count, length: targetString.length - target.count))
         WinningAverageLabel.attributedText = targetString
         WinningAverageLabel.isHidden = false
@@ -187,19 +166,7 @@ class ResultViewController: UIViewController {
         if(HomeViewController.mySession.myAverageInt < winningAverage)
         {
             self.win()
-        }
-        else if(HomeViewController.mySession.myAverageInt == winningAverage) // 50% chance of winning in event of a tie
-        {
-            let rand = Int.random(in: 0...1)
-            if(rand == 0)
-            {
-                self.win()
-            }
-            else // 1
-            {
-                self.lose()
-            }
-        }
+        } // no more ties
         else
         {
             self.lose() // loss

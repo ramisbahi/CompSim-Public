@@ -282,7 +282,7 @@
 "dIR-c7-qh2.text" = "TIMING:";
 
 /* Class = "UIButton"; normalTitle = " Reset"; ObjectID = "dT7-pR-N0g"; */
-"dT7-pR-N0g.normalTitle" = " RESET";
+"dT7-pR-N0g.normalTitle" = "RESET";
 
 /* Class = "UIButton"; normalTitle = "Scramble Type: 3x3x3"; ObjectID = "dY5-wq-uM6"; */
 "dY5-wq-uM6.normalTitle" = "Scramble Type: 3x3x3";

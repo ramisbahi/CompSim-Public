@@ -51,6 +51,7 @@ extension UIDevice {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         
+
         UITabBarItem.appearance()
         .setTitleTextAttributes(
             [NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: 10)!],
@@ -77,6 +78,8 @@ extension UIDevice {
                     // And will update the schema on disk automatically
                 }
             })
+        
+        
         
         HomeViewController.deviceName = UIDevice.current.modelName
 

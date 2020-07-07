@@ -85,12 +85,12 @@ class AddSolveAlertViewController: UIViewController {
         {
             if count == 1 // do this only on second time this method is called
             {
-                TextField.font = HomeViewController.fontToFitHeight(view: TextField, multiplier: 0.85, name: "Futura")
+                TextField.font = HomeViewController.fontToFitHeight(view: TextField, multiplier: 0.85, name: "Lato-Black")
                 TextField.adjustsFontSizeToFitWidth = true
-                CancelButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: CancelButton, multiplier: 1.0, name: "Futura")
-                EnterButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: EnterButton, multiplier: 1.0, name: "Futura")
+                CancelButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: CancelButton, multiplier: 1.0, name: "Lato-Black")
+                EnterButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: EnterButton, multiplier: 1.0, name: "Lato-Black")
                 
-                PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal)
+                PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black"), NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
             }
             count += 1
         }

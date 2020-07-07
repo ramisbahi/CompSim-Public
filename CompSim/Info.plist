@@ -6,6 +6,7 @@
 	<array>
 		<string>Lato-Black.ttf</string>
 		<string>Lato-Regular.ttf</string>
+		<string>Lato-Bold.ttf</string>
 	</array>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Bluetooth will be used to connect to stackmat peripheral.</string>
