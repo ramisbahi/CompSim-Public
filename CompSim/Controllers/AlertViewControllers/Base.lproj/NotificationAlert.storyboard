@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Black.ttf">
+            <string>Lato-Black</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Notification Alert View Controller-->
         <scene sceneID="qj6-2A-eq6">
             <objects>
-                <viewController storyboardIdentifier="NotificationAlertVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Gb-Wn-yT0" customClass="NotificationAlertViewController" customModule="Pods_CompSim" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationAlertVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Gb-Wn-yT0" customClass="NotificationAlertViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qTg-Dw-KC0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-eC-0ZH">
-                                <rect key="frame" x="105.5" y="318" width="203" height="120"/>
+                                <rect key="frame" x="103" y="318" width="208.5" height="120"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qc8-6K-oHA">
-                                        <rect key="frame" x="0.0" y="0.0" width="203" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="208.5" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alL-wr-bU6">
-                                                <rect key="frame" x="20" y="8" width="163" height="39"/>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
+                                                <rect key="frame" x="20" y="9.5" width="168.5" height="36"/>
+                                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.029578437289999999" green="0.014975679760000001" blue="0.26617147019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="alL-wr-bU6" firstAttribute="leading" secondItem="Qc8-6K-oHA" secondAttribute="leading" constant="20" id="2KX-vI-OR5"/>
                                             <constraint firstItem="alL-wr-bU6" firstAttribute="centerY" secondItem="Qc8-6K-oHA" secondAttribute="centerY" id="3eY-sh-0Ua"/>
@@ -43,12 +49,12 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7a-NK-qnc">
-                                        <rect key="frame" x="36.5" y="65" width="130" height="45"/>
-                                        <color key="backgroundColor" red="1" green="0.64796585929999995" blue="0.2403306603" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <rect key="frame" x="39" y="65" width="130" height="45"/>
+                                        <color key="backgroundColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="130" id="2s8-TI-MMX"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="29"/>
+                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="29"/>
                                         <state key="normal" title="OK">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>

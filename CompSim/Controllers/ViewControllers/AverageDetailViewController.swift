@@ -76,7 +76,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         myCell.textLabel?.font = UIFont.init(name: "Lato-Black", size: 17.0)
         
         myCell.detailTextLabel?.text = currentTime.myScramble // each scramble
-        myCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 12.0)
+        myCell.detailTextLabel?.font = UIFont.init(name: "Lato-Regular", size: 12.0)
         
         if(HomeViewController.darkMode)
         {

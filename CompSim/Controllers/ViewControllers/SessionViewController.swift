@@ -442,7 +442,6 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         bestSingleAverageIndex = nil
         bestSingleSolveIndex = nil // index in average
-        bestSingleTransition = false
         let allTimes = HomeViewController.mySession.allTimes
         for averageIndex in 0..<allTimes.count
         {
@@ -479,13 +478,12 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             BestSingleButton.setTitle("Best single:  ", for: .normal)
         }
         
-        updateBestFonts()
+        //updateBestFonts()
     }
     
     func updateBestAverage()
     {
         bestAverageIndex = nil
-        bestAverageTransition = false
         let allAverages = HomeViewController.mySession.allAverages
         for currIndex in 0..<allAverages.count
         {
@@ -508,7 +506,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             BestAverageButton.setTitle("Best average:  ", for: .normal)
         }
         
-        updateBestFonts()
+        //updateBestFonts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -767,6 +765,10 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector (rename))
         doubleTapGesture.numberOfTapsRequired = 2
         SessionButton.addGestureRecognizer(doubleTapGesture)
+        
+        BestSingleButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        TargetButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        BestAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
     
         
         // Do any additional setup after loading the view.

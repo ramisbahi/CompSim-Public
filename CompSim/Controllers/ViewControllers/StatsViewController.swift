@@ -29,8 +29,19 @@ class StatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        BestSingleButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        MedianAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        BestAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        CurrentMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        BestMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        let radius = BestMoButton.frame.height / 2.0
+        BestMoButton.layer.cornerRadius = radius
+        CurrentMoButton.layer.cornerRadius = radius
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,7 +117,16 @@ class StatsViewController: UIViewController {
             {
                 minString = String(minString[start..<end])
             }
-            BestSingleButton.setTitle(minString, for: .normal)
+            
+            
+            let single = NSLocalizedString("Best single:  ", comment: "")
+             let singleString = NSMutableAttributedString(string: "\(single)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+            singleString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: single.count, length: singleString.length - single.count))
+            BestSingleButton.setAttributedTitle(singleString, for: .normal)
+        }
+        else
+        {
+            BestSingleButton.setTitle("Best single:  ", for: .normal)
         }
     }
     
@@ -125,7 +145,15 @@ class StatsViewController: UIViewController {
         
         if(bestAverageIndex != nil)
         {
-            BestAverageButton.setTitle(allAverages[bestAverageIndex!], for: .normal)
+            let minString = allAverages[bestAverageIndex!]
+            let average = NSLocalizedString("Best average:  ", comment: "")
+             let averageString = NSMutableAttributedString(string: "\(average)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+            averageString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: average.count, length: averageString.length - average.count))
+            BestAverageButton.setAttributedTitle(averageString, for: .normal)
+        }
+        else
+        {
+            BestAverageButton.setTitle("Best average:  ", for: .normal)
         }
     }
     
@@ -140,9 +168,9 @@ class StatsViewController: UIViewController {
         {
             return
         }
-        var median: String = ""
+        var medianTimeString: String = ""
         if sorted.count % 2 != 0 {
-            median = sorted[sorted.count / 2]
+            medianTimeString = sorted[sorted.count / 2]
         }
         else
         {
@@ -150,14 +178,18 @@ class StatsViewController: UIViewController {
             let medianInt = SolveTime.makeIntTime(num: medianFloat)
             if medianInt > 99999 // DNF
             {
-                median = "DNF"
+                medianTimeString = "DNF"
             }
             else
             {
-                median = SolveTime.makeMyString(num: medianInt)
+                medianTimeString = SolveTime.makeMyString(num: medianInt)
             }
         }
-        MedianAverageButton.setTitle(median, for: .normal)
+        
+        let median = NSLocalizedString("MEDIAN AVERAGE:  ", comment: "")
+         let medianString = NSMutableAttributedString(string: "\(median)\(medianTimeString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+        medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: median.count, length: medianString.length - median.count))
+        MedianAverageButton.setAttributedTitle(medianString, for: .normal)
     }
     
     func updateMo()

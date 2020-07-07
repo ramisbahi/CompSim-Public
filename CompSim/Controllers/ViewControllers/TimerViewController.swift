@@ -72,7 +72,7 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
         super.viewDidLoad()
         
         TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Lato-Regular")
-        SubmitButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.07, name: "Futura")
+        SubmitButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.065, name: "Lato-Black")
         
         
         if(HomeViewController.inspection)
@@ -84,7 +84,7 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
         {
             makeDarkMode()
         }
-        CancelButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: CancelButton, multiplier: 0.9, name: "Futura")
+        CancelButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: CancelButton, multiplier: 0.75, name: "Lato-Black")
         let stringSize = CancelButton.titleLabel?.intrinsicContentSize.width
         CancelButton.widthAnchor.constraint(equalToConstant: stringSize! + 45).isActive = true
         
@@ -153,14 +153,7 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     }
     
     override func viewDidLayoutSubviews() {
-        if(HomeViewController.darkMode)
-        {
-            PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal) //- later make white\
-        }
-        else
-        {
-            PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Futura")], for: .normal)
-        }
+        PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black")], for: .normal) //- later make white
     }
     
     static func initializeFormatters()

@@ -9,13 +9,13 @@
 "0mn-7A-bip.text" = "SOLVE TYPE:";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "128-wP-cbk"; */
-"128-wP-cbk.normalTitle" = "Submit";
+"128-wP-cbk.normalTitle" = "SUBMIT";
 
 /* Class = "UILabel"; text = "1. "; ObjectID = "19s-pB-dw1"; */
 "19s-pB-dw1.text" = "1. ";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "1DX-31-wVt"; */
-"1DX-31-wVt.normalTitle" = "Submit";
+"1DX-31-wVt.normalTitle" = "SUBMIT";
 
 /* Class = "UIButton"; normalTitle = "5.00"; ObjectID = "2pc-dx-UvZ"; */
 "2pc-dx-UvZ.normalTitle" = "5.00";
@@ -120,7 +120,7 @@
 "HdL-ZN-fqF.normalTitle" = "New Scramble";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "HqU-L4-G5C"; */
-"HqU-L4-G5C.normalTitle" = "Submit";
+"HqU-L4-G5C.normalTitle" = "SUBMIT";
 
 /* Class = "UILabel"; text = "1.59"; ObjectID = "Jx0-kk-u4e"; */
 "Jx0-kk-u4e.text" = "1.59";
@@ -192,7 +192,7 @@
 "Qv8-kR-Kjg.normalTitle" = "3x3x3";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "QyJ-aL-dKn"; */
-"QyJ-aL-dKn.normalTitle" = "Submit";
+"QyJ-aL-dKn.normalTitle" = "SUBMIT";
 
 /* Class = "UILabel"; text = "Dark Mode"; ObjectID = "R04-Tx-5Ya"; */
 "R04-Tx-5Ya.text" = "DARK MODE:";
@@ -225,7 +225,7 @@
 "TMk-UC-HpA.title" = "CompSim";
 
 /* Class = "UIButton"; normalTitle = " Cancel"; ObjectID = "UCL-Ih-tTs"; */
-"UCL-Ih-tTs.normalTitle" = " Cancel";
+"UCL-Ih-tTs.normalTitle" = " CANCEL";
 
 /* Class = "UILabel"; text = "Privacy"; ObjectID = "Ujd-7l-fl5"; */
 "Ujd-7l-fl5.text" = "Privacy";
@@ -309,7 +309,7 @@
 "iaF-h0-J9O.normalTitle" = "3x3x3 BLD";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "j4y-uh-kgd"; */
-"j4y-uh-kgd.normalTitle" = "Submit";
+"j4y-uh-kgd.normalTitle" = "SUBMIT";
 
 /* Class = "UIButton"; normalTitle = "Megaminx"; ObjectID = "jHQ-BN-QdQ"; */
 "jHQ-BN-QdQ.normalTitle" = "Megaminx";

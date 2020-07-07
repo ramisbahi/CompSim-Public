@@ -67,9 +67,9 @@ class ViewSolveAlertViewController: UIViewController {
             DoneCenterConstraint.isActive = false
         }
         
-        ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "System")
+        ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "Lato-Regular")
         
-        PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Futura", size: 14.0)!], for: .normal)
+        PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black"), NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
     }
     
     @IBAction func DonePressed(_ sender: Any) {

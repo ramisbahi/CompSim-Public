@@ -31,6 +31,7 @@
 "Help" = "Help";
 "Best single:  " = "Best single:  ";
 "Best average:  " = "Best average:  ";
+"MEDIAN AVERAGE:  " = "MEDIAN AVERAGE:  ";
 
 "CompSim Description" = "CompSim is a professional speedcubing competition simulator. This is different from a regular timer; with CompSim, you do solves in an average of 5, mean of 3, or best of 3 format, depending on the event you are doing. In many ways, it works like a normal cubing timer, but it comes with its own unique features as well.";
 
