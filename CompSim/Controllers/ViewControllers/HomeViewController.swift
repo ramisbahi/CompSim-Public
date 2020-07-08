@@ -517,6 +517,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
             })
+            button.setTitleColor(.white, for: .normal)
         }
         
         guard let title = sender.currentTitle else
@@ -525,6 +526,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         }
         
         SessionButton.setTitle(title, for: .normal)
+        sender.setTitleColor(HomeViewController.orangeColor(), for: .normal)
+        
         if title != HomeViewController.mySession.name // exists,// not same - so switch session
         {
             HomeViewController.mySession = sessionNamed(title: title)!
@@ -557,11 +560,16 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     // called whenever something changed with sessions
     func setUpStackView()
     {
+        SessionButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
         SessionButton.setTitle(HomeViewController.mySession.name, for: .normal)
         SessionCollection = []
         for session in HomeViewController.allSessions
         {
             let newButton = createButton(name: session.name)
+            if session.name == HomeViewController.mySession.name
+            {
+                newButton.setTitleColor(HomeViewController.orangeColor(), for: .normal)
+            }
             SessionCollection.append(newButton)
             SessionStackView.addArrangedSubview(newButton)
         }
@@ -615,13 +623,28 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         
         if(HomeViewController.timing == 2)
         {
             removeIncomingData()
         }
         
+        closeStack()
+            
+            super.viewWillDisappear(animated)
+            
+            
+    }
+        
+    func closeStack()
+    {
+        for button in SessionStackView.subviews
+        {
+            if button != SessionButton
+            {
+                button.isHidden = true
+            }
+        }
     }
     
     

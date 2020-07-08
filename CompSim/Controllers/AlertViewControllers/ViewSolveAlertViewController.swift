@@ -31,6 +31,7 @@ class ViewSolveAlertViewController: UIViewController {
     @IBOutlet weak var DeleteButton: UIButton!
     @IBOutlet weak var DoneCenterConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet var BigView: UIView!
     
     override func viewDidLoad() {
@@ -70,6 +71,8 @@ class ViewSolveAlertViewController: UIViewController {
         ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "Lato-Regular")
         
         PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black"), NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        
+        CancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     @IBAction func DonePressed(_ sender: Any) {
@@ -82,6 +85,9 @@ class ViewSolveAlertViewController: UIViewController {
         deleteAction?()
     }
     
+    @IBAction func CancelPressed(_ sender: Any) {
+        dismiss(animated: true)
+    }
     
     /*
     // MARK: - Navigation

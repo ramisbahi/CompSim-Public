@@ -28,7 +28,7 @@ class TabBarController: UITabBarController {
         }
         else
         {
-            self.selectedIndex = 0
+            self.selectedIndex = 1
         }
 
         // Do any additional setup after loading the view.

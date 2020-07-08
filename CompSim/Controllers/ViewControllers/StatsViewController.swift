@@ -26,6 +26,15 @@ class StatsViewController: UIViewController {
     @IBOutlet weak var CurrentMoButton: UIButton!
     @IBOutlet weak var BestMoButton: UIButton!
     
+    @IBOutlet weak var CurrentMoLabel: UILabel!
+    @IBOutlet weak var BestMoLabel: UILabel!
+    
+    @IBOutlet weak var SessionStackView: UIStackView!
+    @IBOutlet weak var SessionButton: UIButton!
+    
+    var moChartEntries = [ChartDataEntry]()
+    var SessionCollection: [UIButton] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +43,19 @@ class StatsViewController: UIViewController {
         BestAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
         CurrentMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
         BestMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        BestMoLabel.adjustsFontSizeToFitWidth = true
+        CurrentMoLabel.adjustsFontSizeToFitWidth = true
+        
+        lineChart.setScaleEnabled(true)
+        lineChart.noDataText = "No averages in this session yet!"
+        lineChart.xAxis.labelFont = UIFont(name: "Lato-Black", size: 12.0)!
+        lineChart.xAxis.labelTextColor = HomeViewController.darkBlueColor()
+        lineChart.xAxis.labelPosition = .bottom
+        lineChart.leftAxis.labelFont = UIFont(name: "Lato-Black", size: 12.0)!
+        lineChart.leftAxis.labelTextColor = HomeViewController.darkBlueColor()
+        lineChart.rightAxis.enabled = false
+    
 
         // Do any additional setup after loading the view.
     }
@@ -44,13 +66,120 @@ class StatsViewController: UIViewController {
         CurrentMoButton.layer.cornerRadius = radius
     }
     
+    @IBAction func SessionButtonClicked(_ sender: Any) {
+        if SessionCollection.count > 0
+        {
+            if SessionCollection[0].isHidden
+            {
+                SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+            }
+            else
+            {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
+                {
+                    self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+                }
+            }
+        }
+        
+        SessionCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    func sessionNamed(title: String) -> Session?
+    {
+        for session in HomeViewController.allSessions
+        {
+            if session.name == title
+            {
+                return session
+            }
+        }
+        return nil
+    }
+    
+    @objc func SessionSelected(_ sender: UIButton) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
+        {
+            self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        }
+        SessionCollection.forEach { (button) in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            })
+            button.setTitleColor(.white, for: .normal)
+        }
+        
+        guard let title = sender.currentTitle else
+        {
+            return // doesn't have title
+        }
+        
+        SessionButton.setTitle(title, for: .normal)
+        sender.setTitleColor(HomeViewController.orangeColor(), for: .normal)
+        
+        if title != HomeViewController.mySession.name // exists,// not same - so switch session
+        {
+            HomeViewController.mySession = sessionNamed(title: title)!
+            HomeViewController.mySession.updateScrambler()
+            updateLabels()
+            updateGraph()
+            HomeViewController.mySession.scrambler.genScramble()
+            HomeViewController.sessionChanged = false
+        }
+    }
+    
+    func createButton(name: String) -> UIButton
+    {
+        SessionCollection.forEach({button in
+            button.layer.cornerRadius = 0.0
+        })
+        
+        let retButton = UIButton(type: .system)
+        retButton.setTitle(name, for: .normal)
+        retButton.isHidden = true
+        retButton.setTitleColor(.white, for: .normal)
+        retButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 17)
+        retButton.backgroundColor = HomeViewController.darkBlueColor()
+        retButton.isUserInteractionEnabled = true
+        retButton.addTarget(self, action: #selector(SessionSelected(_:)), for: UIControl.Event.touchUpInside)
+        retButton.layer.cornerRadius = 6.0
+        retButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        return retButton
+    }
+    
+    // called whenever something changed with sessions
+    func setUpStackView()
+    {
+        SessionButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+        SessionButton.setTitle(HomeViewController.mySession.name, for: .normal)
+        SessionCollection = []
+        for session in HomeViewController.allSessions
+        {
+            let newButton = createButton(name: session.name)
+            if session.name == HomeViewController.mySession.name
+            {
+                newButton.setTitleColor(HomeViewController.orangeColor(), for: .normal)
+            }
+            SessionCollection.append(newButton)
+            SessionStackView.addArrangedSubview(newButton)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("STATS VIEW WILL APPEAR")
         
-        updateGraph()
+        setUpStackView()
         
         updateLabels()
+        
+        updateGraph()
     }
     
     func updateGraph()
@@ -67,16 +196,20 @@ class StatsViewController: UIViewController {
             i += 1
         }
         
-        let line = LineChartDataSet(entries: lineChartEntries, label: HomeViewController.mySession.name)
-        line.colors = [NSUIColor.blue]
+        let line = LineChartDataSet(entries: lineChartEntries, label: "WCA")
+        line.colors = [HomeViewController.darkBlueColor()]
         line.drawCirclesEnabled = false
+        
+        let moLine = LineChartDataSet(entries: moChartEntries, label: "WCAmo10")
+        moLine.colors = [HomeViewController.orangeColor()]
+        moLine.drawCirclesEnabled = false
         
         let data = LineChartData()
         data.addDataSet(line)
+        data.addDataSet(moLine)
         
         lineChart.data = data
-        lineChart.setScaleEnabled(true)
-        lineChart.noDataText = "No averages in this session yet!"
+        
     }
     
     func updateLabels()
@@ -84,6 +217,7 @@ class StatsViewController: UIViewController {
         updateBestSingle()
         updateBestAverage()
         updateMedianAverage()
+        moChartEntries = []
         updateMo()
     }
     
@@ -207,9 +341,13 @@ class StatsViewController: UIViewController {
                 sum += averages[i].toFloatTime()
             }
             
-            if sum / 10.0 < bestMo
+            let initialMo: Float = sum / 10.0
+            
+            moChartEntries.append(ChartDataEntry(x: 10.0, y: Double(initialMo)))
+            
+            if initialMo < bestMo
             {
-                bestMo = sum / 10.0
+                bestMo = initialMo
             }
             
             for i in 10..<averages.count
@@ -217,9 +355,16 @@ class StatsViewController: UIViewController {
                 sum -= averages[i - 10].toFloatTime()
                 sum += averages[i].toFloatTime()
                 
-                if sum / 10.0 < bestMo
+                let currentMo = sum / 10.0
+                
+                if currentMo < 9999
                 {
-                    bestMo = sum / 10.0
+                    moChartEntries.append(ChartDataEntry(x: Double(i + 1), y: Double(currentMo)))
+                }
+                
+                if currentMo < bestMo
+                {
+                    bestMo = currentMo
                 }
             }
             
@@ -243,6 +388,22 @@ class StatsViewController: UIViewController {
         }
         
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        closeStack()
+        super.viewWillDisappear(animated)
+    }
+        
+    func closeStack()
+    {
+        for button in SessionStackView.subviews
+        {
+            if button != SessionButton
+            {
+                button.isHidden = true
+            }
+        }
     }
 
     @IBAction func BestSingleClicked(_ sender: Any) {

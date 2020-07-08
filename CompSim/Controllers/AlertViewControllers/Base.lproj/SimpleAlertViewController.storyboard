@@ -11,6 +11,9 @@
         <array key="Lato-Black.ttf">
             <string>Lato-Black</string>
         </array>
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Simple Alert View Controller-->
@@ -28,18 +31,37 @@
                                         <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Solve?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRg-Dx-7xP">
-                                                <rect key="frame" x="10" y="10.666666666666657" width="307.33333333333331" height="34"/>
+                                                <rect key="frame" x="57.333333333333329" y="2" width="212.66666666666669" height="51"/>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="29"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tw-It-BcZ">
+                                                <rect key="frame" x="5" y="0.0" width="47.333333333333336" height="55"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="34"/>
+                                                <state key="normal" title="←">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="cancelPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="kvu-qq-rSS"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
+                                            <constraint firstItem="GRg-Dx-7xP" firstAttribute="leading" secondItem="2tw-It-BcZ" secondAttribute="trailing" constant="5" id="3yJ-JX-inh"/>
                                             <constraint firstItem="GRg-Dx-7xP" firstAttribute="centerX" secondItem="UWs-hZ-csw" secondAttribute="centerX" id="9qv-MD-gDt"/>
-                                            <constraint firstItem="GRg-Dx-7xP" firstAttribute="centerY" secondItem="UWs-hZ-csw" secondAttribute="centerY" id="NhY-So-oPp"/>
-                                            <constraint firstAttribute="trailing" secondItem="GRg-Dx-7xP" secondAttribute="trailing" constant="10" id="UPS-qo-o5W"/>
-                                            <constraint firstItem="GRg-Dx-7xP" firstAttribute="leading" secondItem="UWs-hZ-csw" secondAttribute="leading" constant="10" id="gk4-jP-40I"/>
+                                            <constraint firstItem="GRg-Dx-7xP" firstAttribute="width" secondItem="UWs-hZ-csw" secondAttribute="width" multiplier="0.65" id="EVE-8L-JuZ"/>
+                                            <constraint firstItem="2tw-It-BcZ" firstAttribute="leading" secondItem="UWs-hZ-csw" secondAttribute="leading" constant="5" id="RI1-6v-doO"/>
+                                            <constraint firstAttribute="bottom" secondItem="GRg-Dx-7xP" secondAttribute="bottom" constant="2" id="fwy-Uf-A9l"/>
+                                            <constraint firstItem="GRg-Dx-7xP" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="top" constant="2" id="lBc-Ss-fHo"/>
+                                            <constraint firstAttribute="bottom" secondItem="2tw-It-BcZ" secondAttribute="bottom" id="uYS-M9-gX6"/>
+                                            <constraint firstItem="2tw-It-BcZ" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="top" id="udJ-CN-iqh"/>
                                             <constraint firstAttribute="height" constant="55" id="wfv-bo-yO8"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -49,7 +71,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbl-pC-1d9">
-                                        <rect key="frame" x="178.66666666666666" y="75" width="108.66666666666666" height="41"/>
+                                        <rect key="frame" x="106.33333333333331" y="75" width="114.66666666666669" height="41"/>
                                         <color key="backgroundColor" red="0.64313725489999995" green="0.01176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="23"/>
                                         <state key="normal" title="Yes">
@@ -64,22 +86,6 @@
                                             <action selector="yesPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="e1Y-AJ-stl"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIg-EF-rnM">
-                                        <rect key="frame" x="39.999999999999993" y="75" width="108.66666666666666" height="41"/>
-                                        <color key="backgroundColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="23"/>
-                                        <state key="normal" title="Cancel">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="cancelPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="KzX-Er-h3I"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -88,18 +94,13 @@
                                 <constraints>
                                     <constraint firstItem="Xbl-pC-1d9" firstAttribute="height" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="0.3" id="0b5-Su-G7w"/>
                                     <constraint firstItem="Xbl-pC-1d9" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="bottom" constant="20" id="2xd-T7-Dbv"/>
-                                    <constraint firstItem="PIg-EF-rnM" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="bottom" constant="20" id="9JB-5e-dkz"/>
-                                    <constraint firstAttribute="bottom" secondItem="PIg-EF-rnM" secondAttribute="bottom" constant="20" id="DdY-Fm-HOW"/>
-                                    <constraint firstItem="PIg-EF-rnM" firstAttribute="width" secondItem="Xbl-pC-1d9" secondAttribute="width" id="J3o-Zm-T4p"/>
-                                    <constraint firstItem="PIg-EF-rnM" firstAttribute="leading" secondItem="MLA-Qw-t8w" secondAttribute="leading" constant="40" id="KwF-EZ-Aen"/>
+                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="width" secondItem="MLA-Qw-t8w" secondAttribute="width" multiplier="0.35" id="79C-lz-dbI"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="top" secondItem="MLA-Qw-t8w" secondAttribute="top" id="Lzh-WI-bel"/>
                                     <constraint firstAttribute="bottom" secondItem="Xbl-pC-1d9" secondAttribute="bottom" constant="20" id="RhZ-Wc-ndD"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="centerX" secondItem="MLA-Qw-t8w" secondAttribute="centerX" id="ULe-of-teS"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="leading" secondItem="MLA-Qw-t8w" secondAttribute="leading" id="VWL-nK-toV"/>
-                                    <constraint firstAttribute="trailing" secondItem="Xbl-pC-1d9" secondAttribute="trailing" constant="40" id="VYX-Wz-O04"/>
-                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="leading" secondItem="PIg-EF-rnM" secondAttribute="trailing" constant="30" id="arU-eu-rjj"/>
                                     <constraint firstAttribute="trailing" secondItem="UWs-hZ-csw" secondAttribute="trailing" id="cgq-ue-KNd"/>
-                                    <constraint firstItem="PIg-EF-rnM" firstAttribute="height" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="0.3" id="oXJ-aI-sSZ"/>
+                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="centerX" secondItem="MLA-Qw-t8w" secondAttribute="centerX" id="sh9-Jc-FCK"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -116,7 +117,7 @@
                         <viewLayoutGuide key="safeArea" id="99y-dq-5HU"/>
                     </view>
                     <connections>
-                        <outlet property="CancelButton" destination="PIg-EF-rnM" id="e0A-sM-bp7"/>
+                        <outlet property="CancelButton" destination="2tw-It-BcZ" id="2ss-Qm-KL0"/>
                         <outlet property="SimpleTitle" destination="GRg-Dx-7xP" id="5KL-Vx-C0e"/>
                         <outlet property="SimpleView" destination="UWs-hZ-csw" id="5NV-el-CKS"/>
                         <outlet property="YesButton" destination="Xbl-pC-1d9" id="FBL-N0-6Tr"/>

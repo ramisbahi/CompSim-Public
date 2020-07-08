@@ -31,18 +31,36 @@
                                         <rect key="frame" x="0.0" y="0.0" width="329.33333333333331" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.59" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Aa-xs-kbh">
-                                                <rect key="frame" x="5" y="5.3333333333333428" width="319.33333333333331" height="44.666666666666664"/>
+                                                <rect key="frame" x="57.666666666666657" y="5.3333333333333428" width="213.99999999999997" height="44.666666666666664"/>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="37"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ME7-KI-XS6">
+                                                <rect key="frame" x="5" y="0.0" width="47.666666666666664" height="55"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="34"/>
+                                                <state key="normal" title="←">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="CancelPressed:" destination="s1b-WJ-Edh" eventType="touchUpInside" id="6Zz-ZY-r2x"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
+                                            <constraint firstItem="ME7-KI-XS6" firstAttribute="top" secondItem="ue8-JV-7ll" secondAttribute="top" id="In3-ZO-kMK"/>
+                                            <constraint firstItem="ME7-KI-XS6" firstAttribute="leading" secondItem="ue8-JV-7ll" secondAttribute="leading" constant="5" id="Q94-tu-vko"/>
                                             <constraint firstAttribute="height" constant="55" id="Sc0-jd-Eac"/>
-                                            <constraint firstAttribute="trailing" secondItem="4Aa-xs-kbh" secondAttribute="trailing" constant="5" id="VBK-WL-6VY"/>
+                                            <constraint firstItem="4Aa-xs-kbh" firstAttribute="width" secondItem="ue8-JV-7ll" secondAttribute="width" multiplier="0.65" id="V7P-h8-P5s"/>
                                             <constraint firstItem="4Aa-xs-kbh" firstAttribute="centerY" secondItem="ue8-JV-7ll" secondAttribute="centerY" id="Z1B-c6-BFl"/>
-                                            <constraint firstItem="4Aa-xs-kbh" firstAttribute="leading" secondItem="ue8-JV-7ll" secondAttribute="leading" constant="5" id="tnH-3t-jga"/>
+                                            <constraint firstAttribute="bottom" secondItem="ME7-KI-XS6" secondAttribute="bottom" id="dVK-Ao-bCc"/>
+                                            <constraint firstItem="4Aa-xs-kbh" firstAttribute="leading" secondItem="ME7-KI-XS6" secondAttribute="trailing" constant="5" id="tnO-iu-0nj"/>
                                             <constraint firstItem="4Aa-xs-kbh" firstAttribute="centerX" secondItem="ue8-JV-7ll" secondAttribute="centerX" id="xud-Za-n4M"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -154,6 +172,7 @@
                     </view>
                     <connections>
                         <outlet property="BigView" destination="OAb-aQ-hhW" id="clh-jk-8aZ"/>
+                        <outlet property="CancelButton" destination="ME7-KI-XS6" id="N9V-4c-MGa"/>
                         <outlet property="DeleteButton" destination="dM1-DV-6dl" id="16n-5d-Yj6"/>
                         <outlet property="DoneButton" destination="n3B-kK-PSt" id="nyd-Ax-5BP"/>
                         <outlet property="DoneCenterConstraint" destination="t7V-ZP-hzU" id="Jhh-dS-bYr"/>
