@@ -55,6 +55,7 @@ class StatsViewController: UIViewController {
         lineChart.leftAxis.labelFont = UIFont(name: "Lato-Black", size: 12.0)!
         lineChart.leftAxis.labelTextColor = HomeViewController.darkBlueColor()
         lineChart.rightAxis.enabled = false
+        
     
 
         // Do any additional setup after loading the view.
@@ -207,6 +208,7 @@ class StatsViewController: UIViewController {
         let data = LineChartData()
         data.addDataSet(line)
         data.addDataSet(moLine)
+        data.setDrawValues(false)
         
         lineChart.data = data
         

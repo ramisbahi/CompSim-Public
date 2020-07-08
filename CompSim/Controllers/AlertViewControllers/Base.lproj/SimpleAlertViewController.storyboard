@@ -11,9 +11,6 @@
         <array key="Lato-Black.ttf">
             <string>Lato-Black</string>
         </array>
-        <array key="Lato-Regular.ttf">
-            <string>Lato-Regular</string>
-        </array>
     </customFonts>
     <scenes>
         <!--Simple Alert View Controller-->
@@ -30,7 +27,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWs-hZ-csw">
                                         <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="55"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Solve?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRg-Dx-7xP">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Solve?" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRg-Dx-7xP">
                                                 <rect key="frame" x="57.333333333333329" y="2" width="212.66666666666669" height="51"/>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="29"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -38,7 +35,7 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tw-It-BcZ">
                                                 <rect key="frame" x="5" y="0.0" width="47.333333333333336" height="55"/>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="34"/>
+                                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="50"/>
                                                 <state key="normal" title="←">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
@@ -71,7 +68,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbl-pC-1d9">
-                                        <rect key="frame" x="106.33333333333331" y="75" width="114.66666666666669" height="41"/>
+                                        <rect key="frame" x="180" y="75" width="98" height="41"/>
                                         <color key="backgroundColor" red="0.64313725489999995" green="0.01176470588" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="23"/>
                                         <state key="normal" title="Yes">
@@ -86,6 +83,22 @@
                                             <action selector="yesPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="e1Y-AJ-stl"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeX-Qj-5kb">
+                                        <rect key="frame" x="49.333333333333343" y="75" width="98" height="41"/>
+                                        <color key="backgroundColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="23"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="noy-Ki-Qr4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -94,13 +107,18 @@
                                 <constraints>
                                     <constraint firstItem="Xbl-pC-1d9" firstAttribute="height" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="0.3" id="0b5-Su-G7w"/>
                                     <constraint firstItem="Xbl-pC-1d9" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="bottom" constant="20" id="2xd-T7-Dbv"/>
-                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="width" secondItem="MLA-Qw-t8w" secondAttribute="width" multiplier="0.35" id="79C-lz-dbI"/>
+                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="width" secondItem="MLA-Qw-t8w" secondAttribute="width" multiplier="0.3" id="79C-lz-dbI"/>
+                                    <constraint firstItem="eeX-Qj-5kb" firstAttribute="width" secondItem="MLA-Qw-t8w" secondAttribute="width" multiplier="0.3" id="E0w-VO-v0W"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="top" secondItem="MLA-Qw-t8w" secondAttribute="top" id="Lzh-WI-bel"/>
                                     <constraint firstAttribute="bottom" secondItem="Xbl-pC-1d9" secondAttribute="bottom" constant="20" id="RhZ-Wc-ndD"/>
+                                    <constraint firstItem="eeX-Qj-5kb" firstAttribute="centerX" secondItem="MLA-Qw-t8w" secondAttribute="centerX" multiplier="0.6" id="TWb-Pq-4FN"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="centerX" secondItem="MLA-Qw-t8w" secondAttribute="centerX" id="ULe-of-teS"/>
                                     <constraint firstItem="UWs-hZ-csw" firstAttribute="leading" secondItem="MLA-Qw-t8w" secondAttribute="leading" id="VWL-nK-toV"/>
+                                    <constraint firstAttribute="bottom" secondItem="eeX-Qj-5kb" secondAttribute="bottom" constant="20" id="XAD-mC-h89"/>
                                     <constraint firstAttribute="trailing" secondItem="UWs-hZ-csw" secondAttribute="trailing" id="cgq-ue-KNd"/>
-                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="centerX" secondItem="MLA-Qw-t8w" secondAttribute="centerX" id="sh9-Jc-FCK"/>
+                                    <constraint firstItem="eeX-Qj-5kb" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="bottom" constant="20" id="kF1-Xx-5li"/>
+                                    <constraint firstItem="Xbl-pC-1d9" firstAttribute="centerX" secondItem="MLA-Qw-t8w" secondAttribute="centerX" multiplier="1.4" id="sh9-Jc-FCK"/>
+                                    <constraint firstItem="eeX-Qj-5kb" firstAttribute="height" secondItem="MLA-Qw-t8w" secondAttribute="height" multiplier="0.3" id="zn9-Wj-ntr"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -117,7 +135,8 @@
                         <viewLayoutGuide key="safeArea" id="99y-dq-5HU"/>
                     </view>
                     <connections>
-                        <outlet property="CancelButton" destination="2tw-It-BcZ" id="2ss-Qm-KL0"/>
+                        <outlet property="CancelButton" destination="eeX-Qj-5kb" id="GTA-29-17B"/>
+                        <outlet property="CancelButton2" destination="2tw-It-BcZ" id="dIJ-Yp-Z3K"/>
                         <outlet property="SimpleTitle" destination="GRg-Dx-7xP" id="5KL-Vx-C0e"/>
                         <outlet property="SimpleView" destination="UWs-hZ-csw" id="5NV-el-CKS"/>
                         <outlet property="YesButton" destination="Xbl-pC-1d9" id="FBL-N0-6Tr"/>

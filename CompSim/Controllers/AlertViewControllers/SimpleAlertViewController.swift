@@ -14,6 +14,7 @@ class SimpleAlertViewController: UIViewController {
     @IBOutlet weak var SimpleView: UIView!
     @IBOutlet weak var YesButton: UIButton!
     @IBOutlet weak var CancelButton: UIButton!
+    @IBOutlet weak var CancelButton2: UIButton!
     
     var enterAction: (() -> Void)?
     var myTitle = String()
@@ -34,6 +35,7 @@ class SimpleAlertViewController: UIViewController {
 
         YesButton.titleLabel?.adjustsFontSizeToFitWidth = true
         CancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        CancelButton2.titleLabel?.adjustsFontSizeToFitWidth = true
         // Do any additional setup after loading the view.
     }
     
