@@ -30,6 +30,16 @@ extension String {
     }
 }
 
+extension UIView{
+    func rotate(duration: CFTimeInterval, radians: Float) {
+        let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotation.toValue = NSNumber(value: radians)
+        rotation.duration = duration
+        rotation.isCumulative = true
+        self.layer.add(rotation, forKey: "rotationAnimation")
+    }
+}
+
 class HomeViewController: UIViewController, CBPeripheralManagerDelegate
 {
     @IBOutlet var BigView: UIView!
@@ -63,6 +73,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     @IBOutlet weak var MicButton: UIButton!
     
     @IBOutlet weak var Logo: UIImageView!
+    
+    @IBOutlet weak var refreshImage: UIImageView!
     
     static var scrambleChanged = false
     
@@ -303,18 +315,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         
     }
     
-    /*
-    func pastHoldingTime() -> Bool
-    {
-        var info = mach_timebase_info()
-        guard mach_timebase_info(&info) == KERN_SUCCESS else { return false  }
-        let currentTime = mach_absolute_time()
-        let nano = UInt64(currentTime - self.holdStartTime) * UInt64(info.numer) / UInt64(info.denom)
-        let timePassed =  Float(nano) / 1000000000.0
-        
-        return timePassed >= HomeViewController.holdingTime
-    }*/
-    
     func stackmatReleased()
     {
         if HomeViewController.timerPhase == self.FROZEN
@@ -478,6 +478,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
             {
                 SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
                 if #available(iOS 13.0, *) {
+                    //SessionButton.imageView?.rotate(duration: 0.25, radians: 0.5*Float.pi)
                     UIView.setAnimationsEnabled(false)
                     SessionButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
                     self.view.layoutIfNeeded()
@@ -689,6 +690,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     {
         HomeViewController.mySession.scrambler.genScramble()
         ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
+        refreshImage.rotate(duration: 0.75, radians: 2*Float.pi)
         updateDrawScramble()
     }
     

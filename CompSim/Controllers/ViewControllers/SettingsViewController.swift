@@ -64,9 +64,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
      (didUpdateNotificationStateForCharacteristic will cancel the connection if a subscription is involved)
      */
     func disconnectFromDevice () {
-        if blePeripheral != nil {
-            // We have a connection to the device but we are not subscribed to the Transfer Characteristic for some reason.
-            // Therefore, we will just disconnect from the peripheral
+        if blePeripheral != nil
+        {
             centralManager?.cancelPeripheralConnection(blePeripheral!)
         }
     }
@@ -80,19 +79,17 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     /*
      Called when the central manager discovers a peripheral while scanning. Also, once peripheral is connected, cancel scanning.
      */
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        
-        blePeripheral = peripheral
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,advertisementData: [String : Any], rssi RSSI: NSNumber)
+    {
+        print("diddiscover method is called")
         self.peripherals.append(peripheral)
         self.RSSIs.append(RSSI)
         peripheral.delegate = self
         self.baseTableView.reloadData()
-        if blePeripheral == nil {
-            print("Found new pheripheral devices with services")
-            print("Peripheral name: \(String(describing: peripheral.name))")
-            print("**********************************")
-            print ("Advertisement Data : \(advertisementData)")
-        }
+        print("Found new pheripheral devices with services")
+        print("Peripheral name: \(String(describing: peripheral.name))")
+        print("**********************************")
+        print ("Advertisement Data : \(advertisementData)")
     }
     
     //Peripheral Connections: Connecting, Connected, Disconnected
@@ -387,6 +384,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         if(HomeViewController.timing == 2) // changing from stackmat
         {
             hideTable()
+            cancelScan()
             disconnectFromDevice()
         }
         

@@ -410,9 +410,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lgK-5W-Uhl">
-                                                <rect key="frame" x="55" y="837.33333333333337" width="304" height="31"/>
+                                                <rect key="frame" x="87.666666666666686" y="837.33333333333337" width="239" height="31"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="300" id="fcH-Bc-TBc"/>
+                                                    <constraint firstAttribute="width" constant="235" id="fcH-Bc-TBc"/>
                                                 </constraints>
                                                 <color key="minimumTrackTintColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <color key="maximumTrackTintColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -486,7 +486,7 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RSSI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJl-Xy-PPh">
                                                                     <rect key="frame" x="14" y="52" width="120" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
+                                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -1200,7 +1200,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jgk-eF-5k8">
@@ -1362,14 +1362,14 @@
                                 <rect key="frame" x="10" y="83.999999999999986" width="394" height="171.66666666666663"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="6f7-8F-Jmq">
-                                        <rect key="frame" x="7.9999999999999982" y="7.9999999999999982" width="25.333333333333329" height="25.333333333333329"/>
+                                        <rect key="frame" x="7.9999999999999982" y="6.9999999999999982" width="25.333333333333329" height="25.333333333333329"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6f7-8F-Jmq" secondAttribute="height" id="kqP-zo-VTD"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to refresh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="AFj-1f-Hw0">
-                                        <rect key="frame" x="43.333333333333343" y="4.9999999999999982" width="345.66666666666663" height="25.333333333333329"/>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to refresh" lineBreakMode="tailTruncation" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="AFj-1f-Hw0">
+                                        <rect key="frame" x="43.333333333333343" y="6.9999999999999982" width="345.66666666666663" height="25.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1386,14 +1386,14 @@
                                     <constraint firstItem="AFj-1f-Hw0" firstAttribute="height" secondItem="6f7-8F-Jmq" secondAttribute="height" id="5Gz-rh-03k"/>
                                     <constraint firstItem="lCg-Nk-T6i" firstAttribute="leading" secondItem="Fqw-i6-Rbx" secondAttribute="leading" constant="5" id="83t-93-FUM"/>
                                     <constraint firstAttribute="bottom" secondItem="lCg-Nk-T6i" secondAttribute="bottom" constant="3" id="I0G-1E-Uo0"/>
-                                    <constraint firstItem="6f7-8F-Jmq" firstAttribute="top" secondItem="Fqw-i6-Rbx" secondAttribute="top" constant="8" id="IAk-FF-QbL"/>
+                                    <constraint firstItem="6f7-8F-Jmq" firstAttribute="top" secondItem="Fqw-i6-Rbx" secondAttribute="top" constant="7" id="IAk-FF-QbL"/>
                                     <constraint firstAttribute="trailing" secondItem="AFj-1f-Hw0" secondAttribute="trailing" constant="5" id="IU9-Mu-gTQ"/>
                                     <constraint firstItem="lCg-Nk-T6i" firstAttribute="centerX" secondItem="Fqw-i6-Rbx" secondAttribute="centerX" id="kyY-qn-hVm"/>
                                     <constraint firstAttribute="trailing" secondItem="lCg-Nk-T6i" secondAttribute="trailing" constant="5" id="q8x-gU-MDv"/>
                                     <constraint firstItem="6f7-8F-Jmq" firstAttribute="leading" secondItem="Fqw-i6-Rbx" secondAttribute="leading" constant="8" id="uvB-hF-RO8"/>
-                                    <constraint firstItem="AFj-1f-Hw0" firstAttribute="top" secondItem="Fqw-i6-Rbx" secondAttribute="top" constant="5" id="vaX-0N-x4M"/>
+                                    <constraint firstItem="AFj-1f-Hw0" firstAttribute="top" secondItem="Fqw-i6-Rbx" secondAttribute="top" constant="7" id="vaX-0N-x4M"/>
                                     <constraint firstItem="AFj-1f-Hw0" firstAttribute="leading" secondItem="6f7-8F-Jmq" secondAttribute="trailing" constant="10" id="wdA-2T-Edb"/>
-                                    <constraint firstItem="lCg-Nk-T6i" firstAttribute="top" secondItem="AFj-1f-Hw0" secondAttribute="bottom" constant="2" id="wtY-sw-T0w"/>
+                                    <constraint firstItem="lCg-Nk-T6i" firstAttribute="top" secondItem="AFj-1f-Hw0" secondAttribute="bottom" id="wtY-sw-T0w"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IRZ-Pa-aDz">
@@ -1502,6 +1502,7 @@
                         <outlet property="Time4" destination="nMw-Mu-qR6" id="0kF-PR-p6y"/>
                         <outlet property="Time5" destination="a0e-a9-1ER" id="TuZ-Db-DAf"/>
                         <outlet property="TimerLabel" destination="94l-PH-qUv" id="vQN-5n-Etc"/>
+                        <outlet property="refreshImage" destination="6f7-8F-Jmq" id="16s-lh-Kpi"/>
                         <outlet property="webView" destination="Et1-5k-b1L" id="g5c-Zo-AXq"/>
                         <outletCollection property="TimesCollection" destination="f3P-c9-dr7" collectionClass="NSMutableArray" id="cHa-SQ-fWV"/>
                         <outletCollection property="TimesCollection" destination="Z7F-jU-2b1" collectionClass="NSMutableArray" id="N3x-7K-Ryu"/>
@@ -2514,11 +2515,11 @@ Cg
             <objects>
                 <viewController id="lUl-29-EXG" customClass="StatsViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mqF-Hu-6Dm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgX-vz-uG4" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="295.33333333333326" width="414" height="371.66666666666674"/>
+                                <rect key="frame" x="0.0" y="294.33333333333326" width="414" height="372.66666666666674"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27B-b7-DKN">
@@ -2541,13 +2542,13 @@ Cg
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current WCAmo10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehM-dx-pdp">
-                                <rect key="frame" x="10" y="248.66666666666666" width="187" height="26.666666666666657"/>
+                                <rect key="frame" x="10" y="248.66666666666666" width="187" height="25.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best WCAmo10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Os-hF-yiN">
-                                <rect key="frame" x="217" y="248.66666666666666" width="187" height="26.666666666666657"/>
+                                <rect key="frame" x="217" y="248.66666666666666" width="187" height="25.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -2719,7 +2720,7 @@ Cg
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="z5C-xH-DX3"/>
+        <segue reference="PT0-Cd-KDT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Arrow_Left" width="24" height="11.333333015441895"/>

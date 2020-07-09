@@ -13,6 +13,26 @@ import RealmSwift
 import StoreKit
 import SAConfettiView
 
+extension String {
+
+    /// Generates a `UIImage` instance from this string using a specified
+    /// attributes and size.
+    ///
+    /// - Parameters:
+    ///     - attributes: to draw this string with. Default is `nil`.
+    ///     - size: of the image to return.
+    /// - Returns: a `UIImage` instance from this string using a specified
+    /// attributes and size, or `nil` if the operation fails.
+    func image(withAttributes attributes: [NSAttributedString.Key: Any]? = nil, size: CGSize? = nil) -> UIImage? {
+        let size = size ?? (self as NSString).size(withAttributes: attributes)
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            (self as NSString).draw(in: CGRect(origin: .zero, size: size),
+                                    withAttributes: attributes)
+        }
+    }
+
+}
+
 
 class ResultViewController: UIViewController {
 
@@ -50,6 +70,8 @@ class ResultViewController: UIViewController {
     let cubers = ["Bill", "Lucas", "Feliks", "Kian", "Rami", "Patrick", "Max", "Kevin"]
     
     var times: [SolveTime] = []
+    
+    var confettiView: SAConfettiView?
     
     // Additional setup after loading the view
     override func viewWillAppear(_ animated: Bool) {
@@ -194,6 +216,9 @@ class ResultViewController: UIViewController {
         }
         MyAverageLabel.textColor = .red
         MyAverageLabel.text = MyAverageLabel.text
+        
+        sadConfetti()
+        
     }
     
     func win()
@@ -211,6 +236,8 @@ class ResultViewController: UIViewController {
         }
         MyAverageLabel.textColor = HomeViewController.greenColor()
         MyAverageLabel.text = MyAverageLabel.text
+        
+        happyConfetti()
     }
     
     @IBAction func Time1Touched(_ sender: Any) {
@@ -247,13 +274,31 @@ class ResultViewController: UIViewController {
         MyAverageLabel.font = MyAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: MyAverageLabel.text!, view: BigView, multiplier: 0.9, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: MyAverageLabel, multiplier: 0.9, name: "Lato-Black").pointSize))
     }
     
+    func sadConfetti()
+    {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.65)
+        {
+            self.confettiView!.colors = [.white, .white, .white, .white, .white]
+            self.confettiView!.type = .image(UIImage(named: "crying")!)
+            self.confettiView!.startConfetti()
+        }
+    }
+    
+    func happyConfetti()
+    {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.65)
+        {
+            self.confettiView?.startConfetti()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let confettiView = SAConfettiView(frame: self.view.bounds)
-        self.view.addSubview(confettiView)
-        self.view.sendSubviewToBack(confettiView)
-        confettiView.startConfetti()
+        confettiView = SAConfettiView(frame: self.view.bounds)
+        self.view.addSubview(confettiView!)
+        self.view.sendSubviewToBack(confettiView!)
+        
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
 
