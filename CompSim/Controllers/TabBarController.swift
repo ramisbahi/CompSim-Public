@@ -17,6 +17,11 @@ class TabBarController: UITabBarController {
         var tabFrame = tabBar.frame
         tabFrame.size.height = desiredHeight
         tabFrame.origin.y = self.view.frame.size.height - desiredHeight
+        self.tabBar.frame = tabFrame
+        
+        UITabBar.appearance().layer.borderWidth = 0.0
+        UITabBar.appearance().clipsToBounds = true
+        
     }
 
     override func viewDidLoad() {

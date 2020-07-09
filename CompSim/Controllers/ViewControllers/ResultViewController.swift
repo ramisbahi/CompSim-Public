@@ -11,6 +11,8 @@ import UIKit
 import GameKit
 import RealmSwift
 import StoreKit
+import SAConfettiView
+
 
 class ResultViewController: UIViewController {
 
@@ -38,6 +40,7 @@ class ResultViewController: UIViewController {
     let singleWinning = 1
     let rangeWinning = 2
     
+    
     let realm = try! Realm()
     
     var labels = [UIButton]()
@@ -54,6 +57,7 @@ class ResultViewController: UIViewController {
         try! realm.write {
             HomeViewController.mySession.finishAverage()
         }
+        
         
         HomeViewController.totalAverages += 1 // add 1 to dat
         
@@ -245,6 +249,11 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let confettiView = SAConfettiView(frame: self.view.bounds)
+        self.view.addSubview(confettiView)
+        self.view.sendSubviewToBack(confettiView)
+        confettiView.startConfetti()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
 

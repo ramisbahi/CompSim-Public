@@ -7,22 +7,26 @@ PODS:
   - Realm/Headers (4.3.0)
   - RealmSwift (4.3.0):
     - Realm (= 4.3.0)
+  - SAConfettiView (0.1.8)
 
 DEPENDENCIES:
   - Charts
   - RealmSwift
+  - SAConfettiView
 
 SPEC REPOS:
   trunk:
     - Charts
     - Realm
     - RealmSwift
+    - SAConfettiView
 
 SPEC CHECKSUMS:
   Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
   Realm: 9357c3589555793e1860a7104a7412bca4a48d99
   RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
+  SAConfettiView: c87031a2280659261b730fce3669fb10e73636ee
 
-PODFILE CHECKSUM: d79a5b6c550c80e25b8a48301fa130fec6eac785
+PODFILE CHECKSUM: 4f41dccd042e357ee7493408a814951ec104ef93
 
 COCOAPODS: 1.9.0.beta.2

@@ -477,12 +477,21 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
             if SessionCollection[0].isHidden
             {
                 SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+                if #available(iOS 13.0, *) {
+                    UIView.setAnimationsEnabled(false)
+                    SessionButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+                    self.view.layoutIfNeeded()
+                    UIView.setAnimationsEnabled(true)
+                }
             }
             else
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
                 {
                     self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+                }
+                if #available(iOS 13.0, *) {
+                    SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
                 }
             }
         }
@@ -507,6 +516,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         return nil
     }
     
+    // chose a session
     @objc func SessionSelected(_ sender: UIButton) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
         {
@@ -518,6 +528,10 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
                 self.view.layoutIfNeeded()
             })
             button.setTitleColor(.white, for: .normal)
+        }
+        
+        if #available(iOS 13.0, *) {
+            SessionButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         }
         
         guard let title = sender.currentTitle else
@@ -581,6 +595,10 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         super.viewWillAppear(false)
         
         setUpStackView()
+        
+        if #available(iOS 13.0, *) {
+            SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        }
         
         TargetLabel.setTitle("  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))", for: .normal)
         

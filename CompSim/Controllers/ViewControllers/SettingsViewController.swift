@@ -319,7 +319,10 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     var timer = Timer()
     var characteristics = [String : CBCharacteristic]()
     
-    @IBOutlet weak var WhiteLine: UIView!
+    var hideTableConstraint: NSLayoutConstraint?
+    var TableTopConstraint: NSLayoutConstraint?
+    var TableBottomConstraint: NSLayoutConstraint?
+    
     @IBOutlet weak var baseTableView: UITableView!
     
     @IBOutlet weak var DarkModeLabel: UILabel!
@@ -347,6 +350,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     @IBOutlet var BigView: UIView!
     @IBOutlet weak var LittleView: UIView!
     
+    @IBOutlet weak var TimerUpdateLabel: UILabel!
     
     @IBOutlet weak var CuberButton: UIButton!
     @IBOutlet weak var ScrambleTypeButton: UIButton!
@@ -360,9 +364,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     @IBOutlet weak var EmailButton: UIButton!
     
-    
-    @IBOutlet weak var TableTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var TableBottomConstraint: NSLayoutConstraint!
     
     var cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Random" : NSLocalizedString("Random", comment: ""), "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park", "Kevin" : "Kevin Hays"]
     
@@ -385,7 +386,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     @IBAction func TimingChanged(_ sender: Any) {
         if(HomeViewController.timing == 2) // changing from stackmat
         {
-            //hideTable()
+            hideTable()
             disconnectFromDevice()
         }
         
@@ -397,7 +398,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             InspectionVoiceAlertsControl.isEnabled = false
             if(HomeViewController.timing == 2)
             {
-                //showTable()
+                showTable()
                 // need to check if bluetooth is on here, though
                 startScan()
             }
@@ -412,20 +413,23 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
     }
     
-    /*
+    
     func hideTable()
     {
         baseTableView.isHidden = true
-        TableTopConstraint.isActive = false
-        TableBottomConstraint.isActive = false
+        hideTableConstraint!.isActive = true
+        TableTopConstraint!.isActive = false
+        TableBottomConstraint!.isActive = false
+        
     }
     
     func showTable()
     {
-        TableTopConstraint.isActive = true
-        TableBottomConstraint.isActive = true
+        hideTableConstraint!.isActive = false
+        TableTopConstraint!.isActive = true
+        TableBottomConstraint!.isActive = true
         baseTableView.isHidden = false
-    }*/
+    }
     
     @IBAction func WebsiteButtonTouched(_ sender: Any) {
         guard let url = URL(string: "http://www.compsim.net") else {
@@ -567,6 +571,9 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
     {
+        hideTableConstraint = TimerUpdateLabel.topAnchor.constraint(equalTo: TimingControl.bottomAnchor, constant: 10.0)
+        TableTopConstraint = baseTableView.topAnchor.constraint(equalTo: TimingControl.bottomAnchor, constant: 10.0)
+        TableBottomConstraint = baseTableView.bottomAnchor.constraint(equalTo: TimerUpdateLabel.topAnchor, constant: 10.0)
         
         
         self.baseTableView.delegate = self
@@ -575,6 +582,12 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         {
             self.baseTableView.reloadData()
         }
+        
+        if HomeViewController.timing < 2
+        {
+            hideTable()
+        }
+        
         /*Our key player in this app will be our CBCentralManager. CBCentralManager objects are used to manage discovered or connected remote peripheral devices (represented by CBPeripheral objects), including scanning for, discovering, and connecting to advertising peripherals.
          */
         centralManager = CBCentralManager(delegate: self, queue: nil)
