@@ -45,8 +45,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func newSession(_ sender: Any) {
         
-        let alertService = AlertService()
-        let alert = alertService.alert(placeholder: "Name", usingPenalty: false, keyboardType: 1, myTitle: "New Session",
+        let alertService = InputAlertService()
+        let alert = alertService.alert(placeholder: "Name", keyboardType: 1, myTitle: "New Session",
                                        completion: {
             
             let input = alertService.myVC.TextField.text!
@@ -366,8 +366,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func TargetButtonPressed(_ sender: Any) {
-        let alertService = AlertService()
-        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""), usingPenalty: false, keyboardType: 0, myTitle: NSLocalizedString("Target Time", comment: ""),
+        let alertService = InputAlertService()
+        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""),  keyboardType: 0, myTitle: NSLocalizedString("Target Time", comment: ""),
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!
@@ -569,8 +569,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @objc func rename(sender: UIButton) {
         
-        let alertService = AlertService()
-        let alert = alertService.alert(placeholder: "Name", usingPenalty: false, keyboardType: 1, myTitle: "Rename Session",
+        let alertService = InputAlertService()
+        let alert = alertService.alert(placeholder: "Name", keyboardType: 1, myTitle: "Rename Session",
                                        completion: {
             
             let input = alertService.myVC.TextField.text!

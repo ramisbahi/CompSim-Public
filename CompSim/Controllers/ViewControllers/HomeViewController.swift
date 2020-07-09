@@ -429,8 +429,8 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     
     @IBAction func TargetPressed(_ sender: Any) {
      
-        let alertService = AlertService()
-        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""), usingPenalty: false, keyboardType: 0, myTitle: NSLocalizedString("Target Time", comment: ""),
+        let alertService = InputAlertService()
+        let alert = alertService.alert(placeholder: NSLocalizedString("Time", comment: ""), keyboardType: 0, myTitle: NSLocalizedString("Target Time", comment: ""),
                                        completion: {
             
             let inputTime = alertService.myVC.TextField.text!

@@ -766,7 +766,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LBw-Uw-65Q"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="rl1-So-EJM">
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear1" id="rl1-So-EJM">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <size key="freeformSize" width="414" height="1500"/>
@@ -1212,6 +1212,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="dpl-Va-Kbt">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v5X-kv-VtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="Icw-Z7-67k" customClass="TabBarController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="y1w-Rh-ojI"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="RJK-re-Hls">
@@ -1230,13 +1231,12 @@
                     </tabBar>
                     <connections>
                         <outlet property="tabBar" destination="RJK-re-Hls" id="EaJ-gq-mlf"/>
-                        <segue destination="0Bl-oR-f5Z" kind="relationship" relationship="viewControllers" id="Wdc-bY-ZFf"/>
                         <segue destination="1fs-7q-vwl" kind="relationship" relationship="viewControllers" id="Xe7-UV-mtu"/>
                         <segue destination="AbV-MZ-eM0" kind="relationship" relationship="viewControllers" id="Ac6-eL-MxM"/>
                         <segue destination="lUl-29-EXG" kind="relationship" relationship="viewControllers" id="Wjr-WJ-peH"/>
+                        <segue destination="0Bl-oR-f5Z" kind="relationship" relationship="viewControllers" id="Wdc-bY-ZFf"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v5X-kv-VtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-810.14492753623199" y="613.85869565217399"/>
         </scene>
@@ -2536,7 +2536,7 @@ Cg
         <scene sceneID="uIE-o1-Nlv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AbV-MZ-eM0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Session" image="table.fill" catalog="system" id="Y3a-EX-OVv">
+                    <tabBarItem key="tabBarItem" title="Session" image="table1" id="Y3a-EX-OVv">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -2719,7 +2719,7 @@ Cg
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2qe-iy-8FB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Stats" image="stats" id="UBO-DJ-QNO">
+                    <tabBarItem key="tabBarItem" title="Stats" image="graph" selectedImage="graph" id="UBO-DJ-QNO">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
@@ -2763,18 +2763,20 @@ Cg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Wjr-WJ-peH"/>
-        <segue reference="rF2-8b-ORo"/>
-        <segue reference="PT0-Cd-KDT"/>
+        <segue reference="Xe7-UV-mtu"/>
+        <segue reference="PIq-RF-q2x"/>
+        <segue reference="TfV-nY-2Oj"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Arrow_Left" width="24" height="11.333333015441895"/>
         <image name="arrow.turn.down.left" catalog="system" width="128" height="99"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
-        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="chevron.right" width="128" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="cube" catalog="system" width="128" height="124"/>
         <image name="envelope" catalog="system" width="128" height="93"/>
+        <image name="gear1" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="graph" width="33.333332061767578" height="33.333332061767578"/>
         <image name="happyKevin" width="1162" height="546"/>
         <image name="logo" width="1000" height="1000"/>
         <image name="mic.slash.fill" catalog="system" width="112" height="128"/>
@@ -2782,9 +2784,7 @@ Cg
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>
         <image name="rectangle.on.rectangle" catalog="system" width="128" height="98"/>
         <image name="refresh" width="35" height="35"/>
-        <image name="settings" width="29" height="29"/>
-        <image name="stats" width="33.666667938232422" height="33.666667938232422"/>
-        <image name="table.fill" catalog="system" width="128" height="93"/>
+        <image name="table1" width="33.333332061767578" height="33.333332061767578"/>
         <image name="target" width="26" height="26"/>
         <image name="timer" width="49.666667938232422" height="28.666666030883789"/>
         <image name="xmark.circle" catalog="system" width="128" height="121"/>

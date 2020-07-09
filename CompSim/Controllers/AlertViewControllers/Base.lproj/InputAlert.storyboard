@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Black.ttf">
+            <string>Lato-Black</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Input Alert View Controller-->
+        <scene sceneID="hsc-hE-Stc">
+            <objects>
+                <viewController storyboardIdentifier="InputAlertVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Niq-Dk-4CF" customClass="InputAlertViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="htI-mw-MlG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3a-sc-2tO">
+                                <rect key="frame" x="20.5" y="285" width="373" height="186"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jef-Tl-rSf">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="55"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Target" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9k-QF-6t1">
+                                                <rect key="frame" x="65.5" y="8" width="242" height="39"/>
+                                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="32"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-CS-Lyz">
+                                                <rect key="frame" x="5" y="0.0" width="55.5" height="55"/>
+                                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="50"/>
+                                                <state key="normal" title="←">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="didTapCancel:" destination="Niq-Dk-4CF" eventType="touchUpInside" id="H59-zO-yzc"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="0cy-lm-BNU"/>
+                                            <constraint firstAttribute="bottom" secondItem="WoQ-CS-Lyz" secondAttribute="bottom" id="Gg3-4d-Lna"/>
+                                            <constraint firstItem="WoQ-CS-Lyz" firstAttribute="top" secondItem="jef-Tl-rSf" secondAttribute="top" id="SwK-ZI-XeK"/>
+                                            <constraint firstItem="WoQ-CS-Lyz" firstAttribute="leading" secondItem="jef-Tl-rSf" secondAttribute="leading" constant="5" id="UBW-4Z-kj3"/>
+                                            <constraint firstItem="R9k-QF-6t1" firstAttribute="centerY" secondItem="jef-Tl-rSf" secondAttribute="centerY" id="VPp-vM-epp"/>
+                                            <constraint firstItem="R9k-QF-6t1" firstAttribute="centerX" secondItem="jef-Tl-rSf" secondAttribute="centerX" id="cqf-w3-JuT"/>
+                                            <constraint firstItem="R9k-QF-6t1" firstAttribute="width" secondItem="jef-Tl-rSf" secondAttribute="width" multiplier="0.65" id="uaV-Fk-TqX"/>
+                                            <constraint firstItem="R9k-QF-6t1" firstAttribute="leading" secondItem="WoQ-CS-Lyz" secondAttribute="trailing" constant="5" id="zvB-07-NDN"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kmQ-X7-u2O">
+                                        <rect key="frame" x="45" y="70" width="283" height="51.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="35"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="decimalPad"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Vj-a9-0KZ">
+                                        <rect key="frame" x="136" y="134" width="101" height="37"/>
+                                        <color key="backgroundColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="24"/>
+                                        <state key="normal" title="Enter">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapEnter:" destination="Niq-Dk-4CF" eventType="touchUpInside" id="Uas-5q-3vv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" allowsDirectInteraction="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="1gK-uu-yhK"/>
+                                    <constraint firstItem="kmQ-X7-u2O" firstAttribute="centerX" secondItem="N3a-sc-2tO" secondAttribute="centerX" id="5e0-z0-llt"/>
+                                    <constraint firstItem="kmQ-X7-u2O" firstAttribute="top" secondItem="jef-Tl-rSf" secondAttribute="bottom" constant="15" id="KoC-6t-RK4"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="dvV-jI-lnL"/>
+                                    <constraint firstAttribute="trailing" secondItem="jef-Tl-rSf" secondAttribute="trailing" id="fGO-EZ-tSV"/>
+                                    <constraint firstItem="5Vj-a9-0KZ" firstAttribute="height" secondItem="N3a-sc-2tO" secondAttribute="height" multiplier="0.2" id="fZJ-Lo-mFk"/>
+                                    <constraint firstItem="jef-Tl-rSf" firstAttribute="leading" secondItem="N3a-sc-2tO" secondAttribute="leading" id="iCn-Iy-Bjr"/>
+                                    <constraint firstItem="kmQ-X7-u2O" firstAttribute="leading" secondItem="N3a-sc-2tO" secondAttribute="leading" constant="45" id="loH-Vk-af9"/>
+                                    <constraint firstAttribute="trailing" secondItem="kmQ-X7-u2O" secondAttribute="trailing" constant="45" id="nW6-LM-uNb"/>
+                                    <constraint firstAttribute="width" secondItem="N3a-sc-2tO" secondAttribute="height" multiplier="2" priority="750" id="pcd-2G-If7"/>
+                                    <constraint firstItem="5Vj-a9-0KZ" firstAttribute="centerX" secondItem="N3a-sc-2tO" secondAttribute="centerX" id="pfB-zU-DAP"/>
+                                    <constraint firstItem="jef-Tl-rSf" firstAttribute="top" secondItem="N3a-sc-2tO" secondAttribute="top" id="ukg-Wf-XAN"/>
+                                    <constraint firstItem="5Vj-a9-0KZ" firstAttribute="width" secondItem="N3a-sc-2tO" secondAttribute="width" multiplier="0.27" id="xFm-dI-qKa"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Vj-a9-0KZ" secondAttribute="bottom" constant="15" id="zjj-tv-NS9"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="N3a-sc-2tO" firstAttribute="width" relation="lessThanOrEqual" secondItem="htI-mw-MlG" secondAttribute="width" multiplier="0.9" id="Fki-Vo-pkH"/>
+                            <constraint firstItem="N3a-sc-2tO" firstAttribute="centerY" secondItem="htI-mw-MlG" secondAttribute="centerY" constant="-70" id="R6w-Fc-s2b"/>
+                            <constraint firstItem="N3a-sc-2tO" firstAttribute="centerX" secondItem="htI-mw-MlG" secondAttribute="centerX" id="Ypg-cJ-Bef"/>
+                            <constraint firstItem="N3a-sc-2tO" firstAttribute="height" secondItem="htI-mw-MlG" secondAttribute="height" multiplier="0.4" priority="750" id="pjI-uH-K8h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hkt-gE-I9E"/>
+                    </view>
+                    <connections>
+                        <outlet property="AddSolveTitle" destination="R9k-QF-6t1" id="diq-Nf-1Kg"/>
+                        <outlet property="AddSolveView" destination="jef-Tl-rSf" id="NJH-1I-72j"/>
+                        <outlet property="AlertView" destination="N3a-sc-2tO" id="deb-Jg-Iho"/>
+                        <outlet property="BigView" destination="htI-mw-MlG" id="lfg-PY-fBl"/>
+                        <outlet property="CancelButton" destination="WoQ-CS-Lyz" id="5aN-pL-3G4"/>
+                        <outlet property="EnterButton" destination="5Vj-a9-0KZ" id="Ntc-h0-XTf"/>
+                        <outlet property="HeightConstraint" destination="pjI-uH-K8h" id="8nA-rH-WOA"/>
+                        <outlet property="TextField" destination="kmQ-X7-u2O" id="cQI-IX-T59"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mfP-e0-QZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="13.043478260869566" y="117.85714285714285"/>
+        </scene>
+    </scenes>
+</document>

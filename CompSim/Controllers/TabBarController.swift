@@ -17,18 +17,17 @@ class TabBarController: UITabBarController {
         var tabFrame = tabBar.frame
         tabFrame.size.height = desiredHeight
         tabFrame.origin.y = self.view.frame.size.height - desiredHeight
-        self.tabBar.frame = tabFrame
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if bestSingleTransition || bestAverageTransition
         {
-            self.selectedIndex = 2
+            self.selectedIndex = 1
         }
         else
         {
-            self.selectedIndex = 1
+            self.selectedIndex = 0
         }
 
         // Do any additional setup after loading the view.
