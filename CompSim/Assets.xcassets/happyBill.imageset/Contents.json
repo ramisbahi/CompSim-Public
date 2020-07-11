@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "happyBill-resized.png",
       "idiom" : "universal",
-      "filename" : "happyBill.png",
       "scale" : "1x"
     },
     {
+      "filename" : "happyBill-resized-1.png",
       "idiom" : "universal",
-      "filename" : "happyBill-1.png",
       "scale" : "2x"
     },
     {
+      "filename" : "happyBill-resized-2.png",
       "idiom" : "universal",
-      "filename" : "happyBill (1).png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

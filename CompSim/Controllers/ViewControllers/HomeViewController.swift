@@ -173,6 +173,9 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
             
         webView.configuration.userContentController.addUserScript(zoomDisableScript)
         webView.scrollView.isScrollEnabled = false
+        webView!.isOpaque = false
+        webView!.backgroundColor = UIColor.clear
+        webView!.scrollView.backgroundColor = UIColor.clear
     }
     
     override func viewDidLoad() {
@@ -1144,6 +1147,11 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     static func greenColor() -> UIColor
     {
         return UIColor.init(displayP3Red: 50/255, green: 142/255, blue: 84/255, alpha: 1.0)
+    }
+    
+    static func grayColor() -> UIColor
+    {
+        return UIColor.init(displayP3Red: 196/255, green: 196/255, blue: 196/255, alpha: 1.0)
     }
     
     static func redColor() -> UIColor

@@ -177,6 +177,8 @@ extension UIDevice {
     
     func saveSettings()
     {
+        bestMoTransition = false
+        currentMoTransition = false
         
         let defaults = UserDefaults.standard
         

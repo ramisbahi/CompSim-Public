@@ -43,6 +43,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     let realm = try! Realm()
     
+    var cellHeight: CGFloat?
+    
     @IBAction func newSession(_ sender: Any) {
         
         let alertService = InputAlertService()
@@ -438,12 +440,14 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
          let targetString = NSMutableAttributedString(string: "\(target)\(SolveTime.makeMyString(num: winningAverage))", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
         targetString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: target.count, length: targetString.length - target.count))
         TargetButton.setAttributedTitle(targetString, for: .normal)
+        updateTargetFont()
     }
     
     func updateBestButtons()
     {
         updateBestSingle()
         updateBestAverage()
+        updateBestFonts()
     }
     
     func updateBestSingle()
@@ -486,7 +490,6 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             BestSingleButton.setTitle("Best single:  ", for: .normal)
         }
         
-        //updateBestFonts()
     }
     
     func updateBestAverage()
@@ -513,8 +516,6 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         {
             BestAverageButton.setTitle("Best average:  ", for: .normal)
         }
-        
-        //updateBestFonts()
     }
     
     override func viewWillLayoutSubviews() {
@@ -550,6 +551,9 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillDisappear(_ animated: Bool) {
         
         closeStack()
+        
+        bestMoTransition = false
+        currentMoTransition = false
         
         super.viewWillDisappear(animated)
         
@@ -657,6 +661,9 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeight!
+    }
     
     // performed for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -682,6 +689,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.backgroundColor = UIColor.white
         }
         cell.accessoryType = .disclosureIndicator // show little arrow thing on right side of each cell
+        
+
         if(HomeViewController.mySession.usingWinningTime[currentIndex]) // if was competing against winning time
         {
             cell.textLabel?.textColor = SolveTime.makeIntTime(num: HomeViewController.mySession.allAverages[currentIndex].toFloatTime())  < HomeViewController.mySession.singleTime ? HomeViewController.greenColor() : HomeViewController.redColor() // get int time
@@ -701,13 +710,27 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.detailTextLabel?.text = timeList
         cell.detailTextLabel?.font = UIFont(name: "Lato-Black", size: 14)
         
-        if(indexPath.row % 2 == 1 && !HomeViewController.darkMode) // make gray for every other cell
+        let numLabel = UILabel(frame: CGRect(x:
+            cell.frame.maxX - 5.0, y: cell.frame.minY, width: 30.0, height: CGFloat(cellHeight!)))
+        numLabel.textAlignment = .center
+        numLabel.font = UIFont(name: "Lato-Regular", size: 12)
+        numLabel.textColor = HomeViewController.grayColor()
+        numLabel.text = String(currentIndex + 1)
+        cell.addSubview(numLabel)
+        
+        
+        print("row \(indexPath.row)")
+        print("current average \(HomeViewController.mySession.currentAverage)")
+        print("start index \(bestMoStartIndex)")
+        
+        let index = HomeViewController.mySession.currentAverage - indexPath.row
+        if bestMoTransition && index >= bestMoStartIndex! && index < bestMoStartIndex!+10
         {
-            cell.backgroundColor = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
+            cell.backgroundColor = .yellow
         }
-        else if(indexPath.row % 2 == 0 && HomeViewController.darkMode)
+        else if currentMoTransition && indexPath.row < 10
         {
-            cell.backgroundColor = UIColor.darkGray
+            cell.backgroundColor = .yellow
         }
         
         return cell
@@ -754,6 +777,10 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         slideRightSegue()
     }
     
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        return
+    }
+    
     func slideRightSegue()
     {
         let obj = (self.storyboard?.instantiateViewController(withIdentifier: "AverageDetailViewController"))!
@@ -771,26 +798,40 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func updateBestFonts()
     {
-        let minSingleFont =  BestSingleButton.titleLabel?.font.withSize(min(HomeViewController.fontToFitWidth(text: (BestSingleButton.titleLabel?.text!)!, view: BestSingleButton, multiplier: 0.9, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: BestSingleButton, multiplier: 0.9, name: "Lato-Black").pointSize))
+        /*
+        let singleFont =  BestSingleButton.titleLabel?.font
+        let averageFont = BestAverageButton.titleLabel?.font
         
-        let minAverageFont = BestAverageButton.titleLabel?.font.withSize(min(HomeViewController.fontToFitWidth(text: (BestAverageButton.titleLabel?.text!)!, view: BestAverageButton, multiplier: 0.9, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: BestAverageButton, multiplier: 0.9, name: "Lato-Black").pointSize))
+        print("updating, single font \(singleFont?.pointSize) and average font \(averageFont?.pointSize)")
         
-        let minFont = Float(minSingleFont!.pointSize) < Float(minAverageFont!.pointSize) ? minSingleFont : minAverageFont
+        if Float(singleFont!.pointSize) < Float(averageFont!.pointSize)
+        {
+            BestAverageButton.titleLabel?.font = singleFont
+            BestAverageButton.setTitle(BestAverageButton.titleLabel?.text, for: .normal)
+        }
+        else
+        {
+            BestSingleButton.titleLabel?.font = averageFont
+            BestSingleButton.setTitle(BestSingleButton.titleLabel?.text, for: .normal)
+        }
         
-        BestSingleButton.titleLabel?.font = minFont
-        BestAverageButton.titleLabel?.font = minFont
+        print("new font sizes \(BestSingleButton.titleLabel?.font?.pointSize) and \(BestAverageButton.titleLabel?.font?.pointSize) ")
+        */
         
 
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print("this boi got called")
+    func updateTargetFont()
+    {
         TargetButton.titleLabel?.font = TargetButton.titleLabel?.font.withSize(min(HomeViewController.fontToFitWidth(text: (TargetButton.titleLabel?.text!)!, view: TargetButton, multiplier: 1.0, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: TargetButton, multiplier: 1.0, name: "Lato-Black").pointSize))
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        StatsTableView.allowsSelection = true
+        
+        cellHeight = max(BigView.frame.height * 0.1, 70.0)
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
 
@@ -799,7 +840,9 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         SessionButton.addGestureRecognizer(doubleTapGesture)
         
         BestSingleButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         TargetButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        updateTargetFont()
         BestAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
     
         
@@ -813,7 +856,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         if bestSingleTransition
         {
             bestSingleTransition = false
-            let path: IndexPath = IndexPath(row: HomeViewController.mySession.currentAverage - bestSingleAverageIndex!, section: 0)
+            let path = IndexPath(row: HomeViewController.mySession.currentAverage - bestSingleAverageIndex!, section: 0)
             //StatsTableView.scrollToRow(at: path, at: UITableView.ScrollPosition.top, animated: true)
             StatsTableView.selectRow(at: path, animated: true, scrollPosition: UITableView.ScrollPosition.top)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -824,15 +867,64 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         else if bestAverageTransition
         {
             bestAverageTransition = false
-            let path: IndexPath = IndexPath(row: HomeViewController.mySession.currentAverage - bestAverageIndex!, section: 0)
+            let path = IndexPath(row: HomeViewController.mySession.currentAverage - bestAverageIndex!, section: 0)
             StatsTableView.selectRow(at: path, animated: true, scrollPosition: UITableView.ScrollPosition.top)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.tableView(self.StatsTableView, didSelectRowAt: path)
             }
         }
+        else if bestMoTransition
+        {
+            let initialPath = IndexPath(row: HomeViewController.mySession.currentAverage - bestMoStartIndex!, section: 0)
+            self.StatsTableView.scrollToRow(at: initialPath, at: .bottom, animated: true)
+        }
+        else if currentMoTransition
+        {
+            let initialPath = IndexPath(row: 9, section: 0)
+            self.StatsTableView.scrollToRow(at: initialPath, at: .bottom, animated: true)
+        }
     }
     
-
+    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return action == #selector(UIResponderStandardEditActions.copy(_:))
+    }
+    
+    func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?)
+    {
+        let index = HomeViewController.mySession.currentAverage - indexPath.row
+        UIPasteboard.general.string = clipboardAverageString(index)
+    }
+    
+    func clipboardAverageString(_ index: Int) -> String
+       {
+           let currentDate = Date()
+           // US English Locale (en_US)
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateStyle = .medium
+           dateFormatter.timeStyle = .none
+           dateFormatter.locale = Locale.current
+           let formattedDate = dateFormatter.string(from: currentDate)
+           
+           let solveTypes = ["Average of 5", "Mean of 3", "Best of 3"]
+           let solveType = solveTypes[HomeViewController.mySession.averageTypes[index]]
+           
+           var ret = "Generated by CompSim on \(formattedDate)\n"
+           ret += "\(HomeViewController.mySession.allAverages[index]) \(solveType)\n\n"
+           
+           for i in 0..<5
+           {
+               let currentTime = HomeViewController.mySession.allTimes[index].list[i]
+               
+               ret += "\(i+1). \(currentTime.myString) \(currentTime.myScramble)\n"
+           }
+           
+           return ret
+       }
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {

@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "happyKian-resized.png",
       "idiom" : "universal",
-      "filename" : "happyKian.png",
       "scale" : "1x"
     },
     {
+      "filename" : "happyKian-resized-1.png",
       "idiom" : "universal",
-      "filename" : "cubers2-5.png",
       "scale" : "2x"
     },
     {
+      "filename" : "happyKian-resized-2.png",
       "idiom" : "universal",
-      "filename" : "cubers3-5.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "happyMax-resized.png",
       "idiom" : "universal",
-      "filename" : "happyMax.png",
       "scale" : "1x"
     },
     {
+      "filename" : "happyMax-resized-1.png",
       "idiom" : "universal",
-      "filename" : "cubers2-13.png",
       "scale" : "2x"
     },
     {
+      "filename" : "happyMax-resized-2.png",
       "idiom" : "universal",
-      "filename" : "cubers3-13.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

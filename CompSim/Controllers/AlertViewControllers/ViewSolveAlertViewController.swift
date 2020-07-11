@@ -14,8 +14,8 @@ class ViewSolveAlertViewController: UIViewController {
     // below 4 are all entered
     var enterAction: (() -> Void)?
     var deleteAction: (() -> Void)?
-    var myTitle = String()
-    var myScramble = String()
+    var myTitle: String = String()
+    var myScramble: String = String()
     var penalty: Int = 0 // 0 = OK, 1 = +2, 2 = DNF
     var delete: Bool = true
     
@@ -33,6 +33,7 @@ class ViewSolveAlertViewController: UIViewController {
     
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet var BigView: UIView!
+    @IBOutlet weak var CopyButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +74,10 @@ class ViewSolveAlertViewController: UIViewController {
         PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black"), NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         
         CancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        CopyButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        CopyButton.contentVerticalAlignment = .center
+        
     }
     
     @IBAction func DonePressed(_ sender: Any) {
@@ -87,6 +92,21 @@ class ViewSolveAlertViewController: UIViewController {
     
     @IBAction func CancelPressed(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    @IBAction func CopyPressed(_ sender: Any) {
+        if #available(iOS 13.0, *) {
+            CopyButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        }
+        
+        UIPasteboard.general.string = clipboardSingleString()
+        CopyButton.isEnabled = false
+        CopyButton.tintColor = .white
+    }
+    
+    func clipboardSingleString() -> String
+    {
+        return "\(myTitle) \(myScramble)"
     }
     
     /*

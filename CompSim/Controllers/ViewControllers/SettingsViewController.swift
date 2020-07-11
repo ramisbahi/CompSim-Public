@@ -79,11 +79,18 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     /*
      Called when the central manager discovers a peripheral while scanning. Also, once peripheral is connected, cancel scanning.
      */
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,advertisementData: [String : Any], rssi RSSI: NSNumber)
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,advertisementData: [String : Any])
     {
         print("diddiscover method is called")
+        
+        for currPeripheral in peripherals
+        {
+            if peripheral.name == currPeripheral.name
+            {
+                return
+            }
+        }
         self.peripherals.append(peripheral)
-        self.RSSIs.append(RSSI)
         peripheral.delegate = self
         self.baseTableView.reloadData()
         print("Found new pheripheral devices with services")
@@ -287,7 +294,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         //Connect to device where the peripheral is connected
         let cell = tableView.dequeueReusableCell(withIdentifier: "BlueCell") as! PeripheralTableViewCell
         let peripheral = self.peripherals[indexPath.row]
-        let RSSI = self.RSSIs[indexPath.row]
         
         
         if peripheral.name == nil {
@@ -295,7 +301,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         } else {
             cell.peripheralLabel.text = peripheral.name
         }
-        cell.rssiLabel.text = "RSSI: \(RSSI)"
         
         return cell
     }
@@ -308,7 +313,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     //Data
     var centralManager : CBCentralManager!
-    var RSSIs = [NSNumber]()
     var data = NSMutableData()
     var writeData: String = ""
     var peripherals: [CBPeripheral] = []

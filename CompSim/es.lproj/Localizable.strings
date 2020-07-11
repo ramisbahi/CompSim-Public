@@ -32,7 +32,7 @@
 "Help" = "Ayuda";
 "Best single:  " = "Mejor tiempo:  ";
 "Best average:  " = "Mejor media:  ";
-"MEDIAN AVERAGE:  " = "MEDIA MEDIANA:  ";
+"MEDIAN AVERAGE:  " = "Media Mediana:  ";
 
 "CompSim Description" = "CompSim es un simulador de competencia de speedcubing profesional. Este es diferente a un cronómetro normal; con CompSim, se puede practicar en los formatos de media de 5, media de 3 y mejor de 3, dependiendo del evento que se haga. De muchas maneras, funciona como un cronómetro normal, pero tiene sus propios distintivos también.";
 

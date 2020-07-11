@@ -16,6 +16,11 @@ var bestSingleTransition = false
 var bestAverageIndex: Int?
 var bestAverageTransition = false
 
+var bestMoStartIndex: Int?
+var bestMoTransition = false
+
+var currentMoTransition = false
+
 class StatsViewController: UIViewController {
 
     @IBOutlet weak var lineChart: LineChartView!
@@ -34,6 +39,8 @@ class StatsViewController: UIViewController {
     
     var moChartEntries = [ChartDataEntry]()
     var SessionCollection: [UIButton] = []
+    var medianChartEntries = [ChartDataEntry]()
+    var medianTimeString: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +62,6 @@ class StatsViewController: UIViewController {
         lineChart.leftAxis.labelFont = UIFont(name: "Lato-Black", size: 12.0)!
         lineChart.leftAxis.labelTextColor = HomeViewController.darkBlueColor()
         lineChart.rightAxis.enabled = false
-        
     
 
         // Do any additional setup after loading the view.
@@ -131,7 +137,6 @@ class StatsViewController: UIViewController {
             updateLabels()
             updateGraph()
             HomeViewController.mySession.scrambler.genScramble()
-            HomeViewController.sessionChanged = false
         }
     }
     
@@ -179,7 +184,6 @@ class StatsViewController: UIViewController {
         setUpStackView()
         
         updateLabels()
-        
         updateGraph()
     }
     
@@ -200,17 +204,26 @@ class StatsViewController: UIViewController {
         let line = LineChartDataSet(entries: lineChartEntries, label: "WCA")
         line.colors = [HomeViewController.darkBlueColor()]
         line.drawCirclesEnabled = false
+        line.setDrawHighlightIndicators(false)
         
         let moLine = LineChartDataSet(entries: moChartEntries, label: "WCAmo10")
         moLine.colors = [HomeViewController.orangeColor()]
         moLine.drawCirclesEnabled = false
+        moLine.setDrawHighlightIndicators(false)
+        
+        let medianLine = LineChartDataSet(entries: medianChartEntries, label: "Median Average")
+        medianLine.colors = [HomeViewController.grayColor()]
+        medianLine.drawCirclesEnabled = false
+        medianLine.setDrawHighlightIndicators(false)
         
         let data = LineChartData()
         data.addDataSet(line)
         data.addDataSet(moLine)
+        data.addDataSet(medianLine)
         data.setDrawValues(false)
         
         lineChart.data = data
+        
         
     }
     
@@ -304,13 +317,17 @@ class StatsViewController: UIViewController {
         {
             return
         }
-        var medianTimeString: String = ""
+        medianTimeString = ""
         if sorted.count % 2 != 0 {
             medianTimeString = sorted[sorted.count / 2]
         }
         else
         {
-            let medianFloat: Float = (sorted[sorted.count / 2].toFloatTime() + sorted[sorted.count / 2 - 1].toFloatTime()) / 2.0
+            let medianFloat = (sorted[sorted.count / 2].toFloatTime() + sorted[sorted.count / 2 - 1].toFloatTime()) / 2.0
+            
+            medianChartEntries.append(ChartDataEntry(x: 1.0, y: Double(medianFloat)))
+            medianChartEntries.append(ChartDataEntry(x: Double(HomeViewController.mySession.allAverages.count), y: Double(medianFloat)))
+            
             let medianInt = SolveTime.makeIntTime(num: medianFloat)
             if medianInt > 99999 // DNF
             {
@@ -323,8 +340,8 @@ class StatsViewController: UIViewController {
         }
         
         let median = NSLocalizedString("MEDIAN AVERAGE:  ", comment: "")
-         let medianString = NSMutableAttributedString(string: "\(median)\(medianTimeString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
-        medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: median.count, length: medianString.length - median.count))
+         let medianString = NSMutableAttributedString(string: "\(median)\(medianTimeString!)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+        medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.grayColor(), range: NSRange(location: median.count, length: medianString.length - median.count))
         MedianAverageButton.setAttributedTitle(medianString, for: .normal)
     }
     
@@ -334,7 +351,6 @@ class StatsViewController: UIViewController {
         
         if averages.count >= 10
         {
-            var bestMo: Float = 9999999.0
             
             var sum: Float = 0
             
@@ -347,10 +363,8 @@ class StatsViewController: UIViewController {
             
             moChartEntries.append(ChartDataEntry(x: 10.0, y: Double(initialMo)))
             
-            if initialMo < bestMo
-            {
-                bestMo = initialMo
-            }
+            bestMoStartIndex = 0
+            var bestMo: Float = initialMo
             
             for i in 10..<averages.count
             {
@@ -367,6 +381,7 @@ class StatsViewController: UIViewController {
                 if currentMo < bestMo
                 {
                     bestMo = currentMo
+                    bestMoStartIndex = i - 9
                 }
             }
             
@@ -420,6 +435,26 @@ class StatsViewController: UIViewController {
         if bestAverageIndex != nil
         {
             bestAverageTransition = true
+            self.performSegue(withIdentifier: "SegueToSession", sender: self)
+        }
+    }
+    
+    @IBAction func MedianAverageClicked(_ sender: Any) {
+        
+    }
+    
+    @IBAction func BestMoClicked(_ sender: Any) {
+        if bestMoStartIndex != nil
+        {
+            bestMoTransition = true
+            self.performSegue(withIdentifier: "SegueToSession", sender: self)
+        }
+    }
+    
+    @IBAction func CurrentMoClicked(_ sender: Any) {
+        if HomeViewController.mySession.currentAverage >= 9
+        {
+            currentMoTransition = true
             self.performSegue(withIdentifier: "SegueToSession", sender: self)
         }
     }

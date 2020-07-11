@@ -11,6 +11,9 @@
         <array key="Lato-Black.ttf">
             <string>Lato-Black</string>
         </array>
+        <array key="Lato-Bold.ttf">
+            <string>Lato-Bold</string>
+        </array>
         <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
         </array>
@@ -51,6 +54,20 @@
                                                     <action selector="CancelPressed:" destination="s1b-WJ-Edh" eventType="touchUpInside" id="6Zz-ZY-r2x"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmR-9J-LlD">
+                                                <rect key="frame" x="271.66666666666669" y="0.0" width="57.666666666666686" height="55"/>
+                                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="-1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" image="rectangle.on.rectangle" catalog="system">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="CopyPressed:" destination="s1b-WJ-Edh" eventType="touchUpInside" id="XvV-jw-DzF"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -58,9 +75,13 @@
                                             <constraint firstItem="ME7-KI-XS6" firstAttribute="leading" secondItem="ue8-JV-7ll" secondAttribute="leading" constant="5" id="Q94-tu-vko"/>
                                             <constraint firstAttribute="height" constant="55" id="Sc0-jd-Eac"/>
                                             <constraint firstItem="4Aa-xs-kbh" firstAttribute="width" secondItem="ue8-JV-7ll" secondAttribute="width" multiplier="0.65" id="V7P-h8-P5s"/>
+                                            <constraint firstAttribute="trailing" secondItem="VmR-9J-LlD" secondAttribute="trailing" id="Yp0-UE-faY"/>
                                             <constraint firstItem="4Aa-xs-kbh" firstAttribute="centerY" secondItem="ue8-JV-7ll" secondAttribute="centerY" id="Z1B-c6-BFl"/>
+                                            <constraint firstAttribute="bottom" secondItem="VmR-9J-LlD" secondAttribute="bottom" id="bPN-Gf-jSu"/>
                                             <constraint firstAttribute="bottom" secondItem="ME7-KI-XS6" secondAttribute="bottom" id="dVK-Ao-bCc"/>
+                                            <constraint firstItem="VmR-9J-LlD" firstAttribute="top" secondItem="ue8-JV-7ll" secondAttribute="top" id="tF0-QY-BMm"/>
                                             <constraint firstItem="4Aa-xs-kbh" firstAttribute="leading" secondItem="ME7-KI-XS6" secondAttribute="trailing" constant="5" id="tnO-iu-0nj"/>
+                                            <constraint firstItem="VmR-9J-LlD" firstAttribute="leading" secondItem="4Aa-xs-kbh" secondAttribute="trailing" id="u8X-Oz-pcT"/>
                                             <constraint firstItem="4Aa-xs-kbh" firstAttribute="centerX" secondItem="ue8-JV-7ll" secondAttribute="centerX" id="xud-Za-n4M"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -173,6 +194,7 @@
                     <connections>
                         <outlet property="BigView" destination="OAb-aQ-hhW" id="clh-jk-8aZ"/>
                         <outlet property="CancelButton" destination="ME7-KI-XS6" id="N9V-4c-MGa"/>
+                        <outlet property="CopyButton" destination="VmR-9J-LlD" id="NY1-8G-GTC"/>
                         <outlet property="DeleteButton" destination="dM1-DV-6dl" id="16n-5d-Yj6"/>
                         <outlet property="DoneButton" destination="n3B-kK-PSt" id="nyd-Ax-5BP"/>
                         <outlet property="DoneCenterConstraint" destination="t7V-ZP-hzU" id="Jhh-dS-bYr"/>
@@ -186,7 +208,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRq-vF-9TI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="MED-jH-uTn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="13.043478260869566" y="117.85714285714285"/>
+            <point key="canvasLocation" x="13.043478260869566" y="117.39130434782609"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="rectangle.on.rectangle" catalog="system" width="128" height="98"/>
+    </resources>
 </document>

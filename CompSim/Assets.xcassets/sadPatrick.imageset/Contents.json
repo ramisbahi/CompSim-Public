@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "sadPatrick-resized.png",
       "idiom" : "universal",
-      "filename" : "sadPatrick.png",
       "scale" : "1x"
     },
     {
+      "filename" : "sadPatrick-resized-1.png",
       "idiom" : "universal",
-      "filename" : "cubers2-6.png",
       "scale" : "2x"
     },
     {
+      "filename" : "sadPatrick-resized-2.png",
       "idiom" : "universal",
-      "filename" : "cubers3-6.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

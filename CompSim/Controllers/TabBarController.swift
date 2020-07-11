@@ -26,7 +26,7 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if bestSingleTransition || bestAverageTransition
+        if bestSingleTransition || bestAverageTransition || bestMoTransition || currentMoTransition
         {
             self.selectedIndex = 1
         }

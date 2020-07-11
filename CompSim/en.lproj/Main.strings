@@ -273,7 +273,7 @@
 "dA4-04-9zH.segmentTitles[2]" = "BEST OF 3";
 
 /* Class = "UIButton"; normalTitle = " Stats"; ObjectID = "dE5-MO-YyE"; */
-"dE5-MO-YyE.normalTitle" = " Stats";
+"dE5-MO-YyE.normalTitle" = "←";
 
 /* Class = "UILabel"; text = "Player"; ObjectID = "dGH-rV-lmj"; */
 "dGH-rV-lmj.text" = "Player";

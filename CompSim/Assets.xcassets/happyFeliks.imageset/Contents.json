@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "happyFeliks-resized.png",
       "idiom" : "universal",
-      "filename" : "happyFeliks.jpg",
       "scale" : "1x"
     },
     {
+      "filename" : "happyFeliks-resized-1.png",
       "idiom" : "universal",
-      "filename" : "cubers2-1.jpg",
       "scale" : "2x"
     },
     {
+      "filename" : "happyFeliks-resized-2.png",
       "idiom" : "universal",
-      "filename" : "cubers3-1.jpg",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
