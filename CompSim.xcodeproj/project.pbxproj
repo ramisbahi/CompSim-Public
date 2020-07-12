@@ -40,6 +40,7 @@
 		368914A124B66A38004D303F /* InputAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368914A024B66A38004D303F /* InputAlertViewController.swift */; };
 		368914A324B66C0B004D303F /* InputAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368914A224B66C0B004D303F /* InputAlertService.swift */; };
 		368A44A624B90137007EBAAD /* scramble-display.browser.js in Resources */ = {isa = PBXBuildFile; fileRef = 368A44A524B90137007EBAAD /* scramble-display.browser.js */; };
+		368A44A924BA26EA007EBAAD /* ChartValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368A44A824BA26EA007EBAAD /* ChartValueFormatter.swift */; };
 		3690EAE52316293200CB0B78 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360F108E22E551E500EEBB75 /* TabBarController.swift */; };
 		3690EAE62316293200CB0B78 /* ScrambleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF5022DEE4E5006657CF /* ScrambleReader.swift */; };
 		3690EAE72316293200CB0B78 /* AverageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3612321423005D9F0044DEF1 /* AverageDetailViewController.swift */; };
@@ -168,6 +169,7 @@
 		368914A024B66A38004D303F /* InputAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAlertViewController.swift; sourceTree = "<group>"; };
 		368914A224B66C0B004D303F /* InputAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAlertService.swift; sourceTree = "<group>"; };
 		368A44A524B90137007EBAAD /* scramble-display.browser.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "scramble-display.browser.js"; sourceTree = "<group>"; };
+		368A44A824BA26EA007EBAAD /* ChartValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartValueFormatter.swift; sourceTree = "<group>"; };
 		3690EAC0231623E300CB0B78 /* CompSim.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CompSim.entitlements; sourceTree = "<group>"; };
 		3690EAE2231627A700CB0B78 /* Pyraminx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pyraminx.m; sourceTree = "<group>"; };
 		3696537A23BA4671000784D9 /* AddSolveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSolveAlertViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 		3663DF3922DD699D006657CF /* CompSim */ = {
 			isa = PBXGroup;
 			children = (
+				368A44A724BA26CC007EBAAD /* Charts */,
 				368A44A424B900A9007EBAAD /* js */,
 				365D91C324B126AC004B752E /* Fonts */,
 				360BC94623BBE56D00EE8324 /* Sounds */,
@@ -293,6 +296,14 @@
 				368A44A524B90137007EBAAD /* scramble-display.browser.js */,
 			);
 			path = js;
+			sourceTree = "<group>";
+		};
+		368A44A724BA26CC007EBAAD /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				368A44A824BA26EA007EBAAD /* ChartValueFormatter.swift */,
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 		3690EABA23161FCC00CB0B78 /* Scramblers */ = {
@@ -557,6 +568,7 @@
 				3690EAE82316293200CB0B78 /* SettingsViewController.swift in Sources */,
 				3696538823BA9F46000784D9 /* ViewSolveAlertService.swift in Sources */,
 				36B88A9123C7AD93004262CA /* NotificationAlertService.swift in Sources */,
+				368A44A924BA26EA007EBAAD /* ChartValueFormatter.swift in Sources */,
 				3690EAEB2316293200CB0B78 /* SessionViewController.swift in Sources */,
 				3690EAEC2316293200CB0B78 /* HomeViewController.swift in Sources */,
 				3677A4FA24B77F4100868C0A /* BaseNavigationController.swift in Sources */,

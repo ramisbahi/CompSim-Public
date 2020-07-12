@@ -303,12 +303,25 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             if SessionCollection[0].isHidden
             {
                 SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+                if #available(iOS 13.0, *) {
+                    //SessionButton.imageView?.rotate(duration: 0.25, radians: 0.5*Float.pi)
+                    UIView.setAnimationsEnabled(false)
+                    SessionButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+                    self.view.layoutIfNeeded()
+                    UIView.setAnimationsEnabled(true)
+                }
             }
             else
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
                 {
                     self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+                }
+                if #available(iOS 13.0, *) {
+                    UIView.setAnimationsEnabled(false)
+                    SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+                    self.view.layoutIfNeeded()
+                    UIView.setAnimationsEnabled(true)
                 }
             }
         }
@@ -332,6 +345,13 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.view.layoutIfNeeded()
             })
             button.setTitleColor(.white, for: .normal)
+        }
+        
+        if #available(iOS 13.0, *) {
+            UIView.setAnimationsEnabled(false)
+            SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            self.view.layoutIfNeeded()
+            UIView.setAnimationsEnabled(true)
         }
         
         guard let title = sender.currentTitle else
@@ -487,7 +507,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else
         {
-            BestSingleButton.setTitle("Best single:  ", for: .normal)
+            BestSingleButton.setAttributedTitle(NSAttributedString(string: "Best single:  "), for: .normal)
         }
         
     }
@@ -514,17 +534,23 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else
         {
-            BestAverageButton.setTitle("Best average:  ", for: .normal)
+            BestAverageButton.setAttributedTitle(NSAttributedString(string: "Best average:  "), for: .normal)
         }
-    }
-    
-    override func viewWillLayoutSubviews() {
-        let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
-        ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
+        ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
+        
+        if #available(iOS 13.0, *) {
+            UIView.setAnimationsEnabled(false)
+            SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            self.view.layoutIfNeeded()
+            UIView.setAnimationsEnabled(true)
+        }
+        
         updateTargetButton()
         updateBestButtons()
         setUpStackView()

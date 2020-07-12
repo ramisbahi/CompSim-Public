@@ -7,16 +7,17 @@
 //
 import UIKit
 
+let tabBarHeight: CGFloat = 60.0
+
 class TabBarController: UITabBarController {
     
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        let desiredHeight: CGFloat = 60.0
         var tabFrame = tabBar.frame
-        tabFrame.size.height = desiredHeight
-        tabFrame.origin.y = self.view.frame.size.height - desiredHeight
+        tabFrame.size.height = tabBarHeight
+        tabFrame.origin.y = self.view.frame.size.height - tabBarHeight
         self.tabBar.frame = tabFrame
         
         UITabBar.appearance().layer.borderWidth = 0.0

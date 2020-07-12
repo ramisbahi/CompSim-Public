@@ -40,7 +40,7 @@ extension UIView{
     }
 }
 
-class HomeViewController: UIViewController, CBPeripheralManagerDelegate
+class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestureRecognizerDelegate
 {
     @IBOutlet var BigView: UIView!
     
@@ -114,6 +114,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     static var timerPhase = 0 // IDLE
     
     static var longPress = UILongPressGestureRecognizer()
+    static var webLongPress = UILongPressGestureRecognizer()
     
     static var font: UIFont? = nil
     
@@ -239,7 +240,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         
         if(HomeViewController.font == nil) // not set yet
         {
-            HomeViewController.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.09, name: "Lato-Bold")
+            HomeViewController.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.08, name: "Lato-Bold")
         }
         
         TimesCollection.forEach{(button) in
@@ -468,12 +469,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     }
     
     
-    override func viewWillLayoutSubviews() {
-        let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
-        ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
-    }
-    
-    
     @IBAction func SessionButtonClicked(_ sender: Any) {
         if SessionCollection.count > 0
         {
@@ -495,7 +490,10 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
                     self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
                 }
                 if #available(iOS 13.0, *) {
+                    UIView.setAnimationsEnabled(false)
                     SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+                    self.view.layoutIfNeeded()
+                    UIView.setAnimationsEnabled(true)
                 }
             }
         }
@@ -535,7 +533,10 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         }
         
         if #available(iOS 13.0, *) {
-            SessionButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+            UIView.setAnimationsEnabled(false)
+            SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            self.view.layoutIfNeeded()
+            UIView.setAnimationsEnabled(true)
         }
         
         guard let title = sender.currentTitle else
@@ -598,10 +599,16 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     {
         super.viewWillAppear(false)
         
+        let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
+        ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
+        
         setUpStackView()
         
         if #available(iOS 13.0, *) {
+            UIView.setAnimationsEnabled(false)
             SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            self.view.layoutIfNeeded()
+            UIView.setAnimationsEnabled(true)
         }
         
         TargetLabel.setTitle("  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))", for: .normal)
@@ -632,10 +639,19 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
             HomeViewController.longPress.minimumPressDuration = TimeInterval(HomeViewController.holdingTime)
             HomeViewController.longPress.cancelsTouchesInView = false
             GestureArea.addGestureRecognizer(HomeViewController.longPress)
+            
+            webView.removeGestureRecognizer(HomeViewController.webLongPress)
+            HomeViewController.webLongPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
+            HomeViewController.webLongPress.allowableMovement = 50
+            HomeViewController.webLongPress.minimumPressDuration = TimeInterval(HomeViewController.holdingTime)
+            HomeViewController.webLongPress.cancelsTouchesInView = false
+            HomeViewController.webLongPress.delegate = self
+            webView.addGestureRecognizer(HomeViewController.webLongPress)
         }
         else // inspection or 0.0+noinspection
         {
             GestureArea.removeGestureRecognizer(HomeViewController.longPress)
+            webView.removeGestureRecognizer(HomeViewController.webLongPress)
         }
         
         if HomeViewController.timing == 2
@@ -669,7 +685,9 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         }
     }
     
-    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+      return true
+    }
     
     func gestureSetup()
     {
@@ -683,6 +701,10 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
         GestureArea.addGestureRecognizer(tap)
+        
+        let webTap = UITapGestureRecognizer(target: self, action: #selector(respondToGesture(gesture:)))
+        webTap.delegate = self
+        webView.addGestureRecognizer(webTap)
         
         let tapScramble = UITapGestureRecognizer(target: self, action: #selector(scrambleTapped(gesture:)))
         ScrambleContentView.addGestureRecognizer(tapScramble)
@@ -699,6 +721,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     
     @objc func handleLongPress(sender: UIGestureRecognizer)
     {
+        print("handling long press")
         if(sender.state == .began) // reached holding time
         {
             if HomeViewController.timerPhase == self.IDLE
@@ -723,6 +746,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touches canceled")
         if(usingLongPress())
         {
             cancelTimer()
@@ -730,15 +754,17 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        print("touches began")
         var inGestureArea = false
         for touch in touches
         {
-            if(touch.location(in: GestureArea).y > 0)
+            if(touch.location(in: GestureArea).y > 0 || touch.location(in: webView).y > 0)
             {
                 inGestureArea = true
             }
         }
+        
+        print("in gesture area \(inGestureArea)")
         
         if inGestureArea && usingLongPress() && HomeViewController.timerPhase == self.IDLE
         {
@@ -750,6 +776,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) // released before minimum hold time
     {
+        print("touches ended")
         if(usingLongPress() && HomeViewController.timerPhase == FROZEN)
         {
             cancelTimer()
@@ -764,7 +791,11 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
             button.isHidden = true
         }
         ScrambleContentView.isHidden = true
-        
+        webView.isHidden = true
+        TargetLabel.isHidden = true
+        ResetButton.isHidden = true
+        HelpButton.isHidden = true
+        SessionStackView.isHidden = true
     }
     
     func showAll()
@@ -772,7 +803,11 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate
         //print("showing all")
         updateLabels()
         ScrambleContentView.isHidden = false
-        //TODO: show everything that should show
+        webView.isHidden = false
+        TargetLabel.isHidden = false
+        ResetButton.isHidden = false
+        HelpButton.isHidden = false
+        SessionStackView.isHidden = false
     }
     
     func cancelTimer()

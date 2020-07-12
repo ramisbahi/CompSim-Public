@@ -37,10 +37,14 @@ class StatsViewController: UIViewController {
     @IBOutlet weak var SessionStackView: UIStackView!
     @IBOutlet weak var SessionButton: UIButton!
     
+    @IBOutlet weak var xLabel: UILabel!
+    
     var moChartEntries = [ChartDataEntry]()
     var SessionCollection: [UIButton] = []
     var medianChartEntries = [ChartDataEntry]()
     var medianTimeString: String?
+    
+    @IBOutlet weak var yLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,15 +59,38 @@ class StatsViewController: UIViewController {
         CurrentMoLabel.adjustsFontSizeToFitWidth = true
         
         lineChart.setScaleEnabled(true)
-        lineChart.noDataText = "No averages in this session yet!"
+        lineChart.noDataText = "Do a couple averages to see your data visualization here!"
+        lineChart.noDataFont = UIFont(name: "Lato-Black", size: 16.0)!
+        lineChart.noDataTextColor = HomeViewController.darkBlueColor()
+        lineChart.noDataTextAlignment = .center
         lineChart.xAxis.labelFont = UIFont(name: "Lato-Black", size: 12.0)!
         lineChart.xAxis.labelTextColor = HomeViewController.darkBlueColor()
         lineChart.xAxis.labelPosition = .bottom
         lineChart.leftAxis.labelFont = UIFont(name: "Lato-Black", size: 12.0)!
         lineChart.leftAxis.labelTextColor = HomeViewController.darkBlueColor()
+        lineChart.leftAxis.valueFormatter = ChartValueFormatter()
         lineChart.rightAxis.enabled = false
-    
-
+        lineChart.legend.verticalAlignment = .top
+        lineChart.legend.font = UIFont(name: "Lato-Black", size: 10.0)!
+        lineChart.legend.textColor = HomeViewController.darkBlueColor()
+        
+        lineChart.xAxis.axisLineColor = HomeViewController.grayColor()
+        lineChart.xAxis.gridColor = HomeViewController.grayColor()
+        lineChart.rightAxis.axisLineColor = HomeViewController.grayColor()
+        lineChart.rightAxis.gridColor = HomeViewController.grayColor()
+        lineChart.leftAxis.axisLineColor = HomeViewController.grayColor()
+        lineChart.leftAxis.gridColor = HomeViewController.grayColor()
+         
+        
+        lineChart.drawBordersEnabled = true
+        lineChart.borderColor = HomeViewController.grayColor()
+        
+        
+        
+        
+        yLabel.transform = CGAffineTransform(rotationAngle: CGFloat(3*Float.pi/2))
+        yLabel.adjustsFontSizeToFitWidth = true
+        
         // Do any additional setup after loading the view.
     }
     
@@ -71,6 +98,7 @@ class StatsViewController: UIViewController {
         let radius = BestMoButton.frame.height / 2.0
         BestMoButton.layer.cornerRadius = radius
         CurrentMoButton.layer.cornerRadius = radius
+    
     }
     
     @IBAction func SessionButtonClicked(_ sender: Any) {
@@ -79,12 +107,26 @@ class StatsViewController: UIViewController {
             if SessionCollection[0].isHidden
             {
                 SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+                if #available(iOS 13.0, *) {
+                    //SessionButton.imageView?.rotate(duration: 0.25, radians: 0.5*Float.pi)
+                    UIView.setAnimationsEnabled(false)
+                    SessionButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+                    self.view.layoutIfNeeded()
+                    UIView.setAnimationsEnabled(true)
+                }
             }
             else
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3)
                 {
                     self.SessionButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+                }
+                if #available(iOS 13.0, *)
+                {
+                    UIView.setAnimationsEnabled(false)
+                    SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+                    self.view.layoutIfNeeded()
+                    UIView.setAnimationsEnabled(true)
                 }
             }
         }
@@ -120,6 +162,13 @@ class StatsViewController: UIViewController {
                 self.view.layoutIfNeeded()
             })
             button.setTitleColor(.white, for: .normal)
+        }
+        
+        if #available(iOS 13.0, *) {
+            UIView.setAnimationsEnabled(false)
+            SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            self.view.layoutIfNeeded()
+            UIView.setAnimationsEnabled(true)
         }
         
         guard let title = sender.currentTitle else
@@ -177,11 +226,21 @@ class StatsViewController: UIViewController {
         }
     }
     
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("STATS VIEW WILL APPEAR")
+        
         
         setUpStackView()
+        
+        if #available(iOS 13.0, *) {
+            UIView.setAnimationsEnabled(false)
+            SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            self.view.layoutIfNeeded()
+            UIView.setAnimationsEnabled(true)
+        }
         
         updateLabels()
         updateGraph()
@@ -189,41 +248,53 @@ class StatsViewController: UIViewController {
     
     func updateGraph()
     {
-        var lineChartEntries = [ChartDataEntry]()
-        var i: Double = 1
-        for averageString in HomeViewController.mySession.allAverages
+        if HomeViewController.mySession.allAverages.count > 1
         {
-            if averageString != "DNF"
+            var lineChartEntries = [ChartDataEntry]()
+            var i: Double = 1
+            for averageString in HomeViewController.mySession.allAverages
             {
-                let average = averageString.toFloatTime()
-                lineChartEntries.append(ChartDataEntry(x: i, y: Double(average)))
+                if averageString != "DNF"
+                {
+                    let average = averageString.toFloatTime()
+                    lineChartEntries.append(ChartDataEntry(x: i, y: Double(average)))
+                }
+                i += 1
             }
-            i += 1
+            
+            let line = LineChartDataSet(entries: lineChartEntries, label: "Average")
+            line.colors = [HomeViewController.darkBlueColor()]
+            line.drawCirclesEnabled = false
+            line.setDrawHighlightIndicators(false)
+            
+            let moLine = LineChartDataSet(entries: moChartEntries, label: "WCAmo10")
+            moLine.colors = [HomeViewController.orangeColor()]
+            moLine.drawCirclesEnabled = false
+            moLine.setDrawHighlightIndicators(false)
+            
+            let medianLine = LineChartDataSet(entries: medianChartEntries, label: "Median Average")
+            medianLine.colors = [.black]
+            medianLine.drawCirclesEnabled = false
+            medianLine.setDrawHighlightIndicators(false)
+            
+            
+            let data = LineChartData()
+            data.addDataSet(line)
+            data.addDataSet(moLine)
+            data.addDataSet(medianLine)
+            data.setDrawValues(false)
+            
+            lineChart.data = data
+            
+            if HomeViewController.mySession.allAverages.count < 7
+            {
+                lineChart.xAxis.setLabelCount(HomeViewController.mySession.allAverages.count, force: true)
+            }
         }
-        
-        let line = LineChartDataSet(entries: lineChartEntries, label: "WCA")
-        line.colors = [HomeViewController.darkBlueColor()]
-        line.drawCirclesEnabled = false
-        line.setDrawHighlightIndicators(false)
-        
-        let moLine = LineChartDataSet(entries: moChartEntries, label: "WCAmo10")
-        moLine.colors = [HomeViewController.orangeColor()]
-        moLine.drawCirclesEnabled = false
-        moLine.setDrawHighlightIndicators(false)
-        
-        let medianLine = LineChartDataSet(entries: medianChartEntries, label: "Median Average")
-        medianLine.colors = [HomeViewController.grayColor()]
-        medianLine.drawCirclesEnabled = false
-        medianLine.setDrawHighlightIndicators(false)
-        
-        let data = LineChartData()
-        data.addDataSet(line)
-        data.addDataSet(moLine)
-        data.addDataSet(medianLine)
-        data.setDrawValues(false)
-        
-        lineChart.data = data
-        
+        else
+        {
+            lineChart.data = nil
+        }
         
     }
     
@@ -255,7 +326,7 @@ class StatsViewController: UIViewController {
             }
         }
         
-        
+        print("best single solve index \(bestSingleSolveIndex)")
         if bestSingleSolveIndex != nil
         {
             let minSolve = allTimes[bestSingleAverageIndex!].list[bestSingleSolveIndex!]
@@ -275,7 +346,9 @@ class StatsViewController: UIViewController {
         }
         else
         {
-            BestSingleButton.setTitle("Best single:  ", for: .normal)
+            print("setting title to nil")
+            BestSingleButton.setAttributedTitle(NSAttributedString(string: "Best single:  ", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()]), for: .normal)
+            BestAverageButton.setAttributedTitle(NSAttributedString(string: "Best average:  ", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()]), for: .normal)
         }
     }
     
@@ -313,35 +386,43 @@ class StatsViewController: UIViewController {
             
             a.toFloatTime() < b.toFloatTime()
         })
-        if sorted.count == 0
-        {
-            return
-        }
+        
+        
+        medianChartEntries = []
         medianTimeString = ""
-        if sorted.count % 2 != 0 {
-            medianTimeString = sorted[sorted.count / 2]
-        }
-        else
+        
+        if sorted.count > 0
         {
-            let medianFloat = (sorted[sorted.count / 2].toFloatTime() + sorted[sorted.count / 2 - 1].toFloatTime()) / 2.0
-            
-            medianChartEntries.append(ChartDataEntry(x: 1.0, y: Double(medianFloat)))
-            medianChartEntries.append(ChartDataEntry(x: Double(HomeViewController.mySession.allAverages.count), y: Double(medianFloat)))
-            
-            let medianInt = SolveTime.makeIntTime(num: medianFloat)
-            if medianInt > 99999 // DNF
-            {
-                medianTimeString = "DNF"
+            var medianFloat: Float = 0.0
+            if sorted.count % 2 != 0 {
+                medianTimeString = sorted[sorted.count / 2]
+                medianFloat = medianTimeString!.toFloatTime()
             }
             else
             {
-                medianTimeString = SolveTime.makeMyString(num: medianInt)
+                medianFloat = (sorted[sorted.count / 2].toFloatTime() + sorted[sorted.count / 2 - 1].toFloatTime()) / 2.0
+                
+                let medianInt = SolveTime.makeIntTime(num: medianFloat)
+                if medianInt > 99999 // DNF
+                {
+                    medianTimeString = "DNF"
+                }
+                else
+                {
+                    medianTimeString = SolveTime.makeMyString(num: medianInt)
+                }
+            }
+            
+            if medianFloat < 9999
+            {
+                medianChartEntries.append(ChartDataEntry(x: 1.0, y: Double(medianFloat)))
+                medianChartEntries.append(ChartDataEntry(x: Double(HomeViewController.mySession.allAverages.count), y: Double(medianFloat)))
             }
         }
         
         let median = NSLocalizedString("MEDIAN AVERAGE:  ", comment: "")
          let medianString = NSMutableAttributedString(string: "\(median)\(medianTimeString!)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
-        medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.grayColor(), range: NSRange(location: median.count, length: medianString.length - median.count))
+        medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: NSRange(location: median.count, length: medianString.length - median.count))
         MedianAverageButton.setAttributedTitle(medianString, for: .normal)
     }
     
@@ -402,6 +483,11 @@ class StatsViewController: UIViewController {
                 currMoString = SolveTime.makeMyString(num: currMoInt)
             }
             CurrentMoButton.setTitle(currMoString, for: .normal)
+        }
+        else
+        {
+            BestMoButton.setTitle(" ", for: .normal)
+            CurrentMoButton.setTitle(" ", for: .normal)
         }
         
         

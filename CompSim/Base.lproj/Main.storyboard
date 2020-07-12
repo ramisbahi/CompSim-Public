@@ -1071,10 +1071,10 @@
                                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="13" minY="4" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="3x3x3" image="chevron.down" catalog="system">
+                                        <inset key="imageEdgeInsets" minX="13" minY="2" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="3x3x3" image="chevron.left" catalog="system">
                                             <color key="titleColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="15"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="11"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1231,7 +1231,7 @@
                                     <constraint firstAttribute="bottom" secondItem="awx-C1-efd" secondAttribute="bottom" constant="20" id="rer-WI-AMg"/>
                                 </constraints>
                             </view>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Et1-5k-b1L">
+                            <wkWebView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Et1-5k-b1L">
                                 <rect key="frame" x="0.0" y="570" width="207" height="117"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -1305,7 +1305,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="wordWrap" minimumFontSize="79" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="94l-PH-qUv">
-                                <rect key="frame" x="0.0" y="274.66666666666669" width="414" height="137.66666666666669"/>
+                                <rect key="frame" x="0.0" y="304.66666666666669" width="414" height="137.66666666666669"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="152"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1396,7 +1396,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IRZ-Pa-aDz">
                                 <rect key="frame" x="103.66666666666669" y="44" width="207" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CZ-LM-CwQ">
+                                    <button opaque="NO" contentMode="center" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CZ-LM-CwQ">
                                         <rect key="frame" x="0.0" y="0.0" width="207" height="30"/>
                                         <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -1458,7 +1458,7 @@
                             <constraint firstItem="IRZ-Pa-aDz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VTi-YK-Ou6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dT7-pR-N0g" secondAttribute="trailing" constant="12" id="W7Y-yA-xOz"/>
                             <constraint firstItem="Jgk-eF-5k8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WOF-SJ-CFj"/>
-                            <constraint firstItem="94l-PH-qUv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Xxd-r1-jjb"/>
+                            <constraint firstItem="94l-PH-qUv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="30" id="Xxd-r1-jjb"/>
                             <constraint firstItem="Jgk-eF-5k8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YB1-2e-qye"/>
                             <constraint firstItem="6f7-8F-Jmq" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.037" id="Zw4-Wl-k7G"/>
                             <constraint firstItem="nMw-Mu-qR6" firstAttribute="top" secondItem="RUu-Ml-8x3" secondAttribute="bottom" id="dL9-yU-4hz"/>
@@ -2515,7 +2515,7 @@ Cg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgX-vz-uG4" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="295.33333333333326" width="414" height="371.66666666666674"/>
+                                <rect key="frame" x="20" y="295.33333333333326" width="394" height="351.66666666666674"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27B-b7-DKN">
@@ -2543,13 +2543,13 @@ Cg
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current WCAmo10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehM-dx-pdp">
                                 <rect key="frame" x="10" y="248.66666666666666" width="187" height="26.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="22"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best WCAmo10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Os-hF-yiN">
                                 <rect key="frame" x="217" y="248.66666666666666" width="187" height="26.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="22"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ory-Hn-2AG">
@@ -2616,10 +2616,10 @@ Cg
                                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="13" minY="4" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="3x3x3" image="chevron.down" catalog="system">
+                                        <inset key="imageEdgeInsets" minX="13" minY="2" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="3x3x3" image="chevron.left" catalog="system">
                                             <color key="titleColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="15"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="11"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -2638,23 +2638,39 @@ Cg
                                     <constraint firstItem="4CO-EX-grg" firstAttribute="centerX" secondItem="6VK-zB-Xzj" secondAttribute="centerX" id="hfH-XS-GnT"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average #" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjJ-jY-Lcz">
+                                <rect key="frame" x="178.33333333333334" y="647" width="77.333333333333343" height="30"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGc-Nw-WeQ">
+                                <rect key="frame" x="-15" y="461" width="55" height="20.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Ory-Hn-2AG" firstAttribute="leading" secondItem="mqF-Hu-6Dm" secondAttribute="centerX" constant="10" id="2Cd-Yr-QfK"/>
                             <constraint firstItem="6VK-zB-Xzj" firstAttribute="centerX" secondItem="mqF-Hu-6Dm" secondAttribute="centerX" id="30g-vw-YFa"/>
                             <constraint firstItem="2qe-iy-8FB" firstAttribute="trailing" secondItem="rgX-vz-uG4" secondAttribute="trailing" id="4pa-VI-V02"/>
+                            <constraint firstItem="2qe-iy-8FB" firstAttribute="bottom" secondItem="GjJ-jY-Lcz" secondAttribute="bottom" constant="10" id="5PL-x1-k80"/>
                             <constraint firstItem="6VK-zB-Xzj" firstAttribute="width" secondItem="mqF-Hu-6Dm" secondAttribute="width" multiplier="0.5" constant="0.5" id="6V4-NO-Iwx"/>
+                            <constraint firstItem="FGc-Nw-WeQ" firstAttribute="leading" secondItem="mqF-Hu-6Dm" secondAttribute="leading" constant="-15" id="7Pj-5c-fQb"/>
                             <constraint firstItem="3Os-hF-yiN" firstAttribute="leading" secondItem="mqF-Hu-6Dm" secondAttribute="centerX" constant="10" id="7fR-aW-RMN"/>
                             <constraint firstItem="ehM-dx-pdp" firstAttribute="leading" secondItem="2qe-iy-8FB" secondAttribute="leading" constant="10" id="8JB-nU-4wZ"/>
                             <constraint firstItem="27B-b7-DKN" firstAttribute="top" secondItem="mhD-pj-uhA" secondAttribute="bottom" id="9HF-lg-B4G"/>
                             <constraint firstItem="6VK-zB-Xzj" firstAttribute="top" secondItem="2qe-iy-8FB" secondAttribute="top" id="AHG-fd-ep3"/>
                             <constraint firstItem="YUF-yu-Ee2" firstAttribute="width" secondItem="mqF-Hu-6Dm" secondAttribute="width" multiplier="0.2" id="AyA-C6-K93"/>
                             <constraint firstItem="3Os-hF-yiN" firstAttribute="trailing" secondItem="2qe-iy-8FB" secondAttribute="trailing" constant="-10" id="CY0-xE-BGW"/>
+                            <constraint firstItem="rgX-vz-uG4" firstAttribute="leading" secondItem="FGc-Nw-WeQ" secondAttribute="trailing" constant="-20" id="IsS-Jx-2Uy"/>
                             <constraint firstItem="Ory-Hn-2AG" firstAttribute="height" secondItem="mqF-Hu-6Dm" secondAttribute="height" multiplier="0.045" id="KVh-3G-xqO"/>
                             <constraint firstItem="rgX-vz-uG4" firstAttribute="top" secondItem="3Os-hF-yiN" secondAttribute="bottom" constant="20" id="PMO-BL-WvT"/>
                             <constraint firstItem="27B-b7-DKN" firstAttribute="leading" secondItem="2qe-iy-8FB" secondAttribute="leading" constant="15" id="PlC-MG-qUA"/>
-                            <constraint firstItem="2qe-iy-8FB" firstAttribute="bottom" secondItem="rgX-vz-uG4" secondAttribute="bottom" constant="20" id="QaX-eO-Mae"/>
+                            <constraint firstItem="2qe-iy-8FB" firstAttribute="bottom" secondItem="rgX-vz-uG4" secondAttribute="bottom" constant="40" id="QaX-eO-Mae"/>
+                            <constraint firstItem="FGc-Nw-WeQ" firstAttribute="centerY" secondItem="rgX-vz-uG4" secondAttribute="centerY" id="Qn9-fO-dts"/>
                             <constraint firstItem="N2O-qs-ugN" firstAttribute="top" secondItem="tTO-vG-QPq" secondAttribute="bottom" constant="12" id="R1f-8J-4da"/>
                             <constraint firstItem="mhD-pj-uhA" firstAttribute="height" secondItem="mqF-Hu-6Dm" secondAttribute="height" multiplier="0.07" id="Rf6-NR-Ch8"/>
                             <constraint firstItem="mhD-pj-uhA" firstAttribute="centerX" secondItem="mqF-Hu-6Dm" secondAttribute="centerX" id="TJF-Yp-Ut9"/>
@@ -2664,10 +2680,12 @@ Cg
                             <constraint firstItem="N2O-qs-ugN" firstAttribute="centerX" secondItem="mqF-Hu-6Dm" secondAttribute="centerX" multiplier="1.5" id="aD7-9q-jb6"/>
                             <constraint firstItem="ehM-dx-pdp" firstAttribute="trailing" secondItem="mqF-Hu-6Dm" secondAttribute="centerX" constant="-10" id="aXE-zW-pY0"/>
                             <constraint firstItem="mhD-pj-uhA" firstAttribute="width" secondItem="mqF-Hu-6Dm" secondAttribute="width" multiplier="0.65" id="cKo-fa-gPr"/>
-                            <constraint firstItem="rgX-vz-uG4" firstAttribute="leading" secondItem="2qe-iy-8FB" secondAttribute="leading" id="cmg-eo-oll"/>
+                            <constraint firstItem="rgX-vz-uG4" firstAttribute="leading" secondItem="2qe-iy-8FB" secondAttribute="leading" constant="20" id="cmg-eo-oll"/>
                             <constraint firstItem="2qe-iy-8FB" firstAttribute="trailing" secondItem="Ory-Hn-2AG" secondAttribute="trailing" constant="15" id="daa-8T-Xen"/>
                             <constraint firstItem="tTO-vG-QPq" firstAttribute="top" secondItem="Ory-Hn-2AG" secondAttribute="bottom" constant="15" id="fOk-yl-KfA"/>
+                            <constraint firstItem="GjJ-jY-Lcz" firstAttribute="top" secondItem="rgX-vz-uG4" secondAttribute="bottom" id="gIQ-Ri-ex5"/>
                             <constraint firstItem="27B-b7-DKN" firstAttribute="height" secondItem="mqF-Hu-6Dm" secondAttribute="height" multiplier="0.045" id="img-DQ-wid"/>
+                            <constraint firstItem="GjJ-jY-Lcz" firstAttribute="centerX" secondItem="rgX-vz-uG4" secondAttribute="centerX" id="j3i-qa-q0y"/>
                             <constraint firstItem="3Os-hF-yiN" firstAttribute="top" secondItem="N2O-qs-ugN" secondAttribute="bottom" constant="10" id="kle-GS-atA"/>
                             <constraint firstItem="tTO-vG-QPq" firstAttribute="top" secondItem="27B-b7-DKN" secondAttribute="bottom" constant="15" id="lz6-Qq-Sgm"/>
                             <constraint firstItem="2qe-iy-8FB" firstAttribute="trailing" secondItem="tTO-vG-QPq" secondAttribute="trailing" constant="15" id="mgI-u3-yFb"/>
@@ -2693,6 +2711,8 @@ Cg
                         <outlet property="SessionButton" destination="4CO-EX-grg" id="Rsi-AT-zG7"/>
                         <outlet property="SessionStackView" destination="6VK-zB-Xzj" id="YKJ-da-qSx"/>
                         <outlet property="lineChart" destination="rgX-vz-uG4" id="vcK-rZ-Ylh"/>
+                        <outlet property="xLabel" destination="GjJ-jY-Lcz" id="PjF-aI-7q0"/>
+                        <outlet property="yLabel" destination="FGc-Nw-WeQ" id="ewL-gR-4WN"/>
                         <segue destination="Icw-Z7-67k" kind="presentation" identifier="SegueToSession" animates="NO" modalPresentationStyle="fullScreen" id="PT0-Cd-KDT"/>
                     </connections>
                 </viewController>
@@ -2724,12 +2744,11 @@ Cg
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="AZA-lg-qSK"/>
+        <segue reference="PT0-Cd-KDT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Arrow_Left" width="24" height="11.333333015441895"/>
         <image name="arrow.turn.down.left" catalog="system" width="128" height="99"/>
-        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" width="128" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
