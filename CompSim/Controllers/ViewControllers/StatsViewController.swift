@@ -44,11 +44,16 @@ class StatsViewController: UIViewController {
     var medianChartEntries = [ChartDataEntry]()
     var medianTimeString: String?
     
+    static var changedDarkMode = false
+    
     @IBOutlet weak var yLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        HomeViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
+        
+       
         BestSingleButton.titleLabel?.adjustsFontSizeToFitWidth = true
         MedianAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
         BestAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -85,13 +90,20 @@ class StatsViewController: UIViewController {
         lineChart.drawBordersEnabled = true
         lineChart.borderColor = HomeViewController.grayColor()
         
-        
-        
-        
         yLabel.transform = CGAffineTransform(rotationAngle: CGFloat(3*Float.pi/2))
         yLabel.adjustsFontSizeToFitWidth = true
         
         // Do any additional setup after loading the view.
+    }
+    
+    func makeDarkMode()
+    {
+        
+    }
+    
+    func turnOffDarkMode()
+    {
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -232,7 +244,12 @@ class StatsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        if StatsViewController.changedDarkMode
+        {
+           HomeViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
+           StatsViewController.changedDarkMode = false
+        }
+               
         setUpStackView()
         
         if #available(iOS 13.0, *) {

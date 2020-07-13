@@ -365,6 +365,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     @IBOutlet weak var EmailButton: UIButton!
     
+    @IBOutlet var ControlCollection: [UISegmentedControl]!
     
     var cuberDictionary = ["Bill" : "Bill Wang", "Lucas" : "Lucas Etter", "Feliks" : "Feliks Zemdegs", "Kian" : "Kian Mansour", "Random" : NSLocalizedString("Random", comment: ""), "Rami" : "Rami Sbahi", "Patrick" : "Patrick Ponce", "Max" : "Max Park", "Kevin" : "Kevin Hays"]
     
@@ -372,6 +373,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     @IBAction func DarkModeChanged(_ sender: Any) {
         HomeViewController.changedDarkMode = true
+        StatsViewController.changedDarkMode = true
         if(!HomeViewController.darkMode) // not dark, set to dark
         {
             HomeViewController.darkMode = true
@@ -485,19 +487,35 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         BigView.backgroundColor = HomeViewController.darkModeColor()
         LittleView.backgroundColor = HomeViewController.darkModeColor()
         ScrollView.backgroundColor = HomeViewController.darkModeColor()
-        TopButtons.forEach{ (button) in
+        let allButtons = TopButtons + cuberCollection + eventCollection
+        allButtons.forEach{ (button) in
         
-            //button.backgroundColor = UIColor.darkGray
+            button.backgroundColor = HomeViewController.darkPurpleColor()
         }
+        
         TopLabels.forEach{ (label) in
         
-            //label.backgroundColor = UIColor.darkGray
+            label.textColor = .white
         }
         
+//        ControlCollection.forEach{(control) in
+//            control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
+//            control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: HomeViewController.darkModeColor()], for: .normal)
+//            control.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: 14)!], for: .normal)
+//        }
         
+        HoldingTimeSlider.thumbTintColor = HomeViewController.orangeColor()
         
-        
+        EmailButton.backgroundColor = .white
+        EmailButton.setTitleColor(HomeViewController.darkModeColor(), for: .normal)
+        EmailButton.imageView?.tintColor = HomeViewController.darkModeColor()
+        WebsiteButton.backgroundColor = .white
+        WebsiteButton.setTitleColor(HomeViewController.darkModeColor(), for: .normal)
+        WebsiteButton.imageView?.tintColor = HomeViewController.darkModeColor()
+    
         VersionLabel.textColor = .white
+        
+        self.tabBarController?.tabBar.barTintColor = HomeViewController.darkPurpleColor()
         
         setNeedsStatusBarAppearanceUpdate()
         updateStatusBarBackground()
@@ -523,15 +541,35 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         BigView.backgroundColor = .white
         LittleView.backgroundColor = .white
         ScrollView.backgroundColor = .white
-        TopButtons.forEach{ (button) in
         
-            //button.backgroundColor = HomeViewController.darkBlueColor()
+        let allButtons = TopButtons + cuberCollection + eventCollection
+        allButtons.forEach{ (button) in
+        
+            button.backgroundColor = HomeViewController.darkBlueColor()
         }
+        
         TopLabels.forEach{ (label) in
-            //label.backgroundColor = HomeViewController.darkBlueColor()
+        
+            label.textColor = HomeViewController.darkBlueColor()
         }
         
-        VersionLabel.textColor = .black
+//        ControlCollection.forEach{(control) in
+//            //control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
+//            control.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: 14)!], for: .normal)
+//        }
+        
+        HoldingTimeSlider.thumbTintColor = HomeViewController.darkBlueColor()
+        
+        EmailButton.backgroundColor = HomeViewController.darkBlueColor()
+        EmailButton.setTitleColor(.white, for: .normal)
+        EmailButton.imageView?.tintColor = .white
+        WebsiteButton.backgroundColor = HomeViewController.darkBlueColor()
+        WebsiteButton.setTitleColor(.white, for: .normal)
+        WebsiteButton.imageView?.tintColor = .white
+        
+        self.tabBarController?.tabBar.barTintColor = HomeViewController.darkBlueColor()
+        
+        VersionLabel.textColor = HomeViewController.darkBlueColor()
         setNeedsStatusBarAppearanceUpdate()
         updateStatusBarBackground()
     }
@@ -601,6 +639,9 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         {
             cuberDictionary[NSLocalizedString("Random", comment: "")] = NSLocalizedString("Random", comment: "")
         }
+        
+    
+        
         if(HomeViewController.darkMode)
         {
             DarkModeControl.selectedSegmentIndex = 0
@@ -609,11 +650,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         else
         {
             turnOffDarkMode()
-        }
-        
-        for control in [DarkModeControl, TimingControl, InspectionControl, TimerUpdateControl, solveTypeControl, InspectionVoiceAlertsControl]
-        {
-            control!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: 14)!], for: .normal)
         }
         
         TimingControl.selectedSegmentIndex = HomeViewController.timing
@@ -673,7 +709,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         WebsiteButton.setTitle(NSLocalizedString("Website", comment: ""), for: .normal)
         EmailButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)
         VersionLabel.text = NSLocalizedString("Version", comment: "") + ": \(appVersion)"
-        VersionLabel.textColor = HomeViewController.darkBlueColor()
         super.viewDidLoad()
         
         

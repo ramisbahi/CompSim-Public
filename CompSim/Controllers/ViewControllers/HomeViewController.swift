@@ -1196,7 +1196,12 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     
     static func darkModeColor() -> UIColor
     {
-        return UIColor.init(red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
+        return UIColor.init(red: 39/255, green: 37/255, blue: 44/255, alpha: 1.0)
+    }
+    
+    static func darkPurpleColor() -> UIColor
+    {
+        return UIColor.init(red: 52/255, green: 55/255, blue: 75/255, alpha: 1.0)
     }
     
     

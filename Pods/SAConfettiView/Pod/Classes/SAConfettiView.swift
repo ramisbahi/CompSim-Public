@@ -40,7 +40,7 @@ public class SAConfettiView: UIView {
             UIColor(red:0.48, green:0.78, blue:0.64, alpha:1.0),
             UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
             UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
-        intensity = 0.5
+        intensity = 1.0
         type = .confetti
         active = false
     }
@@ -112,6 +112,10 @@ public class SAConfettiView: UIView {
         confetti.scaleRange = CGFloat(intensity)
         confetti.scaleSpeed = CGFloat(-0.1 * intensity)
         confetti.contents = imageForType(type: type)!.cgImage
+        confetti.setValue("plane", forKey: "particleType")
+        confetti.setValue(Double.pi, forKey: "orientationRange")
+        confetti.setValue(Double.pi / 2, forKey: "orientationLongitude")
+        confetti.setValue(Double.pi / 2, forKey: "orientationLatitude")
         return confetti
     }
 

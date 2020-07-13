@@ -776,6 +776,13 @@
                         <outletCollection property="cuberCollection" destination="brb-Vl-7Ya" collectionClass="NSMutableArray" id="ti2-kV-uCG"/>
                         <outletCollection property="eventCollection" destination="Kdq-Qi-9kL" collectionClass="NSMutableArray" id="9cu-WX-eJP"/>
                         <outletCollection property="TopLabels" destination="6uq-uX-5mP" collectionClass="NSMutableArray" id="N7B-zO-ugY"/>
+                        <outletCollection property="TopLabels" destination="XRJ-Gy-2ml" collectionClass="NSMutableArray" id="yTF-xv-b3c"/>
+                        <outletCollection property="ControlCollection" destination="ljr-tg-h7i" collectionClass="NSMutableArray" id="PFB-6Z-LO4"/>
+                        <outletCollection property="ControlCollection" destination="Ms5-6S-Cbn" collectionClass="NSMutableArray" id="osL-tB-Q0K"/>
+                        <outletCollection property="ControlCollection" destination="LA3-i5-aRu" collectionClass="NSMutableArray" id="kkt-8L-gu8"/>
+                        <outletCollection property="ControlCollection" destination="LrE-n2-Lfh" collectionClass="NSMutableArray" id="fAZ-X5-er7"/>
+                        <outletCollection property="ControlCollection" destination="xBE-BR-iFx" collectionClass="NSMutableArray" id="siw-bi-pbl"/>
+                        <outletCollection property="ControlCollection" destination="42Y-ms-qTs" collectionClass="NSMutableArray" id="7la-hJ-urI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jIH-Sc-q0c" userLabel="First Responder" sceneMemberID="firstResponder"/>
