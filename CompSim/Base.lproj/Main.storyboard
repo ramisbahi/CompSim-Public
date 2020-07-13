@@ -1494,6 +1494,7 @@
                         <outlet property="HelpButton" destination="MsW-Dz-Ohw" id="lYB-7K-yxT"/>
                         <outlet property="Logo" destination="fQe-f8-jUV" id="ebB-Bt-jgR"/>
                         <outlet property="MicButton" destination="edN-gV-HS0" id="Hdh-0p-9dF"/>
+                        <outlet property="RefreshButton" destination="AFj-1f-Hw0" id="IHH-BF-Xxb"/>
                         <outlet property="ResetButton" destination="dT7-pR-N0g" id="Saz-jl-p4b"/>
                         <outlet property="ScrambleContentView" destination="Fqw-i6-Rbx" id="Lgi-Zz-SXm"/>
                         <outlet property="ScrambleLabel" destination="lCg-Nk-T6i" id="coX-wR-FGP"/>
@@ -2328,13 +2329,13 @@ Cg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TARGET: 7.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhq-FN-tIS">
-                                <rect key="frame" x="0.0" y="220.66666666666666" width="414" height="51.666666666666657"/>
+                                <rect key="frame" x="0.0" y="546" width="414" height="42"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2em-RB-Jye">
-                                <rect key="frame" x="192" y="277.33333333333331" width="30" height="66.333333333333314"/>
+                                <rect key="frame" x="192" y="593" width="30" height="66.333333333333371"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="47"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2408,7 +2409,7 @@ Cg
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" alpha="0.84999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happyKevin" translatesAutoresizingMaskIntoConstraints="NO" id="4Tu-dJ-3lW">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="220.66666666666666"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="546"/>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="1Vm-8i-lBH">
                                 <rect key="frame" x="96.666666666666671" y="36.666666666666657" width="220.66666666666663" height="220.99999999999997"/>
@@ -2422,20 +2423,14 @@ Cg
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Ff-PU-ZUX">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <color key="backgroundColor" red="0.1131800518" green="0.1131800518" blue="0.1131800518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Bsx-oU-StS" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="0Rz-gk-Sdd"/>
                             <constraint firstItem="4Tu-dJ-3lW" firstAttribute="top" secondItem="srE-kU-o46" secondAttribute="top" id="6ph-Wz-3ww"/>
                             <constraint firstItem="0ZI-JG-3AW" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.09" id="7e5-n0-AWW"/>
-                            <constraint firstItem="0Ff-PU-ZUX" firstAttribute="top" secondItem="Bd8-uC-vl3" secondAttribute="top" id="8pa-uo-Hcd"/>
                             <constraint firstItem="Off-7F-HIE" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="9xX-vu-ZW9"/>
                             <constraint firstItem="xhR-M0-HcP" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.07" id="AwO-oH-4J7"/>
-                            <constraint firstItem="4Tu-dJ-3lW" firstAttribute="height" relation="lessThanOrEqual" secondItem="0Ff-PU-ZUX" secondAttribute="height" multiplier="0.3" id="C0g-lV-3RW"/>
                             <constraint firstItem="HQv-Ho-HQQ" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="Cao-Fd-udb"/>
                             <constraint firstItem="Off-7F-HIE" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.09" id="DdH-6K-tNR"/>
                             <constraint firstItem="zhq-FN-tIS" firstAttribute="leading" secondItem="srE-kU-o46" secondAttribute="leading" id="FSs-4h-w32"/>
@@ -2448,18 +2443,14 @@ Cg
                             <constraint firstItem="kzy-G9-9Q3" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="Ojc-qT-72S"/>
                             <constraint firstItem="0ZI-JG-3AW" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="T80-zG-htN"/>
                             <constraint firstItem="1Vm-8i-lBH" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="UsK-pu-rk9"/>
-                            <constraint firstItem="srE-kU-o46" firstAttribute="trailing" secondItem="0Ff-PU-ZUX" secondAttribute="trailing" id="VXa-R2-hFn"/>
                             <constraint firstItem="2em-RB-Jye" firstAttribute="top" secondItem="zhq-FN-tIS" secondAttribute="bottom" constant="5" id="Wgx-zh-emH"/>
                             <constraint firstItem="HQv-Ho-HQQ" firstAttribute="leading" secondItem="Bd8-uC-vl3" secondAttribute="leading" id="Wsd-gI-E1u"/>
-                            <constraint firstItem="0Ff-PU-ZUX" firstAttribute="leading" secondItem="srE-kU-o46" secondAttribute="leading" id="Zzo-FR-9gd"/>
                             <constraint firstItem="zhq-FN-tIS" firstAttribute="trailing" secondItem="srE-kU-o46" secondAttribute="trailing" id="aQK-Yo-55V"/>
                             <constraint firstAttribute="trailing" secondItem="HQv-Ho-HQQ" secondAttribute="trailing" id="asd-iA-iNp"/>
                             <constraint firstItem="2em-RB-Jye" firstAttribute="centerX" secondItem="Bd8-uC-vl3" secondAttribute="centerX" id="eQ5-XK-sNM"/>
-                            <constraint firstItem="zhq-FN-tIS" firstAttribute="height" secondItem="0Ff-PU-ZUX" secondAttribute="height" multiplier="0.07" id="ew5-2o-5rk"/>
                             <constraint firstAttribute="bottom" secondItem="xhR-M0-HcP" secondAttribute="bottom" constant="25" id="gmT-iW-fpf"/>
                             <constraint firstItem="zhq-FN-tIS" firstAttribute="top" secondItem="4Tu-dJ-3lW" secondAttribute="bottom" id="hEu-rk-1f3"/>
                             <constraint firstItem="kzy-G9-9Q3" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.09" id="hN9-vA-QsN"/>
-                            <constraint firstAttribute="bottom" secondItem="0Ff-PU-ZUX" secondAttribute="bottom" id="hbO-Cb-Dqw"/>
                             <constraint firstAttribute="trailing" secondItem="4Tu-dJ-3lW" secondAttribute="trailing" id="jV2-DD-clB"/>
                             <constraint firstItem="HQv-Ho-HQQ" firstAttribute="top" secondItem="kzy-G9-9Q3" secondAttribute="bottom" constant="5" id="mJN-SE-Z4C"/>
                             <constraint firstItem="Bsx-oU-StS" firstAttribute="height" secondItem="Bd8-uC-vl3" secondAttribute="height" multiplier="0.09" id="sbr-bm-vdm"/>
@@ -2470,7 +2461,6 @@ Cg
                     <connections>
                         <outlet property="BackgroundImage" destination="4Tu-dJ-3lW" id="e1G-3l-z5q"/>
                         <outlet property="BigView" destination="Bd8-uC-vl3" id="pIq-8E-aLp"/>
-                        <outlet property="DarkBackground" destination="0Ff-PU-ZUX" id="OXB-Nx-2hr"/>
                         <outlet property="ImageConstraint" destination="6ph-Wz-3ww" id="Re9-7j-Bhv"/>
                         <outlet property="LogoImage" destination="1Vm-8i-lBH" id="Q3c-oK-oFg"/>
                         <outlet property="MyAverageLabel" destination="HQv-Ho-HQQ" id="GMn-js-A7I"/>
@@ -2712,6 +2702,7 @@ Cg
                         <outlet property="BestMoButton" destination="N2O-qs-ugN" id="J9H-bz-cPJ"/>
                         <outlet property="BestMoLabel" destination="3Os-hF-yiN" id="8Ea-DV-bdf"/>
                         <outlet property="BestSingleButton" destination="Ory-Hn-2AG" id="lqJ-B1-P2l"/>
+                        <outlet property="BigView" destination="mqF-Hu-6Dm" id="m38-QF-s1P"/>
                         <outlet property="CurrentMoButton" destination="YUF-yu-Ee2" id="Mh0-VA-nDU"/>
                         <outlet property="CurrentMoLabel" destination="ehM-dx-pdp" id="cZD-Ez-gdO"/>
                         <outlet property="MedianAverageButton" destination="mhD-pj-uhA" id="53S-YY-hVD"/>
@@ -2750,8 +2741,8 @@ Cg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rF2-8b-ORo"/>
-        <segue reference="PT0-Cd-KDT"/>
+        <segue reference="PIq-RF-q2x"/>
+        <segue reference="z5C-xH-DX3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Arrow_Left" width="24" height="11.333333015441895"/>

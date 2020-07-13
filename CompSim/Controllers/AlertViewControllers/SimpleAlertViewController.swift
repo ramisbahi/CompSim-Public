@@ -30,7 +30,7 @@ class SimpleAlertViewController: UIViewController {
         
         if(HomeViewController.darkMode)
         {
-            SimpleView.backgroundColor = .darkGray
+            SimpleView.backgroundColor = HomeViewController.darkPurpleColor()
         }
 
         YesButton.titleLabel?.adjustsFontSizeToFitWidth = true

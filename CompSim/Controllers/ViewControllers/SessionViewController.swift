@@ -274,7 +274,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         retButton.isHidden = true
         retButton.setTitleColor(.white, for: .normal)
         retButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 17)
-        retButton.backgroundColor = HomeViewController.darkBlueColor()
+        retButton.backgroundColor = HomeViewController.darkMode ?  HomeViewController.darkPurpleColor() : HomeViewController.darkBlueColor()
         retButton.isUserInteractionEnabled = true
         retButton.addTarget(self, action: #selector(SessionSelected(_:)), for: UIControl.Event.touchUpInside)
         retButton.layer.cornerRadius = 6.0
@@ -456,8 +456,10 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         let winningAverage: Int = HomeViewController.mySession.singleTime // for single time
         
+        let mainTextColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        
         let target = NSLocalizedString("TARGET:  ", comment: "")
-         let targetString = NSMutableAttributedString(string: "\(target)\(SolveTime.makeMyString(num: winningAverage))", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+         let targetString = NSMutableAttributedString(string: "\(target)\(SolveTime.makeMyString(num: winningAverage))", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
         targetString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: target.count, length: targetString.length - target.count))
         TargetButton.setAttributedTitle(targetString, for: .normal)
         updateTargetFont()
@@ -488,6 +490,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         
+        let mainTextColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        
         if bestSingleSolveIndex != nil
         {
             let minSolve = allTimes[bestSingleAverageIndex!].list[bestSingleSolveIndex!]
@@ -501,13 +505,13 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             
             let single = NSLocalizedString("Best single:  ", comment: "")
-             let singleString = NSMutableAttributedString(string: "\(single)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+             let singleString = NSMutableAttributedString(string: "\(single)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
             singleString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: single.count, length: singleString.length - single.count))
             BestSingleButton.setAttributedTitle(singleString, for: .normal)
         }
         else
         {
-            BestSingleButton.setAttributedTitle(NSAttributedString(string: "Best single:  "), for: .normal)
+            BestSingleButton.setAttributedTitle(NSAttributedString(string: "Best single:  ", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
         }
         
     }
@@ -524,17 +528,19 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         
+        let mainTextColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        
         if(bestAverageIndex != nil)
         {
             let minString = allAverages[bestAverageIndex!]
             let average = NSLocalizedString("Best average:  ", comment: "")
-             let averageString = NSMutableAttributedString(string: "\(average)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+             let averageString = NSMutableAttributedString(string: "\(average)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
             averageString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: average.count, length: averageString.length - average.count))
             BestAverageButton.setAttributedTitle(averageString, for: .normal)
         }
         else
         {
-            BestAverageButton.setAttributedTitle(NSAttributedString(string: "Best average:  "), for: .normal)
+            BestAverageButton.setAttributedTitle(NSAttributedString(string: "Best average:  ", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
         }
     }
     
@@ -671,16 +677,17 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func makeDarkMode()
     {
-        for button in [NewButton, SessionButton, ResetButton]
+        for button in [NewButton, SessionButton, ResetButton, DeleteButton]
         {
-            button?.backgroundColor = .darkGray
+            button?.backgroundColor = HomeViewController.darkPurpleColor()
         }
+        
         
     }
     
     func turnOffDarkMode()
     {
-        for button in [NewButton, SessionButton, ResetButton]
+        for button in [NewButton, SessionButton, ResetButton, DeleteButton]
         {
             button?.backgroundColor = HomeViewController.darkBlueColor()
         }
@@ -793,6 +800,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             session.allTimes.remove(at: index)
             session.currentAverage -= 1
         }
+        updateBestButtons()
         updateBarWidth()
     }
     

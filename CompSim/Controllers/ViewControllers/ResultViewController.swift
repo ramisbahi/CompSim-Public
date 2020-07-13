@@ -38,7 +38,6 @@ class ResultViewController: UIViewController {
 
     @IBOutlet var BigView: UIView!
     @IBOutlet weak var BackgroundImage: UIImageView!
-    @IBOutlet weak var DarkBackground: UIImageView!
     
     @IBOutlet weak var LogoImage: UIImageView!
     @IBOutlet weak var SecondTime1: UIButton!
@@ -87,8 +86,8 @@ class ResultViewController: UIViewController {
         
         if(ratings.contains(HomeViewController.totalAverages))
         {
-            
-            if #available( iOS 10.3,*){
+            if #available(iOS 10.3,*)
+            {
                 SKStoreReviewController.requestReview()
             }
         }
@@ -165,13 +164,14 @@ class ResultViewController: UIViewController {
     
     func makeDarkMode()
     {
-        DarkBackground.isHidden = false
         WinningAverageLabel.textColor? = UIColor.white
         MyAverageLabel.textColor? = UIColor.white
-        TryAgainButton.backgroundColor = .darkGray
+        TryAgainButton.backgroundColor = HomeViewController.darkPurpleColor()
         TimesCollection.forEach { (button) in
             button.setTitleColor(.white, for: .normal)
         }
+        
+        BigView.backgroundColor = HomeViewController.darkModeColor()
     }
     
     func updateWinningAverage() // calculate average and update label

@@ -46,7 +46,7 @@ class ViewSolveAlertViewController: UIViewController {
         
         if(HomeViewController.darkMode)
         {
-            ViewSolveView.backgroundColor = .darkGray
+            ViewSolveView.backgroundColor = HomeViewController.darkPurpleColor()
         }
         
         TitleLabel.text = myTitle
@@ -71,7 +71,9 @@ class ViewSolveAlertViewController: UIViewController {
         
         ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.04, name: "Lato-Regular")
         
-        PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black"), NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        let unselectedColor: UIColor = HomeViewController.darkMode ? .black : .white
+        PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black"), NSAttributedString.Key.foregroundColor: unselectedColor], for: .normal)
+        PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white]   , for: .selected) //- later make white
         
         CancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
         

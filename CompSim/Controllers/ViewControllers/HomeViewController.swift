@@ -65,6 +65,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     
     @IBOutlet var TimesCollection: [UIButton]!
     
+    @IBOutlet weak var RefreshButton: UILabel!
     @IBOutlet weak var TimerLabel: UILabel!
     // (roundNumber - 1) * 5 + currentIndex = total solve index (starts at 0)
     
@@ -155,7 +156,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
         ScrambleContentView.layer.cornerRadius = 6.0
         
         ScrambleContentView.layer.borderWidth = 1
-        ScrambleContentView.layer.borderColor = HomeViewController.darkBlueColor().cgColor
         
         
  
@@ -568,7 +568,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
         retButton.isHidden = true
         retButton.setTitleColor(.white, for: .normal)
         retButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 17)
-        retButton.backgroundColor = HomeViewController.darkBlueColor()
+        retButton.backgroundColor = HomeViewController.darkMode ? HomeViewController.darkPurpleColor() : HomeViewController.darkBlueColor()
         retButton.isUserInteractionEnabled = true
         retButton.addTarget(self, action: #selector(SessionSelected(_:)), for: UIControl.Event.touchUpInside)
         retButton.layer.cornerRadius = 6.0
@@ -609,7 +609,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
             SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
             self.view.layoutIfNeeded()
             UIView.setAnimationsEnabled(true)
-        }
+        } 
         
         TargetLabel.setTitle("  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))", for: .normal)
         
@@ -1095,10 +1095,15 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
             button.setTitleColor(HomeViewController.orangeColor(), for: .normal) // orange
         }
         
-        HelpButton.backgroundColor = .darkGray
+        tabBarController?.tabBar.barTintColor = HomeViewController.darkPurpleColor()
+        
         HelpButton.tintColor = .white
-        ResetButton.backgroundColor = .darkGray
         ResetButton.titleLabel?.textColor = .white
+        
+        for button in [HelpButton, ResetButton, SessionButton]
+        {
+            button?.backgroundColor = HomeViewController.darkPurpleColor()
+        }
         
         setNeedsStatusBarAppearanceUpdate()
         if #available(iOS 13.0, *) {
@@ -1106,6 +1111,13 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
         } else {
             // Fallback on earlier versions
         }
+        
+        ScrambleContentView.backgroundColor = HomeViewController.darkModeColor()
+        ScrambleContentView.layer.borderColor = UIColor.white.cgColor
+        ScrambleLabel.textColor = .white
+        refreshImage.image = UIImage(named: "refresh_white")
+        RefreshButton.textColor = .white
+        
     }
     
     @available(iOS 13.0, *)
@@ -1113,6 +1125,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     {
         let statusBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
         statusBar.backgroundColor = HomeViewController.darkMode ?  HomeViewController.darkModeColor() : .white
+        statusBar.overrideUserInterfaceStyle = HomeViewController.darkMode ? .light : .dark
          view.addSubview(statusBar)
     }
     
@@ -1126,9 +1139,14 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
             button.setTitleColor(HomeViewController.orangeColor(), for: .normal)
         }
         
-        HelpButton.backgroundColor = HomeViewController.darkBlueColor()
-        HelpButton.tintColor = .white //HomeViewController.darkBlueColor()
-        ResetButton.backgroundColor = HomeViewController.darkBlueColor()
+        ScrambleContentView.layer.borderColor = HomeViewController.darkModeColor().cgColor
+        
+        for button in [HelpButton, ResetButton, SessionButton]
+        {
+            button?.backgroundColor = HomeViewController.darkBlueColor()
+        }
+        HelpButton.tintColor = .white
+
         ResetButton.titleLabel?.textColor = .white
         
         setNeedsStatusBarAppearanceUpdate()
@@ -1138,6 +1156,11 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
             // Fallback on earlier versions
         }
         
+        ScrambleContentView.layer.borderColor = HomeViewController.darkModeColor().cgColor
+        ScrambleContentView.backgroundColor = .white
+        ScrambleLabel.textColor = .black
+        refreshImage.image = UIImage(named: "refresh")
+        RefreshButton.textColor = HomeViewController.darkBlueColor()
     }
     
     func doSettings()
@@ -1196,7 +1219,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     
     static func darkModeColor() -> UIColor
     {
-        return UIColor.init(red: 39/255, green: 37/255, blue: 44/255, alpha: 1.0)
+        return UIColor.init(red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
     }
     
     static func darkPurpleColor() -> UIColor

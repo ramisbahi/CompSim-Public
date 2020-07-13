@@ -29,7 +29,7 @@ class NotificationAlertViewController: UIViewController
         
         if(HomeViewController.darkMode)
         {
-            NotifView.backgroundColor = .darkGray
+            NotifView.backgroundColor = HomeViewController.darkPurpleColor()
         }
     }
 

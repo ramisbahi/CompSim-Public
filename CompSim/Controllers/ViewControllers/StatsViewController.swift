@@ -31,6 +31,8 @@ class StatsViewController: UIViewController {
     @IBOutlet weak var CurrentMoButton: UIButton!
     @IBOutlet weak var BestMoButton: UIButton!
     
+    @IBOutlet var BigView: UIView!
+    
     @IBOutlet weak var CurrentMoLabel: UILabel!
     @IBOutlet weak var BestMoLabel: UILabel!
     
@@ -45,15 +47,15 @@ class StatsViewController: UIViewController {
     var medianTimeString: String?
     
     static var changedDarkMode = false
+    static var firstTime = true
     
     @IBOutlet weak var yLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        HomeViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
-        
        
+        StatsViewController.firstTime = true
+        
         BestSingleButton.titleLabel?.adjustsFontSizeToFitWidth = true
         MedianAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
         BestAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -96,14 +98,122 @@ class StatsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func makeGraphDark()
+    {
+        lineChart.xAxis.axisLineColor = HomeViewController.darkPurpleColor()
+        lineChart.xAxis.gridColor = HomeViewController.darkPurpleColor()
+        lineChart.rightAxis.axisLineColor = HomeViewController.darkPurpleColor()
+        lineChart.rightAxis.gridColor = HomeViewController.darkPurpleColor()
+        lineChart.leftAxis.axisLineColor = HomeViewController.darkPurpleColor()
+        lineChart.leftAxis.gridColor = HomeViewController.darkPurpleColor()
+         
+        
+        lineChart.drawBordersEnabled = true
+        lineChart.borderColor = HomeViewController.darkPurpleColor()
+        
+        lineChart.legend.textColor = .white
+        
+        lineChart.xAxis.labelTextColor = .white
+        lineChart.leftAxis.labelTextColor = .white
+        
+        xLabel.textColor = .white
+        yLabel.textColor = .white
+        
+        lineChart.noDataTextColor = .white
+    }
+    
+    func makeGraphLight()
+    {
+        lineChart.xAxis.axisLineColor = HomeViewController.grayColor()
+        lineChart.xAxis.gridColor = HomeViewController.grayColor()
+        lineChart.rightAxis.axisLineColor = HomeViewController.grayColor()
+        lineChart.rightAxis.gridColor = HomeViewController.grayColor()
+        lineChart.leftAxis.axisLineColor = HomeViewController.grayColor()
+        lineChart.leftAxis.gridColor = HomeViewController.grayColor()
+         
+        
+        lineChart.drawBordersEnabled = true
+        lineChart.borderColor = HomeViewController.grayColor()
+        
+        lineChart.legend.textColor = HomeViewController.darkBlueColor()
+        
+        lineChart.xAxis.labelTextColor = HomeViewController.darkBlueColor()
+        lineChart.leftAxis.labelTextColor = HomeViewController.darkBlueColor()
+        
+        xLabel.textColor = HomeViewController.darkBlueColor()
+        yLabel.textColor = HomeViewController.darkBlueColor()
+        
+        lineChart.noDataTextColor = HomeViewController.darkBlueColor()
+    }
+    
     func makeDarkMode()
     {
+        BigView.backgroundColor = HomeViewController.darkModeColor()
+        
+        let median = NSLocalizedString("MEDIAN AVERAGE:  ", comment: "")
+        let medianString = NSMutableAttributedString(string: (MedianAverageButton.titleLabel?.text)!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        if medianString.length > median.count
+        {
+            medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.gray, range: NSRange(location: median.count, length: medianString.length - median.count))
+        }
+        
+        MedianAverageButton.setAttributedTitle(medianString, for: .normal)
+        
+        let average = NSLocalizedString("Best average:  ", comment: "")
+        let averageString = NSMutableAttributedString(string: (BestAverageButton.titleLabel?.text)!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        if averageString.length > average.count
+        {
+            averageString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: average.count, length: averageString.length - average.count))
+        }
+        BestAverageButton.setAttributedTitle(averageString, for: .normal)
+        
+        let single = NSLocalizedString("Best single:  ", comment: "")
+        let singleString = NSMutableAttributedString(string: (BestSingleButton.titleLabel?.text)!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        singleString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: single.count, length: singleString.length - single.count))
+        BestSingleButton.setAttributedTitle(singleString, for: .normal)
+        
+        CurrentMoButton.backgroundColor = HomeViewController.darkPurpleColor()
+        BestMoButton.backgroundColor = HomeViewController.darkPurpleColor()
+        CurrentMoLabel.textColor = .white
+        BestMoLabel.textColor = .white
+        
+        SessionButton.backgroundColor = HomeViewController.darkPurpleColor()
+        
+        makeGraphDark()
+        
         
     }
     
     func turnOffDarkMode()
     {
+        BigView.backgroundColor = .white
         
+        let median = NSLocalizedString("MEDIAN AVERAGE:  ", comment: "")
+        let medianString = NSMutableAttributedString(string: (MedianAverageButton.titleLabel?.text)!, attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+        if medianString.length > median.count
+        {
+            medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: NSRange(location: median.count, length: medianString.length - median.count))
+        }
+        MedianAverageButton.setAttributedTitle(medianString, for: .normal)
+        
+        let average = NSLocalizedString("Best average:  ", comment: "")
+        let averageString = NSMutableAttributedString(string: (BestAverageButton.titleLabel?.text)!, attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+        averageString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: average.count, length: averageString.length - average.count))
+        BestAverageButton.setAttributedTitle(averageString, for: .normal)
+        
+        let single = NSLocalizedString("Best single:  ", comment: "")
+        let singleString = NSMutableAttributedString(string: (BestSingleButton.titleLabel?.text)!, attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+        singleString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: single.count, length: singleString.length - single.count))
+        BestSingleButton.setAttributedTitle(singleString, for: .normal)
+        
+        CurrentMoButton.backgroundColor = HomeViewController.darkBlueColor()
+        BestMoButton.backgroundColor = HomeViewController.darkBlueColor()
+        CurrentMoLabel.textColor = HomeViewController.darkBlueColor()
+        BestMoLabel.textColor = HomeViewController.darkBlueColor()
+        
+        SessionButton.backgroundColor = HomeViewController.darkBlueColor()
+        
+        makeGraphLight()
     }
     
     override func viewDidLayoutSubviews() {
@@ -149,6 +259,15 @@ class StatsViewController: UIViewController {
                 self.view.layoutIfNeeded()
             })
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        if HomeViewController.darkMode
+        {
+            return .lightContent
+        }
+        return .default
     }
     
     func sessionNamed(title: String) -> Session?
@@ -212,7 +331,7 @@ class StatsViewController: UIViewController {
         retButton.isHidden = true
         retButton.setTitleColor(.white, for: .normal)
         retButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 17)
-        retButton.backgroundColor = HomeViewController.darkBlueColor()
+        retButton.backgroundColor = HomeViewController.darkMode ? HomeViewController.darkPurpleColor() : HomeViewController.darkBlueColor()
         retButton.isUserInteractionEnabled = true
         retButton.addTarget(self, action: #selector(SessionSelected(_:)), for: UIControl.Event.touchUpInside)
         retButton.layer.cornerRadius = 6.0
@@ -244,11 +363,7 @@ class StatsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if StatsViewController.changedDarkMode
-        {
-           HomeViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
-           StatsViewController.changedDarkMode = false
-        }
+        print("stats view will appear")
                
         setUpStackView()
         
@@ -260,6 +375,18 @@ class StatsViewController: UIViewController {
         }
         
         updateLabels()
+        
+        if StatsViewController.changedDarkMode
+        {
+           HomeViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
+           StatsViewController.changedDarkMode = false
+        }
+        else if StatsViewController.firstTime
+        {
+            HomeViewController.darkMode ? makeDarkMode() : turnOffDarkMode()
+            StatsViewController.firstTime = false
+        }
+        
         updateGraph()
     }
     
@@ -280,7 +407,7 @@ class StatsViewController: UIViewController {
             }
             
             let line = LineChartDataSet(entries: lineChartEntries, label: "Average")
-            line.colors = [HomeViewController.darkBlueColor()]
+            line.colors = [HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()]
             line.drawCirclesEnabled = false
             line.setDrawHighlightIndicators(false)
             
@@ -290,7 +417,7 @@ class StatsViewController: UIViewController {
             moLine.setDrawHighlightIndicators(false)
             
             let medianLine = LineChartDataSet(entries: medianChartEntries, label: "Median Average")
-            medianLine.colors = [.black]
+            medianLine.colors = [HomeViewController.darkMode ? .gray : .black]
             medianLine.drawCirclesEnabled = false
             medianLine.setDrawHighlightIndicators(false)
             
@@ -343,7 +470,8 @@ class StatsViewController: UIViewController {
             }
         }
         
-        print("best single solve index \(bestSingleSolveIndex)")
+        let mainTextColor: UIColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        
         if bestSingleSolveIndex != nil
         {
             let minSolve = allTimes[bestSingleAverageIndex!].list[bestSingleSolveIndex!]
@@ -357,15 +485,14 @@ class StatsViewController: UIViewController {
             
             
             let single = NSLocalizedString("Best single:  ", comment: "")
-             let singleString = NSMutableAttributedString(string: "\(single)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+             let singleString = NSMutableAttributedString(string: "\(single)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
             singleString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: single.count, length: singleString.length - single.count))
             BestSingleButton.setAttributedTitle(singleString, for: .normal)
         }
         else
         {
-            print("setting title to nil")
-            BestSingleButton.setAttributedTitle(NSAttributedString(string: "Best single:  ", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()]), for: .normal)
-            BestAverageButton.setAttributedTitle(NSAttributedString(string: "Best average:  ", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()]), for: .normal)
+            BestSingleButton.setAttributedTitle(NSAttributedString(string: "Best single:  ", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
+            
         }
     }
     
@@ -382,17 +509,19 @@ class StatsViewController: UIViewController {
             }
         }
         
+        let mainTextColor: UIColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        
         if(bestAverageIndex != nil)
         {
             let minString = allAverages[bestAverageIndex!]
             let average = NSLocalizedString("Best average:  ", comment: "")
-             let averageString = NSMutableAttributedString(string: "\(average)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+             let averageString = NSMutableAttributedString(string: "\(average)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
             averageString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: average.count, length: averageString.length - average.count))
             BestAverageButton.setAttributedTitle(averageString, for: .normal)
         }
         else
         {
-            BestAverageButton.setTitle("Best average:  ", for: .normal)
+            BestAverageButton.setAttributedTitle(NSAttributedString(string: "Best average:  ", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
         }
     }
     
@@ -437,9 +566,12 @@ class StatsViewController: UIViewController {
             }
         }
         
+        let mainTextColor: UIColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        let secondaryColor: UIColor = HomeViewController.darkMode ? .gray : .black
+        
         let median = NSLocalizedString("MEDIAN AVERAGE:  ", comment: "")
-         let medianString = NSMutableAttributedString(string: "\(median)\(medianTimeString!)", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
-        medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: NSRange(location: median.count, length: medianString.length - median.count))
+         let medianString = NSMutableAttributedString(string: "\(median)\(medianTimeString!)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
+        medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: secondaryColor, range: NSRange(location: median.count, length: medianString.length - median.count))
         MedianAverageButton.setAttributedTitle(medianString, for: .normal)
     }
     

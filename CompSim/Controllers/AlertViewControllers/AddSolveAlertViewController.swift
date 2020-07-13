@@ -44,7 +44,7 @@ class AddSolveAlertViewController: UIViewController {
         
         if(HomeViewController.darkMode)
         {
-            AddSolveView.backgroundColor = .darkGray
+            AddSolveView.backgroundColor = HomeViewController.darkPurpleColor()
         }
         
         if(keyboardType == 1)
@@ -89,7 +89,9 @@ class AddSolveAlertViewController: UIViewController {
                 TextField.adjustsFontSizeToFitWidth = true
                 EnterButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: EnterButton, multiplier: 1.0, name: "Lato-Black")
                 
-                PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black"), NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+                let unselectedColor: UIColor = HomeViewController.darkMode ? HomeViewController.darkModeColor() : .white
+                PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black"), NSAttributedString.Key.foregroundColor: unselectedColor], for: .normal)
+                PenaltySelector.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected) //- later make white
             }
             count += 1
         }

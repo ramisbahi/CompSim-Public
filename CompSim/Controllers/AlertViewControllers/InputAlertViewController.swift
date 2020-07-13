@@ -40,7 +40,7 @@ class InputAlertViewController: UIViewController {
     
         if(HomeViewController.darkMode)
         {
-            AddSolveView.backgroundColor = .darkGray
+            AddSolveView.backgroundColor = HomeViewController.darkPurpleColor()
         }
         
         if(keyboardType == 1)

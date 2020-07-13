@@ -153,7 +153,9 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     }
     
     override func viewDidLayoutSubviews() {
-        PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black")], for: .normal) //- later make white
+        let unselectedColor: UIColor = HomeViewController.darkMode ? HomeViewController.darkModeColor() : .white
+        PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: unselectedColor, NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: PenaltySelector, multiplier: 0.7, name: "Lato-Black")], for: .normal) //- later make white
+        PenaltySelector!.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white]   , for: .selected) //- later make white
     }
     
     static func initializeFormatters()
@@ -172,8 +174,8 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
     {
         DarkBackground.isHidden = false
         TimerLabel.textColor = .white
-        SubmitButton.backgroundColor = .darkGray
-        CancelButton.backgroundColor = .darkGray
+        SubmitButton.backgroundColor = HomeViewController.darkPurpleColor()
+        CancelButton.backgroundColor = HomeViewController.darkPurpleColor()
         
     }
     

@@ -162,6 +162,23 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     {
         super.viewWillAppear(true)
         
+        if(HomeViewController.darkMode)
+        {
+            makeDarkMode()
+        }
+        else
+        {
+            turnOffDarkMode()
+        }
+        
+        if(SolveTime.makeIntTime(num: HomeViewController.mySession.allAverages[SessionViewController.myIndex].toFloatTime()) < HomeViewController.mySession.singleTime) // win
+        {
+            AverageLabel.textColor = HomeViewController.greenColor()
+        }
+        else // lose
+        {
+            AverageLabel.textColor = HomeViewController.redColor()
+        }
     }
 
     override func viewDidLoad() {
@@ -189,23 +206,9 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
             AverageLabel.text = HomeViewController.mySession.allAverages[SessionViewController.myIndex] + " Single"
         }
         
-        if(HomeViewController.darkMode)
-        {
-            makeDarkMode()
-        }
-        else
-        {
-            turnOffDarkMode()
-        }
         
-        if(SolveTime.makeIntTime(num: HomeViewController.mySession.allAverages[SessionViewController.myIndex].toFloatTime()) < HomeViewController.mySession.singleTime) // win
-        {
-            AverageLabel.textColor = HomeViewController.greenColor()
-        }
-        else // lose
-        {
-            AverageLabel.textColor = HomeViewController.redColor()
-        }
+        
+        
         
         
     
@@ -216,14 +219,18 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     {
         DarkBackground.isHidden = false
         CopyButton.tintColor? = .white
+        CopyButton.setTitleColor(.white, for: .normal)
         AverageLabel.textColor? = UIColor.white // may be changed to red/green afterwards - just changing default
         AverageTableView.backgroundColor = UIColor.init(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
         BackButton.backgroundColor = .darkGray
+        
     }
     
     func turnOffDarkMode()
     {
         CopyButton.tintColor? = HomeViewController.darkBlueColor()
+        CopyButton.setTitleColor(HomeViewController.darkBlueColor()
+            , for: .normal)
         DarkBackground.isHidden = true
         AverageLabel.textColor? = UIColor.black // may be changed to red/green afterwards - just changing default
         AverageTableView.backgroundColor = UIColor.white
