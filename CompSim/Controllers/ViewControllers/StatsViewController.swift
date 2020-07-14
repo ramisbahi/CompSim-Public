@@ -56,9 +56,7 @@ class StatsViewController: UIViewController {
        
         StatsViewController.firstTime = true
         
-        BestSingleButton.titleLabel?.adjustsFontSizeToFitWidth = true
         MedianAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        BestAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
         CurrentMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
         BestMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
@@ -362,8 +360,7 @@ class StatsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        print("stats view will appear")
+    
                
         setUpStackView()
         
@@ -446,9 +443,24 @@ class StatsViewController: UIViewController {
     {
         updateBestSingle()
         updateBestAverage()
+        updateBestFonts()
         updateMedianAverage()
         moChartEntries = []
         updateMo()
+    }
+    
+    func updateBestFonts()
+    {
+        let text: String = (BestAverageButton.titleLabel?.text)!
+        let font =  HomeViewController.fontToFitWidth(text: text, view: BestAverageButton, multiplier: 0.95, name: "Lato-Black")
+        BestAverageButton.titleLabel?.font = font
+        BestSingleButton.titleLabel?.font = font
+        
+        print("stats new font sizes \(BestSingleButton.titleLabel?.font?.pointSize) and \(BestAverageButton.titleLabel?.font?.pointSize) ")
+        
+        BestAverageButton.setTitle(text, for: .normal)
+        BestSingleButton.setTitle((BestSingleButton.titleLabel?.text)!, for: .normal)
+
     }
     
     func updateBestSingle()

@@ -681,7 +681,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         {
             button?.backgroundColor = HomeViewController.darkPurpleColor()
         }
-        
+        self.tabBarController?.tabBar.barTintColor = HomeViewController.darkPurpleColor()
         
     }
     
@@ -750,20 +750,17 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         numLabel.textColor = HomeViewController.grayColor()
         numLabel.text = String(currentIndex + 1)
         cell.addSubview(numLabel)
-        
-        
-        print("row \(indexPath.row)")
-        print("current average \(HomeViewController.mySession.currentAverage)")
-        print("start index \(bestMoStartIndex)")
+
         
         let index = HomeViewController.mySession.currentAverage - indexPath.row
+        let highlightColor = HomeViewController.darkMode ? HomeViewController.orangeColor() : .yellow
         if bestMoTransition && index >= bestMoStartIndex! && index < bestMoStartIndex!+10
         {
-            cell.backgroundColor = .yellow
+            cell.backgroundColor = highlightColor
         }
         else if currentMoTransition && indexPath.row < 10
         {
-            cell.backgroundColor = .yellow
+            cell.backgroundColor = highlightColor
         }
         
         return cell
@@ -832,25 +829,15 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func updateBestFonts()
     {
-        /*
-        let singleFont =  BestSingleButton.titleLabel?.font
-        let averageFont = BestAverageButton.titleLabel?.font
+        let text: String = (BestAverageButton.titleLabel?.text)!
+        let font =  HomeViewController.fontToFitWidth(text: text, view: BestAverageButton, multiplier: 0.95, name: "Lato-Black")
+        BestAverageButton.titleLabel?.font = font
+        BestSingleButton.titleLabel?.font = font
         
-        print("updating, single font \(singleFont?.pointSize) and average font \(averageFont?.pointSize)")
-        
-        if Float(singleFont!.pointSize) < Float(averageFont!.pointSize)
-        {
-            BestAverageButton.titleLabel?.font = singleFont
-            BestAverageButton.setTitle(BestAverageButton.titleLabel?.text, for: .normal)
-        }
-        else
-        {
-            BestSingleButton.titleLabel?.font = averageFont
-            BestSingleButton.setTitle(BestSingleButton.titleLabel?.text, for: .normal)
-        }
+        BestAverageButton.setTitle(text, for: .normal)
+        BestSingleButton.setTitle((BestSingleButton.titleLabel?.text)!, for: .normal)
         
         print("new font sizes \(BestSingleButton.titleLabel?.font?.pointSize) and \(BestAverageButton.titleLabel?.font?.pointSize) ")
-        */
         
 
     }
@@ -873,12 +860,12 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         doubleTapGesture.numberOfTapsRequired = 2
         SessionButton.addGestureRecognizer(doubleTapGesture)
         
-        BestSingleButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        //BestSingleButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         TargetButton.titleLabel?.adjustsFontSizeToFitWidth = true
         updateTargetFont()
-        BestAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
-    
+        //BestAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         
         // Do any additional setup after loading the view.
     }

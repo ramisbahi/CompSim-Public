@@ -222,8 +222,8 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         CopyButton.setTitleColor(.white, for: .normal)
         AverageLabel.textColor? = UIColor.white // may be changed to red/green afterwards - just changing default
         AverageTableView.backgroundColor = UIColor.init(displayP3Red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
-        BackButton.backgroundColor = .darkGray
-        
+        BackButton.backgroundColor = HomeViewController.darkPurpleColor()
+        self.tabBarController?.tabBar.barTintColor = HomeViewController.darkPurpleColor()
     }
     
     func turnOffDarkMode()

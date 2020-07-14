@@ -840,7 +840,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7x-do-eup">
-                                <rect key="frame" x="279" y="10" width="125" height="33"/>
+                                <rect key="frame" x="279" y="0.0" width="125" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="Lcq-6E-IMF"/>
                                 </constraints>
@@ -867,7 +867,7 @@
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="trailing" secondItem="c4t-Dd-fsp" secondAttribute="trailing" id="NNl-mD-4uu"/>
                             <constraint firstItem="B4M-qY-OQc" firstAttribute="top" secondItem="wL3-xv-aHE" secondAttribute="top" constant="50" id="NsU-OG-JC9"/>
                             <constraint firstItem="dE5-MO-YyE" firstAttribute="top" secondItem="wL3-xv-aHE" secondAttribute="top" id="Rzj-9B-AKH"/>
-                            <constraint firstItem="F7x-do-eup" firstAttribute="top" secondItem="wL3-xv-aHE" secondAttribute="top" constant="10" id="VMl-Vq-lef"/>
+                            <constraint firstItem="F7x-do-eup" firstAttribute="top" secondItem="wL3-xv-aHE" secondAttribute="top" id="VMl-Vq-lef"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="trailing" secondItem="F7x-do-eup" secondAttribute="trailing" constant="10" id="aFR-Fs-3LH"/>
                             <constraint firstItem="B4M-qY-OQc" firstAttribute="leading" secondItem="wL3-xv-aHE" secondAttribute="leading" id="gGY-cn-tdw"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="trailing" secondItem="4HU-Wj-DfA" secondAttribute="trailing" id="gkn-3d-uiV"/>
@@ -2742,7 +2742,7 @@ Cg
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="PIq-RF-q2x"/>
-        <segue reference="z5C-xH-DX3"/>
+        <segue reference="AZA-lg-qSK"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Arrow_Left" width="24" height="11.333333015441895"/>
