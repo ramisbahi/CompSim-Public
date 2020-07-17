@@ -33,32 +33,13 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tw-It-BcZ">
-                                                <rect key="frame" x="5" y="0.0" width="47.333333333333336" height="55"/>
-                                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="50"/>
-                                                <state key="normal" title="←">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="cancelPressed:" destination="E4s-TQ-qd6" eventType="touchUpInside" id="kvu-qq-rSS"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstItem="GRg-Dx-7xP" firstAttribute="leading" secondItem="2tw-It-BcZ" secondAttribute="trailing" constant="5" id="3yJ-JX-inh"/>
                                             <constraint firstItem="GRg-Dx-7xP" firstAttribute="centerX" secondItem="UWs-hZ-csw" secondAttribute="centerX" id="9qv-MD-gDt"/>
                                             <constraint firstItem="GRg-Dx-7xP" firstAttribute="width" secondItem="UWs-hZ-csw" secondAttribute="width" multiplier="0.65" id="EVE-8L-JuZ"/>
-                                            <constraint firstItem="2tw-It-BcZ" firstAttribute="leading" secondItem="UWs-hZ-csw" secondAttribute="leading" constant="5" id="RI1-6v-doO"/>
                                             <constraint firstAttribute="bottom" secondItem="GRg-Dx-7xP" secondAttribute="bottom" constant="2" id="fwy-Uf-A9l"/>
                                             <constraint firstItem="GRg-Dx-7xP" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="top" constant="2" id="lBc-Ss-fHo"/>
-                                            <constraint firstAttribute="bottom" secondItem="2tw-It-BcZ" secondAttribute="bottom" id="uYS-M9-gX6"/>
-                                            <constraint firstItem="2tw-It-BcZ" firstAttribute="top" secondItem="UWs-hZ-csw" secondAttribute="top" id="udJ-CN-iqh"/>
                                             <constraint firstAttribute="height" constant="55" id="wfv-bo-yO8"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -85,7 +66,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeX-Qj-5kb">
                                         <rect key="frame" x="49.333333333333343" y="75" width="98" height="41"/>
-                                        <color key="backgroundColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="23"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -136,7 +117,6 @@
                     </view>
                     <connections>
                         <outlet property="CancelButton" destination="eeX-Qj-5kb" id="GTA-29-17B"/>
-                        <outlet property="CancelButton2" destination="2tw-It-BcZ" id="dIJ-Yp-Z3K"/>
                         <outlet property="SimpleTitle" destination="GRg-Dx-7xP" id="5KL-Vx-C0e"/>
                         <outlet property="SimpleView" destination="UWs-hZ-csw" id="5NV-el-CKS"/>
                         <outlet property="YesButton" destination="Xbl-pC-1d9" id="FBL-N0-6Tr"/>

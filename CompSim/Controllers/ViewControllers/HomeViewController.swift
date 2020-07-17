@@ -339,77 +339,102 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     
     static func fontToFitWidth(text: String, view: UIView, multiplier: Float, name: String) -> UIFont
     {
-        let minFontSize: CGFloat = 1.0 // CGFloat 18
-        let maxFontSize: CGFloat = 300.0     // CGFloat 67
-        var fontSize = maxFontSize
+        var minFontSize: CGFloat = 1.0 // CGFloat 18
+        var maxFontSize: CGFloat = 300.0     // CGFloat 67
+        var currentFontSize: CGFloat = (minFontSize + maxFontSize ) / 2
         var textWidth: CGFloat = 0.0
         if(name == "System")
         {
-            textWidth = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]).width
+            textWidth = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: currentFontSize)]).width
         }
         else
         {
-            textWidth = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: fontSize)!]).width
+            textWidth = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: currentFontSize)!]).width
         }
         let width = view.frame.size.width
         let multWidth = width * CGFloat(multiplier)
-        print("width \(width)")
         
-        while (textWidth > multWidth && fontSize > minFontSize) {
-                fontSize -= 1
+        while textWidth != multWidth && abs(maxFontSize - minFontSize) > 0.5
+        {
+            
             if(name == "System")
             {
-                textWidth = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]).width
+                textWidth = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: currentFontSize)]).width
             }
             else
             {
-                textWidth = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: fontSize)!]).width
+                textWidth = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: currentFontSize)!]).width
             }
+            
+            if multWidth < textWidth
+            {
+                maxFontSize = currentFontSize
+            }
+            else // if multWidth > textWidth
+            {
+                minFontSize = currentFontSize
+            }
+            
+            currentFontSize = (minFontSize + maxFontSize ) / 2
         }
         
         if(name == "System")
         {
-            return UIFont.systemFont(ofSize: fontSize)
+            return UIFont.systemFont(ofSize: currentFontSize - 0.1)
         }
-        return UIFont(name: name, size: fontSize)!
+        return UIFont(name: name, size: currentFontSize - 0.1)!
     }
     
 
     static func fontToFitHeight(view: UIView, multiplier: Float, name: String) -> UIFont
     {
-        let minFontSize: CGFloat = 1.0 // CGFloat 18
-        let maxFontSize: CGFloat = 300.0     // CGFloat 67
-        var fontSize = maxFontSize
+        var minFontSize: CGFloat = 1.0 // CGFloat 18
+        var maxFontSize: CGFloat = 300.0     // CGFloat 67
+        var currentFontSize: CGFloat = (minFontSize + maxFontSize ) / 2
         let text: NSString = "1.59"
         var textHeight: CGFloat = 0.0
+        
         if(name == "System")
         {
-            textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]).height
+            textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: currentFontSize)]).height
         }
         else
         {
-            textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: fontSize)!]).height
+            textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: currentFontSize)!]).height
         }
         let height = view.frame.size.height
         let multHeight = height * CGFloat(multiplier)
         
-        while (textHeight > multHeight && fontSize > minFontSize) {
-                fontSize -= 1
+        
+        while textHeight != multHeight && abs(maxFontSize - minFontSize) > 0.5
+        {
+            
             if(name == "System")
             {
-                textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]).height
+                textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: currentFontSize)]).height
             }
             else
             {
-                textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: fontSize)!]).height
+                textHeight = text.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: name, size: currentFontSize)!]).height
             }
+            
+            if multHeight < textHeight
+            {
+                maxFontSize = currentFontSize
             }
+            else // if multHeight > textHeight
+            {
+                minFontSize = currentFontSize
+            }
+            
+            currentFontSize = (minFontSize + maxFontSize ) / 2
+        }
         
         if(name == "System")
         {
-            return UIFont.systemFont(ofSize: fontSize)
+            return UIFont.systemFont(ofSize: currentFontSize - 0.1)
         }
-        return UIFont(name: name, size: fontSize)!
+        return UIFont(name: name, size: currentFontSize - 0.1)!
     }
     
     @IBAction func HelpPressed(_ sender: Any) {
@@ -835,7 +860,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     
     @IBAction func resetPressed(_ sender: Any) {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: NSLocalizedString("Reset Average?", comment: ""), completion: {
+        let alert = alertService.alert(myTitle: NSLocalizedString("Reset Average?", comment: ""), yesText: "Reset", completion: {
             self.reset()
         })
         self.present(alert, animated: true)
@@ -898,7 +923,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     func deleteSolve()
     {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: NSLocalizedString("Delete Last Solve?", comment: ""),
+        let alert = alertService.alert(myTitle: NSLocalizedString("Delete Last Solve?", comment: ""), yesText: "Delete",
                                        completion: {
             
             try! self.realm.write

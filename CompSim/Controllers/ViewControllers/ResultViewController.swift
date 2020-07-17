@@ -39,7 +39,6 @@ class ResultViewController: UIViewController {
     @IBOutlet var BigView: UIView!
     @IBOutlet weak var BackgroundImage: UIImageView!
     
-    @IBOutlet weak var LogoImage: UIImageView!
     @IBOutlet weak var SecondTime1: UIButton!
     @IBOutlet weak var SecondTime2: UIButton!
     @IBOutlet weak var SecondTime3: UIButton!
@@ -178,8 +177,9 @@ class ResultViewController: UIViewController {
     {
         let winningAverage: Int = HomeViewController.mySession.singleTime // for single time
         
+        let mainColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
         let target = NSLocalizedString("TARGET:  ", comment: "")
-        let targetString = NSMutableAttributedString(string: "\(target)\(SolveTime.makeMyString(num: winningAverage))", attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
+        let targetString = NSMutableAttributedString(string: "\(target)\(SolveTime.makeMyString(num: winningAverage))", attributes: [NSAttributedString.Key.foregroundColor: mainColor])
        targetString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: target.count, length: targetString.length - target.count))
         WinningAverageLabel.attributedText = targetString
         WinningAverageLabel.isHidden = false
@@ -270,8 +270,9 @@ class ResultViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        WinningAverageLabel.font = WinningAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: WinningAverageLabel.text!, view: WinningAverageLabel, multiplier: 0.9, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: WinningAverageLabel, multiplier: 0.9, name: "Lato-Black").pointSize))
-        MyAverageLabel.font = MyAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: MyAverageLabel.text!, view: BigView, multiplier: 0.9, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: MyAverageLabel, multiplier: 0.9, name: "Lato-Black").pointSize))
+        
+        WinningAverageLabel.font = WinningAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: WinningAverageLabel.text!, view: WinningAverageLabel, multiplier: 1.0, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: WinningAverageLabel, multiplier: 1.0, name: "Lato-Black").pointSize))
+        MyAverageLabel.font = MyAverageLabel.font.withSize(min(HomeViewController.fontToFitWidth(text: MyAverageLabel.text!, view: BigView, multiplier: 1.0, name: "Lato-Black").pointSize, HomeViewController.fontToFitHeight(view: MyAverageLabel, multiplier: 1.0, name: "Lato-Black").pointSize))
     }
     
     func sadConfetti()
@@ -328,11 +329,11 @@ class ResultViewController: UIViewController {
     
     func timeConstraints()
     {
-        SecondTime1.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 45 + 0.25*BigView.frame.size.height).isActive = true
-        SecondTime2.topAnchor.constraint(equalTo: SecondTime1.bottomAnchor).isActive = true
+        //SecondTime1.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 45 + 0.25*BigView.frame.size.height).isActive = true
+        /*SecondTime2.topAnchor.constraint(equalTo: SecondTime1.bottomAnchor).isActive = true
         SecondTime3.topAnchor.constraint(equalTo: SecondTime2.bottomAnchor).isActive = true
         SecondTime4.topAnchor.constraint(equalTo: SecondTime3.bottomAnchor).isActive = true
-        SecondTime5.topAnchor.constraint(equalTo: SecondTime4.bottomAnchor).isActive = true
+        SecondTime5.topAnchor.constraint(equalTo: SecondTime4.bottomAnchor).isActive = true*/
     }
     
     @objc func imageTapped()

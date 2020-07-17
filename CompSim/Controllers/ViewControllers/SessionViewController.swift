@@ -74,7 +74,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func resetPressed(_ sender: Any) {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Reset \(HomeViewController.mySession.name) session?", completion: {
+        let alert = alertService.alert(myTitle: "Reset \(HomeViewController.mySession.name) session?", yesText: "Reset", completion: {
             self.resetSession()
         })
         
@@ -467,9 +467,9 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func updateBestButtons()
     {
+        print("calling update best buttons")
         updateBestSingle()
         updateBestAverage()
-        updateBestFonts()
     }
     
     func updateBestSingle()
@@ -492,6 +492,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let mainTextColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
         
+        let single = NSLocalizedString("Best single:  ", comment: "")
+        
         if bestSingleSolveIndex != nil
         {
             let minSolve = allTimes[bestSingleAverageIndex!].list[bestSingleSolveIndex!]
@@ -503,15 +505,14 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
                 minString = String(minString[start..<end])
             }
             
-            
-            let single = NSLocalizedString("Best single:  ", comment: "")
              let singleString = NSMutableAttributedString(string: "\(single)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
             singleString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: single.count, length: singleString.length - single.count))
             BestSingleButton.setAttributedTitle(singleString, for: .normal)
+            
         }
         else
         {
-            BestSingleButton.setAttributedTitle(NSAttributedString(string: "Best single:  ", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
+            BestSingleButton.setAttributedTitle(NSAttributedString(string: single, attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
         }
         
     }
@@ -530,17 +531,25 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let mainTextColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
         
+        let average = NSLocalizedString("Best average:  ", comment: "")
+        
         if(bestAverageIndex != nil)
         {
             let minString = allAverages[bestAverageIndex!]
-            let average = NSLocalizedString("Best average:  ", comment: "")
              let averageString = NSMutableAttributedString(string: "\(average)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
             averageString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: average.count, length: averageString.length - average.count))
             BestAverageButton.setAttributedTitle(averageString, for: .normal)
+            
+            let font =  HomeViewController.fontToFitWidth(text: "\(average)\(minString)", view: BestAverageButton, multiplier: 0.93, name: "Lato-Black")
+            BestAverageButton.titleLabel?.font = font
+            BestSingleButton.titleLabel?.font = font
         }
         else
         {
-            BestAverageButton.setAttributedTitle(NSAttributedString(string: "Best average:  ", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
+            BestAverageButton.setAttributedTitle(NSAttributedString(string: average, attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
+            let font =  HomeViewController.fontToFitWidth(text: average, view: BestAverageButton, multiplier: 0.93, name: "Lato-Black")
+            BestAverageButton.titleLabel?.font = font
+            BestSingleButton.titleLabel?.font = font
         }
     }
     
@@ -550,17 +559,20 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
         ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
         
+
+        UIView.setAnimationsEnabled(false)
         if #available(iOS 13.0, *) {
-            UIView.setAnimationsEnabled(false)
             SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
             self.view.layoutIfNeeded()
-            UIView.setAnimationsEnabled(true)
         }
+        
         
         updateTargetButton()
         updateBestButtons()
         setUpStackView()
         updateBarWidth()
+
+        UIView.setAnimationsEnabled(true)
         
         DeleteButton.isEnabled = HomeViewController.allSessions.count > 1
         
@@ -577,6 +589,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             StatsTableView.backgroundColor = UIColor.white
         }
         
+        
+        StatsTableView.separatorColor = HomeViewController.darkMode ? .darkGray : HomeViewController.grayColor()
         StatsTableView.reloadData()
     }
     
@@ -633,7 +647,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func deletePressed(_ sender: Any) {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Delete \(HomeViewController.mySession.name) session?", completion: {
+        let alert = alertService.alert(myTitle: "Delete \(HomeViewController.mySession.name) session?", yesText: "Delete", completion: {
             self.deleteSession()
         })
         
@@ -753,7 +767,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         
         let index = HomeViewController.mySession.currentAverage - indexPath.row
-        let highlightColor = HomeViewController.darkMode ? HomeViewController.orangeColor() : .yellow
+        let highlightColor = HomeViewController.greenColor().withAlphaComponent(0.14)
         if bestMoTransition && index >= bestMoStartIndex! && index < bestMoStartIndex!+10
         {
             cell.backgroundColor = highlightColor
@@ -762,6 +776,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         {
             cell.backgroundColor = highlightColor
         }
+        
+        
         
         return cell
     }
@@ -773,10 +789,19 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            self.StatsTableView.dataSource?.tableView!(self.StatsTableView, commit: .delete, forRowAt: indexPath)
+            return
+        }
+        deleteButton.backgroundColor = HomeViewController.redColor()
+        return [deleteButton]
+    }
+    
     func deleteAveragePressed(at index: Int, _ tableView: UITableView, forRowAt indexPath: IndexPath)
     {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Delete \(HomeViewController.mySession.allAverages[index]) average?", completion: {
+        let alert = alertService.alert(myTitle: "Delete \(HomeViewController.mySession.allAverages[index]) average?", yesText: "Delete", completion: {
             self.deleteAverage(at: index)
             tableView.deleteRows(at: [indexPath], with: .fade)
         })
@@ -800,6 +825,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         updateBestButtons()
         updateBarWidth()
     }
+    
+    
     
     // average pressed
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -825,21 +852,6 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         
             self.navigationController!.view.layer.add(transition, forKey: kCATransition)
             self.navigationController?.pushViewController(obj, animated: true)
-    }
-    
-    func updateBestFonts()
-    {
-        let text: String = (BestAverageButton.titleLabel?.text)!
-        let font =  HomeViewController.fontToFitWidth(text: text, view: BestAverageButton, multiplier: 0.95, name: "Lato-Black")
-        BestAverageButton.titleLabel?.font = font
-        BestSingleButton.titleLabel?.font = font
-        
-        BestAverageButton.setTitle(text, for: .normal)
-        BestSingleButton.setTitle((BestSingleButton.titleLabel?.text)!, for: .normal)
-        
-        print("new font sizes \(BestSingleButton.titleLabel?.font?.pointSize) and \(BestAverageButton.titleLabel?.font?.pointSize) ")
-        
-
     }
     
     func updateTargetFont()

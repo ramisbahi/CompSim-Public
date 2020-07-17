@@ -364,14 +364,15 @@ class StatsViewController: UIViewController {
                
         setUpStackView()
         
+
+        UIView.setAnimationsEnabled(false)
         if #available(iOS 13.0, *) {
-            UIView.setAnimationsEnabled(false)
             SessionButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
             self.view.layoutIfNeeded()
-            UIView.setAnimationsEnabled(true)
         }
         
         updateLabels()
+        UIView.setAnimationsEnabled(true)
         
         if StatsViewController.changedDarkMode
         {
@@ -413,11 +414,12 @@ class StatsViewController: UIViewController {
             moLine.drawCirclesEnabled = false
             moLine.setDrawHighlightIndicators(false)
             
+            
             let medianLine = LineChartDataSet(entries: medianChartEntries, label: "Median Average")
             medianLine.colors = [HomeViewController.darkMode ? .gray : .black]
             medianLine.drawCirclesEnabled = false
             medianLine.setDrawHighlightIndicators(false)
-            
+            medianLine.lineDashLengths = [3]
             
             let data = LineChartData()
             data.addDataSet(line)
@@ -441,27 +443,15 @@ class StatsViewController: UIViewController {
     
     func updateLabels()
     {
+        print("STATS updating labels")
         updateBestSingle()
         updateBestAverage()
-        updateBestFonts()
+        //updateBestFonts()
         updateMedianAverage()
         moChartEntries = []
         updateMo()
     }
-    
-    func updateBestFonts()
-    {
-        let text: String = (BestAverageButton.titleLabel?.text)!
-        let font =  HomeViewController.fontToFitWidth(text: text, view: BestAverageButton, multiplier: 0.95, name: "Lato-Black")
-        BestAverageButton.titleLabel?.font = font
-        BestSingleButton.titleLabel?.font = font
-        
-        print("stats new font sizes \(BestSingleButton.titleLabel?.font?.pointSize) and \(BestAverageButton.titleLabel?.font?.pointSize) ")
-        
-        BestAverageButton.setTitle(text, for: .normal)
-        BestSingleButton.setTitle((BestSingleButton.titleLabel?.text)!, for: .normal)
 
-    }
     
     func updateBestSingle()
     {
@@ -482,7 +472,9 @@ class StatsViewController: UIViewController {
             }
         }
         
-        let mainTextColor: UIColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        let mainTextColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        
+        let single = NSLocalizedString("Best single:  ", comment: "")
         
         if bestSingleSolveIndex != nil
         {
@@ -495,16 +487,14 @@ class StatsViewController: UIViewController {
                 minString = String(minString[start..<end])
             }
             
-            
-            let single = NSLocalizedString("Best single:  ", comment: "")
              let singleString = NSMutableAttributedString(string: "\(single)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
             singleString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: single.count, length: singleString.length - single.count))
             BestSingleButton.setAttributedTitle(singleString, for: .normal)
+            
         }
         else
         {
-            BestSingleButton.setAttributedTitle(NSAttributedString(string: "Best single:  ", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
-            
+            BestSingleButton.setAttributedTitle(NSAttributedString(string: single, attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
         }
     }
     
@@ -521,19 +511,27 @@ class StatsViewController: UIViewController {
             }
         }
         
-        let mainTextColor: UIColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        let mainTextColor = HomeViewController.darkMode ? .white : HomeViewController.darkBlueColor()
+        
+        let average = NSLocalizedString("Best average:  ", comment: "")
         
         if(bestAverageIndex != nil)
         {
             let minString = allAverages[bestAverageIndex!]
-            let average = NSLocalizedString("Best average:  ", comment: "")
              let averageString = NSMutableAttributedString(string: "\(average)\(minString)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
             averageString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.greenColor(), range: NSRange(location: average.count, length: averageString.length - average.count))
             BestAverageButton.setAttributedTitle(averageString, for: .normal)
+            
+            let font =  HomeViewController.fontToFitWidth(text: "\(average)\(minString)", view: BestAverageButton, multiplier: 0.93, name: "Lato-Black")
+            BestAverageButton.titleLabel?.font = font
+            BestSingleButton.titleLabel?.font = font
         }
         else
         {
-            BestAverageButton.setAttributedTitle(NSAttributedString(string: "Best average:  ", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
+            BestAverageButton.setAttributedTitle(NSAttributedString(string: average, attributes: [NSAttributedString.Key.foregroundColor: mainTextColor]), for: .normal)
+            let font =  HomeViewController.fontToFitWidth(text: average, view: BestAverageButton, multiplier: 0.93, name: "Lato-Black")
+            BestAverageButton.titleLabel?.font = font
+            BestSingleButton.titleLabel?.font = font
         }
     }
     
@@ -603,8 +601,10 @@ class StatsViewController: UIViewController {
             
             let initialMo: Float = sum / 10.0
             
-            moChartEntries.append(ChartDataEntry(x: 10.0, y: Double(initialMo)))
-            
+            if initialMo < 9999
+            {
+                moChartEntries.append(ChartDataEntry(x: 10.0, y: Double(initialMo)))
+            }
             bestMoStartIndex = 0
             var bestMo: Float = initialMo
             
@@ -630,7 +630,7 @@ class StatsViewController: UIViewController {
             // best mo10ao5s
             let bestMoInt = SolveTime.makeIntTime(num: bestMo)
             var bestMoString = "DNF"
-            if bestMoInt <= 99999
+            if bestMoInt <= 9999
             {
                 bestMoString = SolveTime.makeMyString(num: bestMoInt)
             }
@@ -639,7 +639,7 @@ class StatsViewController: UIViewController {
             // current mo10ao5s
             let currMoInt = SolveTime.makeIntTime(num: sum / 10.0)
             var currMoString = "DNF"
-            if currMoInt <= 99999
+            if currMoInt <= 9999
             {
                 currMoString = SolveTime.makeMyString(num: currMoInt)
             }
