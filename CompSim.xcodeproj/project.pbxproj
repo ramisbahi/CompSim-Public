@@ -83,6 +83,8 @@
 		36A0A4AB23AF676600D41938 /* SolveTimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0A4AA23AF676600D41938 /* SolveTimeList.swift */; };
 		36A8B56824B3E4E000ADC24E /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36A8B56724B3E4E000ADC24E /* Lato-Bold.ttf */; };
 		36B88A9123C7AD93004262CA /* NotificationAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B88A9023C7AD93004262CA /* NotificationAlertService.swift */; };
+		36DF344324C61ACF00A43C10 /* HelpWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF344224C61ACF00A43C10 /* HelpWalkthroughViewController.swift */; };
+		36DF344524C6260900A43C10 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF344424C6260900A43C10 /* WalkthroughViewController.swift */; };
 		36EF308C24B2315500C49293 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36EF308B24B2315500C49293 /* Lato-Regular.ttf */; };
 		36EFA85324B66F230074F92E /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663DF4C22DEBB5C006657CF /* ResultViewController.swift */; };
 		C79702DB2D2364D767859210 /* Pods_CompSim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A701408881740019BBE202B5 /* Pods_CompSim.framework */; };
@@ -181,6 +183,8 @@
 		36A0A4AA23AF676600D41938 /* SolveTimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveTimeList.swift; sourceTree = "<group>"; };
 		36A8B56724B3E4E000ADC24E /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../../../../Downloads/Lato/Lato-Bold.ttf"; sourceTree = "<group>"; };
 		36B88A9023C7AD93004262CA /* NotificationAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertService.swift; sourceTree = "<group>"; };
+		36DF344224C61ACF00A43C10 /* HelpWalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpWalkthroughViewController.swift; sourceTree = "<group>"; };
+		36DF344424C6260900A43C10 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		36EF308B24B2315500C49293 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../../../../Downloads/Lato/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		51B11034A5437C664B7F3657 /* Pods-CompSim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompSim.debug.xcconfig"; path = "Target Support Files/Pods-CompSim/Pods-CompSim.debug.xcconfig"; sourceTree = "<group>"; };
 		A701408881740019BBE202B5 /* Pods_CompSim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompSim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -356,6 +360,8 @@
 				36348225239C6E82009A14C7 /* TimerViewController.swift */,
 				3617752223DE1A5A00FC6DCE /* HelpViewController.swift */,
 				3631811724A652FF00B8F21F /* StatsViewController.swift */,
+				36DF344224C61ACF00A43C10 /* HelpWalkthroughViewController.swift */,
+				36DF344424C6260900A43C10 /* WalkthroughViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				3654A84223BC02280066A48F /* LogoViewController.swift in Sources */,
 				3690EAF92316293200CB0B78 /* BigCubeScrambler.m in Sources */,
 				3690EAFA2316293200CB0B78 /* BigCubeScrambler.h in Sources */,
+				36DF344324C61ACF00A43C10 /* HelpWalkthroughViewController.swift in Sources */,
 				3690EAFB2316293200CB0B78 /* Util.h in Sources */,
 				3602BC3424379DD60050406C /* State.swift in Sources */,
 				3690EAFC2316293200CB0B78 /* Util.m in Sources */,
@@ -599,6 +606,7 @@
 				3602BC3C2437CF5E0050406C /* Square1.swift in Sources */,
 				3683FB9A249853C2000CAD0E /* UUIDKey.swift in Sources */,
 				3690EAFD2316293200CB0B78 /* Im.m in Sources */,
+				36DF344524C6260900A43C10 /* WalkthroughViewController.swift in Sources */,
 				3690EAFE2316293200CB0B78 /* Im.h in Sources */,
 				368914A324B66C0B004D303F /* InputAlertService.swift in Sources */,
 				3696538A23BA9F55000784D9 /* ViewSolveAlertViewController.swift in Sources */,

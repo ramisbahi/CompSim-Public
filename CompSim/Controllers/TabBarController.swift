@@ -20,8 +20,10 @@ class TabBarController: UITabBarController {
         tabFrame.origin.y = self.view.frame.size.height - tabBarHeight
         self.tabBar.frame = tabFrame
         
+        /*
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
+         */
         
     }
 

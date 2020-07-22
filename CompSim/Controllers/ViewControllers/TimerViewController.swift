@@ -12,7 +12,7 @@ import RealmSwift
 import Foundation
 import CoreBluetooth
 
-class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
+class TimerViewController: UIViewController {
     
     let IDLE = 0
     let INSPECTION = 1
@@ -60,10 +60,6 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
         else
         {
             startTimer()
-            if HomeViewController.timing == 2
-            {
-                updateIncomingData()
-            }
         }
         
     }
@@ -87,69 +83,9 @@ class TimerViewController: UIViewController, CBPeripheralManagerDelegate {
         CancelButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: CancelButton, multiplier: 0.75, name: "Lato-Black")
         let stringSize = CancelButton.titleLabel?.intrinsicContentSize.width
         CancelButton.widthAnchor.constraint(equalToConstant: stringSize! + 45).isActive = true
-        
-        if(HomeViewController.timing == 2)
-        {
-            peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
-                //-Notification for updating the text view with incoming text
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if HomeViewController.timing == 2
-        {
-            removeIncomingData()
-        }
-    }
-    
-    func removeIncomingData()
-    {
-        print("removing from timer")
-        NotificationCenter.default.removeObserver(observer!)
-        observer = nil
-    }
-    
-    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-           if peripheral.state == .poweredOn {
-               return
-           }
-           print("Peripheral manager is running")
-       }
-       
-    //Check when someone subscribe to our characteristic, start sending the data
-    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        print("Device subscribe to characteristic")
-    }
-    
-    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-        if let error = error {
-            print("\(error)")
-            return
-        }
-    }
-    
-    func updateIncomingData () {
-        print("WE ADDING OBSERVER from timer")
-        observer = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
-        {
-            notification in
-            
-            let message = characteristicASCIIValue as String
-            print("[Incoming from timer]: " + message)
-            
-            if message == "Bravo"
-            {
-                self.stackmatTouched()
-            }
-        }
-    }
-    
-    func stackmatTouched()
-    {
-        if timerPhase == TIMING
-        {
-            stopTimer()
-        }
     }
     
     override func viewDidLayoutSubviews() {

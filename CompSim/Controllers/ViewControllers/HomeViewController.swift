@@ -40,7 +40,7 @@ extension UIView{
     }
 }
 
-class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestureRecognizerDelegate
+class HomeViewController: UIViewController, UIGestureRecognizerDelegate
 {
     @IBOutlet var BigView: UIView!
     
@@ -82,8 +82,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     var currentPageIndex = 0
     
     var labels = [UIButton]()
-    
-    var peripheralManager: CBPeripheralManager?
     
     // settings stuff
     
@@ -188,12 +186,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
         
         ScrambleLabel.text = HomeViewController.mySession.getCurrentScramble()
         
-        // Do any additional setup after loading the view.
-        print("loaded, going to set peripheral manager")
-        
-        
-        peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
-            //-Notification for updating the text view with incoming text
         
         
         TimerViewController.initializeFormatters() // have to do this once in a while....
@@ -248,93 +240,6 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
         }
         //ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
         TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Lato-Regular")
-    }
-    
-    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-           if peripheral.state == .poweredOn {
-               return
-           }
-           print("Peripheral manager is running")
-       }
-       
-    //Check when someone subscribe to our characteristic, start sending the data
-    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        print("Device subscribe to characteristic")
-    }
-    
-    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-        if let error = error {
-            print("\(error)")
-            return
-        }
-    }
-    
-    func updateIncomingData() {
-        print("WE ADDING OBSERVER from home")
-        observer = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil)
-        {
-            notification in
-            
-            let message = characteristicASCIIValue as String
-            print("[Incoming from home]: " + message)
-            
-            if message == "Bravo"
-            {
-                self.stackmatTouched()
-            }
-            else if message == "Six"
-            {
-                self.stackmatReleased()
-            }
-        }
-    }
-    
-    func removeIncomingData()
-    {
-        print("removing from home")
-        NotificationCenter.default.removeObserver(observer!)
-        observer = nil
-    }
-    
-    func stackmatTouched()
-    {
-        print("BRUH stackmat touched")
-        if HomeViewController.timerPhase == self.IDLE
-        {
-            TimerLabel.isHidden = false
-            HomeViewController.timerPhase = self.FROZEN
-            print("BRUH going to hide all")
-            hideAll()
-            
-            // make green after holding time
-            Timer.scheduledTimer(withTimeInterval:  TimeInterval(HomeViewController.holdingTime), repeats: false) {_ in
-                print("BRUH scheduled timer called")
-                if HomeViewController.timerPhase == self.FROZEN
-                {
-                    self.TimerLabel.textColor = .green
-                    HomeViewController.timerPhase = self.READY
-                }
-            }
-        }
-        
-    }
-    
-    func stackmatReleased()
-    {
-        if HomeViewController.timerPhase == self.FROZEN
-        {
-            self.cancelTimer()
-        }
-        else // if(HomeViewController.timerPhase == self.READY) // did holding time, released
-        {
-            self.performSegue(withIdentifier: "timerSegue", sender: self)
-        }
-    }
-    
-    @available(iOS 13.0, *)
-    @IBAction func MicTapped(_ sender: Any) {
-       // ViewController.usingMic ? turnOffMic(changeStatus: true) : turnOnMic()
-        
     }
     
     static func fontToFitWidth(text: String, view: UIView, multiplier: Float, name: String) -> UIFont
@@ -678,23 +583,15 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
             GestureArea.removeGestureRecognizer(HomeViewController.longPress)
             webView.removeGestureRecognizer(HomeViewController.webLongPress)
         }
-        
-        if HomeViewController.timing == 2
-        {
-            updateIncomingData() // moved here
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         
-        if(HomeViewController.timing == 2)
-        {
-            removeIncomingData()
-        }
+        
         
         closeStack()
             
-            super.viewWillDisappear(animated)
+        super.viewWillDisappear(animated)
             
             
     }
@@ -746,7 +643,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     
     @objc func handleLongPress(sender: UIGestureRecognizer)
     {
-        print("handling long press")
+        //print("handling long press")
         if(sender.state == .began) // reached holding time
         {
             if HomeViewController.timerPhase == self.IDLE
@@ -771,7 +668,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches canceled")
+        //print("touches canceled")
         if(usingLongPress())
         {
             cancelTimer()
@@ -779,7 +676,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches began")
+        //print("touches began")
         var inGestureArea = false
         for touch in touches
         {
@@ -789,7 +686,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
             }
         }
         
-        print("in gesture area \(inGestureArea)")
+        //print("in gesture area \(inGestureArea)")
         
         if inGestureArea && usingLongPress() && HomeViewController.timerPhase == self.IDLE
         {
@@ -801,7 +698,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) // released before minimum hold time
     {
-        print("touches ended")
+        //print("touches ended")
         if(usingLongPress() && HomeViewController.timerPhase == FROZEN)
         {
             cancelTimer()
@@ -868,7 +765,7 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
 
     func usingLongPress() -> Bool
     {
-        return !HomeViewController.inspection && HomeViewController.holdingTime > 0.01 && HomeViewController.timing == 1
+        return !HomeViewController.inspection && HomeViewController.holdingTime > 0.01 && HomeViewController.timing == 0
     }
     
     func reset()
@@ -909,12 +806,12 @@ class HomeViewController: UIViewController, CBPeripheralManagerDelegate, UIGestu
                     break
             }
         }
-        else if HomeViewController.timing == 1 && (HomeViewController.inspection || HomeViewController.holdingTime < 0.01) // tap gesture, timing
+        else if HomeViewController.timing == 0 && (HomeViewController.inspection || HomeViewController.holdingTime < 0.01) // tap gesture, timing
         {
             //print("tapped")
             self.performSegue(withIdentifier: "timerSegue", sender: self)
         }
-        else if HomeViewController.timing == 0 // not timing... addsolve
+        else if HomeViewController.timing == 1 // not timing... addsolve
         {
             addSolve()
         }

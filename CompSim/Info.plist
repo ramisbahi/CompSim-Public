@@ -8,10 +8,6 @@
 		<string>Lato-Regular.ttf</string>
 		<string>Lato-Bold.ttf</string>
 	</array>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Bluetooth will be used to connect to stackmat peripheral.</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

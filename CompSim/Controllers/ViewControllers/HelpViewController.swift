@@ -56,7 +56,7 @@ class HelpViewController: UIViewController {
             for label in MyLabels
             {
                 label.textColor = .white
-                print(label.text!)
+                //print(label.text!)
             }
         }
 

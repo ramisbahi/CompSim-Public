@@ -46,3 +46,17 @@
 
 "Step4" = "4. Analyze your session.";
 "Step4desc" = "In the session tab, you can view your averages. If you click on an average, you can view it in more detail (i.e. with scrambles). Here, you can see the average time and the target average time. If you wish to see the full scramble of a given solve in a larger font, you can click on the solve.\n\nIf you wish to delete an average in a session, swipe left on it and click delete.\n\nThe colored bar shows the proportions of wins (green), losses (red), and non-targeted averages (black/white).\n\nYou can create a new session, normally for a new event, by clicking on “New”, and you will be prompted to name the session. If you name the session by a traditional event name (i.e. 6x6 or pyraminx), the application will automatically adjust to the settings for those events (i.e. mo3 / 7x7 scramble and ao5 / pyraminx scramble).\n\nIf you click “Reset”, the entire session will be reset (i.e. all averages deleted).\n\nIf you double tap on the session name, you can rename the session.\n\nIf you press the \"X\" by the session name, you can delete the session.";
+
+
+"Help_0_0" = "Made a mistake? Reset the current average.";
+"Help_0_1" = "Change your cubing session.";
+"Help_0_2" = "Find help (and this walkthrough) here.";
+"Help_0_3" = "Tap to refresh for a new scramble.";
+"Help_0_4" = "Your previous times will be documented in black.";
+"Help_0_5" = "...and your most recent time in yellow! Click to edit, copy, or view scramble.";
+"Help_0_6" = "If WCA inspection is on, tap anywhere to start the countdown. Press and hold to start the timer.";
+"Help_0_7" = "Swipe up to manually add a solve (or just tap if timing is off).";
+"Help_0_8" = "The \"draw scramble\" shows what your cube should look like if scrambled correctly.";
+"Help_0_9" = "Adjust your target—this is your time to beat.";
+
+"Help_1_0"

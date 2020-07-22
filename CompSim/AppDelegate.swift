@@ -60,7 +60,6 @@ extension UIDevice {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.init(displayP3Red: 0/255, green: 51/255, blue: 89/255, alpha: 0.7)
         UIPageControl.appearance().pageIndicatorTintColor =
             UIColor.init(displayP3Red: 196/255, green: 196/255, blue: 196/255, alpha: 1.0)
-        
 
         
         let config = Realm.Configuration(
