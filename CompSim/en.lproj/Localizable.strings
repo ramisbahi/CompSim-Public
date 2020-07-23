@@ -59,4 +59,31 @@
 "Help_0_8" = "The \"draw scramble\" shows what your cube should look like if scrambled correctly.";
 "Help_0_9" = "Adjust your target—this is your time to beat.";
 
-"Help_1_0"
+"Help_1_0" = "Reset the entire current session.";
+"Help_1_1" = "Create a new session or delete this session here.";
+"Help_1_2" = "Your target (again)!";
+"Help_1_3" = "Your best average of the entire session (tap to view).";
+"Help_1_4" = "Your best solve of the entire session (tap to view).";
+"Help_1_5" = "This bar shows the ratio of winning to losing averages relative to your target.";
+"Help_1_6" = "These rows show the completed averages for this session, with their times at the top and their individual times below.";
+"Help_1_7" = "Select a row to see an average’s scrambles and an option to copy to clipboard!";
+
+"Help_2_0" = "Your median average of the session (shown as dotted line in graph).";
+"Help_2_1" = "Your current mean of 10 averages (tap to view).";
+"Help_2_2" = "Your best mean of 10 averages (tap to view).";
+"Help_2_3" = "This is your interactive data visualization of your averages, WCAmo10s, and median average.";
+"Help_2_4" = "Pinch and scroll to see more detail.";
+
+"Help_3_0" = "The scramble type you'd like for this session.";
+"Help_3_1" = "The face you’ll see at your victory or defeat.";
+"Help_3_2" = "The WCA average format you'd like for this session.";
+"Help_3_3" = "Timer display with decimals.";
+"Help_3_4" = "Timer display with seconds only.";
+"Help_3_5" = "No timer display while solving.";
+"Help_3_6" = "The amount of time to hold the timer down before starting (0.55 is the stackmat standard).";
+"Help_3_7" = "Disable the CompSim timer here if you would like to input times manually (by tapping).";
+"Help_3_8" = "Enable for a 15 second countdown when the screen is tapped.";
+"Help_3_9" = "Enable for \"8 seconds\" and \"12 seconds\" audio warnings during inspection.";
+"Help_3_10" = "Enable to see our alternate (dark) theme!";
+"Help_3_11" = "Check out our website! (CompSim.net)";
+"Help_3_12" = "Email us if you’re feeling lucky!";
