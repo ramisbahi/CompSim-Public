@@ -48,40 +48,43 @@
 "Step4desc" = "In the session tab, you can view your averages. If you click on an average, you can view it in more detail (i.e. with scrambles). Here, you can see the average time and the target average time. If you wish to see the full scramble of a given solve in a larger font, you can click on the solve.\n\nIf you wish to delete an average in a session, swipe left on it and click delete.\n\nThe colored bar shows the proportions of wins (green), losses (red), and non-targeted averages (black/white).\n\nYou can create a new session, normally for a new event, by clicking on “New”, and you will be prompted to name the session. If you name the session by a traditional event name (i.e. 6x6 or pyraminx), the application will automatically adjust to the settings for those events (i.e. mo3 / 7x7 scramble and ao5 / pyraminx scramble).\n\nIf you click “Reset”, the entire session will be reset (i.e. all averages deleted).\n\nIf you double tap on the session name, you can rename the session.\n\nIf you press the \"X\" by the session name, you can delete the session.";
 
 
-"Help_0_0" = "Made a mistake? Reset the current average.";
-"Help_0_1" = "Change your cubing session.";
-"Help_0_2" = "Find help (and this walkthrough) here.";
-"Help_0_3" = "Tap to refresh for a new scramble.";
-"Help_0_4" = "Your previous times will be documented in black.";
-"Help_0_5" = "...and your most recent time in yellow! Click to edit, copy, or view scramble.";
-"Help_0_6" = "If WCA inspection is on, tap anywhere to start the countdown. Press and hold to start the timer.";
-"Help_0_7" = "Swipe up to manually add a solve (or just tap if timing is off).";
-"Help_0_8" = "The \"draw scramble\" shows what your cube should look like if scrambled correctly.";
-"Help_0_9" = "Adjust your target—this is your time to beat.";
 
-"Help_1_0" = "Reset the entire current session.";
-"Help_1_1" = "Create a new session or delete this session here.";
+
+"Help_0_0" = "Adjust your target—this is the time to beat for your average.";
+"Help_0_1" = "Your scramble. Tap to refresh.";
+"Help_0_2" = "The \"draw scramble\" shows what your cube should look like if scrambled correctly.";
+"Help_0_3" = "If WCA inspection is on, tap anywhere to start the countdown. Press and hold to start the timer.";
+"Help_0_4" = "Swipe up to manually add a solve (or just tap if timing is off).";
+"Help_0_5" = "Your previous times will be documented in black.";
+"Help_0_6" = "...and your most recent time in yellow! Click to edit, copy, or view scramble.";
+"Help_0_7" = "Made a mistake? Reset the current average.";
+"Help_0_8" = "Change your cubing session.";
+"Help_0_9" = "This walkthrough.";
+
+
+"Help_1_0" = "A completed average for this session, with its time at the top and its individual times below.";
+"Help_1_1" = "Select an average to see its scrambles and an option to copy to clipboard!";
 "Help_1_2" = "Your target (again)!";
-"Help_1_3" = "Your best average of the entire session (tap to view).";
-"Help_1_4" = "Your best solve of the entire session (tap to view).";
-"Help_1_5" = "This bar shows the ratio of winning to losing averages relative to your target.";
-"Help_1_6" = "These rows show the completed averages for this session, with their times at the top and their individual times below.";
-"Help_1_7" = "Select a row to see an average’s scrambles and an option to copy to clipboard!";
+"Help_1_3" = "This bar shows the ratio of winning to losing averages relative to your target.";
+"Help_1_4" = "Your best average of the session (tap to view).";
+"Help_1_5" = "Your best solve of the session (tap to view).";
+"Help_1_6" = "Reset the current session.";
+"Help_1_7" = "Create a new session or delete this session.";
 
-"Help_2_0" = "Your median average of the session (shown as dotted line in graph).";
+"Help_2_0" = "Your median average of the session (displayed as dotted line in graph).";
 "Help_2_1" = "Your current mean of 10 averages (tap to view).";
 "Help_2_2" = "Your best mean of 10 averages (tap to view).";
 "Help_2_3" = "This is your interactive data visualization of your averages, WCAmo10s, and median average.";
 "Help_2_4" = "Pinch and scroll to see more detail.";
 
-"Help_3_0" = "The scramble type you'd like for this session.";
+"Help_3_0" = "The scramble type for this session.";
 "Help_3_1" = "The face you’ll see at your victory or defeat.";
-"Help_3_2" = "The WCA average format you'd like for this session.";
+"Help_3_2" = "The WCA average format for this session.";
 "Help_3_3" = "Timer display with decimals.";
 "Help_3_4" = "Timer display with seconds only.";
 "Help_3_5" = "No timer display while solving.";
 "Help_3_6" = "The amount of time to hold the timer down before starting (0.55 is the stackmat standard).";
-"Help_3_7" = "Disable the CompSim timer here if you would like to input times manually (by tapping).";
+"Help_3_7" = "Disable the CompSim timer if you would like to input times manually (by tapping).";
 "Help_3_8" = "Enable for a 15 second countdown when the screen is tapped.";
 "Help_3_9" = "Enable for \"8 seconds\" and \"12 seconds\" audio warnings during inspection.";
 "Help_3_10" = "Enable to see our alternate (dark) theme!";

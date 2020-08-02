@@ -238,8 +238,15 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
         TimesCollection.forEach{(button) in
             button.titleLabel?.font = HomeViewController.font
         }
-        //ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
+        ScrambleLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.05, name: "System")
         TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Lato-Regular")
+        RefreshButton.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.03, name: "Lato-Regular")
+        //TargetLabel.imageView?.backgroundColor = .red
+        
+        TargetLabel.imageView?.contentMode = .scaleAspectFit
+        TargetLabel.contentVerticalAlignment = .fill
+        //TargetLabel.contentHorizontalAlignment = .fill
+        //TargetLabel.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 15)
     }
     
     static func fontToFitWidth(text: String, view: UIView, multiplier: Float, name: String) -> UIFont
@@ -348,7 +355,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
     
     func segueToHelp()
     {
-       let obj = (self.storyboard?.instantiateViewController(withIdentifier: "HelpViewController"))!
+       let obj = (self.storyboard?.instantiateViewController(withIdentifier: "HelpWalkthroughViewController"))!
 
        let transition:CATransition = CATransition()
        transition.duration = 0.3
@@ -375,7 +382,9 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
                let str = temp.myString
                let intTime = temp.intTime
                
-                self.TargetLabel.setTitle("  " + str, for: .normal) // set title to string version
+                let targetText = "  " + str
+                self.TargetLabel.setTitle(targetText, for: .normal) // set title to string version
+                self.TargetLabel.titleLabel?.font = HomeViewController.fontToFitWidth(text: targetText, view: self.TargetLabel, multiplier: 0.6, name: "Lato-Black")
                try! self.realm.write
                {
                    HomeViewController.mySession.singleTime = intTime
@@ -541,7 +550,9 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
             UIView.setAnimationsEnabled(true)
         } 
         
-        TargetLabel.setTitle("  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))", for: .normal)
+        let targetText = "  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))"
+        TargetLabel.setTitle(targetText, for: .normal)
+        TargetLabel.titleLabel?.font = HomeViewController.fontToFitWidth(text: targetText, view: TargetLabel, multiplier: 0.6, name: "Lato-Black")
         
         if(HomeViewController.changedDarkMode) // changed it - only have to do this once when changed
         {
@@ -899,7 +910,9 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
   
     func updateLabels()
     {
-        TargetLabel.setTitle("  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))", for: .normal)
+        let targetText = "  \(SolveTime.makeMyString(num: HomeViewController.mySession.singleTime))"
+        TargetLabel.setTitle(targetText, for: .normal)
+        TargetLabel.titleLabel?.font = HomeViewController.fontToFitWidth(text: targetText, view: TargetLabel, multiplier: 0.6, name: "Lato-Black")
         
         for i in 0..<HomeViewController.mySession.currentIndex
         {
@@ -946,6 +959,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
     {
         display: block;
         margin-left: 0px;
+        margin-bottom: 0px;
     }
     -->
     </style>

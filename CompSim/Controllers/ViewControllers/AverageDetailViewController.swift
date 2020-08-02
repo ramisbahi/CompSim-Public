@@ -23,6 +23,8 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     var averageType = 0
     
+    var cellHeight: CGFloat?
+    
     @IBAction func StatsButtonPressed(_ sender: Any) {
         AverageDetailViewController.justReturned = true
         slideLeftSegue()
@@ -74,10 +76,10 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         let currentTime = HomeViewController.mySession.allTimes[SessionViewController.myIndex].list[indexPath.row]
         
         myCell.textLabel?.text = currentTime.myString // each time
-        myCell.textLabel?.font = UIFont.init(name: "Lato-Black", size: 17.0)
+        myCell.textLabel?.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: cellHeight!)), multiplier: 0.35, name: "Lato-Black")
         
         myCell.detailTextLabel?.text = currentTime.myScramble // each scramble
-        myCell.detailTextLabel?.font = UIFont.init(name: "Lato-Regular", size: 12.0)
+        myCell.detailTextLabel?.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: cellHeight!)), multiplier: 0.2, name: "Lato-Regular")
         
         if(HomeViewController.darkMode)
         {
@@ -100,6 +102,10 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         {})
         
         self.present(alert, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeight!
     }
     
     func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
@@ -125,6 +131,8 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func CopyButtonPressed(_ sender: Any) {
         if #available(iOS 13.0, *) {
+            CopyButton.setTitleColor(HomeViewController.greenColor(), for: .normal)
+            CopyButton.tintColor = HomeViewController.greenColor()
             CopyButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
             CopyButton.setTitle("COPIED", for: .normal)
         }
@@ -162,6 +170,10 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     {
         super.viewWillAppear(true)
         
+        
+    
+        print("ultimate font \(AverageLabel.font)")
+        
         if(HomeViewController.darkMode)
         {
             makeDarkMode()
@@ -184,8 +196,24 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cellHeight = max(self.view.frame.height * 0.1, 70.0)
         
+        AverageLabel.font = HomeViewController.fontToFitHeight(view: AverageLabel, multiplier: 1.0, name: "Lato-Black")
         
+        let widthFont = HomeViewController.fontToFitWidth(text: AverageLabel.text!, view: AverageLabel, multiplier: 1.0, name: "Lato-Black")
+        if widthFont.pointSize < AverageLabel.font.pointSize
+        {
+            AverageLabel.font = widthFont
+        }
+        
+        CopyButton.titleLabel?.font = HomeViewController.fontToFitWidth(text: "COPIED", view: CopyButton, multiplier: 1.0, name: "Lato-Black")
+        if #available(iOS 13.0, *) {
+            CopyButton.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(font: (CopyButton.titleLabel?.font)!), forImageIn: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
+        //CopyButton.imageView.poin
+    
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         
         BackButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: self.view, multiplier: 0.04, name: "Lato-Black")
@@ -205,12 +233,6 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         {
             AverageLabel.text = HomeViewController.mySession.allAverages[SessionViewController.myIndex] + " Single"
         }
-        
-        
-        
-        
-        
-        
     
         // Do any additional setup after loading the view.
     }

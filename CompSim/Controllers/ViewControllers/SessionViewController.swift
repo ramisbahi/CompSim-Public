@@ -720,7 +720,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
         
         cell.textLabel?.text = HomeViewController.mySession.allAverages[currentIndex] // set to average
-        cell.textLabel?.font = UIFont(name: "Lato-Black", size: 20)
+        
+        cell.textLabel?.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: cellHeight!)), multiplier: 0.35, name: "Lato-Black")
         
         
         if(HomeViewController.darkMode)
@@ -755,7 +756,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         timeList.append(HomeViewController.mySession.allTimes[currentIndex].list[numSolves-1].myString)
         
         cell.detailTextLabel?.text = timeList
-        cell.detailTextLabel?.font = UIFont(name: "Lato-Black", size: 14)
+        cell.detailTextLabel?.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: cellHeight!)), multiplier: 0.2, name: "Lato-Black")
         
         let numLabel = UILabel(frame: CGRect(x:
             cell.frame.maxX - 5.0, y: cell.frame.minY, width: 30.0, height: CGFloat(cellHeight!)))

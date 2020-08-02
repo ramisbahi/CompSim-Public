@@ -26,7 +26,7 @@ extension UIDevice {
 
 
 @UIApplicationMain
- class AppDelegate: UIResponder, UIApplicationDelegate {
+                                                                                       class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
@@ -51,11 +51,8 @@ extension UIDevice {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         
-
-        UITabBarItem.appearance()
-        .setTitleTextAttributes(
-            [NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: 10)!],
-        for: .normal)
+        print("scale: \(UIScreen.main.scale)")
+        
         
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.init(displayP3Red: 0/255, green: 51/255, blue: 89/255, alpha: 0.7)
         UIPageControl.appearance().pageIndicatorTintColor =

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "VoidCubeOnly.png",
+      "filename" : "VoidCubeOnly (3).png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "VoidCubeOnly (1).png",
+      "filename" : "VoidCubeOnly (4).png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "VoidCubeOnly (2).png",
+      "filename" : "VoidCubeOnly (5).png",
       "idiom" : "universal",
       "scale" : "3x"
     }

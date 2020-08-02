@@ -50,33 +50,42 @@ class StatsViewController: UIViewController {
     static var firstTime = true
     
     @IBOutlet weak var yLabel: UILabel!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
+        
+        
+        
         StatsViewController.firstTime = true
         
-        MedianAverageButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        CurrentMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        BestMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        BestMoLabel.adjustsFontSizeToFitWidth = true
+        CurrentMoButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 150.0)
+        CurrentMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        CurrentMoButton.titleLabel?.baselineAdjustment = .alignCenters
+        BestMoButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 150.0)
+        BestMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        BestMoButton.titleLabel?.baselineAdjustment = .alignCenters
+        
         CurrentMoLabel.adjustsFontSizeToFitWidth = true
+        BestMoLabel.font = UIFont(name: "Lato-Black", size:  getApproximateAdjustedFontSizeWithLabel(label: CurrentMoLabel))
+        
         
         lineChart.setScaleEnabled(true)
         lineChart.noDataText = "Do a couple averages to see your data visualization here!"
-        lineChart.noDataFont = UIFont(name: "Lato-Black", size: 16.0)!
+        lineChart.noDataFont = HomeViewController.fontToFitHeight(view: lineChart, multiplier: 0.05, name: "Lato-Black")
         lineChart.noDataTextColor = HomeViewController.darkBlueColor()
         lineChart.noDataTextAlignment = .center
-        lineChart.xAxis.labelFont = UIFont(name: "Lato-Black", size: 12.0)!
+        lineChart.xAxis.labelFont = HomeViewController.fontToFitHeight(view: lineChart, multiplier: 0.07, name: "Lato-Black")
         lineChart.xAxis.labelTextColor = HomeViewController.darkBlueColor()
         lineChart.xAxis.labelPosition = .bottom
-        lineChart.leftAxis.labelFont = UIFont(name: "Lato-Black", size: 12.0)!
+        lineChart.leftAxis.labelFont = HomeViewController.fontToFitHeight(view: lineChart, multiplier: 0.07, name: "Lato-Black")
         lineChart.leftAxis.labelTextColor = HomeViewController.darkBlueColor()
         lineChart.leftAxis.valueFormatter = ChartValueFormatter()
         lineChart.rightAxis.enabled = false
         lineChart.legend.verticalAlignment = .top
-        lineChart.legend.font = UIFont(name: "Lato-Black", size: 10.0)!
+        lineChart.legend.font = HomeViewController.fontToFitHeight(view: lineChart, multiplier: 0.07, name: "Lato-Black")
         lineChart.legend.textColor = HomeViewController.darkBlueColor()
         
         lineChart.xAxis.axisLineColor = HomeViewController.grayColor()
@@ -95,6 +104,31 @@ class StatsViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    func getApproximateAdjustedFontSizeWithLabel(label: UILabel) -> CGFloat {
+
+        if label.adjustsFontSizeToFitWidth == true {
+
+            var currentFont: UIFont = label.font
+            let originalFontSize = currentFont.pointSize
+            var currentSize: CGSize = (label.text! as NSString).size(withAttributes: [NSAttributedString.Key.font: currentFont])
+
+            while currentSize.width > label.frame.size.width && currentFont.pointSize > (originalFontSize * label.minimumScaleFactor) {
+                currentFont = currentFont.withSize(currentFont.pointSize - 1)
+                currentSize = (label.text! as NSString).size(withAttributes: [NSAttributedString.Key.font: currentFont])
+            }
+
+            return currentFont.pointSize
+
+        }
+        else {
+
+            return label.font.pointSize
+
+        }
+
+    }
+    
     
     func makeGraphDark()
     {
@@ -193,6 +227,8 @@ class StatsViewController: UIViewController {
             medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: NSRange(location: median.count, length: medianString.length - median.count))
         }
         MedianAverageButton.setAttributedTitle(medianString, for: .normal)
+        let font =  HomeViewController.fontToFitWidth(text: (MedianAverageButton.titleLabel?.text)!, view: MedianAverageButton, multiplier: 0.93, name: "Lato-Black")
+        MedianAverageButton.titleLabel?.font = font
         
         let average = NSLocalizedString("Best average:  ", comment: "")
         let averageString = NSMutableAttributedString(string: (BestAverageButton.titleLabel?.text)!, attributes: [NSAttributedString.Key.foregroundColor: HomeViewController.darkBlueColor()])
@@ -218,7 +254,7 @@ class StatsViewController: UIViewController {
         let radius = BestMoButton.frame.height / 2.0
         BestMoButton.layer.cornerRadius = radius
         CurrentMoButton.layer.cornerRadius = radius
-    
+        
     }
     
     @IBAction func SessionButtonClicked(_ sender: Any) {
@@ -361,6 +397,7 @@ class StatsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
+        
                
         setUpStackView()
         
@@ -443,7 +480,6 @@ class StatsViewController: UIViewController {
     
     func updateLabels()
     {
-        print("STATS updating labels")
         updateBestSingle()
         updateBestAverage()
         //updateBestFonts()
@@ -583,6 +619,8 @@ class StatsViewController: UIViewController {
          let medianString = NSMutableAttributedString(string: "\(median)\(medianTimeString!)", attributes: [NSAttributedString.Key.foregroundColor: mainTextColor])
         medianString.addAttribute(NSAttributedString.Key.foregroundColor, value: secondaryColor, range: NSRange(location: median.count, length: medianString.length - median.count))
         MedianAverageButton.setAttributedTitle(medianString, for: .normal)
+        let font =  HomeViewController.fontToFitWidth(text: "\(median)\(medianTimeString!)", view: MedianAverageButton, multiplier: 0.93, name: "Lato-Black")
+        MedianAverageButton.titleLabel?.font = font
     }
     
     func updateMo()

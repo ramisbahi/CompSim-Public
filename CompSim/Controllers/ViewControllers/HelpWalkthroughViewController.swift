@@ -75,6 +75,9 @@ class HelpWalkthroughViewController: UIViewController, UIPageViewControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        
         configurePageViewController()
         
         // Do any additional setup after loading the view.
@@ -114,6 +117,22 @@ class HelpWalkthroughViewController: UIViewController, UIPageViewControllerDeleg
         pageViewController.setViewControllers([startingViewController], direction: .forward, animated: true)
     }
 
+    @IBAction func BackPressed(_ sender: Any) {
+        slideLeftSegue()
+    }
+    
+    func slideLeftSegue()
+    {
+        let transition:CATransition = CATransition()
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+    
+    
+        self.navigationController!.view.layer.add(transition, forKey: kCATransition)
+        self.navigationController?.popViewController(animated: true)
+    }
     /*
     // MARK: - Navigation
 
