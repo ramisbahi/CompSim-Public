@@ -55,8 +55,9 @@ class StatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+        let labelFont = HomeViewController.fontToFitWidth(text: "Average #", view: xLabel, multiplier: 0.8, name: "Lato-Black")
+        xLabel.font = labelFont
+        yLabel.font = labelFont
         
         StatsViewController.firstTime = true
         
@@ -69,7 +70,7 @@ class StatsViewController: UIViewController {
         BestMoButton.titleLabel?.baselineAdjustment = .alignCenters
         
         CurrentMoLabel.adjustsFontSizeToFitWidth = true
-        BestMoLabel.font = UIFont(name: "Lato-Black", size:  getApproximateAdjustedFontSizeWithLabel(label: CurrentMoLabel))
+        BestMoLabel.font = UIFont(name: "Lato-Black", size:  StatsViewController.getApproximateAdjustedFontSizeWithLabel(label: CurrentMoLabel))
         
         
         lineChart.setScaleEnabled(true)
@@ -77,15 +78,18 @@ class StatsViewController: UIViewController {
         lineChart.noDataFont = HomeViewController.fontToFitHeight(view: lineChart, multiplier: 0.05, name: "Lato-Black")
         lineChart.noDataTextColor = HomeViewController.darkBlueColor()
         lineChart.noDataTextAlignment = .center
-        lineChart.xAxis.labelFont = HomeViewController.fontToFitHeight(view: lineChart, multiplier: 0.07, name: "Lato-Black")
+        let axisFont = HomeViewController.fontToFitWidth(text: "100", view: self.view, multiplier: 0.05, name: "Lato-Black")
+        lineChart.xAxis.labelFont = axisFont
         lineChart.xAxis.labelTextColor = HomeViewController.darkBlueColor()
         lineChart.xAxis.labelPosition = .bottom
-        lineChart.leftAxis.labelFont = HomeViewController.fontToFitHeight(view: lineChart, multiplier: 0.07, name: "Lato-Black")
+        lineChart.leftAxis.labelFont = axisFont
         lineChart.leftAxis.labelTextColor = HomeViewController.darkBlueColor()
         lineChart.leftAxis.valueFormatter = ChartValueFormatter()
         lineChart.rightAxis.enabled = false
+        let legendFont = HomeViewController.fontToFitWidth(text: "Average WCAmo10 Median Average", view: self.view, multiplier: 0.5, name: "Lato-Black")
         lineChart.legend.verticalAlignment = .top
-        lineChart.legend.font = HomeViewController.fontToFitHeight(view: lineChart, multiplier: 0.07, name: "Lato-Black")
+        lineChart.legend.font = legendFont
+        lineChart.legend.formSize = legendFont.pointSize
         lineChart.legend.textColor = HomeViewController.darkBlueColor()
         
         lineChart.xAxis.axisLineColor = HomeViewController.grayColor()
@@ -105,7 +109,7 @@ class StatsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func getApproximateAdjustedFontSizeWithLabel(label: UILabel) -> CGFloat {
+    static func getApproximateAdjustedFontSizeWithLabel(label: UILabel) -> CGFloat {
 
         if label.adjustsFontSizeToFitWidth == true {
 

@@ -31,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1451"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MgX-Jd-ubN">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="767.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="768.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-NK-pgV">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="130.66666666666666"/>
@@ -172,7 +172,7 @@
                                                             <action selector="eventTapped:" destination="0Bl-oR-f5Z" eventType="touchUpInside" id="wby-h5-4kd"/>
                                                         </connections>
                                                     </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdq-Qi-9kL">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdq-Qi-9kL">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
                                                         <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="18"/>
@@ -522,6 +522,7 @@
                                                 <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="GqU-g2-2in" secondAttribute="height" multiplier="164:35" id="09b-Va-Qlb"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="rRU-Mu-RRx"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -540,7 +541,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERSION:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRJ-Gy-2ml">
-                                                <rect key="frame" x="166" y="716.66666666666663" width="82.333333333333314" height="21"/>
+                                                <rect key="frame" x="165" y="716.66666666666663" width="84" height="21.666666666666629"/>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="18"/>
                                                 <color key="textColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -565,6 +566,7 @@
                                                 <rect key="frame" x="20.666666666666671" y="673.33333333333337" width="165.66666666666663" height="35.333333333333371"/>
                                                 <color key="backgroundColor" red="0.0" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="KCZ-YC-cMk"/>
                                                     <constraint firstAttribute="width" secondItem="BTZ-LD-Niw" secondAttribute="height" multiplier="164:35" id="Kz0-EH-7TS"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="18"/>
@@ -602,14 +604,14 @@
                                         <constraints>
                                             <constraint firstItem="0mn-7A-bip" firstAttribute="top" secondItem="wXm-KH-6ct" secondAttribute="bottom" id="0GS-0D-Uc5"/>
                                             <constraint firstItem="dIR-c7-qh2" firstAttribute="top" secondItem="lgK-5W-Uhl" secondAttribute="bottom" constant="15" id="0jp-gl-yXF"/>
-                                            <constraint firstItem="BTZ-LD-Niw" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.4" id="1dB-NO-7UK"/>
+                                            <constraint firstItem="BTZ-LD-Niw" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.4" priority="750" id="1dB-NO-7UK"/>
                                             <constraint firstItem="GqU-g2-2in" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" multiplier="1.5" id="26y-lg-EHn"/>
                                             <constraint firstItem="lgK-5W-Uhl" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="2Ys-Wf-5Kc"/>
                                             <constraint firstItem="GqU-g2-2in" firstAttribute="top" secondItem="R04-Tx-5Ya" secondAttribute="bottom" constant="20" id="2qs-zw-ml5"/>
                                             <constraint firstItem="0mn-7A-bip" firstAttribute="leading" secondItem="MgX-Jd-ubN" secondAttribute="leading" constant="20" id="3Bi-g3-hPH"/>
                                             <constraint firstItem="LrE-n2-Lfh" firstAttribute="top" secondItem="ljr-tg-h7i" secondAttribute="bottom" constant="15" id="40S-Rr-54e"/>
                                             <constraint firstItem="Ms5-6S-Cbn" firstAttribute="top" secondItem="LrE-n2-Lfh" secondAttribute="bottom" constant="15" id="6cd-r1-Qry"/>
-                                            <constraint firstItem="GqU-g2-2in" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.4" id="8d8-7j-RN7"/>
+                                            <constraint firstItem="GqU-g2-2in" firstAttribute="width" secondItem="MgX-Jd-ubN" secondAttribute="width" multiplier="0.4" priority="750" id="8d8-7j-RN7"/>
                                             <constraint firstItem="XRJ-Gy-2ml" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="8s4-jx-9qC"/>
                                             <constraint firstItem="xBE-BR-iFx" firstAttribute="centerX" secondItem="MgX-Jd-ubN" secondAttribute="centerX" id="ALp-P2-Gq7"/>
                                             <constraint firstItem="42Y-ms-qTs" firstAttribute="top" secondItem="0mn-7A-bip" secondAttribute="bottom" id="BEI-in-UE7"/>
@@ -761,7 +763,7 @@
                                 <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4HU-Wj-DfA">
-                                <rect key="frame" x="0.0" y="104.66666666666669" width="414" height="631.33333333333326"/>
+                                <rect key="frame" x="0.0" y="110.66666666666669" width="414" height="625.33333333333326"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="AvC-tB-OuD" id="APK-gl-HUR"/>
@@ -769,7 +771,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.45 Average" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4M-qY-OQc">
-                                <rect key="frame" x="0.0" y="35" width="414" height="51.666666666666657"/>
+                                <rect key="frame" x="0.0" y="41" width="414" height="51.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="43"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -795,8 +797,8 @@
                                     <action selector="StatsButtonPressed:" destination="AvC-tB-OuD" eventType="touchUpInside" id="kEB-fZ-eS0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7x-do-eup">
-                                <rect key="frame" x="304" y="0.0" width="100" height="25"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7x-do-eup">
+                                <rect key="frame" x="279.66666666666669" y="0.0" width="124.33333333333331" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="F7x-do-eup" secondAttribute="height" multiplier="4:1" id="uln-42-VYZ"/>
                                 </constraints>
@@ -828,7 +830,7 @@
                             <constraint firstItem="B4M-qY-OQc" firstAttribute="top" secondItem="F7x-do-eup" secondAttribute="bottom" constant="10" id="cwa-qV-Yji"/>
                             <constraint firstItem="B4M-qY-OQc" firstAttribute="leading" secondItem="wL3-xv-aHE" secondAttribute="leading" id="gGY-cn-tdw"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="trailing" secondItem="4HU-Wj-DfA" secondAttribute="trailing" id="gkn-3d-uiV"/>
-                            <constraint firstItem="F7x-do-eup" firstAttribute="width" secondItem="R3d-AM-Pfb" secondAttribute="width" multiplier="0.241546" id="kXP-dR-tSg"/>
+                            <constraint firstItem="F7x-do-eup" firstAttribute="width" secondItem="R3d-AM-Pfb" secondAttribute="width" multiplier="0.3" id="kXP-dR-tSg"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="bottom" secondItem="c4t-Dd-fsp" secondAttribute="bottom" id="svw-uB-wUJ"/>
                             <constraint firstItem="4HU-Wj-DfA" firstAttribute="leading" secondItem="wL3-xv-aHE" secondAttribute="leading" id="tqL-Py-Q8m"/>
                             <constraint firstItem="wL3-xv-aHE" firstAttribute="bottom" secondItem="4HU-Wj-DfA" secondAttribute="bottom" id="w9H-rr-gDY"/>
@@ -2190,7 +2192,7 @@ Cg
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7jN-ra-vHB">
-                                                <rect key="frame" x="103.66666666666669" y="1832.6666666666667" width="207" height="32"/>
+                                                <rect key="frame" x="103.66666666666669" y="1831.6666666666667" width="207" height="33"/>
                                                 <color key="backgroundColor" red="0.94901960780000005" green="0.75686274509999996" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                                 <state key="normal" title="Walkthrough">
@@ -2587,7 +2589,7 @@ Cg
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAI-73-ZRD">
                                 <rect key="frame" x="0.0" y="0.0" width="10" height="30"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3yg-td-zyt"/>
                                     <constraint firstAttribute="width" constant="10" id="Y34-rR-b2g"/>
@@ -2831,14 +2833,14 @@ Cg
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="PT0-Cd-KDT"/>
+        <segue reference="z5C-xH-DX3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Arrow_Left" width="24" height="11.333333015441895"/>
         <image name="arrow.turn.down.left" catalog="system" width="128" height="99"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
-        <image name="chevron.right" width="128" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" width="128" height="128"/>
         <image name="cube" catalog="system" width="128" height="124"/>
         <image name="envelope" catalog="system" width="128" height="93"/>
         <image name="gear1" width="50" height="50"/>

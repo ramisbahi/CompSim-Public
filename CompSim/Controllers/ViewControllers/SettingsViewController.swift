@@ -268,6 +268,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     override func viewDidLoad() // only need to do these things when lose instance anyways, so call in view did load (selected index wont change when go between tabs)
     {
         
+        super.viewDidLoad()
+        
         
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
@@ -346,7 +348,24 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         WebsiteButton.setTitle(NSLocalizedString("Website", comment: ""), for: .normal)
         EmailButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)
         VersionLabel.text = NSLocalizedString("Version", comment: "") + ": \(appVersion)"
-        super.viewDidLoad()
+        
+        var font = HomeViewController.fontToFitHeight(view: ScrambleTypeButton, multiplier: 0.3, name: "Lato-Black")
+        let widthFont = HomeViewController.fontToFitWidth(text: "Scramble Type: 3x3x3 BLD", view: self.view, multiplier: 0.5, name: "Lato-Black")
+        if widthFont.pointSize < font.pointSize
+        {
+            font = widthFont
+        }
+        ScrambleTypeButton.titleLabel?.font = font
+        for button in eventCollection
+        {
+            button.titleLabel?.font = font
+        }
+        CuberButton.titleLabel?.font = font
+        for button in cuberCollection
+        {
+            button.titleLabel?.font = font
+        }
+        
         
         
 
@@ -360,6 +379,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         let scrString = NSMutableAttributedString(string: "\(scrType):  \(title)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         scrString.addAttribute(NSAttributedString.Key.foregroundColor, value: HomeViewController.orangeColor(), range: NSRange(location: scrType.count + 1, length: scrString.length - scrType.count - 1))
         ScrambleTypeButton.setAttributedTitle(scrString, for: .normal)
+        
         
         super.viewWillAppear(false)
         

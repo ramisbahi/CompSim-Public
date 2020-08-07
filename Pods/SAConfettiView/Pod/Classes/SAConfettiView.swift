@@ -112,10 +112,6 @@ public class SAConfettiView: UIView {
         confetti.scaleRange = CGFloat(intensity)
         confetti.scaleSpeed = CGFloat(-0.1 * intensity)
         confetti.contents = imageForType(type: type)!.cgImage
-        confetti.setValue("plane", forKey: "particleType")
-        confetti.setValue(Double.pi, forKey: "orientationRange")
-        confetti.setValue(Double.pi / 2, forKey: "orientationLongitude")
-        confetti.setValue(Double.pi / 2, forKey: "orientationLatitude")
         return confetti
     }
 

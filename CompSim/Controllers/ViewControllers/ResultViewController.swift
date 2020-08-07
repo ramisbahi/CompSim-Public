@@ -289,6 +289,7 @@ class ResultViewController: UIViewController {
     {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.65)
         {
+            
             self.confettiView?.startConfetti()
         }
     }

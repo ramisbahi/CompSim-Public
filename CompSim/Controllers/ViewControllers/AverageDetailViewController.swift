@@ -198,16 +198,17 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         cellHeight = max(self.view.frame.height * 0.1, 70.0)
         
-        AverageLabel.font = HomeViewController.fontToFitHeight(view: AverageLabel, multiplier: 1.0, name: "Lato-Black")
+        AverageLabel.font = HomeViewController.fontToFitHeight(view: AverageLabel, multiplier: 0.8, name: "Lato-Black")
         
-        let widthFont = HomeViewController.fontToFitWidth(text: AverageLabel.text!, view: AverageLabel, multiplier: 1.0, name: "Lato-Black")
+        let widthFont = HomeViewController.fontToFitWidth(text: AverageLabel.text!, view: AverageLabel, multiplier: 0.8, name: "Lato-Black")
         if widthFont.pointSize < AverageLabel.font.pointSize
         {
             AverageLabel.font = widthFont
         }
         
-        CopyButton.titleLabel?.font = HomeViewController.fontToFitWidth(text: "COPIED", view: CopyButton, multiplier: 1.0, name: "Lato-Black")
+        CopyButton.titleLabel?.font = HomeViewController.fontToFitWidth(text: "COPIED", view: CopyButton, multiplier: 0.65, name: "Lato-Black")
         if #available(iOS 13.0, *) {
+            
             CopyButton.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(font: (CopyButton.titleLabel?.font)!), forImageIn: .normal)
         } else {
             // Fallback on earlier versions
@@ -216,9 +217,6 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         
-        BackButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: self.view, multiplier: 0.04, name: "Lato-Black")
-        let stringSize = BackButton.titleLabel?.intrinsicContentSize.width
-        BackButton.widthAnchor.constraint(equalToConstant: stringSize! + 40).isActive = true
         
         averageType = HomeViewController.mySession.averageTypes[SessionViewController.myIndex] // set average type (0 = ao5, 1 = mo3, 2 = bo3)
         if(averageType == 0)

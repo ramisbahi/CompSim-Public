@@ -8,6 +8,14 @@
 
 import UIKit
 
+class InsetLabel: UILabel
+{
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets.init(top: 0, left: 5, bottom: 0, right: 10)
+        super.drawText(in: rect.inset(by: insets))
+    }
+}
+
 // bubble up, x location proportion, y location proportion, width proportion, height proportion, mirrored
 
 let bubbles: [[[Any]]] = [
@@ -112,21 +120,29 @@ class WalkthroughViewController: UIViewController {
     
     func addPrompt()
     {
-        let promptLabel = UILabel(frame: CGRect(x: ImageView.frame.minX, y: ImageView.frame.minY, width: ImageView.frame.width, height: ImageView.frame.height))
+        let widthProp: CGFloat = 0.9
+        let heightProp: CGFloat = 0.3
+        
+        let promptLabel = InsetLabel(frame: CGRect(x: ImageView.frame.minX + ImageView.frame.width * (1-widthProp) / 2.0, y: ImageView.frame.minY + ImageView.frame.height * (1-heightProp) / 2.0, width: ImageView.frame.width * widthProp, height: ImageView.frame.height*heightProp))
         
         if bubbleIndex >= bubbles[index].count
         {
-            promptLabel.text = index == 3 ? "WALKTHROUGH COMPLETE!" : "SWIPE TO CONTINUE"
+            promptLabel.text = index == 3 ? "Walkthrough complete." : "Swipe to continue. →"
         }
         else
         {
-            promptLabel.text = index == 0 ? "TAP TO BEGIN" : "TAP TO CONTINUE"
+            promptLabel.text = index == 0 ? "Tap to begin." : "Tap to continue."
         }
         
         promptLabel.font = UIFont(name: "Lato-Black", size: 50.0)
-        promptLabel.textColor = HomeViewController.redColor()
+        promptLabel.baselineAdjustment = .alignCenters
+        promptLabel.textColor = HomeViewController.darkBlueColor()
         promptLabel.textAlignment = .center
         promptLabel.adjustsFontSizeToFitWidth = true
+        promptLabel.tintColor = UIColor(displayP3Red: 247, green: 218, blue: 149, alpha: 1.0)
+        promptLabel.backgroundColor = UIColor(displayP3Red: 247/255, green: 218/255, blue: 149/255, alpha: 1.0)
+        promptLabel.layer.cornerRadius = 6.0
+        promptLabel.layer.masksToBounds = true
         self.view.addSubview(promptLabel)
     }
     
