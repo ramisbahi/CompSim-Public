@@ -11,7 +11,7 @@ import UIKit
 class InsetLabel: UILabel
 {
     override func drawText(in rect: CGRect) {
-        let insets = UIEdgeInsets.init(top: 0, left: 5, bottom: 0, right: 10)
+        let insets = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 10)
         super.drawText(in: rect.inset(by: insets))
     }
 }
@@ -127,14 +127,14 @@ class WalkthroughViewController: UIViewController {
         
         if bubbleIndex >= bubbles[index].count
         {
-            promptLabel.text = index == 3 ? "Walkthrough complete." : "Swipe to continue. →"
+            promptLabel.text = index == 3 ? "Walkthrough complete!" : "Swipe to continue. →"
         }
         else
         {
             promptLabel.text = index == 0 ? "Tap to begin." : "Tap to continue."
         }
         
-        promptLabel.font = UIFont(name: "Lato-Black", size: 50.0)
+        promptLabel.font = UIFont(name: "Lato-Black", size: 100.0)
         promptLabel.baselineAdjustment = .alignCenters
         promptLabel.textColor = HomeViewController.darkBlueColor()
         promptLabel.textAlignment = .center
@@ -215,7 +215,6 @@ class WalkthroughViewController: UIViewController {
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.text = text
-        //label.backgroundColor = .orange
         
         view.addSubview(bubbleImageView)
         view.addSubview(label)

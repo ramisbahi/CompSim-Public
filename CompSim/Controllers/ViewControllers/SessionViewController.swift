@@ -11,6 +11,30 @@ import RealmSwift
 
 var bestPressed = false
 
+class AverageTableViewCell: UITableViewCell {
+
+    var currentIndex: Int!
+
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        let numLabel = UILabel(frame: CGRect(x:
+            self.frame.maxX - 30.0, y: self.frame.minY, width: 30.0, height: self.frame.height))
+        
+        numLabel.textAlignment = .center
+        numLabel.baselineAdjustment = .alignCenters
+        numLabel.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: self.frame.height)), multiplier: 0.2, name: "Lato-Black")
+        numLabel.textColor = HomeViewController.grayColor()
+        numLabel.text = String(currentIndex + 1)
+        
+        self.addSubview(numLabel)
+        
+    }
+}
+
+
+
+
 class SessionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var DarkBackground: UIImageView!
@@ -559,6 +583,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
         ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
         
+        
 
         UIView.setAnimationsEnabled(false)
         if #available(iOS 13.0, *) {
@@ -717,7 +742,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         let currentIndex = HomeViewController.mySession.currentAverage - indexPath.row // reverse order
         
         
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
+        let cell = AverageTableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
+        cell.currentIndex = currentIndex
         
         cell.textLabel?.text = HomeViewController.mySession.allAverages[currentIndex] // set to average
         
@@ -737,7 +763,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.backgroundColor = UIColor.white
         }
         cell.accessoryType = .disclosureIndicator // show little arrow thing on right side of each cell
-        
+    
 
         if(HomeViewController.mySession.usingWinningTime[currentIndex]) // if was competing against winning time
         {
@@ -756,16 +782,9 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         timeList.append(HomeViewController.mySession.allTimes[currentIndex].list[numSolves-1].myString)
         
         cell.detailTextLabel?.text = timeList
-        cell.detailTextLabel?.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: cellHeight!)), multiplier: 0.2, name: "Lato-Black")
-        
-        let numLabel = UILabel(frame: CGRect(x:
-            cell.frame.maxX - 5.0, y: cell.frame.minY, width: 30.0, height: CGFloat(cellHeight!)))
-        numLabel.textAlignment = .center
-        numLabel.font = UIFont(name: "Lato-Regular", size: 12)
-        numLabel.textColor = HomeViewController.grayColor()
-        numLabel.text = String(currentIndex + 1)
-        cell.addSubview(numLabel)
+        cell.detailTextLabel?.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: cellHeight!)), multiplier: 0.23, name: "Lato-Black")
 
+        
         
         let index = HomeViewController.mySession.currentAverage - indexPath.row
         let highlightColor = HomeViewController.greenColor().withAlphaComponent(0.14)
@@ -886,6 +905,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+
         
         if bestSingleTransition
         {
@@ -932,6 +952,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         let index = HomeViewController.mySession.currentAverage - indexPath.row
         UIPasteboard.general.string = clipboardAverageString(index)
     }
+
     
     func clipboardAverageString(_ index: Int) -> String
        {

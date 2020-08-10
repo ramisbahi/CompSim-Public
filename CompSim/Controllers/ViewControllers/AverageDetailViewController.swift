@@ -171,9 +171,6 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewWillAppear(true)
         
         
-    
-        print("ultimate font \(AverageLabel.font)")
-        
         if(HomeViewController.darkMode)
         {
             makeDarkMode()
@@ -197,14 +194,10 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         
         cellHeight = max(self.view.frame.height * 0.1, 70.0)
+        AverageLabel.font = HomeViewController.fontToFitHeight(view: AverageLabel, multiplier: 0.8, name: "Lato-Black") // view will appear makes no diff
+        print("k")
+        print(AverageLabel.font.pointSize)
         
-        AverageLabel.font = HomeViewController.fontToFitHeight(view: AverageLabel, multiplier: 0.8, name: "Lato-Black")
-        
-        let widthFont = HomeViewController.fontToFitWidth(text: AverageLabel.text!, view: AverageLabel, multiplier: 0.8, name: "Lato-Black")
-        if widthFont.pointSize < AverageLabel.font.pointSize
-        {
-            AverageLabel.font = widthFont
-        }
         
         CopyButton.titleLabel?.font = HomeViewController.fontToFitWidth(text: "COPIED", view: CopyButton, multiplier: 0.65, name: "Lato-Black")
         if #available(iOS 13.0, *) {
@@ -231,6 +224,15 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         {
             AverageLabel.text = HomeViewController.mySession.allAverages[SessionViewController.myIndex] + " Single"
         }
+        
+        
+        
+        let widthFont = HomeViewController.fontToFitWidth(text: AverageLabel.text!, view: AverageLabel, multiplier: 0.8, name: "Lato-Black")
+        if widthFont.pointSize < AverageLabel.font.pointSize
+        {
+            AverageLabel.font = widthFont
+        }
+        
     
         // Do any additional setup after loading the view.
     }
