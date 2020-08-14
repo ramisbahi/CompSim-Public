@@ -90,7 +90,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
     static var darkMode = false
     static var changedDarkMode = false
     
-    static var timing = 1
+    static var timing = 0
     static var inspection = true
     
     static var cuber = NSLocalizedString("Random", comment: "") // holds first name of cuber

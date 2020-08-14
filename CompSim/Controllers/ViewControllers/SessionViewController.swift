@@ -18,16 +18,7 @@ class AverageTableViewCell: UITableViewCell {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        let numLabel = UILabel(frame: CGRect(x:
-            self.frame.maxX - 30.0, y: self.frame.minY, width: 30.0, height: self.frame.height))
         
-        numLabel.textAlignment = .center
-        numLabel.baselineAdjustment = .alignCenters
-        numLabel.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: self.frame.height)), multiplier: 0.2, name: "Lato-Black")
-        numLabel.textColor = HomeViewController.grayColor()
-        numLabel.text = String(currentIndex + 1)
-        
-        self.addSubview(numLabel)
         
     }
 }
@@ -742,8 +733,10 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         let currentIndex = HomeViewController.mySession.currentAverage - indexPath.row // reverse order
         
         
-        let cell = AverageTableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
-        cell.currentIndex = currentIndex
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
+        //cell.currentIndex = currentIndex
+        
+        
         
         cell.textLabel?.text = HomeViewController.mySession.allAverages[currentIndex] // set to average
         
@@ -797,7 +790,16 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.backgroundColor = highlightColor
         }
         
+        let numLabel = UILabel(frame: CGRect(x:
+            cell.frame.maxX - 30.0, y: cell.frame.minY, width: 30.0, height: cell.frame.height))
         
+        numLabel.textAlignment = .center
+        numLabel.baselineAdjustment = .alignCenters
+        numLabel.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: cell.frame.height)), multiplier: 0.2, name: "Lato-Black")
+        numLabel.textColor = HomeViewController.grayColor()
+        numLabel.text = String(currentIndex + 1)
+        
+        cell.addSubview(numLabel)
         
         return cell
     }

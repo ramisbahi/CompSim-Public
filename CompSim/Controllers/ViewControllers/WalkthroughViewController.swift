@@ -20,51 +20,51 @@ class InsetLabel: UILabel
 
 let bubbles: [[[Any]]] = [
                             [ // page 0
-                                [false, 0.45, 0.665, 0.4, 0.15, true],
+                                [false, 0.35, 0.565, 0.5, 0.25, true],
                                 [false, 0.55, 0.022, 0.4, 0.13, false], // these
-                                [false, 0.11, 0.53, 0.4, 0.224, false], // two
-                                [false, 0.55, 0.4, 0.35, 0.25, false],
+                                [false, 0.05, 0.43, 0.46, 0.324, false], // two
+                                [false, 0.45, 0.3, 0.45, 0.35, false],
                                 [false, 0.15, 0.42 , 0.4, 0.224, true],
-                                [false, 0.56, 0.2, 0.4, 0.224, false],// these
-                                [false, 0.07, 0.27, 0.4, 0.224, true], // two
-                                [true, 0.05, 0.0444, 0.4, 0.16, false],
-                                [true, 0.41, 0.048, 0.25, 0.14, false],
+                                [false, 0.17, 0.18, 0.4, 0.224, true],// these
+                                [true, 0.47, 0.542, 0.4, 0.25, false], // two
+                                [true, 0.05, 0.0444, 0.4, 0.23, false],
+                                [true, 0.41, 0.048, 0.28, 0.2, false],
                                 [true, 0.62, 0.0444, 0.34, 0.1, true]
                             ],
 
                             [ // page 1
-                                [false, 0.03, 0.33, 0.4, 0.224, false],
+                                [false, 0.03, 0.23, 0.4, 0.324, false],
                                 [false, 0.56, 0.445, 0.42, 0.24, true],
-                                [true, 0.45, 0.13, 0.25, 0.1, false],
-                                [true, 0.4, 0.21, 0.4, 0.2, true],
-                                [false, 0.15, 0.01, 0.3, 0.14, false], // these
-                                [false, 0.55, 0.01, 0.3, 0.14, true], // two
+                                [true, 0.45, 0.13, 0.3, 0.12, false],
+                                [true, 0.35, 0.21, 0.45, 0.25, true],
+                                [true, 0.15, 0.168, 0.3, 0.24, false], // these
+                                [true, 0.55, 0.168, 0.3, 0.24, true], // two
                                 [true, 0.0555, 0.0444, 0.28, 0.16, false],
                                 [true, 0.6, 0.0444, 0.34, 0.2, true]
                             ],
                             
                             [ // page 2
-                                [true, 0.35, 0.13, 0.4, 0.2, false],
-                                [false, 0.175, 0.11, 0.3, 0.15, false],
-                                [false, 0.525, 0.11, 0.3, 0.15, true],
-                                [false, 0.2, 0.365, 0.4, 0.224, true],
+                                [true, 0.35, 0.125, 0.4, 0.3, false],
+                                [false, 0.17, 0.05, 0.3, 0.21, false],
+                                [false, 0.53, 0.05, 0.3, 0.21, true],
+                                [false, 0.15, 0.305, 0.45, 0.284, true],
                                 [false, 0.56, 0.5, 0.35, 0.13, false]
                             ],
                             
                             [ // page 3
-                                [true, 0.5, 0.055, 0.3, 0.14, false],
-                                [true, 0.19, 0.15, 0.4, 0.14, true],
-                                [false, 0.06, 0.028, 0.35, 0.16, false],
-                                [false, 0.05, 0.235, 0.275, 0.1, true],
-                                [false, 0.34, 0.235, 0.275, 0.1, true],
-                                [false, 0.67, 0.235, 0.275, 0.1, false],
-                                [false, 0.12, 0.21, 0.35, 0.2, true],
-                                [false, 0.57, 0.313, 0.4, 0.2, true],
-                                [false, 0.57, 0.385, 0.4, 0.2, false],
-                                [false, 0.57, 0.455, 0.4, 0.2, true],
-                                [false, 0.57, 0.527, 0.4, 0.2, false],
-                                [false, 0.16, 0.688, 0.3, 0.12, false],
-                                [false, 0.54, 0.688, 0.3, 0.12, true]
+                                [true, 0.5, 0.055, 0.3, 0.2, false],
+                                [true, 0.19, 0.15, 0.4, 0.18, true],
+                                [false, 0.05, 0.01, 0.35, 0.18, false],
+                                [false, 0.05, 0.165, 0.275, 0.17, true],
+                                [false, 0.34, 0.165, 0.275, 0.17, true],
+                                [false, 0.67, 0.165, 0.275, 0.17, false],
+                                [false, 0.05, 0.12, 0.42, 0.29, true],
+                                [false, 0.5, 0.213, 0.47, 0.3, true],
+                                [false, 0.52, 0.335, 0.47, 0.25, false],
+                                [false, 0.34, 0.405, 0.47, 0.25, true],
+                                [false, 0.55, 0.56, 0.44, 0.17, false],
+                                [false, 0.06, 0.628, 0.39, 0.18, false],
+                                [false, 0.55, 0.628, 0.39, 0.18, true]
                             ]
                         ]
 
@@ -121,7 +121,7 @@ class WalkthroughViewController: UIViewController {
     func addPrompt()
     {
         let widthProp: CGFloat = 0.9
-        let heightProp: CGFloat = 0.3
+        let heightProp: CGFloat = 0.15
         
         let promptLabel = InsetLabel(frame: CGRect(x: ImageView.frame.minX + ImageView.frame.width * (1-widthProp) / 2.0, y: ImageView.frame.minY + ImageView.frame.height * (1-heightProp) / 2.0, width: ImageView.frame.width * widthProp, height: ImageView.frame.height*heightProp))
         

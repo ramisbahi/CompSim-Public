@@ -69,7 +69,11 @@ class TimerViewController: UIViewController {
         
         TimerLabel.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.22, name: "Lato-Regular")
         SubmitButton.titleLabel?.font = HomeViewController.fontToFitHeight(view: BigView, multiplier: 0.065, name: "Lato-Black")
-        
+        let widthFont = HomeViewController.fontToFitWidth(text: "SUBMIT", view: SubmitButton, multiplier: 0.87, name: "Lato-Black")
+        if widthFont.pointSize < (SubmitButton.titleLabel?.font.pointSize)!
+        {
+            SubmitButton.titleLabel?.font = widthFont
+        }
         
         if(HomeViewController.inspection)
         {

@@ -23,6 +23,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     @IBOutlet weak var TimingControl: UISegmentedControl!
     @IBOutlet weak var InspectionControl: UISegmentedControl!
     
+    @IBOutlet weak var TabItem: UITabBarItem!
+    
     @IBOutlet weak var HoldingTimeLabel: UILabel!
     @IBOutlet weak var HoldingTimeSlider: UISlider!
     

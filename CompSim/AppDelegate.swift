@@ -90,7 +90,6 @@ extension UIDevice {
         
         application.isIdleTimerDisabled = true
         
-        
         return true
     }
     
