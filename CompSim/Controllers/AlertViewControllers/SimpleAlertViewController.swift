@@ -23,6 +23,7 @@ class SimpleAlertViewController: UIViewController {
         super.viewDidLoad()
         SimpleTitle.text = myTitle
         YesButton.setTitle(yesText, for: .normal)
+        CancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         if #available(iOS 11.0, *) {
             SimpleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         } else {
@@ -33,6 +34,8 @@ class SimpleAlertViewController: UIViewController {
         {
             SimpleView.backgroundColor = HomeViewController.darkPurpleColor()
         }
+        
+        
 
         YesButton.titleLabel?.adjustsFontSizeToFitWidth = true
         CancelButton.titleLabel?.adjustsFontSizeToFitWidth = true

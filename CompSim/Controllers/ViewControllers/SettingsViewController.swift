@@ -157,9 +157,12 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             label.textColor = .white
         }
         
+        let controlSize: CGFloat = NSLocale.preferredLanguages[0].contains("es-") ? 10.0 : 14.0
+    
+    
         ControlCollection.forEach{(control) in
             control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
-            control.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: 14)!, NSAttributedString.Key.foregroundColor: HomeViewController.darkModeColor()], for: .normal)
+            control.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: controlSize)!, NSAttributedString.Key.foregroundColor: HomeViewController.darkModeColor()], for: .normal)
         }
         
         HoldingTimeSlider.thumbTintColor = HomeViewController.orangeColor()
@@ -211,9 +214,11 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             label.textColor = HomeViewController.darkBlueColor()
         }
         
+        let controlSize: CGFloat = NSLocale.preferredLanguages[0].contains("es-") ? 10.0 : 14.0
+        
         ControlCollection.forEach{(control) in
             control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
-            control.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: 14)!, NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+            control.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Lato-Black", size: controlSize)!, NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         }
         
         HoldingTimeSlider.thumbTintColor = HomeViewController.darkBlueColor()
@@ -272,6 +277,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         
         super.viewDidLoad()
         
+        EmailButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        EmailButton.titleLabel?.baselineAdjustment = .alignCenters
         
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         

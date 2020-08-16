@@ -181,6 +181,8 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
         
         super.viewDidLoad()
         
+        RefreshButton.text = NSLocalizedString("Tap to refresh", comment: "")
+        
         disableWebZoom()
         updateDrawScramble()
         
@@ -538,6 +540,10 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
     {
         super.viewWillAppear(false)
         
+        if NSLocale.preferredLanguages[0].contains("es-")
+        {
+            ResetButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 13.0)
+        }
         let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
         ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
         
@@ -768,7 +774,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
     
     @IBAction func resetPressed(_ sender: Any) {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: NSLocalizedString("Reset Average?", comment: ""), yesText: "Reset", completion: {
+        let alert = alertService.alert(myTitle: NSLocalizedString("Reset Average?", comment: ""), yesText: NSLocalizedString("Reset", comment: ""), completion: {
             self.reset()
         })
         self.present(alert, animated: true)
@@ -831,7 +837,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
     func deleteSolve()
     {
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: NSLocalizedString("Delete Last Solve?", comment: ""), yesText: "Delete",
+        let alert = alertService.alert(myTitle: NSLocalizedString("Delete Last Solve?", comment: ""), yesText: NSLocalizedString("Delete", comment: ""),
                                        completion: {
             
             try! self.realm.write
@@ -1034,7 +1040,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
         tabBarController?.tabBar.barTintColor = HomeViewController.darkPurpleColor()
         
         HelpButton.tintColor = .white
-        ResetButton.titleLabel?.textColor = .white
         
         for button in [HelpButton, ResetButton, SessionButton]
         {
@@ -1083,7 +1088,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate
         }
         HelpButton.tintColor = .white
 
-        ResetButton.titleLabel?.textColor = .white
         
         setNeedsStatusBarAppearanceUpdate()
         if #available(iOS 13.0, *) {

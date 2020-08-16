@@ -52,6 +52,7 @@ class InputAlertViewController: UIViewController {
         
         TextField.placeholder = placeholder
         
+        AddSolveTitle.adjustsFontSizeToFitWidth = true
         TextField.adjustsFontSizeToFitWidth = true
         EnterButton.titleLabel?.adjustsFontSizeToFitWidth = true
         CancelButton.titleLabel?.adjustsFontSizeToFitWidth = true

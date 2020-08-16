@@ -71,7 +71,7 @@ class AddSolveAlertViewController: UIViewController {
             newHeight.isActive = true
         }*/
         
-        
+        AddSolveTitle.adjustsFontSizeToFitWidth = true
         TextField.adjustsFontSizeToFitWidth = true
         EnterButton.titleLabel?.adjustsFontSizeToFitWidth = true
         CancelButton.titleLabel?.adjustsFontSizeToFitWidth = true

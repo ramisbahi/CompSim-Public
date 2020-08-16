@@ -798,7 +798,7 @@
                                     <action selector="StatsButtonPressed:" destination="AvC-tB-OuD" eventType="touchUpInside" id="kEB-fZ-eS0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7x-do-eup">
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7x-do-eup">
                                 <rect key="frame" x="279.66666666666669" y="0.0" width="124.33333333333331" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="F7x-do-eup" secondAttribute="height" multiplier="4:1" id="uln-42-VYZ"/>
@@ -885,7 +885,7 @@
             <objects>
                 <viewController storyboardIdentifier="SessionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kqA-DF-Yjh" customClass="SessionViewController" customModule="CompSim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M4I-BC-dr8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wIu-c4-TJb">
@@ -1070,7 +1070,7 @@
                             <constraint firstItem="VYU-3Y-Wca" firstAttribute="trailing" secondItem="0d4-14-4fS" secondAttribute="trailing" id="6pU-EI-h2x"/>
                             <constraint firstItem="xr8-T2-eEg" firstAttribute="leading" secondItem="M4I-BC-dr8" secondAttribute="leading" id="8tg-ca-4s6"/>
                             <constraint firstItem="0d4-14-4fS" firstAttribute="height" secondItem="M4I-BC-dr8" secondAttribute="height" multiplier="0.07" id="A5v-zZ-1wy"/>
-                            <constraint firstItem="kLt-ZZ-r74" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="SYS-AT-ZdR" secondAttribute="leading" constant="12" id="A6K-b8-JMD"/>
+                            <constraint firstItem="kLt-ZZ-r74" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="SYS-AT-ZdR" secondAttribute="leading" constant="-12" id="A6K-b8-JMD"/>
                             <constraint firstItem="VYU-3Y-Wca" firstAttribute="bottom" secondItem="xr8-T2-eEg" secondAttribute="bottom" id="CoJ-Yh-wqF"/>
                             <constraint firstItem="xr8-T2-eEg" firstAttribute="top" secondItem="ko2-gS-DCd" secondAttribute="bottom" id="FjZ-Z8-s8J"/>
                             <constraint firstItem="JOI-Yw-YcK" firstAttribute="height" secondItem="M4I-BC-dr8" secondAttribute="height" multiplier="0.045" id="Gdz-9a-wJi"/>
@@ -1441,7 +1441,7 @@
                             <constraint firstItem="94l-PH-qUv" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="fU6-z7-HFf"/>
                             <constraint firstItem="edN-gV-HS0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="gFj-Lt-ydG"/>
                             <constraint firstItem="Et1-5k-b1L" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="kI2-SD-zA5"/>
-                            <constraint firstItem="dT7-pR-N0g" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="IRZ-Pa-aDz" secondAttribute="leading" constant="12" id="nkp-zd-Mr3"/>
+                            <constraint firstItem="dT7-pR-N0g" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="IRZ-Pa-aDz" secondAttribute="leading" constant="-12" id="nkp-zd-Mr3"/>
                             <constraint firstItem="Et1-5k-b1L" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o9J-fb-sHc"/>
                             <constraint firstItem="a0e-a9-1ER" firstAttribute="top" secondItem="nMw-Mu-qR6" secondAttribute="bottom" id="oG4-bj-R96"/>
                             <constraint firstItem="fQe-f8-jUV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="obe-Yu-Dzi"/>
@@ -2834,8 +2834,9 @@ Cg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="3MC-0Q-g5t"/>
         <segue reference="rF2-8b-ORo"/>
-        <segue reference="z5C-xH-DX3"/>
+        <segue reference="AZA-lg-qSK"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Arrow_Left" width="24" height="11.333333015441895"/>

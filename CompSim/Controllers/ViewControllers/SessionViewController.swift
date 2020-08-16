@@ -571,6 +571,10 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if NSLocale.preferredLanguages[0].contains("es-")
+        {
+            ResetButton.titleLabel?.font = UIFont(name: "Lato-Black", size: 13.0)
+        }
         let stringSize = ResetButton.titleLabel?.intrinsicContentSize.width
         ResetButton.widthAnchor.constraint(equalToConstant: stringSize! + 10).isActive = true
         
@@ -662,8 +666,11 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     @IBAction func deletePressed(_ sender: Any) {
+        
+        let title = NSLocalizedString("Delete", comment: "") + " " + HomeViewController.mySession.name + " " + NSLocalizedString("session?", comment: "")
+        
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Delete \(HomeViewController.mySession.name) session?", yesText: "Delete", completion: {
+        let alert = alertService.alert(myTitle: title, yesText: NSLocalizedString("Delete", comment: ""), completion: {
             self.deleteSession()
         })
         
@@ -791,11 +798,11 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         let numLabel = UILabel(frame: CGRect(x:
-            cell.frame.maxX - 30.0, y: cell.frame.minY, width: 30.0, height: cell.frame.height))
+            cell.frame.maxX - 30.0, y: cell.frame.minY, width: 30.0, height: cellHeight!))
         
         numLabel.textAlignment = .center
         numLabel.baselineAdjustment = .alignCenters
-        numLabel.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: cell.frame.height)), multiplier: 0.2, name: "Lato-Black")
+        numLabel.font = HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 1, height: cellHeight!)), multiplier: 0.2, name: "Lato-Black")
         numLabel.textColor = HomeViewController.grayColor()
         numLabel.text = String(currentIndex + 1)
         
@@ -812,7 +819,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+        let deleteButton = UITableViewRowAction(style: .default, title: NSLocalizedString("Delete", comment: "")) { (action, indexPath) in
             self.StatsTableView.dataSource?.tableView!(self.StatsTableView, commit: .delete, forRowAt: indexPath)
             return
         }
@@ -822,8 +829,9 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func deleteAveragePressed(at index: Int, _ tableView: UITableView, forRowAt indexPath: IndexPath)
     {
+        let title = NSLocalizedString("Delete", comment: "") + " " + HomeViewController.mySession.allAverages[index] + " " + NSLocalizedString("average?", comment: "")
         let alertService = SimpleAlertService()
-        let alert = alertService.alert(myTitle: "Delete \(HomeViewController.mySession.allAverages[index]) average?", yesText: "Delete", completion: {
+        let alert = alertService.alert(myTitle: title, yesText: NSLocalizedString("Delete", comment: ""), completion: {
             self.deleteAverage(at: index)
             tableView.deleteRows(at: [indexPath], with: .fade)
         })

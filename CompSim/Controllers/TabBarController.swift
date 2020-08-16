@@ -37,8 +37,9 @@ class TabBarController: UITabBarController {
         super.viewDidLayoutSubviews()
         
         let topNotch = hasTopNotch()
+        let isIPad = UIDevice.current.userInterfaceIdiom == .pad
         
-        let tabBarHeight: CGFloat = topNotch ? 102.0 : 70.0
+        let tabBarHeight: CGFloat = topNotch && !isIPad ? 102.0 : 70.0
         
         var tabFrame = tabBar.frame
         tabFrame.size.height = tabBarHeight
@@ -50,7 +51,7 @@ class TabBarController: UITabBarController {
     
         UITabBarItem.appearance()
         .setTitleTextAttributes(
-            [NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 5, height: tabBarHeight)), multiplier: topNotch ? 0.24 : 0.29, name: "Lato-Black")],
+            [NSAttributedString.Key.font: HomeViewController.fontToFitHeight(view: UIView(frame: CGRect(x: 0, y: 0, width: 5, height: tabBarHeight)), multiplier: topNotch && !isIPad ? 0.24 : 0.29, name: "Lato-Black")],
         for: .normal)
         
         //UITabBarItem.appearance().imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)

@@ -134,7 +134,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
             CopyButton.setTitleColor(HomeViewController.greenColor(), for: .normal)
             CopyButton.tintColor = HomeViewController.greenColor()
             CopyButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-            CopyButton.setTitle("COPIED", for: .normal)
+            CopyButton.setTitle(NSLocalizedString("COPIED", comment: ""), for: .normal)
         }
         
         UIPasteboard.general.string = clipboardAverageString()
@@ -171,6 +171,7 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewWillAppear(true)
         
         
+        
         if(HomeViewController.darkMode)
         {
             makeDarkMode()
@@ -189,24 +190,27 @@ class AverageDetailViewController: UIViewController, UITableViewDelegate, UITabl
             AverageLabel.textColor = HomeViewController.redColor()
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        cellHeight = max(self.view.frame.height * 0.1, 70.0)
-        AverageLabel.font = HomeViewController.fontToFitHeight(view: AverageLabel, multiplier: 0.8, name: "Lato-Black") // view will appear makes no diff
-        print("k")
-        print(AverageLabel.font.pointSize)
-        
-        
-        CopyButton.titleLabel?.font = HomeViewController.fontToFitWidth(text: "COPIED", view: CopyButton, multiplier: 0.65, name: "Lato-Black")
+    
+    override func viewDidLayoutSubviews() {
+        CopyButton.titleLabel?.font = HomeViewController.fontToFitWidth(text: NSLocalizedString("COPIED", comment: ""), view: CopyButton, multiplier: 0.6, name: "Lato-Black")
         if #available(iOS 13.0, *) {
             
             CopyButton.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(font: (CopyButton.titleLabel?.font)!), forImageIn: .normal)
         } else {
             // Fallback on earlier versions
         }
-        //CopyButton.imageView.poin
+        AverageLabel.font = HomeViewController.fontToFitHeight(view: AverageLabel, multiplier: 0.98, name: "Lato-Black")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        cellHeight = max(self.view.frame.height * 0.1, 70.0)
+        
+        CopyButton.setTitle(NSLocalizedString("COPY", comment: ""), for: .normal)
+        
+        
+        
     
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         

@@ -6,16 +6,16 @@
 "0ae-Fd-NOJ.segmentTitles[1]" = "Público";
 
 /* Class = "UILabel"; text = "Solve Type"; ObjectID = "0mn-7A-bip"; */
-"0mn-7A-bip.text" = "Formato de Resolución";
+"0mn-7A-bip.text" = "FORMATO DE RESOLUCIÓN:";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "128-wP-cbk"; */
-"128-wP-cbk.normalTitle" = "Enviar";
+"128-wP-cbk.normalTitle" = "ENVIAR";
 
 /* Class = "UILabel"; text = "1. "; ObjectID = "19s-pB-dw1"; */
 "19s-pB-dw1.text" = "1. ";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "1DX-31-wVt"; */
-"1DX-31-wVt.normalTitle" = "Enviar";
+"1DX-31-wVt.normalTitle" = "ENVIAR";
 
 /* Class = "UIButton"; normalTitle = "5.00"; ObjectID = "2pc-dx-UvZ"; */
 "2pc-dx-UvZ.normalTitle" = "5.00";
@@ -24,19 +24,19 @@
 "3wn-p8-k6S.normalTitle" = "5x5x5";
 
 /* Class = "UISegmentedControl"; 42Y-ms-qTs.segmentTitles[0] = "Average of 5"; ObjectID = "42Y-ms-qTs"; */
-"42Y-ms-qTs.segmentTitles[0]" = "Media de 5";
+"42Y-ms-qTs.segmentTitles[0]" = "MEDIA DE 5";
 
 /* Class = "UISegmentedControl"; 42Y-ms-qTs.segmentTitles[1] = "Mean of 3"; ObjectID = "42Y-ms-qTs"; */
-"42Y-ms-qTs.segmentTitles[1]" = "Media de 3";
+"42Y-ms-qTs.segmentTitles[1]" = "MEDIA DE 3";
 
 /* Class = "UISegmentedControl"; 42Y-ms-qTs.segmentTitles[2] = "Best of 3"; ObjectID = "42Y-ms-qTs"; */
-"42Y-ms-qTs.segmentTitles[2]" = "Mejor de 3";
+"42Y-ms-qTs.segmentTitles[2]" = "MEJOR DE 3";
 
 /* Class = "UIButton"; normalTitle = "Force Next Scramble"; ObjectID = "471-OX-PH8"; */
 "471-OX-PH8.normalTitle" = "Forzar la Próxima Mezcla";
 
 /* Class = "UILabel"; text = "Solve Type"; ObjectID = "4Qi-vq-Ya9"; */
-"4Qi-vq-Ya9.text" = "Formato de Resolución";
+"4Qi-vq-Ya9.text" = "FORMATO DE RESOLUCIÓN";
 
 /* Class = "UIButton"; normalTitle = "Event: 3x3x3"; ObjectID = "55d-02-MIz"; */
 "55d-02-MIz.normalTitle" = "Evento: 3x3x3";
@@ -48,13 +48,13 @@
 "6Qz-xP-iB7.text" = "1.59";
 
 /* Class = "UILabel"; text = "WCA Inspection"; ObjectID = "6uq-uX-5mP"; */
-"6uq-uX-5mP.text" = "Inspección de WCA";
+"6uq-uX-5mP.text" = "INSPECCIÓN DE WCA:";
 
 /* Class = "UILabel"; text = "Wins"; ObjectID = "7Fz-UQ-Nfy"; */
 "7Fz-UQ-Nfy.text" = "Victorias";
 
 /* Class = "UILabel"; text = "Inspection Voice"; ObjectID = "7Lm-QJ-n9i"; */
-"7Lm-QJ-n9i.text" = "Voz de Inspección";
+"7Lm-QJ-n9i.text" = "VOZ DE INSPECCIÓN:";
 
 /* Class = "UIButton"; normalTitle = "Lucas Etter"; ObjectID = "84q-54-Z7O"; */
 "84q-54-Z7O.normalTitle" = "Lucas Etter";
@@ -120,7 +120,7 @@
 "HdL-ZN-fqF.normalTitle" = "Nueva Mezcla";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "HqU-L4-G5C"; */
-"HqU-L4-G5C.normalTitle" = "Enviar";
+"HqU-L4-G5C.normalTitle" = "ENVIAR";
 
 /* Class = "UILabel"; text = "1.59"; ObjectID = "Jx0-kk-u4e"; */
 "Jx0-kk-u4e.text" = "1.59";
@@ -135,10 +135,10 @@
 "Kp9-F7-yXV.normalTitle" = "4x4x4";
 
 /* Class = "UISegmentedControl"; LA3-i5-aRu.segmentTitles[0] = "On"; ObjectID = "LA3-i5-aRu"; */
-"LA3-i5-aRu.segmentTitles[0]" = "Activo";
+"LA3-i5-aRu.segmentTitles[0]" = "ACTIVO";
 
 /* Class = "UISegmentedControl"; LA3-i5-aRu.segmentTitles[1] = "Off"; ObjectID = "LA3-i5-aRu"; */
-"LA3-i5-aRu.segmentTitles[1]" = "Inactivo";
+"LA3-i5-aRu.segmentTitles[1]" = "INACTIVO";
 
 /* Class = "UIButton"; normalTitle = "5x5x5"; ObjectID = "LBm-Uj-Srh"; */
 "LBm-Uj-Srh.normalTitle" = "5x5x5";
@@ -153,19 +153,19 @@
 "LpS-K1-oBx.normalTitle" = "Hacer Cuenta";
 
 /* Class = "UISegmentedControl"; LrE-n2-Lfh.segmentTitles[0] = "On"; ObjectID = "LrE-n2-Lfh"; */
-"LrE-n2-Lfh.segmentTitles[0]" = "Activo";
+"LrE-n2-Lfh.segmentTitles[0]" = "ACTIVO";
 
 /* Class = "UISegmentedControl"; LrE-n2-Lfh.segmentTitles[1] = "Off"; ObjectID = "LrE-n2-Lfh"; */
-"LrE-n2-Lfh.segmentTitles[1]" = "Inactivo";
+"LrE-n2-Lfh.segmentTitles[1]" = "INACTIVO";
 
 /* Class = "UIButton"; normalTitle = "2x2x2"; ObjectID = "MZa-Tm-aNf"; */
 "MZa-Tm-aNf.normalTitle" = "2x2x2";
 
 /* Class = "UISegmentedControl"; Ms5-6S-Cbn.segmentTitles[0] = "On"; ObjectID = "Ms5-6S-Cbn"; */
-"Ms5-6S-Cbn.segmentTitles[0]" = "Activo";
+"Ms5-6S-Cbn.segmentTitles[0]" = "ACTIVO";
 
 /* Class = "UISegmentedControl"; Ms5-6S-Cbn.segmentTitles[1] = "Off"; ObjectID = "Ms5-6S-Cbn"; */
-"Ms5-6S-Cbn.segmentTitles[1]" = "Inactivo";
+"Ms5-6S-Cbn.segmentTitles[1]" = "INACTIVO";
 
 /* Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "NC7-PY-x1f"; */
 "NC7-PY-x1f.normalTitle" = "Hacer Cuenta";
@@ -192,10 +192,10 @@
 "Qv8-kR-Kjg.normalTitle" = "3x3x3";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "QyJ-aL-dKn"; */
-"QyJ-aL-dKn.normalTitle" = "Enviar";
+"QyJ-aL-dKn.normalTitle" = "ENVIAR";
 
 /* Class = "UILabel"; text = "Dark Mode"; ObjectID = "R04-Tx-5Ya"; */
-"R04-Tx-5Ya.text" = "Modo Oscuro";
+"R04-Tx-5Ya.text" = "MODO OSCURO:";
 
 /* Class = "UILabel"; text = "1.59"; ObjectID = "R8R-vt-M3N"; */
 "R8R-vt-M3N.text" = "1.59";
@@ -225,7 +225,7 @@
 "TMk-UC-HpA.title" = "CompSim";
 
 /* Class = "UIButton"; normalTitle = " Cancel"; ObjectID = "UCL-Ih-tTs"; */
-"UCL-Ih-tTs.normalTitle" = " Cancelar";
+"UCL-Ih-tTs.normalTitle" = " CANCELAR";
 
 /* Class = "UILabel"; text = "Privacy"; ObjectID = "Ujd-7l-fl5"; */
 "Ujd-7l-fl5.text" = "Privacidad";
@@ -264,13 +264,13 @@
 "cfa-yl-JQD.text" = "1.59";
 
 /* Class = "UISegmentedControl"; dA4-04-9zH.segmentTitles[0] = "Average of 5"; ObjectID = "dA4-04-9zH"; */
-"dA4-04-9zH.segmentTitles[0]" = "Media de 5";
+"dA4-04-9zH.segmentTitles[0]" = "MEDIA DE 5";
 
 /* Class = "UISegmentedControl"; dA4-04-9zH.segmentTitles[1] = "Mean of 3"; ObjectID = "dA4-04-9zH"; */
-"dA4-04-9zH.segmentTitles[1]" = "Media de 3";
+"dA4-04-9zH.segmentTitles[1]" = "MEDIA DE 3";
 
 /* Class = "UISegmentedControl"; dA4-04-9zH.segmentTitles[2] = "Best of 3"; ObjectID = "dA4-04-9zH"; */
-"dA4-04-9zH.segmentTitles[2]" = "Mejor de 3";
+"dA4-04-9zH.segmentTitles[2]" = "MEJOR DE 3";
 
 /* Class = "UIButton"; normalTitle = " Stats"; ObjectID = "dE5-MO-YyE"; */
 "dE5-MO-YyE.normalTitle" = "←";
@@ -279,10 +279,10 @@
 "dGH-rV-lmj.text" = "Jugador";
 
 /* Class = "UILabel"; text = "Timing"; ObjectID = "dIR-c7-qh2"; */
-"dIR-c7-qh2.text" = "Cronometrar";
+"dIR-c7-qh2.text" = "CRONOMETRAR:";
 
 /* Class = "UIButton"; normalTitle = " Reset"; ObjectID = "dT7-pR-N0g"; */
-"dT7-pR-N0g.normalTitle" = " Reiniciar";
+"dT7-pR-N0g.normalTitle" = "REINICIAR";
 
 /* Class = "UIButton"; normalTitle = "Scramble Type: 3x3x3"; ObjectID = "dY5-wq-uM6"; */
 "dY5-wq-uM6.normalTitle" = "Tipo de Mezcla: 3x3x3";
@@ -294,7 +294,7 @@
 "eLU-vY-iiZ.normalTitle" = "6x6x6";
 
 /* Class = "UILabel"; text = "Holding Time: 0.3 "; ObjectID = "ePi-pz-Za3"; */
-"ePi-pz-Za3.text" = "Tiempo para Apretar: 0.3 ";
+"ePi-pz-Za3.text" = "TIEMPO PARA APRETAR: 0.3 ";
 
 /* Class = "UIButton"; normalTitle = "Random"; ObjectID = "gh6-AO-aXv"; */
 "gh6-AO-aXv.normalTitle" = "Aleatorio";
@@ -309,7 +309,7 @@
 "iaF-h0-J9O.normalTitle" = "3x3x3 BLD";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "j4y-uh-kgd"; */
-"j4y-uh-kgd.normalTitle" = "Submit";
+"j4y-uh-kgd.normalTitle" = "ENVIAR";
 
 /* Class = "UIButton"; normalTitle = "Megaminx"; ObjectID = "jHQ-BN-QdQ"; */
 "jHQ-BN-QdQ.normalTitle" = "Megaminx";
@@ -321,16 +321,16 @@
 "jT1-YK-Ex7.normalTitle" = "CompSim";
 
 /* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "kLt-ZZ-r74"; */
-"kLt-ZZ-r74.normalTitle" = "Reiniciar";
+"kLt-ZZ-r74.normalTitle" = "REINICIAR";
 
 /* Class = "UILabel"; text = "1.59"; ObjectID = "kcn-Vc-vLi"; */
 "kcn-Vc-vLi.text" = "1.59";
 
 /* Class = "UISegmentedControl"; ljr-tg-h7i.segmentTitles[0] = "On"; ObjectID = "ljr-tg-h7i"; */
-"ljr-tg-h7i.segmentTitles[0]" = "Inactivo";
+"ljr-tg-h7i.segmentTitles[0]" = "ACTIVO";
 
 /* Class = "UISegmentedControl"; ljr-tg-h7i.segmentTitles[1] = "Off"; ObjectID = "ljr-tg-h7i"; */
-"ljr-tg-h7i.segmentTitles[1]" = "Cronometrar";
+"ljr-tg-h7i.segmentTitles[1]" = "INACTIVO";
 
 /* Class = "UISegmentedControl"; mUr-Jm-UAb.segmentTitles[0] = "None"; ObjectID = "mUr-Jm-UAb"; */
 "mUr-Jm-UAb.segmentTitles[0]" = "Nada";
@@ -369,7 +369,7 @@
 "u52-Im-qhw.normalTitle" = "Skewb";
 
 /* Class = "UILabel"; text = "Timer Update"; ObjectID = "uwH-WR-wfc"; */
-"uwH-WR-wfc.text" = "Actualización del Tiempo";
+"uwH-WR-wfc.text" = "ACTUALIZACIÓN DE TIEMPO:";
 
 /* Class = "UISegmentedControl"; vag-Sx-mn2.segmentTitles[0] = "DNF"; ObjectID = "vag-Sx-mn2"; */
 "vag-Sx-mn2.segmentTitles[0]" = "DNF";
@@ -387,19 +387,19 @@
 "vf3-Zc-agO.text" = "5.00";
 
 /* Class = "UITabBarItem"; title = "Target"; ObjectID = "wZc-Zi-Ru6"; */
-"wZc-Zi-Ru6.title" = "Objetivo";
+"wZc-Zi-Ru6.title" = "OBJETIVO";
 
 /* Class = "UILabel"; text = "Confirm Password"; ObjectID = "wcj-D7-V5C"; */
 "wcj-D7-V5C.text" = "Confirmar Contraseña";
 
 /* Class = "UISegmentedControl"; xBE-BR-iFx.segmentTitles[0] = "Update"; ObjectID = "xBE-BR-iFx"; */
-"xBE-BR-iFx.segmentTitles[0]" = "Actualizado";
+"xBE-BR-iFx.segmentTitles[0]" = "ACTUALIZADO";
 
 /* Class = "UISegmentedControl"; xBE-BR-iFx.segmentTitles[1] = "Seconds"; ObjectID = "xBE-BR-iFx"; */
-"xBE-BR-iFx.segmentTitles[1]" = "Segundos";
+"xBE-BR-iFx.segmentTitles[1]" = "SEGUNDOS";
 
 /* Class = "UISegmentedControl"; xBE-BR-iFx.segmentTitles[2] = "None"; ObjectID = "xBE-BR-iFx"; */
-"xBE-BR-iFx.segmentTitles[2]" = "Nada";
+"xBE-BR-iFx.segmentTitles[2]" = "NADA";
 
 /* Class = "UIButton"; normalTitle = "Bill Wang"; ObjectID = "xOL-wK-cxq"; */
 "xOL-wK-cxq.normalTitle" = "Bill Wang";

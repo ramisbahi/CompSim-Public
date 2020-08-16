@@ -55,6 +55,11 @@ class StatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        BestMoLabel.text = NSLocalizedString("Best WCAmo10", comment: "")
+        CurrentMoLabel.text = NSLocalizedString("Current WCAmo10", comment: "")
+        xLabel.text = NSLocalizedString("Average #", comment: "")
+        yLabel.text = NSLocalizedString("Time", comment: "")
+        
         let labelFont = HomeViewController.fontToFitWidth(text: "Average #", view: xLabel, multiplier: 0.8, name: "Lato-Black")
         xLabel.font = labelFont
         yLabel.font = labelFont
@@ -69,9 +74,17 @@ class StatsViewController: UIViewController {
         BestMoButton.titleLabel?.adjustsFontSizeToFitWidth = true
         BestMoButton.titleLabel?.baselineAdjustment = .alignCenters
         
-        CurrentMoLabel.adjustsFontSizeToFitWidth = true
-        BestMoLabel.font = UIFont(name: "Lato-Black", size:  StatsViewController.getApproximateAdjustedFontSizeWithLabel(label: CurrentMoLabel))
         
+        if NSLocale.preferredLanguages[0].contains("es-")
+        {
+            BestMoLabel.adjustsFontSizeToFitWidth = true
+            CurrentMoLabel.font = UIFont(name: "Lato-Black", size:  StatsViewController.getApproximateAdjustedFontSizeWithLabel(label: BestMoLabel) - 3)
+        }
+        else
+        {
+            CurrentMoLabel.adjustsFontSizeToFitWidth = true
+            BestMoLabel.font = UIFont(name: "Lato-Black", size:  StatsViewController.getApproximateAdjustedFontSizeWithLabel(label: CurrentMoLabel))
+        }
         
         lineChart.setScaleEnabled(true)
         lineChart.noDataText = "Do a couple averages to see your data visualization here!"
