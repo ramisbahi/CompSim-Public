@@ -182,7 +182,7 @@ bool ini = false;
             for(int i=1; i<=depth; i++) {
                 [s appendFormat:@"%@%@ ", [turnSkb objectAtIndex:(solSkb[i]>>1)], [sufSkb objectAtIndex:(solSkb[i]&1)]];
             }
-            return s;
+            return [s stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         }
     }
     return @"";

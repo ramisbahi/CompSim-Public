@@ -61,14 +61,14 @@ int seq[80];
             }
         }
         if (seq[(j+1)*linelen - 1]!=0) {
-            [s appendString:@"U  "]; // new line removed
+            [s appendString:@"U "]; // new line removed
             //state = applyMove(state, permU);
         }
         else {
-            [s appendString:@"U'  "]; // new line removed
+            [s appendString:@"U' "]; // new line removed
             //state = applyMove(state, permUi);
         }
     }
-    return s;
+    return [s stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 @end

@@ -86,11 +86,11 @@
         if([[[seq objectAtIndex:i] objectAtIndex:0] intValue] == 7) {
             [s appendString:@"/ "];
         } else {
-            [s appendFormat:@"(%d,%d) ", [[[seq objectAtIndex:i] objectAtIndex:0] intValue], [[[seq objectAtIndex:i] objectAtIndex:1] intValue]];
+            [s appendFormat:@"(%d, %d) ", [[[seq objectAtIndex:i] objectAtIndex:0] intValue], [[[seq objectAtIndex:i] objectAtIndex:1] intValue]];
             //s.append("(" + seq[0][i][0] + "," + seq[0][i][1] + ") ");
         }
     }
-    return s;
+    return [s stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 - (NSString *) ssq1t_scramble {
